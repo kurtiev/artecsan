@@ -1,0 +1,68 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>Restaurant Profile</h2>
+        <p class="padding-top-5">
+            Instructions for restaurant user: Before you get going please keep in mind that we're a super young company which means we're still working on a lot of cool and exciting new features including adding more P.O.S. systems. So if you don't see your P.O.S. system in the drop down menu below, we sincerely apologize but our platform does not currently work for your location. However there might be a solution. Simply hit the contact us button, tell us which P.O.S. system you use and we'll see what we can do to expedite getting you connected.
+        </p>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                            <h3 class="text-center">Restaurant Profile</h3>
+                            <form class="m-t" role="form" action="login.html">
+
+                                <div class="form-group">
+                                    <label>Restaurant Name:</label>
+                                    <input type="text" class="form-control" placeholder="Restaurant Name" >
+                                </div>
+                                <div class="form-group">
+                                    <label>Entity Type:</label>
+                                    <select class="form-control" name="entityType" ng-model="profile.entityType"><option value="? undefined:undefined ?"></option>
+                                        <option value="Corporation">Corporation</option>
+                                        <option value="LLC">LLC</option>
+                                        <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                        <option value="Partnership">Partnership</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Street Address:</label>
+                                    <input type="email" class="form-control" placeholder="Street Address">
+                                </div>
+                                <div class="form-group">
+                                    <label>City:</label>
+                                    <input type="password" class="form-control" placeholder="City">
+                                </div>
+                                <div class="form-group">
+                                    <label>State:</label>
+                                    <input type="password" class="form-control" placeholder="State">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zipcode:</label>
+                                    <input type="password" class="form-control" placeholder="Zipcode">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number:</label>
+                                    <input type="password" class="form-control" placeholder="Phone Number">
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-xs-6 text-left">
+                                    <button class="btn btn-primary"  onclick="window.history.go(-1); return false;">&lt;&lt; Back</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" ui-sref="profile.paymentProfile" class="btn btn-primary block float-right m-b">Next - Payment Setup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

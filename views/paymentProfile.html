@@ -1,0 +1,121 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>Payment Profile</h2>
+        <p class="padding-top-5">
+            Message to restaurant user: Keep in mind that your first 14-days are free. The system needs at least 7- days of data and this process cannot start until your setup is complete. So the sooner you get setup, the sooner Artecsan can begin.
+        </p>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                            <h3 class="text-center">Payment Details</h3>
+                            <img class="img-responsive float-right" src="img/png/accepted_cards.png"/>
+                            <form id="payment-form" class="m-t">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="cardNumber">
+                                                Card number
+                                            </label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="tel" placeholder="Valid Card Number" id="cardNumber">
+                                                <div class="input-group-addon">
+                                                    <span>
+                                                        <i class="fa fa-credit-card"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="cardExpiry">
+                                                <span>Expiration Date</span>
+                                            </label>
+                                            <div>
+                                                <input class="form-control width-20" maxlength="2" type="number" placeholder="MM" id="cardExpiry">
+                                           <span class="float-left date-payment-label">/</span>
+                                                <input class="form-control width-20" maxlength="2" type="number" placeholder="YY" id="cardExpiry2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 pull-right">
+                                        <div class="form-group">
+                                            <label for="cardCVC">
+                                               CV Code
+                                            </label>
+                                            <input class="form-control" type="tel"  placeholder="CVC" id="cardCVC">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="couponCode">
+                                                Coupon Code
+                                            </label>
+                                            <input class="form-control" type="text" id="couponCode" placeholder="Coupon Code">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="zipCode">
+                                                Zip Code
+                                            </label>
+                                            <input class="form-control" type="text" id="zipCode" placeholder="ZIP Code">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="firstName">
+                                                First Name
+                                            </label>
+                                            <input class="form-control" type="text" id="firstName" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label for="lastName">
+                                                Last Name
+                                            </label>
+                                            <input class="form-control" type="text" id="lastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="billingAddress">
+                                                Billing Address
+                                            </label>
+                                            <input class="form-control" type="text" id="billingAddress" placeholder="Billing Address">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-sm-4 text-left">
+                                    <button class="btn btn-primary"  onclick="window.history.go(-1); return false;">&lt;&lt; Back</button>
+                                </div>
+                                <div class="col-sm-8">
+                                    <button type="submit" ui-sref="food.agreement" class="btn btn-primary block float-right m-b">Next - Disclaimer and Confidentiality Agreement</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
