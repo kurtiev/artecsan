@@ -29,7 +29,7 @@
                                     <p class="text-pos-description color-black">No cancelation fee</p>
                                 </div>
                                 <div class="text-center padding-20">
-                                    <button class="btn" ui-sref="profile.setupProfile" ng-class="{'btn-primary' : main.posIndex == 1, 'btn-default' :  main.posIndex != 1}" type="button">Sign up</button>
+                                    <button class="btn" ng-class="{'btn-primary' : main.posIndex == 1, 'btn-default' :  main.posIndex != 1}" type="button" ng-controller="notifyCtrl" ng-click="inspiniaDemo1(); main.isRegistration = false; main.isFoodSetup=false;">Sign up</button>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                     <p class="text-pos-description color-black">No cancelation fee</p>
                                 </div>
                                 <div class="text-center padding-20">
-                                    <button class="btn"  ui-sref="profile.setupProfile" ng-class="{'btn-primary' : main.posIndex == 3, 'btn-default' :  main.posIndex != 3}" type="button">Sign up</button>
+                                    <button class="btn" ng-class="{'btn-primary' : main.posIndex == 3, 'btn-default' :  main.posIndex != 3}" type="button"  ng-controller="notifyCtrl" ng-click="inspiniaDemo1(); main.isRegistration = false; main.isFoodSetup=false;">Sign up</button>
                                 </div>
                             </div>
                         </div>

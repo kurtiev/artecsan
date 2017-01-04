@@ -493,3 +493,7 @@ body.login-page {
 .lazur-bg > .button-element > a:focus, .lazur-bg > .button-element > a:hover {
     color: #ffffff;
 }
+
+.product-color a {
+    color: #ffffff;
+}
