@@ -332,6 +332,7 @@ function MainCtrl($http, $uibModal, $scope) {
             controller: ModalInstanceRecipeCtrl,
             windowClass: "animated fadeIn",
             controllerAs: 'vm',
+            size: 'lg',
             resolve: {
                 recipe: function () {
                     return null;
@@ -351,6 +352,7 @@ function MainCtrl($http, $uibModal, $scope) {
             templateUrl: 'views/modal/add_new_menu_item.html',
             controller: ModalInstanceMenuCtrl,
             windowClass: "animated fadeIn",
+            size: 'lg',
             controllerAs: 'vm',
             resolve: {
                 menu: function () {

@@ -19,8 +19,8 @@
 }
 
 .product-color {
-    background-color: #1ab394;,
-color: white !important;
+    background-color: #1ab394;
+    color: white !important;
 }
 
 .product-color span,
@@ -332,7 +332,7 @@ color: white !important;
 }
 
 body.login-page {
-    background: url('../img/png/BG_blurred.jpg') center no-repeat fixed rgba(55, 188, 139, .7);
+    background: url('../img/png/BG_blurred.jpg') center no-repeat fixed #3681c1;
     background-size: cover;
 }
 
@@ -464,9 +464,8 @@ body.login-page {
     width: 120px;
 }
 
-
 .switch :checked + i, .product-color,
-.lazur-bg, .btn-primary, .navy-bg{
+.lazur-bg, .btn-primary, .navy-bg {
     background-color: #337ab7
 }
 
@@ -496,4 +495,44 @@ body.login-page {
 
 .product-color a {
     color: #ffffff;
+}
+
+.pos_logo {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.pos_item {
+    background-color: transparent;
+    border: 1px solid #3681c1;
+    cursor: pointer;
+    color: #3681c1;
+}
+
+.pos_item.selected {
+    border: 1px solid #f8ac59;
+}
+
+.pos_item.soon, .pos_item.soon:hover {
+    background: transparent;
+}
+
+.pos_item.soon, .pos_item.soon:hover a {
+    cursor: default;
+}
+
+.pos_item .pos-element a,
+.pos_item .pos-element a:hover,
+.pos_item .pos-element a:focus {
+    color: #3681c1;
+}
+
+.pos_item:hover {
+    background-color: rgba(54, 129, 193, 0.03)
 }

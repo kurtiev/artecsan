@@ -3,7 +3,8 @@
         <h4 class="modal-title" ng-if="!vm.isEdit">Create Recipe</h4>
         <h4 class="modal-title" ng-if="vm.isEdit">Edit Recipe</h4>
     </div>
-    <div class="modal-body max-height-340">
+    <!--<div class="modal-body max-height-340">-->
+    <div class="modal-body">
         <form class="form-horizontal" name="form" ng-model="vm.recipe" novalidate="" role="form">
                 <fieldset>
                     <div class="row no-padding">
@@ -49,6 +50,7 @@
                             <tr>
                                 <th>Ingredient Name</th>
                                 <th class="width-150">Measurement Type</th>
+                                <th class="width-150">Unit of Measure</th>
                                 <th class="width-80">Amount</th>
                                 <th class="width-80">Cost</th>
                                 <th></th>
@@ -66,6 +68,14 @@
                                     <option value="? undefined:undefined ?"></option>
                                     <option value="Dry Measurements">Dry Measurements</option>
                                     <option value="Liquid Measurements">Liquid Measurements</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-model="ingredient.measurement_type">
+                                    <option value=""></option>
+                                    <option value="">Ounces</option>
+                                    <option value="">Grams</option>
+                                    <option value="">Liters</option>
                                 </select>
                             </td>
                             <td>
