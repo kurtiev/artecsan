@@ -330,7 +330,7 @@ function MainCtrl($http, $uibModal, $scope) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal/add_new_recipe_item.html',
             controller: ModalInstanceRecipeCtrl,
-            windowClass: "animated fadeIn",
+            windowClass: "animated fadeIn modal-lgg",
             controllerAs: 'vm',
             size: 'lg',
             resolve: {
@@ -351,7 +351,7 @@ function MainCtrl($http, $uibModal, $scope) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal/add_new_menu_item.html',
             controller: ModalInstanceMenuCtrl,
-            windowClass: "animated fadeIn",
+            windowClass: "animated fadeIn modal-lgg",
             size: 'lg',
             controllerAs: 'vm',
             resolve: {

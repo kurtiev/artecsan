@@ -50,6 +50,7 @@
                             <tr>
                                 <th>Ingredient Name</th>
                                 <th class="width-150">Measurement Type</th>
+                                <th class="width-150">Measure Like</th>
                                 <th class="width-150">Unit of Measure</th>
                                 <th class="width-80">Amount</th>
                                 <th class="width-80">Cost</th>
@@ -71,7 +72,16 @@
                                 </select>
                             </td>
                             <td>
-                                <select class="form-control" ng-model="ingredient.measurement_type">
+                                <select class="form-control" ng-model="ingredient.measure_like">
+                                    <option value="? undefined:undefined ?"></option>
+                                    <option value="Dry Measurements">Butter</option>
+                                    <option value="Dry Measurements">Parsley</option>
+                                    <option value="Dry Measurements">Nuts</option>
+                                    <option value="Dry Measurements">Sugar</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-model="ingredient.unit_of_measure">
                                     <option value=""></option>
                                     <option value="">Ounces</option>
                                     <option value="">Grams</option>

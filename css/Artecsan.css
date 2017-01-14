@@ -536,3 +536,8 @@ body.login-page {
 .pos_item:hover {
     background-color: rgba(54, 129, 193, 0.03)
 }
+
+.modal-lgg .modal-lg {
+    width: 100%;
+    max-width: 1200px;
+}

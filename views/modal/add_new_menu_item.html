@@ -41,7 +41,8 @@
                         <tr>
                             <th>Recipe/Inventory Name</th>
                             <th>Measurement Type</th>
-                            <th class="width-80">Unit of Measurement</th>
+                            <th class="width-150">Measure Like</th>
+                            <th>Unit of Measurement</th>
                             <th class="width-80">Amount</th>
                             <th class="width-80">Cost</th>
                             <th></th>
@@ -61,6 +62,15 @@
                                     <option value="? undefined:undefined ?"></option>
                                     <option value="Dry Measurements">Dry Measurements</option>
                                     <option value="Liquid Measurements">Liquid Measurements</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-model="ingredient.measure_like">
+                                    <option value="? undefined:undefined ?"></option>
+                                    <option value="Dry Measurements">Butter</option>
+                                    <option value="Dry Measurements">Parsley</option>
+                                    <option value="Dry Measurements">Nuts</option>
+                                    <option value="Dry Measurements">Sugar</option>
                                 </select>
                             </td>
                             <td>

@@ -8,57 +8,204 @@
 </div>
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-md-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.managementCategories">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title" >Management</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.inventoryCategories">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title" >Inventory</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.comingSoon">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title" >Consumer Reviews</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.performanceScore">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title" >Performance Score</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.dashboardSubCategories">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title" >Dashboard & Reports</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.administrator">
-                            <div class="widget style1 lazur-bg">
-                                <div class="text-center home-element">
-                                    <a class="pos-title">Administrator</a>
-                                </div>
+                        <div class="col-sm-12">
+                            <div>
+                                <c3chart bindto-id="pie-plot1-chart">
+                                    <chart-column column-id="{{v.column_id}}"
+                                                  column-values="{{v.column_values}}"
+                                                  column-type="pie" ng-repeat="v in pieData"/>
+                                    <chart-pie expand="true"/>
+                                </c3chart>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Sales Monthly</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div>
+                                <c3chart bindto-id="stacked-bar-plot1-chart">
+                                    <chart-column column-id="data 1"
+                                                  column-name="Beverage Sales"
+                                                  column-values="310,200,100,400,150,250"
+                                                  column-type="bar"/>
+
+                                    <chart-column column-id="data 2"
+                                                  column-name="Food Sales"
+                                                  column-values="530,20,120,40,153,25"
+                                                  column-type="bar"/>
+
+                                    <chart-column column-id="data 3"
+                                                  column-name="Admission Sales"
+                                                  column-values="450,120,10,40,15,225"
+                                                  column-type="bar"/>
+
+                                    <chart-group group-values="data 1,data 2,data 3"/>
+
+                                    <chart-axis-y axis-id="y">
+                                        <chart-axis-y-tick tick-format-function="formatY"></chart-axis-y-tick>
+                                    </chart-axis-y>
+
+                                    <chart-axis-x axis-id="x">
+                                        <chart-axis-x-tick tick-format-function="formatX"></chart-axis-x-tick>
+                                    </chart-axis-x>
+                                </c3chart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Sales Forecast</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sales MTD</th>
+                                        <th>Sales Mthly <br> Forecast Remaining</th>
+                                        <th>Total Projected <br> Mthly Sales</th>
+                                        <th>Today's <br> Forecast</th>
+                                        <th>Yesterday's <br> Forecast</th>
+                                        <th>Yesterdays <br> Actual</th>
+                                        <th>Yesterdays <br> Variance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Inventory Analysis</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Inventory <br> Purchases MTD</th>
+                                    <th>Inventory Usage <br> MTD</th>
+                                    <th>Spending -vs <br> Usage</th>
+                                    <th>EOM Additional <br> Inventory Required</th>
+                                    <th>Yesterday's <br> Forecast Usage</th>
+                                    <th>Yesterdays <br> Actual Usage</th>
+                                    <th>Yesterdays <br> Variance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Budget Analysis</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>MTD Actual <br> Spending</th>
+                                    <th>MTD Projected <br> Spending</th>
+                                    <th>Mthly Spending <br> Variance</th>
+                                    <th>Forecast Additional <br> Funding Required</th>
+                                    <th>Actual Spending <br> Budget %</th>
+                                    <th>Forecasted Spending <br> %</th>
+                                    <th>% Variance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Payroll Analysis</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>MTD Actual <br> Payroll</th>
+                                    <th>MTD Forecast <br> Payroll</th>
+                                    <th>Payroll Cost <br> Variance</th>
+                                    <th>Payroll Performance <br> % of Sales</th>
+                                    <th>Budgeted % <br> of Sales</th>
+                                    <th>Forecasted % <br> Budget %</th>
+                                    <th>Variance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                    <td>$117,425 </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-4">
             <div class="ibox ">
                 <div class="ibox-content">
                     <div class="tab-content">

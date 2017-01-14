@@ -3,7 +3,7 @@ function pageTitle($rootScope, $timeout) {
         link: function(scope, element) {
             var listener = function(event, toState, toParams, fromState, fromParams) {
                 // Default title - load on Dashboard 1
-                var title = 'INSPINIA | Responsive Admin Theme';
+                var title = 'Artecsan powered by Skrible ';
                 // Create your own title pattern
                 if (toState.data && toState.data.pageTitle) title = 'Artecsan powered by Skrible | ' + toState.data.pageTitle;
                 $timeout(function() {
