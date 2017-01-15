@@ -9,60 +9,75 @@
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
         <div class="col-md-8">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div>
-                                <c3chart bindto-id="pie-plot1-chart">
-                                    <chart-column column-id="{{v.column_id}}"
-                                                  column-values="{{v.column_values}}"
-                                                  column-type="pie" ng-repeat="v in pieData"/>
-                                    <chart-pie expand="true"/>
-                                </c3chart>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="clearfix">
+                                        <h5 class="text-center">&nbsp;</h5>
+                                    </div>
+                                    <div class="clearfix">
+                                        <c3chart bindto-id="pie-plot1-chart">
+                                            <chart-column column-id="{{v.column_id}}"
+                                                          column-values="{{v.column_values}}"
+                                                          column-type="pie" ng-repeat="v in pieData"/>
+                                            <chart-pie expand="true"/>
+                                        </c3chart>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="clearfix">
+                                        <h5 class="text-center">Sales Monthly</h5>
+                                    </div>
+                                    <div class="clearfix">
+                                        <c3chart bindto-id="stacked-bar-plot1-chart">
+                                            <chart-column column-id="data 1"
+                                                          column-name="Beverage Sales"
+                                                          column-values="310,200,100,400,150,250"
+                                                          column-type="bar"/>
+
+                                            <chart-column column-id="data 2"
+                                                          column-name="Food Sales"
+                                                          column-values="530,20,120,40,153,25"
+                                                          column-type="bar"/>
+
+                                            <chart-column column-id="data 3"
+                                                          column-name="Admission Sales"
+                                                          column-values="450,120,10,40,15,225"
+                                                          column-type="bar"/>
+
+                                            <chart-group group-values="data 1,data 2,data 3"/>
+
+                                            <chart-axis-y axis-id="y">
+                                                <chart-axis-y-tick tick-format-function="formatY"></chart-axis-y-tick>
+                                            </chart-axis-y>
+
+                                            <chart-axis-x axis-id="x">
+                                                <chart-axis-x-tick tick-format-function="formatX"></chart-axis-x-tick>
+                                            </chart-axis-x>
+                                        </c3chart>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Sales Monthly</h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div>
-                                <c3chart bindto-id="stacked-bar-plot1-chart">
-                                    <chart-column column-id="data 1"
-                                                  column-name="Beverage Sales"
-                                                  column-values="310,200,100,400,150,250"
-                                                  column-type="bar"/>
-
-                                    <chart-column column-id="data 2"
-                                                  column-name="Food Sales"
-                                                  column-values="530,20,120,40,153,25"
-                                                  column-type="bar"/>
-
-                                    <chart-column column-id="data 3"
-                                                  column-name="Admission Sales"
-                                                  column-values="450,120,10,40,15,225"
-                                                  column-type="bar"/>
-
-                                    <chart-group group-values="data 1,data 2,data 3"/>
-
-                                    <chart-axis-y axis-id="y">
-                                        <chart-axis-y-tick tick-format-function="formatY"></chart-axis-y-tick>
-                                    </chart-axis-y>
-
-                                    <chart-axis-x axis-id="x">
-                                        <chart-axis-x-tick tick-format-function="formatX"></chart-axis-x-tick>
-                                    </chart-axis-x>
-                                </c3chart>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="ibox float-e-margins">-->
+                        <!--<div class="ibox-title">-->
+                            <!--<h5>Sales Monthly</h5>-->
+                        <!--</div>-->
+                        <!--<div class="ibox-content">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-sm-12">-->
+                                    <!---->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
