@@ -351,7 +351,7 @@ function MainCtrl($http, $uibModal, $scope) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal/add_new_menu_item.html',
             controller: ModalInstanceMenuCtrl,
-            windowClass: "animated fadeIn modal-lgg",
+            windowClass: "animated fadeIn",
             size: 'lg',
             controllerAs: 'vm',
             resolve: {
