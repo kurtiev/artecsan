@@ -541,3 +541,13 @@ body.login-page {
     width: 100%;
     max-width: 1200px;
 }
+.ng-submitted .ng-invalid-required,
+.ng-submitted .ng-dirty.ng-invalid-pattern.ng-touched,
+.ng-dirty.ng-invalid.ng-invalid-required.ng-touched {
+    background-color: #f78f9a;
+    border-color: #e6868f;
+}
+
+.form-control {
+    color: #000;
+}

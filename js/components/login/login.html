@@ -1,0 +1,88 @@
+<div class="loginColumns animated fadeInRight admin-login">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 text-center">
+            <div class="logo">
+                <i class="glyphicon glyphicon-cutlery"></i> Artecsan powered by Skrible
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-center">
+            <div class="ibox-content">
+                <form class="m-t" name="$ctr.loginForm" novalidate autocomplete="off" ng-submit="$ctr.login($ctr.loginForm)" ng-if="!$ctr.m.forgotPass">
+                    <fieldset ng-disabled="$ctr.m.inRequest">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Email" ng-model="$ctr.m.email" required
+                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                   placeholder="Email address" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" ng-model="$ctr.m.password"
+                                   required
+                                   placeholder="Password" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login
+                        </button>
+                        <a class="pull-left small" href="" ng-click="$ctr.m.forgotPass = true">Forgot password</a> <br>
+                        <a class="create-new-account" ui-sref="registration" href="">or Create new Account</a>
+                        <div class="form-group">
+                            <div class="m-t-xs animated fadeInRight"
+                                 ng-show="$ctr.loginForm.$submitted && !$ctr.loginForm.Email.$valid">
+                                <small class="text-danger" ng-show="$ctr.loginForm.$submitted && !$ctr.m.email">Username field must be a valid e-mail
+                                    address.
+                                </small>
+                            </div>
+                            <div class="m-t-xs animated fadeInRight"
+                                 ng-show="$ctr.loginForm.$submitted && !$ctr.loginForm.Password.$valid">
+                                <small class="text-danger" ng-show="$ctr.loginForm.$submitted && !$ctr.m.password">Password field is required.</small>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="$ctr.m.errorMessage">
+                            <div vc-recaptcha key="$ctr.m.captchaKey"></div>
+                            <div class="m-t-xs animated fadeInRight">
+                                <small class="text-danger">{{$ctr.m.errorMessage}}</small>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form name="forgotPassword" autocomplete="off" novalidate ng-submit="$ctr.forgotPassword(forgotPassword)" ng-if="$ctr.m.forgotPass">
+                    <fieldset ng-disabled="$ctr.m.inRequest">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Email" ng-model="$ctr.m.email" required
+                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                   placeholder="Email address" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Send</button>
+                        <a class="pull-left small" href="" ng-click="$ctr.m.forgotPass = false">Login</a> <br>
+                        <a class="create-new-account" ui-sref="registration" href="">or Create new Account</a>
+
+                        <div class="form-group" ng-show="forgotPassword.$submitted && !$ctr.m.email">
+                            <div class="m-t-xs animated fadeInRight">
+                                <small class="text-danger">Field must be a valid e-mail address.</small>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <p class="text-center welcome" ng-bind-html="$ctr.settings.admin_welcome_title"></p>
+
+            <p class="text-justify info" ng-bind-html="$ctr.settings.admin_welcome_text"></p>
+        </div>
+    </div>
+    <div class="login-footer hidden-xs">
+        <div class="row">
+            <div class="col-xs-12">
+                Copyright <strong>ARTecsan</strong>
+                <small class="pull-right">&copy; 2017</small>
+            </div>
+        </div>
+    </div>
+    <div class="login-footer relative visible-xs">
+        <div class="row">
+            <div class="col-xs-12">
+                Copyright <strong>ARTecsan</strong>
+                <small class="pull-right">&copy; 2017</small>
+            </div>
+        </div>
+    </div>
+</div>
