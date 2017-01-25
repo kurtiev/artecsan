@@ -44,7 +44,15 @@
         };
 
         serviceFactory.get_restaurants = function (model) {
-            return $http.get (serviceBase + 'restaurants/?', model, getAuthConfig());
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'restaurants',
+                headers: {
+                    'Authorization': 'Bearer ' + auth.authentication.token
+                },
+                params: model
+            });
         };
 
         serviceFactory.get_refbooks = function (model) {

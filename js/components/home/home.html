@@ -21,33 +21,31 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-5 padding-top-5">
-                                <input type="text" class="form-control" id="filter" placeholder="Restaurant Name">
-                            </div>
-                            <div class="col-md-2 padding-top-5">
-                                <button class="btn btn-primary">Search</button>
-                            </div>
+                            <form novalidate autocomplete="off" name="$ctr.form.search"
+                                  ng-submit="$ctr.searchByWord(search_by)">
+                                <div class="col-md-5 padding-top-5">
+                                    <input type="text" class="form-control" id="filter" ng-model="search_by" placeholder="Restaurant Name">
+                                </div>
+                                <div class="col-md-2 padding-top-5">
+                                    <button class="btn btn-primary">Search</button>
+                                </div>
+                            </form>
                             <div class="col-md-5 text-right padding-top-5">
                                 <button class="btn btn-primary" ui-sref="admin.pos">Add new Restaurant</button>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="footable table table-stripped" data-page-size="8">
+                            <table class="footable table" data-page-size="5">
                                 <thead>
                                     <tr>
-                                        <th data-sort-ignore="true"
-                                            ng-click="$ctr.m.paginationOffset = 0; $ctr.search('id')"
-                                            ng-class="{'footable-sorted-desc': ($ctr.m.order_by == 'id' && $ctr.m.order_way == 'DESC'), 'footable-sorted-asc': ($ctr.m.order_by == 'id' && $ctr.m.order_way == 'ASC')}">
-                                            #
-                                            <span class="footable-sort-indicator"></span>
-                                        </th>
-                                        <th>Restaurant Name</th>
-                                        <th>Address</th>
+                                        <th ng-click="$ctr.m.paginationOffset = 0; $ctr.search('id')">#</th>
+                                        <th ng-click="$ctr.m.paginationOffset = 0; $ctr.search('name')">Restaurant Name</th>
+                                        <th ng-click="$ctr.m.paginationOffset = 0; $ctr.search('address')">Address</th>
                                         <th data-sort-ignore="true" class="center width-210">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr  class="gradeX" ng-repeat="restaurant in $ctr.restaurantsList">
+                                    <tr ng-repeat="restaurant in $ctr.restaurantsList">
                                         <td>{{restaurant.id}}</td>
                                         <td>{{restaurant.restaurant_name}}</td>
                                         <td>{{restaurant.address}}</td>
@@ -60,7 +58,28 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="5">
-                                        <ul class="pagination pull-right"></ul>
+                                        <nav>
+                                            <div class="clearfix">
+                                                <nav class="pull-left">
+                                                    <uib-pagination total-items="$ctr.paginationTotal"
+                                                                    max-size="5"
+                                                                    next-text="{{'Next'}}"
+                                                                    boundary-link-numbers="true"
+                                                                    previous-text="{{'Previous'}}"
+                                                                    items-per-page="$ctr.m.paginationCount"
+                                                                    ng-model="$ctr.m.paginationOffset"
+                                                                    ng-change="$ctr.search()">
+                                                    </uib-pagination>
+                                                  <!--  <ul class="pagination" ng-show="$ctr.paginationTotal > $ctr.m.paginationCount">
+                                                        <li class="pagination-page">
+                                                            <a href=""
+                                                               ng-click="$ctr.m.paginationOffset = 0; $ctr.m.paginationCount = $ctr.paginationTotal; $ctr.search()"
+                                                               class="ng-binding">Show All ({{$ctr.paginationTotal}})</a>
+                                                        </li>
+                                                    </ul>-->
+                                                </nav>
+                                            </div>
+                                        </nav>
                                     </td>
                                 </tr>
                                 </tfoot>
