@@ -30,7 +30,11 @@
 
             if (is_sign_up && that.restaurant.subscription_type_id !== 0) {
                 core.data.new_restaurant.subscription_type_id = that.restaurant.subscription_type_id;
-                $state.go('restaurantUserProfile');
+                if (auth.authentication.isLogged) {
+                    $state.go('restaurantProfile');
+                } else {
+                    $state.go('restaurantUserProfile');
+                }
             }
         };
 

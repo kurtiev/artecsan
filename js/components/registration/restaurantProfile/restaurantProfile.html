@@ -60,11 +60,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Phone Number:</label>
-                                                <input type="text" class="form-control" placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>
+                                                <input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6 text-left">
-                                                    <button type="button" class="btn btn-primary">&lt;&lt; Back</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="$ctr.back()">&lt;&lt; Back</button>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <button type="submit" class="btn btn-primary block float-right m-b">Next - Payment Setup</button>

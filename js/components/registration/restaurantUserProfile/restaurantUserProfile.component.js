@@ -8,6 +8,11 @@
             return;
         }
 
+        if (auth.authentication.isLogged) {
+            $state.go('registration');
+            return;
+        }
+
         var that = this;
         that.form = {};
         that.api = api;
@@ -43,10 +48,10 @@
             that.api.users_registration(user_model).then(function (res) {
                 try {
                     if (res.data.data.user) {
-                        // TODO uncomment
-                        // localStorageService.set('adminAuthorizationData', {
-                        //     authenticationInfo: auth.setUser(res.data.data.user)
-                        // });
+
+                        localStorageService.set('adminAuthorizationData', {
+                            authenticationInfo: auth.setUser(res.data.data.user)
+                        });
                         core.data.new_restaurant.user_id = res.data.data.user.id;
                         core.data.new_restaurant.user.first_name = that.model.first_name;
                         core.data.new_restaurant.user.last_name = that.model.last_name;

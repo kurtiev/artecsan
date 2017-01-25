@@ -5,7 +5,7 @@
                 <i class="glyphicon glyphicon-cutlery"></i> Artecsan powered by Skrible
             </a>
             <a class="navbar-brand navbar-link" href="" ui-sref="home" ng-if="$ctr.isAuth">
-                <i class="glyphicon glyphicon-cutlery"></i> Artecsan powered by Skrible
+                <i class="glyphicon glyphicon-cutlery"></i> Artecsan powered by Skrible <span ng-show="$ctr.restaurantName"> - {{$ctr.restaurantName}} </span>
             </a>
         </div>
         <ul class="nav navbar-top-links navbar-right" ng-if="$ctr.isAuth">

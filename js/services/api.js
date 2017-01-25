@@ -44,14 +44,23 @@
         };
 
         serviceFactory.get_restaurants = function (model) {
-            return $http.get (serviceBase + 'restaurants/?', model, getAuthConfig());
+            return $http.get(serviceBase + 'restaurants/?', model, getAuthConfig());
         };
 
         serviceFactory.get_refbooks = function (model) {
             return $http.post(serviceBase + 'rb/get_refbooks', model, getAuthConfig());
         };
+
         serviceFactory.users_registration = function (model) {
             return $http.post(serviceBase + 'users/registration', model, getAuthConfig());
+        };
+
+        serviceFactory.create_restaurant = function (model) {
+            return $http.post(serviceBase + 'restaurants', model, getAuthConfig());
+        };
+
+        serviceFactory.get_restaurant = function (id) {
+            return $http.get(serviceBase + 'restaurants/' + id, getAuthConfig());
         };
 
 

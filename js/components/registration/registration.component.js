@@ -3,10 +3,10 @@
 
     function registrationController(api, $state, auth, core) {
 
-        if (auth.authentication.isLogged) {
-            $state.go('home');
-            return;
-        }
+        // if (auth.authentication.isLogged) {
+        //     $state.go('home');
+        //     return;
+        // }
 
         var that = this;
 
@@ -15,7 +15,7 @@
         that.posList = [];
 
         that.model = {
-            user_id: core.data.new_restaurant ? core.data.new_restaurant.user_id : null,
+            user_id: auth.authentication.isLogged ? auth.authentication.user.id : null,
             subscription_type_id: core.data.new_restaurant ? core.data.new_restaurant.subscription_type_id : null,
             pos_id: core.data.new_restaurant ? core.data.new_restaurant.pos_id : null,
             user: {

@@ -28,7 +28,7 @@
                                 <button class="btn btn-primary">Search</button>
                             </div>
                             <div class="col-md-5 text-right padding-top-5">
-                                <button class="btn btn-primary" ui-sref="admin.pos">Add new Restaurant</button>
+                                <button class="btn btn-primary" ui-sref="registration">Add new Restaurant</button>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -52,7 +52,7 @@
                                         <td>{{restaurant.restaurant_name}}</td>
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
-                                            <button class="btn btn-primary" ui-sref="admin.homeMenu" ng-click="main.selectRestaurant()">Select</button>
+                                            <button class="btn btn-primary" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
                                             <button class="btn btn-primary" ui-sref="admin.pos">Setup Process</button>
                                         </td>
                                     </tr>

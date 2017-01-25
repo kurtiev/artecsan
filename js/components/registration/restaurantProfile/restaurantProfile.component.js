@@ -38,8 +38,7 @@
             core.data.new_restaurant.restaurant.zip = that.model.zip;
             core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
 
-            console.log(core.data.new_restaurant);
-            // $state.go('restaurantProfile');
+            $state.go('payment');
         };
 
         that.back = function () {
@@ -50,7 +49,8 @@
             core.data.new_restaurant.restaurant.state = that.model.state;
             core.data.new_restaurant.restaurant.zip = that.model.zip;
             core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
-            $state.go('restaurantUserProfile');
+
+            $state.go('subscription');
         };
 
         that.$onInit = function () {

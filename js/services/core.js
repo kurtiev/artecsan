@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var core = function (api, auth, $q) {
+    var core = function (api, auth, $q, restaurant, localStorageService) {
 
 
         var data = {
@@ -55,7 +55,12 @@
         }
 
         var init = function () {
-            // get_settings()
+            var restaurantID = localStorageService.get('restaurant_id');
+
+            if (restaurantID) {
+                restaurant.set_restaurant(restaurantID.restaurant_id);
+            }
+
         };
 
 
@@ -67,7 +72,7 @@
         };
     };
 
-    core.$inject = ['api', 'auth', '$q'];
+    core.$inject = ['api', 'auth', '$q', 'restaurant', 'localStorageService'];
     angular.module('inspinia').factory('core', core);
 
 })();

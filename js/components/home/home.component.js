@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function homeController(appConfig, $state, auth, api, alertService, core) {
+    function homeController(appConfig, $state, auth, api, alertService, core, restaurant, localStorageService) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -11,6 +11,7 @@
 
         var that = this;
 
+        that.restaurantService = restaurant;
         that.restaurantsList = [];
 
         that.m = {
@@ -20,6 +21,14 @@
             paginationCount: 25
         };
 
+        that.selectRestaurant = function (restaurant) {
+            that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
+                localStorageService.set('restaurant_id', {
+                    restaurant_id: restaurant.id
+                });
+                $state.go('admin.homeMenu');
+            });
+        };
 
         that.search = function (keyword) {
 
@@ -68,7 +77,7 @@
 
     }
 
-    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core'];
+    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', 'restaurant', 'localStorageService'];
 
     angular.module('inspinia').component('homeComponent', {
         templateUrl: 'js/components/home/home.html',

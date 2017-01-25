@@ -1,0 +1,156 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg navigation-hide"
+         ng-class="{'navigation-hide' : !main.isFoodSetup && main.isRegistration}">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>Payment Profile</h2>
+                <p class="padding-top-5">
+                    Message to restaurant user: Keep in mind that your first 14-days are free. The system needs at least
+                    7- days of data and this process cannot start until your setup is complete. So the sooner you get
+                    setup, the sooner Artecsan can begin.
+                </p>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                                    <h3 class="text-center">Payment Details</h3>
+                                    <img class="img-responsive float-right" src="img/png/accepted_cards.png"/>
+                                    <form id="payment-form" class="m-t" autocomplete="off" novalidate name="$ctr.form" ng-submit="$ctr.submit($ctr.form)">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="cardNumber">
+                                                        Card number
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="tel"
+                                                               placeholder="Valid Card Number" id="cardNumber" only-digits maxlength="14" ng-model="$ctr.model.card_number" required>
+                                                        <div class="input-group-addon">
+                                                    <span>
+                                                        <i class="fa fa-credit-card"></i>
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label for="cardExpiry">
+                                                        <span>Expiration Date</span>
+                                                    </label>
+                                                    <div>
+                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
+                                                               placeholder="MM" id="cardExpiry" ng-model="$ctr.model.expiration_month" required>
+                                                        <span class="float-left date-payment-label">/</span>
+                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
+                                                               placeholder="YY" id="cardExpiry2" ng-model="$ctr.model.expiration_year" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 pull-right">
+                                                <div class="form-group">
+                                                    <label for="cardCVC">
+                                                        CV Code
+                                                    </label>
+                                                    <input class="form-control" type="text" only-digits placeholder="CVC"
+                                                           id="cardCVC" ng-model="$ctr.model.cv_code" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label for="couponCode">
+                                                        Coupon Code
+                                                    </label>
+                                                    <input class="form-control" type="text" id="couponCode"
+                                                           placeholder="Coupon Code" ng-model="$ctr.model.coupon_code" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label for="zipCode">
+                                                        Zip Code
+                                                    </label>
+                                                    <input class="form-control" type="text" id="zipCode" only-digits
+                                                           placeholder="ZIP Code" ng-model="$ctr.model.zip" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label for="firstName">
+                                                        First Name
+                                                    </label>
+                                                    <input class="form-control" type="text" id="firstName"
+                                                           placeholder="First Name" ng-model="$ctr.model.first_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-group">
+                                                    <label for="lastName">
+                                                        Last Name
+                                                    </label>
+                                                    <input class="form-control" type="text" id="lastName"
+                                                           placeholder="Last Name" ng-model="$ctr.model.last_name" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="billingAddress">
+                                                        Billing Address
+                                                    </label>
+                                                    <input class="form-control" type="text" id="billingAddress"
+                                                           ng-model="$ctr.model.billing_address" required
+                                                           placeholder="Billing Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 text-left">
+                                                <!--<button type="button" class="btn btn-primary"> &lt;&lt; Back</button>-->
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <button type="submit" class="btn btn-primary block float-right m-b">
+                                                    Next - Disclaimer and Confidentiality Agreement
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
