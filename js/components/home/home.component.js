@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function homeController(appConfig, $state, auth, api, alertService, core, restaurant, localStorageService) {
+    function homeController(appConfig, $state, auth, api, alertService, core, restaurant, localStorageService, $scope) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -17,8 +17,10 @@
         that.m = {
             order_by: "id",
             order_way: "ASC",
-            paginationOffset: 25,
-            paginationCount: 25
+            paginationOffset: 0,
+            paginationCount: 3,
+            inRequest: false,
+            search_by: null
         };
 
         that.selectRestaurant = function (restaurant) {
@@ -39,7 +41,7 @@
                 order_way: that.m.order_way,
                 paginationOffset: that.m.paginationOffset,
                 paginationCount: that.m.paginationCount,
-                inRequest: false
+                search_by: that.m.search_by
             };
 
             for (var i in m) {
@@ -57,11 +59,15 @@
                     m.order_by = keyword;
                 }
             }
+            if (m.paginationOffset > 0 && !keyword) {
+                m.paginationOffset = (m.paginationOffset - 1) * m.paginationCount;
+            }
 
 
             api.get_restaurants(m).then(function (res) {
                 try {
                     that.restaurantsList = res.data.data.restaurants_list;
+                    that.paginationTotal = res.data.data.total;
                 } catch (e) {
                     console.log(e);
                 }
@@ -74,10 +80,18 @@
 
         that.search();
 
+        that.searchByWord = function (word) {
+            that.m.search_by = word || '';
+        };
+
+        $scope.$watch('$ctr.m', function () {
+            that.search();
+        }, true);
+
 
     }
 
-    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', 'restaurant', 'localStorageService'];
+    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', 'restaurant', 'localStorageService', '$scope'];
 
     angular.module('inspinia').component('homeComponent', {
         templateUrl: 'js/components/home/home.html',

@@ -1,6 +1,3 @@
-/**
- * Created by Eugen Protsenko on 25.01.2017.
- */
 (function () {
 
     'use strict';
