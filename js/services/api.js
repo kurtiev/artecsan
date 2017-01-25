@@ -43,6 +43,10 @@
             return $http.post(serviceBase + 'users/reset_password', model, getAuthConfig());
         };
 
+        serviceFactory.get_restaurants = function (model) {
+            return $http.get (serviceBase + 'restaurants/?', model, getAuthConfig());
+        };
+
         serviceFactory.get_refbooks = function (model) {
             return $http.post(serviceBase + 'rb/get_refbooks', model, getAuthConfig());
         };
