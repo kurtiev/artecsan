@@ -35,7 +35,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="pos in $ctr.posList track by $index" ng-click="$ctr.selectPos(pos)">
-                                    <div class="widget style1 navy-bg pos_item cursor-pointer" ng-class="{'selected': $ctr.model.price_id == pos.id}">
+                                    <div class="widget style1 navy-bg pos_item cursor-pointer" ng-class="{'selected': $ctr.model.pos_id == pos.id}">
                                         <div class="text-center pos-element">
                                             <img src="" ng-src="{{pos.logo_content_item_url}}" alt="{{pos.name}}" class="pos_logo">
                                         </div>

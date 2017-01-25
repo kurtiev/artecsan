@@ -11,7 +11,7 @@
 
         $rootScope.userData = userData;
 
-        var _setUser = function (user) {
+        var setUser = function (user) {
             userData.isLogged = true;
             userData.user = user;
             appConfig.token = 'Bearer ' + userData.user.access_token;
@@ -36,7 +36,7 @@
                 if (success.data.data) {
                     if (success.data.data.message === 'OK') {
                         localStorageService.set('adminAuthorizationData', {
-                            authenticationInfo: _setUser(success.data.data.user)
+                            authenticationInfo: setUser(success.data.data.user)
                         });
                     }
                     deferred.resolve(success);
@@ -59,7 +59,7 @@
             var authData = localStorageService.get('adminAuthorizationData');
             if (authData) {
                 if (authData.authenticationInfo) {
-                    _setUser(authData.authenticationInfo.user);
+                    setUser(authData.authenticationInfo.user);
                 }
             }
 
@@ -69,6 +69,7 @@
             login: login,
             logOut: logOut,
             fillAuthData: fillAuthData,
+            setUser: setUser,
             authentication: userData
         };
     };

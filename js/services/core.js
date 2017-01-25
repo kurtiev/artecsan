@@ -7,7 +7,8 @@
 
         var data = {
             settings: null,
-            refbooks: null
+            refbooks: null,
+            new_restaurant: null
         };
 
 
@@ -25,6 +26,34 @@
             return deferred.promise;
         }
 
+        function get_refbooks() {
+            var deferred = $q.defer();
+            if (data.refbooks) {
+                deferred.resolve(data.refbooks);
+            } else {
+
+                var keys = {
+                    refbooks: [
+                        "platforms",
+                        "user_types",
+                        "sex",
+                        "entity_types",
+                        "countries",
+                        "content_types",
+                        "city",
+                        "city_zips",
+                        "invite_status"
+                    ]
+                };
+
+                api.get_refbooks(keys).then(function (res) {
+                    data.refbooks = res.data.data.refbooks;
+                    deferred.resolve(data.refbooks);
+                })
+            }
+            return deferred.promise;
+        }
+
         var init = function () {
             // get_settings()
         };
@@ -33,6 +62,7 @@
         return {
             data: data,
             getSettings: get_settings,
+            getRefbooks: get_refbooks,
             init: init
         };
     };

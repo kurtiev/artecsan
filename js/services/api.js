@@ -36,11 +36,18 @@
         };
 
         serviceFactory.rb_subscriptions = function () {
-            return $http.get(serviceBase + 'rb/rb_subscriptions', getAuthConfig()); // TODO
+            return $http.get(serviceBase + 'rb/subscriptions', getAuthConfig());
         };
 
         serviceFactory.reset_password = function (model) {
             return $http.post(serviceBase + 'users/reset_password', model, getAuthConfig());
+        };
+
+        serviceFactory.get_refbooks = function (model) {
+            return $http.post(serviceBase + 'rb/get_refbooks', model, getAuthConfig());
+        };
+        serviceFactory.users_registration = function (model) {
+            return $http.post(serviceBase + 'users/registration', model, getAuthConfig());
         };
 
 

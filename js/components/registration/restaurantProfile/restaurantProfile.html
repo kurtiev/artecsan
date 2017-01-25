@@ -1,0 +1,90 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg navigation-hide"
+         ng-class="{'navigation-hide' : !main.isFoodSetup && main.isRegistration}">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>Restaurant Profile</h2>
+                <p class="padding-top-5">
+                    Instructions for restaurant user: Before you get going please keep in mind that we're a super young
+                    company which means we're still working on a lot of cool and exciting new features including adding
+                    more P.O.S. systems. So if you don't see your P.O.S. system in the drop down menu below, we
+                    sincerely apologize but our platform does not currently work for your location. However there might
+                    be a solution. Simply hit the contact us button, tell us which P.O.S. system you use and we'll see
+                    what we can do to expedite getting you connected.
+                </p>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                                    <h3 class="text-center">Restaurant Profile</h3>
+                                    <form class="m-t" autocomplete="off" novalidate name="$ctr.form" ng-submit="$ctr.submit($ctr.form)">
+                                        <fieldset ng-disabled="$ctr.model.form_disabled">
+                                            <div class="form-group">
+                                                <label>Restaurant Name:</label>
+                                                <input type="text" class="form-control" placeholder="Restaurant Name" ng-model="$ctr.model.restaurant_name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Entity Type:</label>
+                                                <select class="form-control" ng-model="$ctr.model.entity_type_id" required ng-options="type.id as type.name for type in $ctr.get_refbooks.entity_types"></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Street Address:</label>
+                                                <input type="text" class="form-control" placeholder="Street Address" ng-model="$ctr.model.street_address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>City:</label>
+                                                <input type="text" class="form-control" placeholder="City" ng-model="$ctr.model.city" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>State:</label>
+                                                <input type="text" class="form-control" placeholder="State" ng-model="$ctr.model.state" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Zip code:</label>
+                                                <input type="text" class="form-control" placeholder="Zip code" ng-model="$ctr.model.zip" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Phone Number:</label>
+                                                <input type="text" class="form-control" placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6 text-left">
+                                                    <button type="button" class="btn btn-primary">&lt;&lt; Back</button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <button type="submit" class="btn btn-primary block float-right m-b">Next - Payment Setup</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

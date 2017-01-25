@@ -4,10 +4,10 @@
     angular.module('inspinia').config(function ($stateProvider) {
 
         $stateProvider
-            .state('registration', {
-                url: "/registration",
-                template: "<registration-component></registration-component>",
-                data: {pageTitle: ' Registration'}
+            .state('subscription', {
+                url: "/subscription",
+                template: "<subscription-component></subscription-component>",
+                data: {pageTitle: ' Subscriptions'}
             });
 
     })
