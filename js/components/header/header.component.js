@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function headerController(core, auth) {
+    function headerController(core, auth, $state) {
 
         var that = this;
         that.isAuth = auth.authentication.isLogged;
@@ -11,10 +11,15 @@
             core.getSettings().then(function (res) {
                 that.settings = res
             });
+        };
+
+        that.logout = function () {
+            auth.logOut();
+            $state.go('login')
         }
     }
 
-    headerController.$inject = ['core', 'auth'];
+    headerController.$inject = ['core', 'auth', '$state'];
 
     angular.module('inspinia').component('headerComponent', {
         templateUrl: 'js/components/header/header.html',

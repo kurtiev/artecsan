@@ -25,7 +25,7 @@
 
             that.inRequest = true;
 
-            let m = {
+            var m = {
                 order_by: that.m.order_by,
                 order_way: that.m.order_way,
                 paginationOffset: that.m.paginationOffset,

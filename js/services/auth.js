@@ -2,32 +2,35 @@
 
     "use strict";
 
-    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $state) {
+    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $injector) {
 
-        var userData = {
+        var that = this;
+        that.userData = {
             isLogged: false,
             user: null
         };
 
-        $rootScope.userData = userData;
+        $rootScope.userData = that.userData;
 
         var setUser = function (user) {
-            userData.isLogged = true;
-            userData.user = user;
-            appConfig.token = 'Bearer ' + userData.user.access_token;
-            $rootScope.userData = userData;
-            return userData;
+            that.userData.isLogged = true;
+            that.userData.user = user;
+            appConfig.token = 'Bearer ' + that.userData.user.access_token;
+            $rootScope.userData = that.userData;
+            return that.userData;
         };
 
         var clearUserData = function () {
-            var userData = {
+            that.userData = {
                 isLogged: false,
                 user: null
             };
             appConfig.token = null;
-            $rootScope.userData = userData;
+            $rootScope.userData = that.userData;
             // Clear all static data and User info
             localStorageService.clearAll();
+            var auth = $injector.get('auth');
+            auth.authentication = that.userData;
         };
 
         var login = function (model) {
@@ -51,7 +54,6 @@
 
         var logOut = function () {
             clearUserData();
-            $state.go('login')
         };
 
         var fillAuthData = function () {
@@ -70,11 +72,11 @@
             logOut: logOut,
             fillAuthData: fillAuthData,
             setUser: setUser,
-            authentication: userData
+            authentication: that.userData
         };
     };
 
-    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$state'];
+    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$injector'];
     angular.module('inspinia').factory('auth', authService);
 
 })();
