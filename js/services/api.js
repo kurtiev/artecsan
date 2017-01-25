@@ -10,7 +10,7 @@
         function getAuthConfig() {
             var config = {};
             config.headers = {};
-            config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'; // TODO
 
             var auth = $injector.get('auth');
 
