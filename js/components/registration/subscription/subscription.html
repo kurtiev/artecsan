@@ -68,7 +68,7 @@
 
                             </div>
                             <div class="text-center padding-20">
-                                <button class="btn" ng-class="{'btn-primary' : $ctr.restaurant.subscription_type_id == 0, 'btn-default' :  $ctr.restaurant.subscription_type_id != 0}" type="button">Contact us</button>
+                                <button class="btn" ng-class="{'btn-primary' : $ctr.restaurant.subscription_type_id == 0, 'btn-default' :  $ctr.restaurant.subscription_type_id != 0}" type="button" ng-click="$ctr.contactUsPopup()">Contact us</button>
                             </div>
                         </div>
                     </div>
@@ -84,3 +84,45 @@
 
 </div>
 <!-- End wrapper-->
+
+
+<script type="text/ng-template" id="contact_us.html">
+    <div class="inmodal">
+        <form novalidate autocomplete="off" name="vm.form" ng-submit="vm.contactUs(vm.form)">
+            <div class="modal-header">
+                <h4 class="modal-title">Contact Us</h4>
+            </div>
+            <div class="modal-body max-height-340">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-12 no-padding">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name" class="form-control" ng-model="vm.m.first_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name" class="form-control" ng-model="vm.m.last_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Phone number</label>
+                            <input type="number" placeholder="Phone number" class="form-control" ng-model="vm.m.phone_number" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Email</label>
+                            <input type="text" placeholder="Email" class="form-control" ng-model="vm.m.email" required
+                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Message</label>
+                            <input type="textarea" placeholder="Message" class="form-control" ng-model="vm.m.message" required>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="vm.close()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Contact Us</button>
+            </div>
+        </form>
+    </div>
+</script>

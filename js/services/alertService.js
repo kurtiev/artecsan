@@ -22,6 +22,15 @@
             });
         };
 
+        appServiceFactory.successfullySent = function (title) {
+            SweetAlert.swal({
+                title: title || 'Successful',
+                type: "success",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        };
+
 
         appServiceFactory.showAlertSave = function (title, text) {
             SweetAlert.swal({
@@ -45,6 +54,15 @@
             SweetAlert.swal({
                 title: err.message,
                 text: text || '',
+                showConfirmButton: false,
+                type: "error",
+                timer: 3000
+            });
+        };
+
+        appServiceFactory.showError = function (title) {
+            SweetAlert.swal({
+                title: title,
                 showConfirmButton: false,
                 type: "error",
                 timer: 3000

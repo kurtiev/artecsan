@@ -16,11 +16,12 @@
 
         that.m = {
             order_by: "id",
-            order_way: "ASC",
-            paginationOffset: 0,
-            paginationCount: 3,
+            order_way: "ASC",  //ASC/DESC
+            paginationOffset: 0, // 0 by default
+            paginationCount: 25, //25 by default,
             inRequest: false,
-            search_by: null
+            search_by: null,
+            paginationTotal: 0
         };
 
         that.selectRestaurant = function (restaurant) {
@@ -51,6 +52,7 @@
             }
 
             if (keyword) {
+                m.paginationOffset = 0;
                 if (that.m.order_by == keyword) {
                     that.m.order_way = m.order_way == 'ASC' ? 'DESC' : 'ASC';
                     m.order_way = m.order_way == 'ASC' ? 'DESC' : 'ASC'
@@ -67,7 +69,7 @@
             api.get_restaurants(m).then(function (res) {
                 try {
                     that.restaurantsList = res.data.data.restaurants_list;
-                    that.paginationTotal = res.data.data.total;
+                    that.m.paginationTotal = res.data.data.total;
                 } catch (e) {
                     console.log(e);
                 }
@@ -79,14 +81,6 @@
         };
 
         that.search();
-
-        that.searchByWord = function (word) {
-            that.m.search_by = word || '';
-        };
-
-        $scope.$watch('$ctr.m', function () {
-            that.search();
-        }, true);
 
 
     }

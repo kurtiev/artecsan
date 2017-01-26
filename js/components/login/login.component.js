@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function loginController(appConfig, $state, auth, api, alertService, core) {
+    function loginController(appConfig, $state, auth, api, alertService, core, $uibModal) {
 
         if (auth.authentication.isLogged) {
             $state.go('home');
@@ -12,6 +12,7 @@
         var that = this;
 
         that.loginForm = {};
+        that.popupForm = {};
 
         that.m = {
             email: null,
@@ -19,8 +20,52 @@
             captchaKey: appConfig.googleCaptcha,
             errorMessage: null,
             inRequest: false,
-            forgotPass: false
+            forgotPass: false,
+            popup_passwd: null
         };
+
+        that.createNewAccountPopup = function (self) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'views/modal/create_new_account.html',
+                controller: function ($uibModalInstance, localStorageService) {
+                    this.close = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+
+                    this.confirmPopupPasswd = function (form, passwd) {
+                        if (!form.$valid) {
+                            return
+                        }
+                        if (passwd == 'ARTECSAN') {
+                            localStorageService.set('confirmPopupPasswd', {
+                                passwd: passwd
+                            });
+                            $state.go('registration');
+                            this.close();
+                        } else {
+                            alertService.showError('User password are invalid');
+                        }
+                    };
+                },
+                windowClass: "animated fadeIn",
+                controllerAs: '$ctr',
+                size: 'sm',
+                resolve: {
+                    user: function () {
+                        return null;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+                self.selected = result;
+            }, function (reason) {
+
+            });
+        };
+
+
+
 
         that.login = function (form) {
 
@@ -73,7 +118,7 @@
 
     }
 
-    loginController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core'];
+    loginController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', '$uibModal'];
 
     angular.module('inspinia').component('loginComponent', {
         templateUrl: 'js/components/login/login.html',
