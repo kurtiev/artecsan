@@ -75,6 +75,10 @@
             return $http.post(serviceBase + 'users/invite', model, getAuthConfig());
         };
 
+        serviceFactory.contact_us = function (model) {
+            return $http.post(serviceBase + 'users/contact_us', model, getAuthConfig());
+        };
+
 
         return serviceFactory;
     };

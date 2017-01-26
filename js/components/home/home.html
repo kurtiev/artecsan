@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="footable footable-custom table-stripped toggle-arrow-tiny table" data-page-size="3">
+                            <table class="footable footable-custom table-stripped toggle-arrow-tiny table" data-page-size="25">
                                 <thead>
                                     <tr>
                                         <th data-sort-ignore="true" ng-click="$ctr.search('id')"
@@ -62,7 +62,7 @@
                                         <td>{{restaurant.restaurant_name}}</td>
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
-                                            <button class="btn btn-primary" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
+                                            <button class="btn btn-primary" disabled="{{restaurant.is_setup_completed == 1}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
                                             <button class="btn btn-primary" ui-sref="admin.pos">Setup Process</button>
                                         </td>
                                     </tr>
@@ -72,8 +72,8 @@
                                     <td colspan="5">
                                         <nav>
                                             <div class="clearfix">
-                                                <nav class="pull-left">
-                                                    <uib-pagination total-items="$ctr.m.paginationTotal"
+                                                <nav class="pull-right">
+                                                    <ul uib-pagination total-items="$ctr.m.paginationTotal"
                                                                     max-size="5"
                                                                     next-text="{{'Next'}}"
                                                                     boundary-link-numbers="true"
@@ -81,7 +81,7 @@
                                                                     items-per-page="$ctr.m.paginationCount"
                                                                     ng-model="$ctr.m.paginationOffset"
                                                                     ng-change="$ctr.search()">
-                                                    </uib-pagination>
+                                                    </ul>
                                                   <!--  <ul class="pagination" ng-show="$ctr.paginationTotal > $ctr.m.paginationCount">
                                                         <li class="pagination-page">
                                                             <a href=""
