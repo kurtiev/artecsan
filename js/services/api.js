@@ -71,6 +71,10 @@
             return $http.get(serviceBase + 'restaurants/' + id, getAuthConfig());
         };
 
+        serviceFactory.users_invite = function (model) {
+            return $http.post(serviceBase + 'users/invite', model, getAuthConfig());
+        };
+
 
         return serviceFactory;
     };

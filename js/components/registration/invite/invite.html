@@ -12,12 +12,7 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-12">
-                <h2>Payment Profile</h2>
-                <p class="padding-top-5">
-                    Message to restaurant user: Keep in mind that your first 14-days are free. The system needs at least
-                    7- days of data and this process cannot start until your setup is complete. So the sooner you get
-                    setup, the sooner Artecsan can begin.
-                </p>
+                <h2>User Setup</h2>
             </div>
         </div>
 
@@ -27,117 +22,60 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="row">
-                                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                                    <h3 class="text-center">Payment Details</h3>
-                                    <img class="img-responsive float-right" src="img/png/accepted_cards.png"/>
-                                    <form id="payment-form" class="m-t" autocomplete="off" novalidate name="$ctr.form" ng-submit="$ctr.submit($ctr.form)">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="form-group">
-                                                    <label for="cardNumber">
-                                                        Card number
-                                                    </label>
-                                                    <div class="input-group">
-                                                        <input class="form-control" type="tel"
-                                                               placeholder="Valid Card Number" id="cardNumber" only-digits maxlength="14" ng-model="$ctr.model.card_number" required>
-                                                        <div class="input-group-addon">
-                                                    <span>
-                                                        <i class="fa fa-credit-card"></i>
-                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <h3 class="text-center">Users</h3>
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-primary float-right" ng-click="$ctr.addUser()">Add
+                                                User Item
+                                            </button>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label for="cardExpiry">
-                                                        <span>Expiration Date</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-stripped">
+                                            <thead>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Type</th>
+                                                <th class="width-70">Active</th>
+                                                <th class="width-180"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="user in $ctr.usersList">
+                                                <td>{{user.first_name}}</td>
+                                                <td>{{user.last_name}}</td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{::$ctr.userTypesFilter(user.type_ids)}}</td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-model="user.is_active" ng-true-value="1" ng-false-value="0"><i></i>
                                                     </label>
-                                                    <div>
-                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
-                                                               placeholder="MM" id="cardExpiry" ng-model="$ctr.model.expiration_month" required>
-                                                        <span class="float-left date-payment-label">/</span>
-                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
-                                                               placeholder="YY" id="cardExpiry2" ng-model="$ctr.model.expiration_year" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 pull-right">
-                                                <div class="form-group">
-                                                    <label for="cardCVC">
-                                                        CV Code
-                                                    </label>
-                                                    <input class="form-control" type="text" only-digits placeholder="CVC"
-                                                           id="cardCVC" ng-model="$ctr.model.cv_code" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label for="couponCode">
-                                                        Coupon Code
-                                                    </label>
-                                                    <input class="form-control" type="text" id="couponCode"
-                                                           placeholder="Coupon Code" ng-model="$ctr.model.coupon_code" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label for="zipCode">
-                                                        Zip Code
-                                                    </label>
-                                                    <input class="form-control" type="text" id="zipCode" only-digits
-                                                           placeholder="ZIP Code" ng-model="$ctr.model.zip" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label for="firstName">
-                                                        First Name
-                                                    </label>
-                                                    <input class="form-control" type="text" id="firstName"
-                                                           placeholder="First Name" ng-model="$ctr.model.first_name" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label for="lastName">
-                                                        Last Name
-                                                    </label>
-                                                    <input class="form-control" type="text" id="lastName"
-                                                           placeholder="Last Name" ng-model="$ctr.model.last_name" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="form-group">
-                                                    <label for="billingAddress">
-                                                        Billing Address
-                                                    </label>
-                                                    <input class="form-control" type="text" id="billingAddress"
-                                                           ng-model="$ctr.model.billing_address" required
-                                                           placeholder="Billing Address">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4 text-left">
-                                                <!--<button type="button" class="btn btn-primary"> &lt;&lt; Back</button>-->
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <button type="submit" class="btn btn-primary block float-right m-b">
-                                                    Next - Disclaimer and Confidentiality Agreement
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                                </td>
+                                                <td class="text-right">
+                                                    <button class="btn btn-warning " type="button"
+                                                            ng-click="$ctr.editUser(user, $index)"><i
+                                                            class="fa fa-edit"></i>&nbsp;Edit
+                                                    </button>
+                                                    <button class="btn btn-danger " type="button"
+                                                            ng-click="$ctr.delete($index)"><i class="fa fa-times"></i>&nbsp;Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    <button class="btn btn-primary float-left">&lt;&lt; Back</button>
+                                    <button class="btn btn-primary" ng-click="$ctr.sentInvitations(false)" ng-disabled="!$ctr.usersList.length">Invite Users
+                                        and Processed
+                                    </button>
+                                    <button class="btn btn-primary margin-left-10"
+                                            ng-click="$ctr.sentInvitations(true)" ng-disabled="!$ctr.usersList.length">Invite Users & Exit
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -154,3 +92,193 @@
 
 </div>
 <!-- End wrapper-->
+
+
+<script type="text/ng-template" id="add-user-for-invite.html">
+    <div class="inmodal">
+        <form novalidate autocomplete="off" name="vm.form" ng-submit="vm.add(vm.form)">
+            <div class="modal-header">
+                <h4 class="modal-title">Invite User</h4>
+            </div>
+            <div class="modal-body max-height-340">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-12 no-padding">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name" class="form-control" ng-model="vm.m.first_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name" class="form-control" ng-model="vm.m.last_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Email</label>
+                            <input type="text" placeholder="Email" class="form-control" ng-model="vm.m.email" required
+                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>User Type</label>
+                            <select class="form-control" ng-model="vm.m.type_ids"
+                                    ng-options="user.id as user.name for user in vm.userTypes" required>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-if="vm.user.userType == 'Custom Roles'">
+                    <div class="ibox-content padding-top-20">
+                        <h3 class="text-center">Permissions Management</h3>
+                        <table class="table table-stripped">
+                            <tbody>
+                            <tr>
+                                <td>Restaurant Module</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Billing</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Users</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Setup Wizard</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>POS Setup</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Management</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Inventory</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Begin Food Inventory Count</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Consumer Reviews</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dashboard / Reports</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food Details</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Performance Score</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Administrator</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Billing</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Users</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="vm.close()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Invite</button>
+            </div>
+        </form>
+    </div>
+</script>

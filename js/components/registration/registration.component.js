@@ -1,12 +1,8 @@
 (function () {
     'use strict';
 
-    function registrationController(api, $state, auth, core, localStorageService) {
+    function registrationController(api, $state, auth, core, appConfig, localStorageService) {
 
-        // if (auth.authentication.isLogged) {
-        //     $state.go('home');
-        //     return;
-        // }
 
         var createNewAccountConfirmPasswd = localStorageService.get('confirmPopupPasswd');
         if (!createNewAccountConfirmPasswd) {
@@ -15,7 +11,11 @@
 
         var that = this;
 
+        that.base_api_url = appConfig.apiDomain;
+
         that.loginForm = {};
+
+        that.isAuth = auth.authentication.isLogged;
 
         that.posList = [];
 
@@ -69,7 +69,7 @@
 
     }
 
-    registrationController.$inject = ['api', '$state', 'auth', 'core', 'localStorageService'];
+    registrationController.$inject = ['api', '$state', 'auth', 'core', 'appConfig', 'localStorageService'];
 
     angular.module('inspinia').component('registrationComponent', {
         templateUrl: 'js/components/registration/registration.html',

@@ -541,6 +541,7 @@ body.login-page {
     width: 100%;
     max-width: 1200px;
 }
+
 .ng-submitted .ng-invalid-required,
 .ng-submitted .ng-dirty.ng-invalid-pattern.ng-touched,
 .ng-dirty.ng-invalid.ng-invalid-required.ng-touched {
@@ -550,4 +551,23 @@ body.login-page {
 
 .form-control {
     color: #000;
+}
+
+.btn-primary.disabled,
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary.active[disabled],
+fieldset[disabled] .btn-primary,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:active,
+fieldset[disabled] .btn-primary.active {
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
