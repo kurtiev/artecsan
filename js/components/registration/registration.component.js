@@ -5,7 +5,7 @@
 
 
         var createNewAccountConfirmPasswd = localStorageService.get('confirmPopupPasswd');
-        if (!createNewAccountConfirmPasswd) {
+        if (!createNewAccountConfirmPasswd && !auth.authentication.isLogged) {
             $state.go('login');
         }
 
