@@ -33,9 +33,9 @@ function MainCtrl($http, $uibModal, $scope, $location) {
         });
     };
 
-    // if (invite_key) {
-    //     inviteKeyPopup();
-    // }
+    if (invite_key) {
+        inviteKeyPopup();
+    }
 
     // that.passwordConfirm = function (form) {
     //     if (!form.$valid) {

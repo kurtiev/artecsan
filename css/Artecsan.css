@@ -576,3 +576,7 @@ fieldset[disabled] .btn-primary.active {
     max-height: 300px;
     overflow-y: auto;
 }
+
+.no-resize {
+    resize: none;
+}
