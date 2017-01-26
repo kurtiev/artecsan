@@ -1,0 +1,24 @@
+<div class="inmodal">
+    <div class="modal-body">
+        <form name="$ctr.inviteForm" novalidate="" role="form" ng-submit="$ctr.passwordConfirm($ctr.inviteForm, $ctr.password)">
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-md-12 no-padding">
+                        <label> Password</label>
+                        <input type="password" placeholder="Password" autocomplete="off" required class="form-control" ng-model="$ctr.password">
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <label>Confirm password</label>
+                        <input type="password" placeholder="Password" autocomplete="off" required class="form-control" ng-model="$ctr.confirm_password">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="modal-footer" style="text-align: center !important;">
+                <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" >Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+

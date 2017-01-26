@@ -3,7 +3,47 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope) {
+function MainCtrl($http, $uibModal, $scope, $location) {
+
+    var that = this;
+
+    that.inviteForm = {};
+
+    var invite_key = $location.search()['invite_key'];
+
+    var inviteKeyPopup = function (self) {
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/invite_key_popup.html',
+            controller: ModalInstanceCtrl,
+            windowClass: "animated fadeIn",
+            controllerAs: 'ctr',
+            size: 'sm',
+            resolve: {
+                user: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+            self.usersList.push(result);
+        }, function (reason) {
+
+        });
+    };
+
+    // if (invite_key) {
+    //     inviteKeyPopup();
+    // }
+
+    // that.passwordConfirm = function (form) {
+    //     if (!form.$valid) {
+    //         return
+    //     }
+    // };
+
+
     this.posIndex = 2;
     this.isRegistration = false;
     this.isFoodSetup = false;

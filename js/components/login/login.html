@@ -22,7 +22,7 @@
                         <button type="submit" class="btn btn-primary block full-width m-b">Login
                         </button>
                         <a class="pull-left small" href="" ng-click="$ctr.m.forgotPass = true">Forgot password</a> <br>
-                        <a class="create-new-account" ui-sref="registration" href="">or Create new Account</a>
+                        <a class="create-new-account" ng-click="$ctr.createNewAccountPopup();" href="">or Create new Account</a>
                         <div class="form-group">
                             <div class="m-t-xs animated fadeInRight"
                                  ng-show="$ctr.loginForm.$submitted && !$ctr.loginForm.Email.$valid">

@@ -50,6 +50,15 @@
             });
         };
 
+        appServiceFactory.showError = function (title) {
+            SweetAlert.swal({
+                title: title,
+                showConfirmButton: false,
+                type: "error",
+                timer: 3000
+            });
+        };
+
         return appServiceFactory;
     };
 
