@@ -52,7 +52,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">Send</button>
                         <a class="pull-left small" href="" ng-click="$ctr.m.forgotPass = false">Login</a> <br>
-                        <a class="create-new-account" ui-sref="registration" href="">or Create new Account</a>
+                        <a class="create-new-account" ng-click="$ctr.createNewAccountPopup();" href="">or Create new Account</a>
 
                         <div class="form-group" ng-show="forgotPassword.$submitted && !$ctr.m.email">
                             <div class="m-t-xs animated fadeInRight">
