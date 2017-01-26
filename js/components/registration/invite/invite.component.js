@@ -33,7 +33,7 @@
 
     };
 
-    function inviteController(api, $state, auth, core, $uibModal, restaurant) {
+    function inviteController(api, $state, auth, core, $uibModal, restaurant, alertService) {
 
         if (!auth.authentication.isLogged) {
             $state.go('registration');
@@ -134,17 +134,20 @@
                     type_ids: [that.usersList[i].type_ids],
                     is_active: that.usersList[i].is_active
                 };
-                sentList.push(m)
+                sentList.push(u)
             }
 
             var model = {
-                users: u,
+                users: sentList,
                 restaurant_id: restaurant.data.info.id
             };
 
             if (restaurant.data.info.id) {
                 that.api.users_invite(model).then(function (res) {
-                    if (isExit) {
+                    if (res.data.data.code === 1000) {
+                        alertService.showSuccessText('Invitations were sent')
+                    }
+                    if (!isExit) {
                         $state.go('food.vendorSetup');
                     } else {
                         $state.go('home');
@@ -156,7 +159,7 @@
 
     }
 
-    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'restaurant'];
+    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'restaurant', 'alertService'];
 
     angular.module('inspinia').component('inviteComponent', {
         templateUrl: 'js/components/registration/invite/invite.html',

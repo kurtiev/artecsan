@@ -31,9 +31,9 @@
                     restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
                     entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
                     street_address: core.data.new_restaurant.restaurant.street_address,
-                    city: core.data.new_restaurant.restaurant.city,
+                    city_geoname_id: core.data.new_restaurant.restaurant.city_geoname_id,
                     logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
-                    state: core.data.new_restaurant.restaurant.state,
+                    state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
                     zip: core.data.new_restaurant.restaurant.zip,
                     phone_number: core.data.new_restaurant.restaurant.phone_number
                 },

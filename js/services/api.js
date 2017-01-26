@@ -75,6 +75,10 @@
             return $http.post(serviceBase + 'users/invite', model, getAuthConfig());
         };
 
+        serviceFactory.locations_lookup = function (model) {
+            return $http.post(serviceBase + 'rb/locations_lookup', model, getAuthConfig());
+        };
+
 
         return serviceFactory;
     };

@@ -4,67 +4,67 @@
             <li ui-sref-active="active">
                 <a  ui-sref="home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="login"><i class="fa fa-sign-out" ng-click="auth.logOut()"></i> <span class="nav-label">{{ 'Logout' }}</span> </a>
+            <li >
+                <a href="" ng-click="$ctr.logOut()"><i class="fa fa-sign-out"></i> <span class="nav-label">{{ 'Logout' }}</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('food')}" ng-if="main.isFoodSetup">
-                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'Food Setup' }}</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('food')}">
-                    <li ui-sref-active="active"><a ui-sref="food.vendorSetup">Vendor Setup</a></li>
-                    <li ui-sref-active="active"><a ui-sref="food.inventorySetup">Inventory Setup</a></li>
-                    <li ui-sref-active="active"><a ui-sref="food.recipeSetup">Recipe Setup</a></li>
-                    <li ui-sref-active="active"><a ui-sref="food.menuSetup">Menu Setup</a></li>
-                    <li ui-sref-active="active"><a ui-sref="food.deliverySetup">Delivery Schedule</a></li>
-                </ul>
-            </li>
+            <!--<li ng-class="{active: $state.includes('food')}" ng-if="main.isFoodSetup">-->
+                <!--<a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'Food Setup' }}</span><span class="fa arrow"></span></a>-->
+                <!--<ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('food')}">-->
+                    <!--<li ui-sref-active="active"><a ui-sref="food.vendorSetup">Vendor Setup</a></li>-->
+                    <!--<li ui-sref-active="active"><a ui-sref="food.inventorySetup">Inventory Setup</a></li>-->
+                    <!--<li ui-sref-active="active"><a ui-sref="food.recipeSetup">Recipe Setup</a></li>-->
+                    <!--<li ui-sref-active="active"><a ui-sref="food.menuSetup">Menu Setup</a></li>-->
+                    <!--<li ui-sref-active="active"><a ui-sref="food.deliverySetup">Delivery Schedule</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
 
-            <li ui-sref-active="active" ng-if="main.isFoodSetup">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="main.isFoodSetup">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-table"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="main.isFoodSetup">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-money"></i> <span class="nav-label">{{ 'Payroll' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="main.isFoodSetup">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-calculator"></i> <span class="nav-label">{{ 'Accounting' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="main.isFoodSetup">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>
-            </li>
-            <hr ng-if="main.isFoodSetup">
+            <!--<li ui-sref-active="active" ng-if="main.isFoodSetup">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="main.isFoodSetup">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-table"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="main.isFoodSetup">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-money"></i> <span class="nav-label">{{ 'Payroll' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="main.isFoodSetup">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-calculator"></i> <span class="nav-label">{{ 'Accounting' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="main.isFoodSetup">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>-->
+            <!--</li>-->
+            <!--<hr ng-if="main.isFoodSetup">-->
 
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="home.home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.homeMenu"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'Home' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.managementCategories"><i class="fa fa-edit"></i> <span class="nav-label">{{ 'Management' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.inventoryCategories"><i class="fa fa-desktop"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="food.performanceScore"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'Performance Score' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.administrator"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-flask"></i> <span class="nav-label">{{ 'Frequent Q&A' }}</span> </a>
-            </li>
-            <li ui-sref-active="active" ng-if="!main.isRegistration">
-                <a ui-sref="login"><i class="fa fa-sign-out" ng-click="main.logout()"></i> <span class="nav-label">{{ 'Logout' }}</span> </a>
-            </li>
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="home.home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.homeMenu"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'Home' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.managementCategories"><i class="fa fa-edit"></i> <span class="nav-label">{{ 'Management' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.inventoryCategories"><i class="fa fa-desktop"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="food.performanceScore"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'Performance Score' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.administrator"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-flask"></i> <span class="nav-label">{{ 'Frequent Q&A' }}</span> </a>-->
+            <!--</li>-->
+            <!--<li ui-sref-active="active" ng-if="!main.isRegistration">-->
+                <!--<a ui-sref="login"><i class="fa fa-sign-out" ng-click="main.logout()"></i> <span class="nav-label">{{ 'Logout' }}</span> </a>-->
+            <!--</li>-->
         </ul>
     </div>
 </nav>

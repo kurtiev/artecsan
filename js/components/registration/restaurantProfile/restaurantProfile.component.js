@@ -30,6 +30,11 @@
                 return
             }
 
+            if (!core.data.new_restaurant.restaurant.city_geoname_id || !core.data.new_restaurant.restaurant.state_geoname_id) {
+                alert('Please select City or State from dropdown menu');
+                return
+            }
+
             core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
             core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
             core.data.new_restaurant.restaurant.street_address = that.model.street_address;
@@ -57,7 +62,24 @@
             core.getRefbooks().then(function (res) {
                 that.get_refbooks = res;
             });
-        }
+        };
+
+        that.get_location = function (val, type) {
+            if (val.length < 3) return;
+            return that.api.locations_lookup({search_for: val}).then(function (response) {
+                return response.data.data.locations.filter(function (currentValue, index) {
+                    return currentValue.type_id === parseInt(type)
+                })
+            });
+        };
+
+        that.selectCity = function (item) {
+            core.data.new_restaurant.restaurant.city_geoname_id = item.geoname_id
+        };
+
+        that.selectState = function (item) {
+            core.data.new_restaurant.restaurant.state_geoname_id = item.geoname_id
+        };
 
 
     }

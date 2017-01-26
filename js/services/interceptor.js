@@ -34,14 +34,14 @@
                         return;
                     }
                     if (response.data.error.code != 2001 && response.data.error.code != 1000) {
-                        alertService.showAPIError(response.data.error);
+                        alertService.showAPIError(response.data.error, response.data.validation_Error);
                     }
                     if (response.data.error.code == 2001) {
                         var authService = $injector.get('auth');
-                        // alertService.showAlertTimeout(); // TODO uncomment
-                        // authService.logOut();  // TODO uncomment
+                        alertService.showAlertTimeout();
+                        authService.logOut();
                     } else if (response.data.error.code != 2017) {
-                        alertService.showAPIError(response.data.error);
+                        alertService.showAPIError(response.data.error, response.data.validation_Error);
                     }
                 }
             }

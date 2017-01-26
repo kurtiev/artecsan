@@ -34,14 +34,14 @@
 
                 var keys = {
                     refbooks: [
-                        "platforms",
+                        // "platforms",
                         "user_types",
-                        "sex",
+                        // "sex",
                         "entity_types",
-                        "countries",
+                        // "countries",
                         "content_types",
-                        "city",
-                        "city_zips",
+                        // "city",
+                        // "city_zips",
                         "invite_status"
                     ]
                 };

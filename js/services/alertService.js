@@ -41,9 +41,10 @@
             });
         };
 
-        appServiceFactory.showAPIError = function (err) {
+        appServiceFactory.showAPIError = function (err, text) {
             SweetAlert.swal({
                 title: err.message,
+                text: text || '',
                 showConfirmButton: false,
                 type: "error",
                 timer: 3000

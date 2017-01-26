@@ -33,6 +33,8 @@
                 city: core.data.new_restaurant ? core.data.new_restaurant.restaurant.city : null,
                 state: core.data.new_restaurant ? core.data.new_restaurant.restaurant.state : null,
                 zip: core.data.new_restaurant ? core.data.new_restaurant.restaurant.zip : null,
+                city_geoname_id: core.data.new_restaurant ? core.data.new_restaurant.restaurant.city_geoname_id : null,
+                state_geoname_id: core.data.new_restaurant ? core.data.new_restaurant.restaurant.state_geoname_id : null,
                 phone_number: core.data.new_restaurant ? core.data.new_restaurant.restaurant.phone_number : null
             },
             payment: {
