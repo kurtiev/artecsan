@@ -3,38 +3,85 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state) {
 
     var that = this;
+    that.api = api;
 
     that.inviteForm = {};
 
     var invite_key = $location.search()['invite_key'];
 
-    var inviteKeyPopup = function (self) {
+    var inviteKeyPopup = function (invite_key) {
 
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/modal/invite_key_popup.html',
-            controller: ModalInstanceCtrl,
-            windowClass: "animated fadeIn",
-            controllerAs: 'ctr',
-            size: 'sm',
-            resolve: {
-                user: function () {
-                    return null;
-                }
+        that.api.get_invite_info({invite_key: invite_key}).then(function (res) {
+
+            var user = res.data.data.invite_info;
+
+            if (user) {
+                $uibModal.open({
+                    templateUrl: 'views/modal/invite_key_popup.html',
+
+                    controller: function ($uibModalInstance, alertService) {
+
+                        var self = this;
+
+                        self.user = user;
+
+                        self.decline = function () {
+                            var m = {
+                                invite_key: invite_key,
+                                status_id: 2
+                            };
+
+                            that.api.redeem_invitation(m).then(function (res) {
+                                if (res.data.data.code === 1000) {
+                                    alertService.showSuccessText('Invitation was declined');
+                                    if (!auth.authentication.isLogged) {
+                                        $state.go('login', {});
+                                    }
+                                }
+                            });
+                        };
+
+                        self.submit = function (form) {
+
+                            if (!form.$valid) {
+                                return
+                            }
+
+                            var m = {
+                                invite_key: invite_key,
+                                status_id: 1
+                            };
+
+                            if (self.user.is_new_user) {
+                                m.password = self.user.password
+                            }
+
+                            that.api.redeem_invitation(m).then(function (res) {
+                                if (res.data.data.code === 1000) {
+                                    $uibModalInstance.close();
+                                    alertService.showSuccessText('Invitation was confirmed');
+                                    if (!auth.authentication.isLogged) {
+                                        $state.go('login', {});
+                                    }
+                                }
+
+                            });
+                        }
+                    },
+                    windowClass: "animated fadeIn",
+                    controllerAs: '$ctr'
+                });
             }
-        });
-
-        modalInstance.result.then(function (result) {
-            self.usersList.push(result);
-        }, function (reason) {
 
         });
+
     };
 
     if (invite_key) {
-        inviteKeyPopup();
+        inviteKeyPopup(invite_key);
     }
 
     // that.passwordConfirm = function (form) {

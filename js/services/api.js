@@ -83,6 +83,22 @@
             return $http.post(serviceBase + 'users/contact_us', model, getAuthConfig());
         };
 
+        serviceFactory.get_invite_info = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'users/get_invite_info',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.redeem_invitation = function (model) {
+            return $http.post(serviceBase + 'users/redeem_invitation', model, getAuthConfig());
+        };
+
 
         return serviceFactory;
     };
