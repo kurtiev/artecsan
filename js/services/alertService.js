@@ -69,6 +69,16 @@
             });
         };
 
+        appServiceFactory.showErrorInvitation = function (err, text) {
+            SweetAlert.swal({
+                title: err || '',
+                text: text || '',
+                showConfirmButton: false,
+                type: "error",
+                timer: 4000
+            });
+        };
+
         return appServiceFactory;
     };
 
