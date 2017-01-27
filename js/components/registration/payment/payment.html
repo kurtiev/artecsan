@@ -35,7 +35,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-group">
                                                     <label for="cardNumber">
-                                                        Card number
+                                                        Card number <span class="text-danger">*</span>
                                                     </label>
                                                     <div class="input-group">
                                                         <input class="form-control" type="tel"
@@ -53,7 +53,7 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="cardExpiry">
-                                                        <span>Expiration Date</span>
+                                                        <span>Expiration Date <span class="text-danger">*</span></span>
                                                     </label>
                                                     <div>
                                                         <input class="form-control width-20" maxlength="2" type="text" only-digits
@@ -67,9 +67,9 @@
                                             <div class="col-xs-6 pull-right">
                                                 <div class="form-group">
                                                     <label for="cardCVC">
-                                                        CV Code
+                                                        CV Code <span class="text-danger">*</span>
                                                     </label>
-                                                    <input class="form-control" type="text" only-digits placeholder="CVC"
+                                                    <input class="form-control" type="text" only-digits placeholder="CVC" maxlength="3"
                                                            id="cardCVC" ng-model="$ctr.model.cv_code" required>
                                                 </div>
                                             </div>
@@ -78,7 +78,7 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="couponCode">
-                                                        Coupon Code
+                                                        Coupon Code <span class="text-danger">*</span>
                                                     </label>
                                                     <input class="form-control" type="text" id="couponCode"
                                                            placeholder="Coupon Code" ng-model="$ctr.model.coupon_code" required>
@@ -87,9 +87,10 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="zipCode">
-                                                        Zip Code
+                                                        Zip Code <span class="text-danger">*</span>
                                                     </label>
                                                     <input class="form-control" type="text" id="zipCode" only-digits
+                                                           ng-pattern="/^\d+$/" minlength="3" maxlength="6"
                                                            placeholder="ZIP Code" ng-model="$ctr.model.zip" required>
                                                 </div>
                                             </div>
@@ -98,19 +99,19 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="firstName">
-                                                        First Name
+                                                        First Name <span class="text-danger">*</span>
                                                     </label>
                                                     <input class="form-control" type="text" id="firstName"
-                                                           placeholder="First Name" ng-model="$ctr.model.first_name" required>
+                                                           placeholder="First Name" maxlength="50" ng-model="$ctr.model.first_name" required>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="lastName">
-                                                        Last Name
+                                                        Last Name <span class="text-danger">*</span>
                                                     </label>
                                                     <input class="form-control" type="text" id="lastName"
-                                                           placeholder="Last Name" ng-model="$ctr.model.last_name" required>
+                                                           placeholder="Last Name" maxlength="50" ng-model="$ctr.model.last_name" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,9 +120,9 @@
                                             <div class="col-xs-12">
                                                 <div class="form-group">
                                                     <label for="billingAddress">
-                                                        Billing Address
+                                                        Billing Address <span class="text-danger">*</span>
                                                     </label>
-                                                    <input class="form-control" type="text" id="billingAddress"
+                                                    <input class="form-control" maxlength="50" type="text" id="billingAddress"
                                                            ng-model="$ctr.model.billing_address" required
                                                            placeholder="Billing Address">
                                                 </div>

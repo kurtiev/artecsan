@@ -35,38 +35,53 @@
                                     <form class="m-t" autocomplete="off" novalidate name="$ctr.form" ng-submit="$ctr.submit($ctr.form)">
                                         <fieldset ng-disabled="$ctr.model.form_disabled">
                                             <div class="form-group">
-                                                <label>Restaurant Name:</label>
-                                                <input type="text" class="form-control" placeholder="Restaurant Name" ng-model="$ctr.model.restaurant_name" required>
+                                                <label>Restaurant Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" maxlength="50" placeholder="Restaurant Name" ng-model="$ctr.model.restaurant_name" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Entity Type:</label>
+                                                <label>Entity Type <span class="text-danger">*</span></label>
                                                 <select class="form-control" ng-model="$ctr.model.entity_type_id" required ng-options="type.id as type.name for type in $ctr.get_refbooks.entity_types"></select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Street Address:</label>
-                                                <input type="text" class="form-control" placeholder="Street Address" ng-model="$ctr.model.street_address" required>
+                                                <label>Street Address <span class="text-danger">*</span></label>
+                                                <input maxlength="50" type="text" class="form-control" placeholder="Street Address" ng-model="$ctr.model.street_address" required>
                                             </div>
                                             <div class="form-group dropdown-overflow">
-                                                <label>City:</label>
+                                                <label>City <span class="text-danger">*</span></label>
                                                 <!--<input type="text" class="form-control" placeholder="City" ng-model="$ctr.model.city" required ng-keyup="$ctr.get_location($ctr.model.city, 'city')">-->
                                                 <input type="text" class="form-control" placeholder="City" ng-model="$ctr.model.city" required
                                                        uib-typeahead="city.name for city in $ctr.get_location($viewValue, 2)"
+                                                       readonly
                                                        typeahead-on-select="$ctr.selectCity($item, $model, $label, $event)">
                                             </div>
                                             <div class="form-group dropdown-overflow">
-                                                <label>State:</label>
+                                                <label>State <span class="text-danger">*</span></label>
                                                 <!--<input type="text" class="form-control" placeholder="State" ng-model="$ctr.model.state" required>-->
                                                 <input type="text" class="form-control" placeholder="State" ng-model="$ctr.model.state" required
                                                        uib-typeahead="state.name for state in $ctr.get_location($viewValue, 1)"
+                                                       readonly
                                                        typeahead-on-select="$ctr.selectState($item, $model, $label, $event)">
                                             </div>
                                             <div class="form-group">
-                                                <label>Zip code:</label>
-                                                <input type="text" class="form-control" placeholder="Zip code" ng-model="$ctr.model.zip" required>
+                                                <label>Zip code <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="Zip code" ng-model="$ctr.model.zip" required
+                                                       ng-pattern="/^\d+$/" minlength="3" maxlength="6"
+                                                       ng-change="$ctr.onZipChanged()" name="zip">
                                             </div>
                                             <div class="form-group">
-                                                <label>Phone Number:</label>
-                                                <input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>
+                                                <label>Phone Number <span class="text-danger">*</span></label>
+                                                <!--<input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>-->
+                                                <div class="phone-input">
+                                                    <div>
+                                                        <div class="phone-code">
+                                                            <div>+1</div>
+                                                        </div>
+                                                    </div>
+                                                    <input name="phone" type="text" class="form-control"
+                                                           ng-model="$ctr.model.phone_number" ac-phone maxlength="10" required placeholder="Phone Number">
+                                                </div>
+
+                                                <span class="field-descriptions">(No dashes or special characters)</span>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6 text-left">

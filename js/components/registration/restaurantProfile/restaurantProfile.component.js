@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function restaurantProfileController(api, $state, auth, core) {
+    function restaurantProfileController(api, $state, $timeout, core, utils) {
 
         if (!core.data.new_restaurant) {
             $state.go('registration');
@@ -11,9 +11,11 @@
         var that = this;
         that.form = {};
         that.api = api;
+        that.$timeout = $timeout;
         that.restaurant = core.data.new_restaurant;
         that.entities = [];
         that.get_refbooks = [];
+        that.utils = utils;
 
         that.model = {
             restaurant_name: core.data.new_restaurant ? core.data.new_restaurant.restaurant.restaurant_name : null,
@@ -81,10 +83,55 @@
             core.data.new_restaurant.restaurant.state_geoname_id = item.geoname_id
         };
 
+        that.onZipChanged = function () {
 
+            if (that.timer) {
+                that.$timeout.cancel(that.timer);
+            }
+
+            that.timer = that.$timeout(function () {
+                var zip = that.model.zip;
+
+                if (zip) {
+                    that.api.locations_lookup({search_for: zip}).then(function (response) {
+
+                            if (response.data.data.locations.length) {
+                                that.model.city = response.data.data.locations[0].clear_name;
+                                core.data.new_restaurant.restaurant.city_geoname_id = response.data.data.locations[0].geoname_id;
+                                core.data.new_restaurant.restaurant.state_geoname_id = response.data.data.locations[0].state_geoname_id;
+
+                                for (var i = 0; that.get_refbooks.country_states.length > i; i++) {
+                                    if (response.data.data.locations[0].state_geoname_id === that.get_refbooks.country_states[i].geoname_id) {
+                                        that.model.state = that.get_refbooks.country_states[i].state;
+                                        that.form.zip.$setValidity('zip', true);
+                                        break
+                                    }
+                                }
+                            } else {
+                                that.form.zip.$setValidity('zip', false);
+                                that.model.city = '';
+                                that.model.state = '';
+                                core.data.new_restaurant.restaurant.city_geoname_id = null;
+                                core.data.new_restaurant.restaurant.state_geoname_id = null;
+                            }
+
+
+                        },
+                        function (error) {
+                            console.log('error');
+                        });
+                } else {
+                    that.form.zip.$setValidity('zip', false);
+                    that.model.city = '';
+                    that.model.state = '';
+                    core.data.new_restaurant.restaurant.city_geoname_id = null;
+                    core.data.new_restaurant.restaurant.state_geoname_id = null;
+                }
+            }, 300);
+        };
     }
 
-    restaurantProfileController.$inject = ['api', '$state', 'auth', 'core'];
+    restaurantProfileController.$inject = ['api', '$state', '$timeout', 'core', 'utils'];
 
     angular.module('inspinia').component('restaurantProfileComponent', {
         templateUrl: 'js/components/registration/restaurantProfile/restaurantProfile.html',

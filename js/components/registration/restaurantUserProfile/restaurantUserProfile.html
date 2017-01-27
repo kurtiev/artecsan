@@ -35,29 +35,45 @@
                                     <form class="m-t" autocomplete="off" name="$ctr.form" novalidate ng-submit="$ctr.submit($ctr.form)">
                                         <fieldset ng-disabled="$ctr.inRequest">
                                             <div class="form-group">
-                                                <label>First Name:</label>
-                                                <input type="text" class="form-control" placeholder="First Name" ng-model="$ctr.model.first_name" required>
+                                                <label>First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="First Name" maxlength="50" ng-model="$ctr.model.first_name" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Last Name:</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" ng-model="$ctr.model.last_name" required>
+                                                <label>Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="Last Name" maxlength="50" ng-model="$ctr.model.last_name" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Email:</label>
+                                                <label>Email <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" placeholder="Email" ng-model="$ctr.model.email" required
                                                        ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
                                             </div>
                                             <div class="form-group">
-                                                <label>Phone Number:</label>
-                                                <input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>
+                                                <label>Phone Number <span class="text-danger">*</span></label>
+                                                <!--<input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>-->
+                                                <div class="phone-input">
+                                                    <div>
+                                                        <div class="phone-code">
+                                                            <div>+1</div>
+                                                        </div>
+                                                    </div>
+                                                    <input name="phone" type="text" class="form-control"
+                                                           ng-model="$ctr.model.phone_number" ac-phone maxlength="10" placeholder="Phone Number" required>
+                                                </div>
+
+                                                    <span class="field-descriptions">(No dashes or special characters)</span>
+
                                             </div>
                                             <div class="form-group">
-                                                <label>Password:</label>
-                                                <input type="password" class="form-control" placeholder="Password" ng-model="$ctr.model.password" required>
+                                                <label>Password
+                                                    <span class="q-2"
+                                                          uib-tooltip="Password should be minimum 8 characters and contain at least 1 uppercase letter and 1 digit">
+                                                    </span>
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" placeholder="********" ng-model="$ctr.model.password" ac-password required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Repeat Password:</label>
-                                                <input type="password" class="form-control"  name="password_confirm" placeholder="Repeat Password" ng-model="$ctr.model.password_confirm" required
+                                                <label>Repeat Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control"  name="password_confirm" placeholder="********" ng-model="$ctr.model.password_confirm" required ac-password
                                                        ng-pattern="{{$ctr.model.password}}">
                                             </div>
                                             <div class="form-group" ng-show="($ctr.form.$submitted && $ctr.model.password !== $ctr.model.password_confirm) && $ctr.form.password_confirm.$dirty">
