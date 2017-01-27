@@ -16,9 +16,9 @@
 
         that.m = {
             order_by: "id",
-            order_way: "ASC",  //ASC/DESC
+            order_way: "DESC",  //ASC/DESC
             paginationOffset: 0, // 0 by default
-            paginationCount: 25, //25 by default,
+            paginationCount: 10, //25 by default,
             inRequest: false,
             search_by: null,
             paginationTotal: 0

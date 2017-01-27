@@ -63,7 +63,7 @@
                                         <td>{{restaurant.restaurant_name}}</td>
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
-                                            <button class="btn btn-primary" disabled="{{restaurant.is_setup_completed == 1}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
+                                            <button class="btn btn-primary" disabled="{{restaurant.is_setup_completed == 0}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
                                             <button class="btn btn-primary" ui-sref="admin.pos">Setup Process</button>
                                         </td>
                                     </tr>
