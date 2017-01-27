@@ -8389,3 +8389,17 @@ body.md-skin {
     margin: 0;
   }
 }
+
+.q-2 {
+  margin-bottom: 5px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  background: url('../img/png/Blue_circle_question.svg') no-repeat 50%;
+}
+
+button.ng-invalid.ng-touched, input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+  background-color: #f78f9a !important;
+}

@@ -46,9 +46,16 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state) {
 
                         self.submit = function (form) {
 
-                            if (!form.$valid) {
-                                return
+                            if (form.$valid !== true) {
+
+                                if (form.$error && form.$error.password) {
+                                    alertService.showErrorInvitation('', 'Password should be minimum 8 characters and contain at least 1 uppercase letter and 1 digit');
+                                    return;
+                                }
+                                return;
                             }
+
+
 
                             var m = {
                                 invite_key: invite_key,
