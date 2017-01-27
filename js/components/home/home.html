@@ -39,20 +39,20 @@
                             <table class="footable footable-custom table-stripped toggle-arrow-tiny table" data-page-size="25">
                                 <thead>
                                     <tr>
-                                        <th data-sort-ignore="true" ng-click="$ctr.search('id')"
+                                        <th style="cursor: pointer" data-sort-ignore="true" ng-click="$ctr.search('id')"
                                             ng-class="{'footable-sorted-desc': ($ctr.m.order_by == 'id' && $ctr.m.order_way == 'DESC'), 'footable-sorted': ($ctr.m.order_by == 'id' && $ctr.m.order_way == 'ASC')}">
                                             #
-                                            <span style="cursor: pointer" class="footable-sort-indicator"></span>
+                                            <span  class="footable-sort-indicator"></span>
                                         </th>
-                                        <th data-sort-ignore="true" ng-click="$ctr.search('name')"
+                                        <th style="cursor: pointer" data-sort-ignore="true" ng-click="$ctr.search('name')"
                                             ng-class="{'footable-sorted-desc': ($ctr.m.order_by == 'name' && $ctr.m.order_way == 'DESC'), 'footable-sorted': ($ctr.m.order_by == 'name' && $ctr.m.order_way == 'ASC')}">
                                             Restaurant Name
-                                            <span style="cursor: pointer" class="footable-sort-indicator"></span>
+                                            <span  class="footable-sort-indicator"></span>
                                         </th>
-                                        <th data-sort-ignore="true" ng-click="$ctr.search('address')"
+                                        <th style="cursor: pointer" data-sort-ignore="true" ng-click="$ctr.search('address')"
                                             ng-class="{'footable-sorted-desc': ($ctr.m.order_by == 'address' && $ctr.m.order_way == 'DESC'), 'footable-sorted': ($ctr.m.order_by == 'address' && $ctr.m.order_way == 'ASC')}">
                                             Address
-                                            <span style="cursor: pointer" class="footable-sort-indicator"></span>
+                                            <span  class="footable-sort-indicator"></span>
                                         </th>
                                         <th data-sort-ignore="true" class="center width-210">Action</th>
                                     </tr>
