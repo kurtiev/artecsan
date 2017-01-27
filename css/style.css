@@ -8403,3 +8403,32 @@ body.md-skin {
 button.ng-invalid.ng-touched, input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
   background-color: #f78f9a !important;
 }
+
+.phone-input {
+  position: relative;
+}
+
+.phone-input>div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0 12px;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+}
+
+.phone-input>div div.phone-code {
+  height: 100%;
+  display: table;
+}
+
+.phone-input>div div.phone-code>div {
+  display: table-cell;
+  vertical-align: middle;
+  padding-top: 1px;
+}
+
+.phone-input input[type=text] {
+  padding-left: 50px;
+  font-size: 14px;
+}

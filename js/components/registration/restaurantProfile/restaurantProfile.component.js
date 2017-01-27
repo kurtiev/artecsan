@@ -4,8 +4,8 @@
     function restaurantProfileController(api, $state, $timeout, core, utils) {
 
         if (!core.data.new_restaurant) {
-            // $state.go('registration');
-            // return;
+            $state.go('registration');
+            return;
         }
 
         var that = this;
