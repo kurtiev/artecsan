@@ -543,6 +543,7 @@ body.login-page {
 }
 
 .ng-submitted .ng-invalid-required,
+input.ng-dirty.ng-invalid,
 .ng-submitted .ng-dirty.ng-invalid-pattern.ng-touched,
 .ng-dirty.ng-invalid.ng-invalid-required.ng-touched {
     background-color: #f78f9a;

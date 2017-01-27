@@ -34,6 +34,7 @@
 
                 var keys = {
                     refbooks: [
+                        'country_states',
                         // "platforms",
                         "user_types",
                         // "sex",
