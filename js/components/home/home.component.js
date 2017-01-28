@@ -15,6 +15,8 @@
         that.restaurantsList = [];
         that.api = api;
 
+        core.data.new_restaurant = null; // reset recently editable or added restaurant
+
         that.m = {
             order_by: "id",
             order_way: "ASC",  //ASC/DESC

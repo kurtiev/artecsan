@@ -52,15 +52,15 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="form-group">
-                                                    <label for="cardExpiry">
+                                                    <label>
                                                         <span>Expiration Date <span class="text-danger">*</span></span>
                                                     </label>
                                                     <div>
-                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
-                                                               placeholder="MM" id="cardExpiry" ng-model="$ctr.model.expiration_month" required>
+                                                        <input class="form-control width-20" min="1" max="12" type="number"
+                                                               placeholder="MM" ng-model="$ctr.model.expiration_month" required>
                                                         <span class="float-left date-payment-label">/</span>
-                                                        <input class="form-control width-20" maxlength="2" type="text" only-digits
-                                                               placeholder="YY" id="cardExpiry2" ng-model="$ctr.model.expiration_year" required>
+                                                        <input class="form-control width-20" max="99" min="{{$ctr.currYear}}" type="number" only-digits
+                                                               placeholder="YY" ng-model="$ctr.model.expiration_year" required>
                                                     </div>
                                                 </div>
                                             </div>

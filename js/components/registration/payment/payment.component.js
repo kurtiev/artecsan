@@ -17,6 +17,7 @@
         that.isEdit = false;
         that.model = {};
         that.$state = $state;
+        that.currYear = new Date().getFullYear().toString().slice(-2);
 
         var initModel = function () {
             that.model = {

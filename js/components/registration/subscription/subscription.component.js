@@ -55,8 +55,11 @@
         var that = this;
         that.auth = auth;
 
+        if (!core.data.new_restaurant && !$state.params.id) {
+            $state.go('registration');
+        }
+
         that.subscriptions = [];
-        that.settings = core.data.settings;
         that.restaurant = core.data.new_restaurant;
         var isEdit = core.data.new_restaurant ? true : false;
 
@@ -67,6 +70,10 @@
                 isEdit = true;
             })
         }
+
+        core.getSettings().then(function (res) {
+            that.settings = core.data.settings;
+        });
 
         if (!core.data.new_restaurant && !that.auth.authentication.isLogged) {
             $state.go('registration');
