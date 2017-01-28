@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function paymentController(api, $state, auth, core, restaurant) {
+    function paymentController(api, $state, auth, core, restaurant, alertService) {
 
         if (!core.data.new_restaurant && !$state.params.id) {
             $state.go('registration');
@@ -16,6 +16,7 @@
         that.get_refbooks = [];
         that.isEdit = false;
         that.model = {};
+        that.$state = $state;
 
         var initModel = function () {
             that.model = {
@@ -58,8 +59,45 @@
             core.data.new_restaurant.payment.billing_address = that.model.billing_address;
             core.data.new_restaurant.payment.cv_code = that.model.cv_code;
 
-            if (that.isEdit) {
-                $state.go('invite', {id : $state.params.id});
+            if (parseInt($state.params.id)) {
+                var m = {
+                    subscription_type_id: core.data.new_restaurant.subscription_type_id,
+                    pos_id: core.data.new_restaurant.pos_id,
+                    user_id: core.data.new_restaurant.user_id,
+                    restaurant: {
+                        restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
+                        entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
+                        street_address: core.data.new_restaurant.restaurant.street_address,
+                        city_geoname_id: core.data.new_restaurant.restaurant.city_geoname_id,
+                        logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
+                        state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
+                        zip: core.data.new_restaurant.restaurant.zip,
+                        phone_number: core.data.new_restaurant.restaurant.phone_number
+                    },
+                    payment: {
+                        card_number: core.data.new_restaurant.payment.card_number,
+                        expiration_month: core.data.new_restaurant.payment.expiration_month,
+                        expiration_year: core.data.new_restaurant.payment.expiration_year,
+                        coupon_code: core.data.new_restaurant.payment.coupon_code,
+                        first_name: core.data.new_restaurant.payment.first_name,
+                        last_name: core.data.new_restaurant.payment.last_name,
+                        zip: core.data.new_restaurant.payment.zip,
+                        billing_address: core.data.new_restaurant.payment.billing_address,
+                        cv_code: core.data.new_restaurant.payment.cv_code
+                    }
+                };
+                that.api.update_restaurant(m, $state.params.id).then(function (res) {
+                    try {
+                        if (res.data.data.code === 1000) {
+                            alertService.showAlertSave();
+                            setTimeout(function () {
+                                $state.go('invite', {id: $state.params.id});
+                            }, 1000);
+                        }
+                    } catch (e) {
+                        console.log(e)
+                    }
+                });
             } else {
                 $state.go('terms');
             }
@@ -85,7 +123,7 @@
 
     }
 
-    paymentController.$inject = ['api', '$state', 'auth', 'core', 'restaurant'];
+    paymentController.$inject = ['api', '$state', 'auth', 'core', 'restaurant', 'alertService'];
 
     angular.module('inspinia').component('paymentComponent', {
         templateUrl: 'js/components/registration/payment/payment.html',

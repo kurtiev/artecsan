@@ -67,6 +67,10 @@
             return $http.post(serviceBase + 'restaurants', model, getAuthConfig());
         };
 
+        serviceFactory.update_restaurant = function (model, id) {
+            return $http.put(serviceBase + 'restaurants/' + id, model, getAuthConfig());
+        };
+
         serviceFactory.get_restaurant = function (id) {
             return $http.get(serviceBase + 'restaurants/' + id, getAuthConfig());
         };

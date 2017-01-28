@@ -133,10 +133,10 @@
                                                 <button type="button" class="btn btn-primary" ng-click="$ctr.back()"> &lt;&lt; Back</button>
                                             </div>
                                             <div class="col-sm-8">
-                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="!$ctr.isEdit">
+                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="!$ctr.$state.params.id">
                                                     Next - Disclaimer and Confidentiality Agreement
                                                 </button>
-                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="$ctr.isEdit">
+                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="$ctr.$state.params.id">
                                                     Next - User Setup
                                                 </button>
                                             </div>
