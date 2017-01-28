@@ -105,20 +105,20 @@
                 <fieldset>
                     <div class="form-group">
                         <div class="col-md-12 no-padding">
-                            <label>First Name</label>
-                            <input type="text" placeholder="First Name" class="form-control" ng-model="vm.m.first_name" required>
+                            <label>First Name <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="First Name" maxlength="50" class="form-control" ng-model="vm.m.first_name" required>
                         </div>
                         <div class="col-md-12 no-padding">
-                            <label>Last Name</label>
-                            <input type="text" placeholder="Last Name" class="form-control" ng-model="vm.m.last_name" required>
+                            <label>Last Name <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="Last Name" maxlength="50" class="form-control" ng-model="vm.m.last_name" required>
                         </div>
                         <div class="col-md-12 no-padding">
-                            <label>Email</label>
+                            <label>Email <span class="text-danger">*</span></label>
                             <input type="text" placeholder="Email" class="form-control" ng-model="vm.m.email" required
                                    ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
                         </div>
                         <div class="col-md-12 no-padding">
-                            <label>User Type</label>
+                            <label>User Type <span class="text-danger">*</span></label>
                             <select class="form-control" ng-model="vm.m.type_ids"
                                     ng-options="user.id as user.name for user in vm.userTypes" required>
                             </select>

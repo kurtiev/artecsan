@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function restaurantUserProfileController(api, $state, auth, core, localStorageService) {
+    function restaurantUserProfileController(api, $state, auth, core, localStorageService, alertService) {
 
         if (!core.data.new_restaurant) {
             $state.go('registration');
@@ -30,8 +30,13 @@
 
         that.submit = function (form) {
 
-            if (!form.$valid) {
-                return
+            if (form.$valid !== true) {
+
+                if (form.$error && form.$error.password) {
+                    alertService.showErrorInvitation('', 'Password should be minimum 8 characters and contain at least 1 uppercase letter and 1 digit');
+                    return;
+                }
+                return;
             }
 
             that.inRequest = true;
@@ -87,7 +92,7 @@
 
     }
 
-    restaurantUserProfileController.$inject = ['api', '$state', 'auth', 'core', 'localStorageService'];
+    restaurantUserProfileController.$inject = ['api', '$state', 'auth', 'core', 'localStorageService', 'alertService'];
 
     angular.module('inspinia').component('restaurantUserProfileComponent', {
         templateUrl: 'js/components/registration/restaurantUserProfile/restaurantUserProfile.html',
