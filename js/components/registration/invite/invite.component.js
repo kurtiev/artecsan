@@ -35,12 +35,7 @@
 
     function inviteController(api, $state, auth, core, $uibModal, restaurant, alertService) {
 
-        if (!auth.authentication.isLogged) {
-            $state.go('registration');
-            return;
-        }
-
-        if (!restaurant.data.info) {
+        if (!auth.authentication.isLogged || !parseInt($state.params.id)) {
             $state.go('registration');
             return;
         }
@@ -48,10 +43,27 @@
         var that = this;
         that.form = {};
         that.api = api;
-        that.usersList = [];
+        that.usersList = [{
+            email: "offr@mail.com",
+            first_name: "wdwdw",
+            last_name: "qwdqw",
+            type_ids: 1,
+            is_active: 1,
+            invite_status_id: 3,
+            is_disabled: 0,
+            status_updated_at: null,
+            user_id: 49,
+            user_type_id: 1
+        }];
         that.get_refbooks = [];
+        that.isEdit = core.data.new_restaurant ? true : false;
 
-        that.usersList = [];
+        if (!core.data.new_restaurant) {
+            restaurant.set_to_edit($state.params.id).then(function () {
+                that.isEdit = true;
+                // that.usersList = core.data.new_restaurant.employees TODO
+            })
+        }
 
         that.$onInit = function () {
             core.getRefbooks().then(function (res) {
@@ -60,11 +72,14 @@
         };
 
         that.userTypesFilter = function (type_id) {
-            for (var i = 0; that.get_refbooks.user_types.length > 0; i++) {
-                if (that.get_refbooks.user_types[i].id === type_id) {
-                    return that.get_refbooks.user_types[i].name
+            if (that.get_refbooks.user_types) {
+                for (var i = 0; that.get_refbooks.user_types.length > i; i++) {
+                    if (that.get_refbooks.user_types[i].id === type_id) {
+                        return that.get_refbooks.user_types[i].name
+                    }
                 }
             }
+
         };
 
         that.delete = function ($index) {
@@ -139,23 +154,25 @@
 
             var model = {
                 users: sentList,
-                restaurant_id: restaurant.data.info.id
+                restaurant_id: $state.params.id
             };
 
-            if (restaurant.data.info.id) {
-                that.api.users_invite(model).then(function (res) {
-                    if (res.data.data.code === 1000) {
-                        alertService.showSuccessText('Invitations were sent')
-                    }
-                    if (!isExit) {
-                        $state.go('food.vendorSetup');
-                    } else {
-                        $state.go('home');
-                    }
-                })
-            }
+            that.api.users_invite(model).then(function (res) {
+                if (res.data.data.code === 1000) {
+                    alertService.showSuccessText('Invitations were sent')
+                }
+                if (!isExit) {
+                    $state.go('food.vendorSetup');
+                } else {
+                    $state.go('home');
+                }
+            })
 
         };
+
+        that.back = function () {
+            $state.go('payment', {id : $state.params.id});
+        }
 
     }
 

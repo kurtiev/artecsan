@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var subscriptionContactUs = function (user, $uibModalInstance, api, alertService) {
+    var subscriptionContactUs = function ($uibModalInstance, api, alertService) {
 
         var that = this;
 
@@ -50,35 +50,40 @@
 
     };
 
-    function subscriptionController(api, $state, auth, core, $uibModal) {
-
-        if (!core.data.new_restaurant) {
-            $state.go('registration');
-            return;
-        }
+    function subscriptionController(api, $state, auth, core, $uibModal, restaurant) {
 
         var that = this;
+        that.auth = auth;
 
         that.subscriptions = [];
         that.settings = core.data.settings;
         that.restaurant = core.data.new_restaurant;
+        var isEdit = core.data.new_restaurant ? true : false;
+
+        // get restaurant for edit, run if we can direct going to this step or just after reloading page
+        if ($state.params.id && auth.authentication.isLogged && !core.data.new_restaurant) {
+            restaurant.set_to_edit($state.params.id).then(function () {
+                that.restaurant = core.data.new_restaurant;
+                isEdit = true;
+            })
+        }
+
+        if (!core.data.new_restaurant && !that.auth.authentication.isLogged) {
+            $state.go('registration');
+            return;
+        }
 
         that.contactUsPopup = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'contact_us.html',
                 controller: subscriptionContactUs,
-                controllerAs: 'vm',
-                resolve: {
-                    user: function () {
-                        return null
-                    }
-                }
+                controllerAs: 'vm'
             });
 
-            modalInstance.result.then(function (user) {
-                if (user) {
-                    that.usersList.push(user)
+            modalInstance.result.then(function () {
+                if (that.auth.authentication.isLogged) {
+                    $state.go('home');
                 }
             }, function () {
 
@@ -88,8 +93,20 @@
         that.$onInit = function () {
             api.rb_subscriptions().then(function (res) {
                 that.subscriptions = res.data.data.subscriptions;
-                that.restaurant.subscription_type_id = that.restaurant.subscription_type_id ? that.restaurant.subscription_type_id : that.subscriptions[1].subscription_id
+
+                // if user is not logged, then set him default subscription_type_id (price plan)
+                if (!that.auth.authentication.isLogged) {
+                    that.restaurant.subscription_type_id = that.restaurant.subscription_type_id ? that.restaurant.subscription_type_id : that.subscriptions[1].subscription_id
+                }
             });
+        };
+
+        that.back = function () {
+            if ($state.params.id) {
+                $state.go('registration', {id : $state.params.id})
+            } else {
+                $state.go('registration')
+            }
         };
 
         that.select = function (subscription, is_sign_up) {
@@ -102,7 +119,11 @@
             if (is_sign_up && that.restaurant.subscription_type_id !== 0) {
                 core.data.new_restaurant.subscription_type_id = that.restaurant.subscription_type_id;
                 if (auth.authentication.isLogged) {
-                    $state.go('restaurantProfile');
+                    if (isEdit) {
+                        $state.go('restaurantProfile', {id: $state.params.id});
+                    } else {
+                        $state.go('restaurantProfile');
+                    }
                 } else {
                     $state.go('restaurantUserProfile');
                 }
@@ -112,7 +133,7 @@
 
     }
 
-    subscriptionController.$inject = ['api', '$state', 'auth', 'core', '$uibModal'];
+    subscriptionController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'restaurant'];
 
     angular.module('inspinia').component('subscriptionComponent', {
         templateUrl: 'js/components/registration/subscription/subscription.html',

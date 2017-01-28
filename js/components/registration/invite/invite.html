@@ -56,6 +56,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <button class="btn btn-warning " type="button"
+                                                            ng-if="!$ctr.isEdit"
                                                             ng-click="$ctr.editUser(user, $index)"><i
                                                             class="fa fa-edit"></i>&nbsp;Edit
                                                     </button>
@@ -69,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-right">
-                                    <button class="btn btn-primary float-left">&lt;&lt; Back</button>
+                                    <button class="btn btn-primary float-left" ng-show="$ctr.isEdit" ng-click="$ctr.back()">&lt;&lt; Back</button>
                                     <button class="btn btn-primary" ng-click="$ctr.sentInvitations(false)" ng-disabled="!$ctr.usersList.length">Invite Users
                                         and Processed
                                     </button>

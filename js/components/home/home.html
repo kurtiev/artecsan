@@ -64,7 +64,12 @@
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
                                             <button class="btn btn-primary" disabled="{{restaurant.is_setup_completed == 1}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
-                                            <button class="btn btn-primary" ui-sref="admin.pos">Setup Process</button>
+                                            <button class="btn btn-primary" ng-click="$ctr.editRestaurant(restaurant)">Setup Process</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="!$ctr.restaurantsList.length">
+                                        <td colspan="4" class="text-center">
+                                            <b>You haven't any restaurants yet. Now you can <a href="" ui-sref="registration">add new</a></b>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('invite', {
-                url: "/invite",
+                url: "/invite/:id",
                 template: "<invite-component></invite-component>",
                 data: {pageTitle: 'Invite Users'}
             });

@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('payment', {
-                url: "/payment",
+                url: "/payment/:id",
                 template: "<payment-component></payment-component>",
                 data: {pageTitle: 'Payment'}
             });

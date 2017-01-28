@@ -13,6 +13,7 @@
 
         that.restaurantService = restaurant;
         that.restaurantsList = [];
+        that.api = api;
 
         that.m = {
             order_by: "id",
@@ -81,6 +82,12 @@
         };
 
         that.search();
+
+        that.editRestaurant = function (restaurant) {
+            that.restaurantService.set_to_edit(restaurant.id).then(function () {
+                $state.go('registration', {id: restaurant.id});
+            });
+        };
 
 
     }

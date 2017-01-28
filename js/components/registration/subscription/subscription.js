@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('subscription', {
-                url: "/subscription",
+                url: "/subscription/:id",
                 template: "<subscription-component></subscription-component>",
                 data: {pageTitle: ' Subscriptions'}
             });

@@ -8,7 +8,7 @@
         var data = {
             settings: null,
             refbooks: null,
-            new_restaurant: null
+            new_restaurant: null // can contain data for editable restaurant
         };
 
 

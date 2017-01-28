@@ -59,7 +59,7 @@
                             localStorageService.set('restaurant_id', {
                                 restaurant_id: res.data.data.id
                             });
-                            $state.go('invite');
+                            $state.go('invite', {id : res.data.data.id});
                         });
 
                     }
