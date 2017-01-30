@@ -14,7 +14,7 @@
             first_name: user ? user.first_name : null,
             last_name: user ? user.last_name : null,
             type_ids: user ? user.type_ids : null,
-            is_active: user ? user.is_active : 1
+            is_disabled: user ? user.is_disabled : 1
         };
 
         that.add = function (form) {
@@ -33,7 +33,7 @@
 
     };
 
-    function inviteController(api, $state, auth, core, $uibModal, alertService) {
+    function inviteController(api, $state, auth, core, $uibModal, alertService, SweetAlert) {
 
         if (!auth.authentication.isLogged || !parseInt($state.params.id)) {
             $state.go('registration');
@@ -46,22 +46,14 @@
         that.usersList = [];
         that.get_refbooks = [];
 
-        if (!core.data.new_restaurant) {
-
-            api.get_restaurant($state.params.id).then(function (res) {
-                try {
-                    var restaurant_to_edit = res.data.data.restaurants_list[0];
-                    that.usersList = restaurant_to_edit.employees;
-                    core.data.new_restaurant = restaurant_to_edit;
-                } catch (e) {
-                    $state.go('home');
-                }
-
-            });
-        } else {
-            var restaurant_to_edit = core.data.new_restaurant;
-            that.usersList = restaurant_to_edit.employees;
-        }
+        api.get_restaurant($state.params.id).then(function (res) {
+            try {
+                var restaurant_to_edit = res.data.data.restaurants_list[0];
+                that.usersList = restaurant_to_edit.employees;
+            } catch (e) {
+                $state.go('home');
+            }
+        });
 
         that.$onInit = function () {
             core.getRefbooks().then(function (res) {
@@ -144,6 +136,39 @@
             });
         };
 
+        that.changeUserStatus = function (user, $index) {
+            if (user) {
+                SweetAlert.swal({
+                        title: "Are you sure?",
+                        text: "This user will be blocked and wouldn't be able work with this restaurant",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#ed5565",
+                        confirmButtonText: "Confirm"
+                    },
+                    function (res) {
+                        if (res) {
+                            var id = $state.params.id;
+                            var m = {
+                                employees: [{
+                                    user_id: user.id,
+                                    is_disabled: user.is_disabled
+                                }]
+                            };
+
+                            that.api.change_restaurant_employee_status(id, m).then(function (res) {
+
+                            }, function (error) {
+                                that.usersList[$index].is_disabled = user.is_disabled === 1 ? 0 : 1;
+                            });
+                        } else {
+                            that.usersList[$index].is_disabled = user.is_disabled === 1 ? 0 : 1;
+                        }
+                    });
+            }
+
+        };
+
         that.sentInvitations = function (isExit) {
 
             if (!that.usersList.length) {
@@ -159,7 +184,7 @@
                     first_name: that.usersList[i].first_name,
                     last_name: that.usersList[i].last_name,
                     type_ids: [that.usersList[i].type_ids],
-                    is_active: that.usersList[i].is_active
+                    is_active: that.usersList[i].is_disabled // TODO confuse
                 };
                 sentList.push(u)
             }
@@ -188,7 +213,7 @@
 
     }
 
-    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'alertService'];
+    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'alertService', 'SweetAlert'];
 
     angular.module('inspinia').component('inviteComponent', {
         templateUrl: 'js/components/registration/invite/invite.html',
