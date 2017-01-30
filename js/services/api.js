@@ -103,6 +103,10 @@
             return $http.post(serviceBase + 'users/redeem_invitation', model, getAuthConfig());
         };
 
+        serviceFactory.change_restaurant_employee_status = function (id, model) {
+            return $http.put(serviceBase + 'restaurant/' + id + '/employees', model, getAuthConfig());
+        };
+
         serviceFactory.delete_invite = function (model) {
             var auth = $injector.get('auth');
             return $http({

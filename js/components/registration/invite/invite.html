@@ -51,7 +51,7 @@
                                                 <td>{{::$ctr.userTypesFilter(user.type_ids)}}</td>
                                                 <td>
                                                     <label class="switch">
-                                                        <input type="checkbox" ng-model="user.is_active" ng-true-value="1" ng-false-value="0"><i></i>
+                                                        <input type="checkbox" ng-model="user.is_disabled" ng-true-value="1" ng-false-value="0" ng-change="$ctr.changeUserStatus(user, $index)"><i></i>
                                                     </label>
                                                 </td>
                                                 <td class="text-right">
@@ -60,7 +60,7 @@
                                                             ng-click="$ctr.editUser(user, $index)"><i
                                                             class="fa fa-edit"></i>&nbsp;Edit
                                                     </button>
-                                                    <button class="btn btn-danger " type="button"
+                                                    <button class="btn btn-danger" type="button"
                                                             ng-click="$ctr.delete($index)"><i class="fa fa-times"></i>&nbsp;Delete
                                                     </button>
                                                 </td>

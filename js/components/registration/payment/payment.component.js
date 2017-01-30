@@ -64,7 +64,7 @@
                 var m = {
                     subscription_type_id: core.data.new_restaurant.subscription_type_id,
                     pos_id: core.data.new_restaurant.pos_id,
-                    user_id: core.data.new_restaurant.user_id,
+                    // user_id: core.data.new_restaurant.user_id,
                     restaurant: {
                         restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
                         entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
