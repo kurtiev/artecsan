@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+    <meta name="robots" content="noindex, nofollow, noarchive"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title page-title></title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link href="build/css/styles.min.css?ver=@@hash" rel="stylesheet">
+</head>
+<body ng-controller="indexController as main" class="{{$state.current.data.specialClass}}">
+<div ui-view></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+<script src="build/js/libs.min.js?ver=@@hash"></script>
+<script src="build/js/app.min.js?ver=@@hash"></script>
+</body>
+</html>
