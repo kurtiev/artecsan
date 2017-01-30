@@ -36,7 +36,7 @@
                 restaurant: {
                     restaurant_name: core.data.new_restaurant ? core.data.new_restaurant.restaurant.restaurant_name : null,
                     entity_type_id: core.data.new_restaurant ? core.data.new_restaurant.restaurant.entity_type_id : null,
-                    street_address: core.data.new_restaurant ? core.data.new_restaurant.restaurant.street_address : null,
+                    address: core.data.new_restaurant ? core.data.new_restaurant.restaurant.address : null,
                     city: core.data.new_restaurant ? core.data.new_restaurant.restaurant.city : null,
                     state: core.data.new_restaurant ? core.data.new_restaurant.restaurant.state : null,
                     zip: core.data.new_restaurant ? core.data.new_restaurant.restaurant.zip : null,

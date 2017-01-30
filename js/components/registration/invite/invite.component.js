@@ -33,7 +33,7 @@
 
     };
 
-    function inviteController(api, $state, auth, core, $uibModal, restaurant, alertService) {
+    function inviteController(api, $state, auth, core, $uibModal, alertService) {
 
         if (!auth.authentication.isLogged || !parseInt($state.params.id)) {
             $state.go('registration');
@@ -43,26 +43,24 @@
         var that = this;
         that.form = {};
         that.api = api;
-        that.usersList = [{
-            email: "offr@mail.com",
-            first_name: "wdwdw",
-            last_name: "qwdqw",
-            type_ids: 1,
-            is_active: 1,
-            invite_status_id: 3,
-            is_disabled: 0,
-            status_updated_at: null,
-            user_id: 49,
-            user_type_id: 1
-        }];
+        that.usersList = [];
         that.get_refbooks = [];
-        that.isEdit = core.data.new_restaurant ? true : false;
 
         if (!core.data.new_restaurant) {
-            restaurant.set_to_edit($state.params.id).then(function () {
-                that.isEdit = true;
-                // that.usersList = core.data.new_restaurant.employees TODO
-            })
+
+            api.get_restaurant($state.params.id).then(function (res) {
+                try {
+                    var restaurant_to_edit = res.data.data.restaurants_list[0];
+                    that.usersList = restaurant_to_edit.employees;
+                    core.data.new_restaurant = restaurant_to_edit;
+                } catch (e) {
+                    $state.go('home');
+                }
+
+            });
+        } else {
+            var restaurant_to_edit = core.data.new_restaurant;
+            that.usersList = restaurant_to_edit.employees;
         }
 
         that.$onInit = function () {
@@ -83,7 +81,21 @@
         };
 
         that.delete = function ($index) {
-            that.usersList.splice($index, 1)
+            if (that.usersList[$index].id) {
+
+                var m = {
+                    ids: [that.usersList[$index].id]
+                };
+
+                that.api.delete_invite(m).then(function (res) {
+                    if (res.data.data.code === 1000) {
+                        that.usersList.splice($index, 1)
+                    }
+                });
+
+            } else {
+                that.usersList.splice($index, 1)
+            }
         };
 
         that.addUser = function () {
@@ -171,12 +183,12 @@
         };
 
         that.back = function () {
-            $state.go('payment', {id : $state.params.id});
+            $state.go('payment', {id: $state.params.id});
         }
 
     }
 
-    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'restaurant', 'alertService'];
+    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'alertService'];
 
     angular.module('inspinia').component('inviteComponent', {
         templateUrl: 'js/components/registration/invite/invite.html',

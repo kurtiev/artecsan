@@ -49,7 +49,7 @@
                         restaurant: {
                             restaurant_name: restaurant_to_edit.restaurant_name,
                             entity_type_id: restaurant_to_edit.entity_type_id,
-                            street_address: restaurant_to_edit.address,
+                            address: restaurant_to_edit.address,
                             city: null,
                             state: null,
                             zip: restaurant_to_edit.zip,

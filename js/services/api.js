@@ -103,6 +103,18 @@
             return $http.post(serviceBase + 'users/redeem_invitation', model, getAuthConfig());
         };
 
+        serviceFactory.delete_invite = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'DELETE',
+                url: serviceBase + 'users/invite',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
 
         return serviceFactory;
     };

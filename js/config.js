@@ -6,13 +6,14 @@ var appConfig = {
     sessionExpires: 9 // hours
 };
 
-function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdleProvider, localStorageServiceProvider, $httpProvider) {
+function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdleProvider, localStorageServiceProvider, $httpProvider, $locationProvider) {
 
     // Configure Idle settings
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
     localStorageServiceProvider.setPrefix('artecsan');
     $httpProvider.interceptors.push('interceptorService');
+    $locationProvider.html5Mode(false).hashPrefix('!');
 
     $urlRouterProvider.otherwise("/home");
 
