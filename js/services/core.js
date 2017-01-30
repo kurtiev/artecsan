@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var core = function (api, auth, $q, restaurant, localStorageService) {
+    var core = function (api, auth, $q, restaurant, localStorageService, $rootScope) {
 
 
         var data = {
@@ -43,7 +43,8 @@
                         "content_types",
                         // "city",
                         // "city_zips",
-                        "invite_status"
+                        "invite_status",
+                        "menu_items"
                     ]
                 };
 
@@ -59,7 +60,9 @@
             var restaurantID = localStorageService.get('restaurant_id');
 
             if (restaurantID) {
-                restaurant.set_restaurant(restaurantID.restaurant_id);
+                restaurant.set_restaurant(restaurantID.restaurant_id).then(function () {
+                    $rootScope.$emit('restaurantSelected');
+                })
             }
 
         };
@@ -73,7 +76,7 @@
         };
     };
 
-    core.$inject = ['api', 'auth', '$q', 'restaurant', 'localStorageService'];
+    core.$inject = ['api', 'auth', '$q', 'restaurant', 'localStorageService', '$rootScope'];
     angular.module('inspinia').factory('core', core);
 
 })();

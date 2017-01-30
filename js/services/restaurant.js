@@ -5,7 +5,8 @@
     var restaurant = function (api, auth, $q, $injector) {
 
         var data = {
-            info: null
+            info: null,
+            permissions: null
         };
 
         var set_restaurant = function (id) {
@@ -13,10 +14,19 @@
             if (data.info) {
                 deferred.resolve(data.info);
             } else {
-                api.get_restaurant(id).then(function (res) {
-                    data.info = res.data.data.restaurants_list[0];
-                    deferred.resolve(data.info);
-                })
+                api.get_restaurant(id).then(function (res1) {
+
+                    api.set_active_restaurant({restaurant_id: id}).then(function (res) {
+                        try {
+                            data.info = res1.data.data.restaurants_list[0];
+                            data.permissions = res.data.data.permissions;
+                            deferred.resolve(data.info);
+                        } catch (e) {
+                            console.log(e);
+                        }
+                    });
+                });
+
             }
 
             return deferred.promise;
