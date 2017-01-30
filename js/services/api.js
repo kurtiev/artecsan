@@ -115,6 +115,9 @@
             });
         };
 
+        serviceFactory.set_active_restaurant = function (model) {
+            return $http.post(serviceBase + 'users/set_active_restaurant', model, getAuthConfig());
+        };
 
         return serviceFactory;
     };
