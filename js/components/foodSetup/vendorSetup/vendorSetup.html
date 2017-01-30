@@ -1,0 +1,213 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>Vendor Setup</h2>
+                <p class="padding-top-5">Instructions for restaurant user: Please select the Food vendors that you
+                    currently purchase from. You may search for your vendor by Name, City or Zip Code. If you do not see
+                    your vendor you may manually enter your vendors name or contact customer support.</p>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3 class="text-center">Vendor Search</h3>
+                                    <div class="row">
+                                        <form novalidate autocomplete="off" name="form" ng-submit="$ctr.search()">
+                                            <div class="col-xs-4">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control input-sm m-b-xs" placeholder="Name">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>City</label>
+                                                <input type="text" class="form-control input-sm m-b-xs" placeholder="City">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>ZipCode</label>
+                                                <input type="text" class="form-control input-sm m-b-xs"
+                                                       placeholder="ZipCode">
+                                            </div>
+                                            <div class="col-xs-12 text-right padding-top-20">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="footable table table-stripped toggle-arrow-tiny"
+                                               data-page-size="8">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>City</th>
+                                                <th>Date</th>
+                                                <th>ZipCode</th>
+                                                <th class="width-50" data-sort-ignore="true"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>234</td>
+                                                <td>Anna Jordan2</td>
+                                                <td>City48</td>
+                                                <td>12/12/12</td>
+                                                <td>3455</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(0)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>123</td>
+                                                <td>Anna Jordan</td>
+                                                <td>City</td>
+                                                <td>12/12/12</td>
+                                                <td>3434</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(1)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>234</td>
+                                                <td>Anna Jordan2</td>
+                                                <td>City48</td>
+                                                <td>12/12/12</td>
+                                                <td>3455</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(2)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>234</td>
+                                                <td>Anna Jordan2</td>
+                                                <td>City48</td>
+                                                <td>12/12/12</td>
+                                                <td>3455</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(3)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>234</td>
+                                                <td>Anna Jordan2</td>
+                                                <td>City48</td>
+                                                <td>12/12/12</td>
+                                                <td>3455</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(4)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>234</td>
+                                                <td>Anna Jordan2</td>
+                                                <td>City48</td>
+                                                <td>12/12/12</td>
+                                                <td>3455</td>
+                                                <td class="text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-click="main.selectVendor(5)"><i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-left">
+                                            <button class="btn btn-primary">&lt;&lt; Back</button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="button" ng-click="$ctr.next()"
+                                                    class="btn btn-primary block m-b float-right">Next - Inventory Setup
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="ibox ">
+                        <div class="ibox-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <h2>Selected Vendors</h2>
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="full-height-scroll" full-scroll>
+                                            <table class="table table-stripped">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="vendor in $ctr.vendorsSelected">
+                                                    <td ng-if="vendor.selected">{{vendor.id}}</td>
+                                                    <td ng-if="vendor.selected">{{vendor.name}}</td>
+                                                </tr>
+                                                <tr ng-show="!$ctr.vendorsSelected.length">
+                                                    <td class="text-center" colspan="2">
+                                                        No selected vendors
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
