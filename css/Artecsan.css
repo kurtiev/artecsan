@@ -587,3 +587,7 @@ fieldset[disabled] .btn-primary.active {
 .dropdown-menu > .active > a:hover {
     background-color: #3681c1;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

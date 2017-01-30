@@ -123,6 +123,18 @@
             return $http.post(serviceBase + 'users/set_active_restaurant', model, getAuthConfig());
         };
 
+        serviceFactory.get_vendors = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'vendors',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
         return serviceFactory;
     };
 
