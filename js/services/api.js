@@ -144,9 +144,12 @@
             });
         };
 
-        // TODO
-        serviceFactory.get_chosen_vendors = function (model) {
-            return $http.get(serviceBase + '', model, getAuthConfig());
+        serviceFactory.get_chosen_vendors = function (id) {
+            return $http.get(serviceBase + 'restaurants/' + id + '/vendors', getAuthConfig());
+        };
+
+        serviceFactory.add_vendor = function (id, model) {
+            return $http.put(serviceBase + 'restaurants/' + id + '/vendors', model, getAuthConfig());
         };
 
         return serviceFactory;

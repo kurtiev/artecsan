@@ -101,8 +101,7 @@
                                                 <td>{{vendor.zip_code}}</td>
                                                 <td class="text-right">
                                                     <label class="switch">
-                                                        <!-- TODO -->
-                                                        <input type="checkbox" ng-model="vendor.is_added" ng-change="$ctr.addVendor(vendor)"><i></i>
+                                                        <input type="checkbox" ng-model="vendor.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addVendor(vendor)"><i></i>
                                                     </label>
                                                 </td>
                                             </tr>
@@ -165,8 +164,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="vendor in $ctr.vendorsSelected">
-                                                    <td ng-if="vendor.selected">{{vendor.id}}</td>
-                                                    <td ng-if="vendor.selected">{{vendor.name}}</td>
+                                                    <td>{{vendor.id}}</td>
+                                                    <td>{{vendor.vendor_name}}</td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.vendorsSelected.length">
                                                     <td class="text-center" colspan="2">
