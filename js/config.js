@@ -3,7 +3,8 @@ var appConfig = {
     token: null,
     apiAuthorization: 'Basic T2ZmZXJCb3hXRUJDbDFlbnQ6T2ZmZXJCb3hXRUJTM2NyM3Q=',
     googleCaptcha: '6Lc17RIUAAAAACKwIeV24O6S51nMWvzNqRxX8tm_',
-    sessionExpires: 9 // hours
+    sessionExpires: 9, // hours
+    apiBincodesDomain: 'https://api.bincodes.com/'
 };
 
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdleProvider, localStorageServiceProvider, $httpProvider, $locationProvider) {
