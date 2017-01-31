@@ -199,7 +199,7 @@
                     alertService.showSuccessText('Invitations were sent')
                 }
                 if (!isExit) {
-                    $state.go('food.vendorSetup');
+                    $state.go('foodSetup.vendor');
                 } else {
                     $state.go('home');
                 }
