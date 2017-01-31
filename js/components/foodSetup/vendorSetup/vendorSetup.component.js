@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function vendorSetupController(api, $state, auth, localStorageService) {
+    function vendorSetupController(api, $state, auth, localStorageService, SweetAlert) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -25,13 +25,16 @@
         that.vendorList = [];
         that.vendorsSelected = [];
         that.searchModel = {
-            order_by: 'id', // id, name, city, date, zip
+            order_by: 'vendor_name', // id, name, city, date, zip
             order_way: "DESC",  //ASC/DESC
             paginationOffset: 0, // 0 by default
             paginationCount: 25, //25 by default,
             inRequest: false,
             search_by: null,
-            paginationTotal: 0
+            paginationTotal: 0,
+            city: null,
+            vendor_name: null,
+            zip_code: null
         };
 
         that.search = function (keyword) {
@@ -43,7 +46,10 @@
                 order_way: that.searchModel.order_way,
                 paginationOffset: that.searchModel.paginationOffset,
                 paginationCount: that.searchModel.paginationCount,
-                search_by: that.searchModel.search_by
+                search_by: that.searchModel.search_by,
+                city: that.searchModel.city,
+                vendor_name: that.searchModel.vendor_name,
+                zip_code: that.searchModel.zip_code
             };
 
             for (var i in m) {
@@ -67,7 +73,6 @@
             }
 
 
-
             api.get_vendors(m).then(function (res) {
                 try {
                     that.vendorList = res.data.data.vendors;
@@ -76,25 +81,53 @@
                     console.log(e);
                 }
                 that.searchModel.inRequest = false;
-            }, function (e) {
-                console.log(e);
+            }, function () {
                 that.searchModel.inRequest = false;
             })
         };
 
         that.search();
 
+        // TODO
+        var getChosenVendors = function () {
+            var m = {
+
+            };
+
+            api.get_chosen_vendors(m).then(function (res) {
+                try {
+                    that.vendorsSelected = res.data.data;
+                } catch (e) {
+                    console.log(e);
+                }
+
+            }, function () {
+            })
+        };
+
+        // TODO
+        that.addVendor = function (vendor) {
+            console.log(vendor);
+
+        };
+
         that.next = function () {
+
             if (that.vendorsSelected.length) {
                 $state.go('foodSetup.inventory');
+                return;
             }
-            $state.go('foodSetup.inventory');
+
+            SweetAlert.swal({
+                title: 'At first select vendors',
+                showConfirmButton: false,
+                type: "error",
+                timer: 2000
+            });
         }
-
-
     }
 
-    vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService'];
+    vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert'];
 
     angular.module('inspinia').component('vendorSetupComponent', {
         templateUrl: 'js/components/foodSetup/vendorSetup/vendorSetup.html',

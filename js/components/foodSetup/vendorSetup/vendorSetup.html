@@ -33,16 +33,16 @@
                                             <fieldset ng-disabled="$ctr.searchModel.inRequest">
                                                 <div class="col-xs-4">
                                                     <label>Name</label>
-                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="Name">
+                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="Name" ng-model="$ctr.searchModel.vendor_name">
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>City</label>
-                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="City">
+                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="City" ng-model="$ctr.searchModel.city">
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Zip Code</label>
                                                     <input type="text" class="form-control input-sm m-b-xs"
-                                                           placeholder="ZipCode">
+                                                           placeholder="ZipCode" ng-model="$ctr.searchModel.zip_code">
                                                 </div>
                                                 <div class="col-xs-12 text-right padding-top-20">
                                                     <button type="submit" class="btn btn-primary">Search</button>
@@ -55,16 +55,40 @@
                                             <thead>
                                             <tr>
                                                 <th ng-click="$ctr.search('id')"
-                                                    class="cursor-pointer footable-sorted"
+                                                    class="cursor-pointer"
                                                     data-sort-ignore="true"
                                                     ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'id' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'id' && $ctr.searchModel.order_way == 'ASC')}">
                                                     ID
                                                     <span  class="footable-sort-indicator"></span>
                                                 </th>
-                                                <th data-sort-ignore="true">Name  <span  class="footable-sort-indicator"></span></th>
-                                                <th data-sort-ignore="true">City  <span  class="footable-sort-indicator"></span></th>
-                                                <th data-sort-ignore="true">Date  <span  class="footable-sort-indicator"></span></th>
-                                                <th data-sort-ignore="true">Zip Code  <span  class="footable-sort-indicator"></span></th>
+                                                <th ng-click="$ctr.search('vendor_name')"
+                                                    class="cursor-pointer"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Name
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('city')"
+                                                    class="cursor-pointer"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'city' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'city' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    City
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('created_at')"
+                                                    class="cursor-pointer"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Date
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('zip_code')"
+                                                    class="cursor-pointer"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'zip_code' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'zip_code' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Zip Code
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
                                                 <th class="width-50" data-sort-ignore="true"></th>
                                             </tr>
                                             </thead>
@@ -77,8 +101,14 @@
                                                 <td>{{vendor.zip_code}}</td>
                                                 <td class="text-right">
                                                     <label class="switch">
-                                                        <input type="checkbox" ng-model="vendor.is_added"><i></i>
+                                                        <!-- TODO -->
+                                                        <input type="checkbox" ng-model="vendor.is_added" ng-change="$ctr.addVendor(vendor)"><i></i>
                                                     </label>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!$ctr.vendorList.length">
+                                                <td colspan="6" class="text-center">
+                                                    No results
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -90,6 +120,7 @@
                                                 ng-model="$ctr.searchModel.paginationOffset"
                                                 max-size="10"
                                                 class="pagination-sm"
+                                                items-per-page="$ctr.searchModel.paginationCount"
                                                 ng-change="$ctr.search()"
                                                 boundary-link-numbers="true"
                                                 rotate="false"></ul>
