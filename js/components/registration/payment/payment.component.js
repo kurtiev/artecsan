@@ -53,7 +53,7 @@
                 return
             }
 
-            api.get_credit_card_checker({
+            /*api.get_credit_card_checker({
                 format: that.formatCardApi,
                 api_key: that.CardApiKey,
                 cc: that.model.card_number
@@ -63,7 +63,7 @@
                         that.invalidCard = true;
                         alertService.showError('Invalid Credit Card or Debit Card Number');
                         return
-                    }
+                    }*/
 
                 core.data.new_restaurant.payment.card_number = that.model.card_number;
                 core.data.new_restaurant.payment.expiration_month = that.model.expiration_month;
@@ -117,7 +117,7 @@
                 } else {
                     $state.go('terms');
                 }
-            });
+            /*});*/
 
 
 
