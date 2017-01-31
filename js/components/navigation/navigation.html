@@ -1,11 +1,11 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('select_restaurant');" id="select_restaurant">
+            <li ui-sref-active="active"  id="select_restaurant">
 
                 <a  ui-sref="home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>
             </li>
-            <li ng-class="{active: $state.includes('food')}"  id="food">
+            <li ng-class="{active: $state.includes('food')}"  id="food" ng-hide="$ctr.isHome">
                 <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'Food Setup' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('food')}">
                     <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('food_vendor_setupv');" id="food_vendor_setupv"><a ui-sref="food.vendorSetup">Vendor Setup</a></li>
@@ -16,19 +16,19 @@
                 </ul>
             </li>
 
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('bar');" id="bar">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('bar');" id="bar" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('p.o.s.sync');" id="p.o.s.sync">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('p.o.s.sync');" id="p.o.s.sync" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-table"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('payroll_setup');" id="payroll_setup">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('payroll_setup');" id="payroll_setup" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-money"></i> <span class="nav-label">{{ 'Payroll' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('accounting');" id="accounting">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('accounting');" id="accounting" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-calculator"></i> <span class="nav-label">{{ 'Accounting' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('users');" id="users">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('users');" id="users" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>
             </li>
             <hr ng-if="main.isFoodSetup">
@@ -36,19 +36,19 @@
            <!-- <li ui-sref-active="active" ng-if="!main.isRegistration">
                 <a ui-sref="admin.homeMenu"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'Home' }}</span> </a>
             </li>-->
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('management');" id="management">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('management');" id="management" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.managementCategories"><i class="fa fa-edit"></i> <span class="nav-label">{{ 'Management' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('inventory');" id="inventory">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('inventory');" id="inventory" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.inventoryCategories"><i class="fa fa-desktop"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('consumer_reviews');" id="consumer_reviews">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('consumer_reviews');" id="consumer_reviews" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>
             </li>
             <!--<li ui-sref-active="active" ng-if="$ctr.closeReadingItems('users');">-->
                 <!--<a ui-sref="food.performanceScore"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'Performance Score' }}</span> </a>-->
             <!--</li>-->
-            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('reports');" id="reports">
+            <li ui-sref-active="active" ng-if="$ctr.closeReadingItems('reports');" id="reports" ng-hide="$ctr.isHome">
                 <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
             </li>
             <!--<li ui-sref-active="active" ng-if="$ctr.closeReadingItems('users');">-->
