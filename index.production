@@ -1,21 +1,123 @@
 <!DOCTYPE html>
-<html ng-app="mainApp">
+<html ng-app="inspinia">
+
 <head>
-    <meta name="robots" content="noindex, nofollow, noarchive"/>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title page-title></title>
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-    <link href="build/css/styles.min.css?ver=@@hash" rel="stylesheet">
+
+    <!-- Page title set in pageTitle directive -->
+    <title page-title>Artecsan powered by Skrible</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css?ver=@@hash" rel="stylesheet">
+
+    <!-- Font awesome -->
+    <link href="font-awesome/css/font-awesome.css?ver=@@hash" rel="stylesheet">
+
+    <!-- Plugins -->
+    <link href="css/plugins/sweetalert/sweetalert.css?ver=@@hash" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="css/animate.css?ver=@@hash" rel="stylesheet">
+    <link id="loadBefore" href="css/style.css?ver=@@hash" rel="stylesheet">
+
+    <link href="css/Artecsan.css?ver=@@hash" rel="stylesheet">
+
 </head>
-<body ng-controller="indexController as main" class="{{$state.current.data.specialClass}}">
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl as main" class="{{$state.current.data.specialClass}}" landing-scrollspy id="page-top">
+
+<!-- Main view  -->
 <div ui-view></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
-<script src="build/js/libs.min.js?ver=@@hash"></script>
-<script src="build/js/app.min.js?ver=@@hash"></script>
+
+<!-- jQuery and Bootstrap -->
+<script src="js/jquery/jquery-2.1.1.min.js?ver=@@hash"></script>
+<script src="js/plugins/jquery-ui/jquery-ui.js?ver=@@hash"></script>
+<script src="js/bootstrap/bootstrap.min.js?ver=@@hash"></script>
+
+<!-- MetisMenu -->
+<script src="js/plugins/metisMenu/jquery.metisMenu.js?ver=@@hash"></script>
+
+<!-- SlimScroll -->
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js?ver=@@hash"></script>
+
+<!-- Peace JS -->
+<script src="js/plugins/pace/pace.min.js?ver=@@hash"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js?ver=@@hash"></script>
+
+<!-- Main Angular scripts-->
+<script src="js/angular/angular.min.js?ver=@@hash"></script>
+<script src="js/angular/angular-sanitize.min.js?ver=@@hash"></script>
+<script src="js/plugins/oclazyload/dist/ocLazyLoad.min.js?ver=@@hash"></script>
+<script src="js/ui-router/angular-ui-router.min.js?ver=@@hash"></script>
+<script src="js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js?ver=@@hash"></script>
+<script src="js/plugins/angular-idle/angular-idle.js?ver=@@hash"></script>
+
+
+<!-- Thirty part libs -->
+<script src="js/plugins/angular-local-storage.min.js?ver=@@hash"></script>
+<script src="js/plugins/sweetalert/sweetalert.min.js?ver=@@hash"></script>
+<script src="js/plugins/sweetalert/angular-sweetalert.min.js?ver=@@hash"></script>
+
+<!-- Angular App Script -->
+<script src="js/app.js?ver=@@hash"></script>
+<script src="js/config.js?ver=@@hash"></script>
+<script src="js/directives.js?ver=@@hash"></script>
+<script src="js/controllers.js?ver=@@hash"></script>
+
+
+<!-- main controllers -->
+<script src="js/controllers/homeMenuController.js?ver=@@hash"></script>
+
+<!-- services -->
+<script src="js/services/interceptor.js?ver=@@hash"></script>
+<script src="js/services/core.js?ver=@@hash"></script>
+<script src="js/services/auth.js?ver=@@hash"></script>
+<script src="js/services/api.js?ver=@@hash"></script>
+<script src="js/services/alertService.js?ver=@@hash"></script>
+<script src="js/services/restaurant.js?ver=@@hash"></script>
+<script src="js/services/utils.js?ver=@@hash"></script>
+
+<!-- directives -->
+<script src="js/directives/onlyDigits.js?ver=@@hash"></script>
+<script src="js/directives/compareTo.js?ver=@@hash"></script>
+<script src="js/directives/acPassword.js?ver=@@hash"></script>
+<script src="js/directives/acPhone.js?ver=@@hash"></script>
+
+<!-- components -->
+<script src="js/components/foodSetup/inventorySetup/inventorySetup.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/inventorySetup/inventorySetup.component.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/vendorSetup/vendorSetup.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/vendorSetup/vendorSetup.component.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/foodSetup.js?ver=@@hash"></script>
+<script src="js/components/registration/invite/invite.js?ver=@@hash"></script>
+<script src="js/components/registration/invite/invite.component.js?ver=@@hash"></script>
+<script src="js/components/registration/terms/terms.js?ver=@@hash"></script>
+<script src="js/components/registration/terms/terms.component.js?ver=@@hash"></script>
+<script src="js/components/registration/payment/payment.js?ver=@@hash"></script>
+<script src="js/components/registration/payment/payment.component.js?ver=@@hash"></script>
+<script src="js/components/registration/restaurantProfile/restaurantProfile.js?ver=@@hash"></script>
+<script src="js/components/registration/restaurantProfile/restaurantProfile.component.js?ver=@@hash"></script>
+<script src="js/components/registration/restaurantUserProfile/restaurantUserProfile.js?ver=@@hash"></script>
+<script src="js/components/registration/restaurantUserProfile/restaurantUserProfile.component.js?ver=@@hash"></script>
+<script src="js/components/registration/subscription/subscription.js?ver=@@hash"></script>
+<script src="js/components/registration/subscription/subscription.component.js?ver=@@hash"></script>
+<script src="js/components/login/login.js?ver=@@hash"></script>
+<script src="js/components/login/login.component.js?ver=@@hash"></script>
+<script src="js/components/registration/registration.js?ver=@@hash"></script>
+<script src="js/components/registration/registration.component.js?ver=@@hash"></script>
+<script src="js/components/header/header.component.js?ver=@@hash"></script>
+<script src="js/components/home/home.component.js?ver=@@hash"></script>
+<script src="js/components/home/home.js?ver=@@hash"></script>
+<script src="js/components/navigation/navigation.component.js?ver=@@hash"></script>
+
+<script src='https://www.google.com/recaptcha/api.js?ver=@@hash'></script>
+<script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
 </body>
 </html>
