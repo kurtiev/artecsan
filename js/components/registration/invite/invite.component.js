@@ -152,7 +152,7 @@
                             var m = {
                                 employees: [{
                                     user_id: user.id,
-                                    is_disabled: user.is_disabled
+                                    is_disabled: user.is_disabled ? 0 : 1
                                 }]
                             };
 

@@ -104,7 +104,7 @@
         };
 
         serviceFactory.change_restaurant_employee_status = function (id, model) {
-            return $http.put(serviceBase + 'restaurant/' + id + '/employees', model, getAuthConfig());
+            return $http.put(serviceBase + 'restaurants/' + id + '/employees', model, getAuthConfig());
         };
 
         serviceFactory.delete_invite = function (model) {
@@ -142,6 +142,11 @@
                 url: appConfig.apiBincodesDomain + 'cc/',
                 params: model
             });
+        };
+
+        // TODO
+        serviceFactory.get_chosen_vendors = function (model) {
+            return $http.get(serviceBase + '', model, getAuthConfig());
         };
 
         return serviceFactory;
