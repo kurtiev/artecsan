@@ -22,7 +22,7 @@
 
         <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-xs-12 col-lg-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="row">
@@ -30,119 +30,100 @@
                                     <h3 class="text-center">Vendor Search</h3>
                                     <div class="row">
                                         <form novalidate autocomplete="off" name="form" ng-submit="$ctr.search()">
-                                            <div class="col-xs-4">
-                                                <label>Name</label>
-                                                <input type="text" class="form-control input-sm m-b-xs" placeholder="Name">
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>City</label>
-                                                <input type="text" class="form-control input-sm m-b-xs" placeholder="City">
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>ZipCode</label>
-                                                <input type="text" class="form-control input-sm m-b-xs"
-                                                       placeholder="ZipCode">
-                                            </div>
-                                            <div class="col-xs-12 text-right padding-top-20">
-                                                <button type="submit" class="btn btn-primary">Search</button>
-                                            </div>
+                                            <fieldset ng-disabled="$ctr.searchModel.inRequest">
+                                                <div class="col-xs-4">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="Name" ng-model="$ctr.searchModel.vendor_name">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control input-sm m-b-xs" placeholder="City" ng-model="$ctr.searchModel.city">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>Zip Code</label>
+                                                    <input type="text" class="form-control input-sm m-b-xs"
+                                                           placeholder="ZipCode" ng-model="$ctr.searchModel.zip_code">
+                                                </div>
+                                                <div class="col-xs-12 text-right padding-top-20">
+                                                    <button type="submit" class="btn btn-primary">Search</button>
+                                                </div>
+                                            </fieldset>
                                         </form>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="footable table table-stripped toggle-arrow-tiny"
-                                               data-page-size="8">
+                                        <table class="footable footable-custom table-stripped toggle-arrow-tiny table" data-page-size="25">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>City</th>
-                                                <th>Date</th>
-                                                <th>ZipCode</th>
+                                                <th ng-click="$ctr.search('id')"
+                                                    class="cursor-pointer min-width-90"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'id' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'id' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    ID
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('vendor_name')"
+                                                    class="cursor-pointer min-width-90"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Name
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('city')"
+                                                    class="cursor-pointer min-width-90"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'city' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'city' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    City
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('created_at')"
+                                                    class="cursor-pointer min-width-90"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Date
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
+                                                <th ng-click="$ctr.search('zip_code')"
+                                                    class="cursor-pointer min-width-90"
+                                                    data-sort-ignore="true"
+                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'zip_code' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'zip_code' && $ctr.searchModel.order_way == 'ASC')}">
+                                                    Zip Code
+                                                    <span  class="footable-sort-indicator"></span>
+                                                </th>
                                                 <th class="width-50" data-sort-ignore="true"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>234</td>
-                                                <td>Anna Jordan2</td>
-                                                <td>City48</td>
-                                                <td>12/12/12</td>
-                                                <td>3455</td>
+                                            <tr ng-repeat="vendor in $ctr.vendorList">
+                                                <td>{{vendor.id}}</td>
+                                                <td>{{vendor.vendor_name}}</td>
+                                                <td>{{vendor.city}}</td>
+                                                <td>{{vendor.created_at | date: 'MM/DD/YY'}}</td>
+                                                <td>{{vendor.zip_code}}</td>
                                                 <td class="text-right">
                                                     <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(0)"><i></i>
+                                                        <input type="checkbox" ng-model="vendor.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addVendor(vendor)"><i></i>
                                                     </label>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>123</td>
-                                                <td>Anna Jordan</td>
-                                                <td>City</td>
-                                                <td>12/12/12</td>
-                                                <td>3434</td>
-                                                <td class="text-right">
-                                                    <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(1)"><i></i>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>234</td>
-                                                <td>Anna Jordan2</td>
-                                                <td>City48</td>
-                                                <td>12/12/12</td>
-                                                <td>3455</td>
-                                                <td class="text-right">
-                                                    <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(2)"><i></i>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>234</td>
-                                                <td>Anna Jordan2</td>
-                                                <td>City48</td>
-                                                <td>12/12/12</td>
-                                                <td>3455</td>
-                                                <td class="text-right">
-                                                    <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(3)"><i></i>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>234</td>
-                                                <td>Anna Jordan2</td>
-                                                <td>City48</td>
-                                                <td>12/12/12</td>
-                                                <td>3455</td>
-                                                <td class="text-right">
-                                                    <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(4)"><i></i>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>234</td>
-                                                <td>Anna Jordan2</td>
-                                                <td>City48</td>
-                                                <td>12/12/12</td>
-                                                <td>3455</td>
-                                                <td class="text-right">
-                                                    <label class="switch">
-                                                        <input type="checkbox" ng-click="main.selectVendor(5)"><i></i>
-                                                    </label>
+                                            <tr ng-show="!$ctr.vendorList.length">
+                                                <td colspan="6" class="text-center">
+                                                    No results
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <td colspan="6">
-                                                    <ul class="pagination pull-right"></ul>
-                                                </td>
-                                            </tr>
-                                            </tfoot>
                                         </table>
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="pull-right">
+                                            <ul uib-pagination total-items="$ctr.searchModel.paginationTotal"
+                                                ng-model="$ctr.searchModel.paginationOffset"
+                                                max-size="10"
+                                                class="pagination-sm"
+                                                items-per-page="$ctr.searchModel.paginationCount"
+                                                ng-change="$ctr.search()"
+                                                boundary-link-numbers="true"
+                                                rotate="false"></ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
@@ -161,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-xs-12 col-lg-4">
                     <div class="ibox ">
                         <div class="ibox-content">
                             <div class="tab-content">
@@ -183,8 +164,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="vendor in $ctr.vendorsSelected">
-                                                    <td ng-if="vendor.selected">{{vendor.id}}</td>
-                                                    <td ng-if="vendor.selected">{{vendor.name}}</td>
+                                                    <td>{{vendor.id}}</td>
+                                                    <td>{{vendor.vendor_name}}</td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.vendorsSelected.length">
                                                     <td class="text-center" colspan="2">

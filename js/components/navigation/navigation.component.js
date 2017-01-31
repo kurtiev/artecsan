@@ -6,36 +6,20 @@
 
         var that = this;
         that.api = api;
-        that.menuItems = [];
-        that.moduleId = null;
+
+        that.state = $state;
 
 
         that.isAuth = auth.authentication.isLogged;
 
-
-        core.getRefbooks().then(function (res) {
-            that.menuItems = res.menu_items;
-        });
-
-
         $rootScope.$on('restaurantSelected', function () {
             that.permissions = restaurant.data.permissions;
-
-
-            that.closeReadingItems = function (menuItemId) {
-                for (var i = 0; that.menuItems.length > i; i++) {
-                    if (that.menuItems[i].menu_item_id == menuItemId) {
-                        that.moduleId = that.menuItems[i].module_id;
-                    }
-                }
-
-                for (var k in that.permissions) {
-                    if (k == that.moduleId) {
-                        return that.permissions[k].r;
-                    }
-                }
-            };
         });
+
+
+        that.$onInit = function () {
+            that.permissions = restaurant.data.permissions;
+        };
 
 
         that.logOut = function () {

@@ -152,7 +152,7 @@
                             var m = {
                                 employees: [{
                                     user_id: user.id,
-                                    is_disabled: user.is_disabled
+                                    is_disabled: user.is_disabled ? 0 : 1
                                 }]
                             };
 
@@ -199,7 +199,7 @@
                     alertService.showSuccessText('Invitations were sent')
                 }
                 if (!isExit) {
-                    $state.go('food.vendorSetup');
+                    $state.go('foodSetup.vendor');
                 } else {
                     $state.go('home');
                 }

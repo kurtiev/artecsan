@@ -18,6 +18,9 @@
         that.model = {};
         that.$state = $state;
         that.currYear = new Date().getFullYear().toString().slice(-2);
+        that.formatCardApi = 'json';
+        that.CardApiKey = 'c208cd8b5d695cd2a3f761fb890e87f3';
+        that.invalidCard = false;
 
         var initModel = function () {
             that.model = {
@@ -50,58 +53,75 @@
                 return
             }
 
-            core.data.new_restaurant.payment.card_number = that.model.card_number;
-            core.data.new_restaurant.payment.expiration_month = that.model.expiration_month;
-            core.data.new_restaurant.payment.expiration_year = that.model.expiration_year;
-            core.data.new_restaurant.payment.coupon_code = that.model.coupon_code;
-            core.data.new_restaurant.payment.first_name = that.model.first_name;
-            core.data.new_restaurant.payment.last_name = that.model.last_name;
-            core.data.new_restaurant.payment.zip = that.model.zip;
-            core.data.new_restaurant.payment.billing_address = that.model.billing_address;
-            core.data.new_restaurant.payment.cv_code = that.model.cv_code;
+            /*api.get_credit_card_checker({
+                format: that.formatCardApi,
+                api_key: that.CardApiKey,
+                cc: that.model.card_number
+            }).then(function (res) {
+                    that.validCard = res.data.valid;
+                    if (!that.validCard) {
+                        that.invalidCard = true;
+                        alertService.showError('Invalid Credit Card or Debit Card Number');
+                        return
+                    }*/
 
-            if (parseInt($state.params.id)) {
-                var m = {
-                    subscription_type_id: core.data.new_restaurant.subscription_type_id,
-                    pos_id: core.data.new_restaurant.pos_id,
-                    // user_id: core.data.new_restaurant.user_id,
-                    restaurant: {
-                        restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
-                        entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
-                        address: core.data.new_restaurant.restaurant.address,
-                        city_geoname_id: core.data.new_restaurant.restaurant.city_geoname_id,
-                        logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
-                        state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
-                        zip: core.data.new_restaurant.restaurant.zip,
-                        phone_number: core.data.new_restaurant.restaurant.phone_number
-                    },
-                    payment: {
-                        card_number: core.data.new_restaurant.payment.card_number,
-                        expiration_month: core.data.new_restaurant.payment.expiration_month,
-                        expiration_year: core.data.new_restaurant.payment.expiration_year,
-                        coupon_code: core.data.new_restaurant.payment.coupon_code,
-                        first_name: core.data.new_restaurant.payment.first_name,
-                        last_name: core.data.new_restaurant.payment.last_name,
-                        zip: core.data.new_restaurant.payment.zip,
-                        billing_address: core.data.new_restaurant.payment.billing_address,
-                        cv_code: core.data.new_restaurant.payment.cv_code
-                    }
-                };
-                that.api.update_restaurant(m, $state.params.id).then(function (res) {
-                    try {
-                        if (res.data.data.code === 1000) {
-                            alertService.showAlertSave();
-                            setTimeout(function () {
-                                $state.go('invite', {id: $state.params.id});
-                            }, 1000);
+                core.data.new_restaurant.payment.card_number = that.model.card_number;
+                core.data.new_restaurant.payment.expiration_month = that.model.expiration_month;
+                core.data.new_restaurant.payment.expiration_year = that.model.expiration_year;
+                core.data.new_restaurant.payment.coupon_code = that.model.coupon_code;
+                core.data.new_restaurant.payment.first_name = that.model.first_name;
+                core.data.new_restaurant.payment.last_name = that.model.last_name;
+                core.data.new_restaurant.payment.zip = that.model.zip;
+                core.data.new_restaurant.payment.billing_address = that.model.billing_address;
+                core.data.new_restaurant.payment.cv_code = that.model.cv_code;
+
+                if (parseInt($state.params.id)) {
+                    var m = {
+                        subscription_type_id: core.data.new_restaurant.subscription_type_id,
+                        pos_id: core.data.new_restaurant.pos_id,
+                        // user_id: core.data.new_restaurant.user_id,
+                        restaurant: {
+                            restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
+                            entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
+                            address: core.data.new_restaurant.restaurant.address,
+                            city_geoname_id: core.data.new_restaurant.restaurant.city_geoname_id,
+                            logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
+                            state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
+                            zip: core.data.new_restaurant.restaurant.zip,
+                            phone_number: core.data.new_restaurant.restaurant.phone_number
+                        },
+                        payment: {
+                            card_number: core.data.new_restaurant.payment.card_number,
+                            expiration_month: core.data.new_restaurant.payment.expiration_month,
+                            expiration_year: core.data.new_restaurant.payment.expiration_year,
+                            coupon_code: core.data.new_restaurant.payment.coupon_code ? core.data.new_restaurant.payment.coupon_code.toString() : core.data.new_restaurant.payment.coupon_code,
+                            first_name: core.data.new_restaurant.payment.first_name,
+                            last_name: core.data.new_restaurant.payment.last_name,
+                            zip: core.data.new_restaurant.payment.zip,
+                            billing_address: core.data.new_restaurant.payment.billing_address,
+                            cv_code: core.data.new_restaurant.payment.cv_code
                         }
-                    } catch (e) {
-                        console.log(e)
-                    }
-                });
-            } else {
-                $state.go('terms');
-            }
+                    };
+                    that.api.update_restaurant(m, $state.params.id).then(function (res) {
+                        try {
+                            if (res.data.data.code === 1000) {
+                                alertService.showAlertSave();
+                                setTimeout(function () {
+                                    $state.go('invite', {id: $state.params.id});
+                                }, 1000);
+                            }
+                        } catch (e) {
+                            console.log(e)
+                        }
+                    });
+                } else {
+                    $state.go('terms');
+                }
+            /*});*/
+
+
+
+
         };
 
         that.back = function () {

@@ -39,7 +39,7 @@
                                                     </label>
                                                     <div class="input-group">
                                                         <input class="form-control" type="tel"
-                                                               placeholder="Valid Card Number" id="cardNumber" only-digits maxlength="14" ng-model="$ctr.model.card_number" required>
+                                                               placeholder="Valid Card Number" id="cardNumber" ng-class="{'ng-invalid': $ctr.invalidCard}" only-digits maxlength="16" ng-model="$ctr.model.card_number" required>
                                                         <div class="input-group-addon">
                                                     <span>
                                                         <i class="fa fa-credit-card"></i>
@@ -78,10 +78,10 @@
                                             <div class="col-xs-6">
                                                 <div class="form-group">
                                                     <label for="couponCode">
-                                                        Coupon Code <span class="text-danger">*</span>
+                                                        Coupon Code
                                                     </label>
                                                     <input class="form-control" type="text" id="couponCode"
-                                                           placeholder="Coupon Code" ng-model="$ctr.model.coupon_code" required>
+                                                           placeholder="Coupon Code" ng-model="$ctr.model.coupon_code">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">

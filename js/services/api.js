@@ -104,7 +104,7 @@
         };
 
         serviceFactory.change_restaurant_employee_status = function (id, model) {
-            return $http.put(serviceBase + 'restaurant/' + id + '/employees', model, getAuthConfig());
+            return $http.put(serviceBase + 'restaurants/' + id + '/employees', model, getAuthConfig());
         };
 
         serviceFactory.delete_invite = function (model) {
@@ -121,6 +121,35 @@
 
         serviceFactory.set_active_restaurant = function (model) {
             return $http.post(serviceBase + 'users/set_active_restaurant', model, getAuthConfig());
+        };
+
+        serviceFactory.get_vendors = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'vendors',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.get_credit_card_checker = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: appConfig.apiBincodesDomain + 'cc/',
+                params: model
+            });
+        };
+
+        serviceFactory.get_chosen_vendors = function (id) {
+            return $http.get(serviceBase + 'restaurants/' + id + '/vendors', getAuthConfig());
+        };
+
+        serviceFactory.add_vendor = function (id, model) {
+            return $http.put(serviceBase + 'restaurants/' + id + '/vendors', model, getAuthConfig());
         };
 
         return serviceFactory;
