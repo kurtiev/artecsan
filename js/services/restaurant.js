@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var restaurant = function (api, auth, $q, $injector) {
+    var restaurant = function (api, auth, $q, $injector, $rootScope, localStorageService) {
 
         var data = {
             info: null,
@@ -10,24 +10,30 @@
         };
 
         var set_restaurant = function (id) {
+
             var deferred = $q.defer();
-            if (data.info) {
-                deferred.resolve(data.info);
-            } else {
-                api.get_restaurant(id).then(function (res1) {
 
-                    api.set_active_restaurant({restaurant_id: id}).then(function (res) {
-                        try {
-                            data.info = res1.data.data.restaurants_list[0];
-                            data.permissions = res.data.data.permissions;
-                            deferred.resolve(data.info);
-                        } catch (e) {
-                            console.log(e);
-                        }
-                    });
+            api.get_restaurant(id).then(function (res1) {
+
+                api.set_active_restaurant({restaurant_id: id}).then(function (res) {
+                    try {
+                        data.info = res1.data.data.restaurants_list[0];
+                        data.permissions = res.data.data.permissions;
+                        deferred.resolve(data.info);
+                        $rootScope.$emit('restaurantSelected');
+                        localStorageService.set('restaurant_id', {
+                            restaurant_id: id
+                        });
+                    } catch (e) {
+                        console.log(e);
+                        deferred.reject()
+                    }
+                }, function (error) {
+                    deferred.reject();
                 });
-
-            }
+            }, function (error) {
+                deferred.reject();
+            });
 
             return deferred.promise;
         };
@@ -100,7 +106,7 @@
         };
     };
 
-    restaurant.$inject = ['api', 'auth', '$q', '$injector'];
+    restaurant.$inject = ['api', 'auth', '$q', '$injector', '$rootScope', 'localStorageService'];
     angular.module('inspinia').factory('restaurant', restaurant);
 
 })();

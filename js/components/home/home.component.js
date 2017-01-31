@@ -29,9 +29,6 @@
 
         that.selectRestaurant = function (restaurant) {
             that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
-                localStorageService.set('restaurant_id', {
-                    restaurant_id: restaurant.id
-                });
                 $state.go('admin.homeMenu');
             });
         };

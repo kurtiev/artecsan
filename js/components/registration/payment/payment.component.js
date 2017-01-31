@@ -7,10 +7,6 @@
             $state.go('registration');
             return;
         }
-        if (!core.data.new_restaurant.restaurant.restaurant_name) {
-            $state.go('registration');
-            return;
-        }
 
         var that = this;
         that.form = {};
@@ -98,7 +94,7 @@
                             card_number: core.data.new_restaurant.payment.card_number,
                             expiration_month: core.data.new_restaurant.payment.expiration_month,
                             expiration_year: core.data.new_restaurant.payment.expiration_year,
-                            coupon_code: core.data.new_restaurant.payment.coupon_code,
+                            coupon_code: core.data.new_restaurant.payment.coupon_code ? core.data.new_restaurant.payment.coupon_code.toString() : core.data.new_restaurant.payment.coupon_code,
                             first_name: core.data.new_restaurant.payment.first_name,
                             last_name: core.data.new_restaurant.payment.last_name,
                             zip: core.data.new_restaurant.payment.zip,

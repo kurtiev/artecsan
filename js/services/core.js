@@ -61,7 +61,7 @@
 
             if (restaurantID) {
                 restaurant.set_restaurant(restaurantID.restaurant_id).then(function () {
-                    $rootScope.$emit('restaurantSelected');
+                    // $rootScope.$emit('restaurantSelected');
                 })
             }
 

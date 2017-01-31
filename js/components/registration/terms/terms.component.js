@@ -56,9 +56,6 @@
                         // set current restaurant
                         alertService.showSuccessText('Congratulations', 'Your restaurant was created.');
                         restaurant.set_restaurant(res.data.data.id).then(function () {
-                            localStorageService.set('restaurant_id', {
-                                restaurant_id: res.data.data.id
-                            });
                             $state.go('invite', {id : res.data.data.id});
                         });
 
