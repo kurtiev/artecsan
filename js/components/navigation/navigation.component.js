@@ -9,6 +9,13 @@
         that.menuItems = [];
         that.moduleId = null;
 
+        that.state = $state;
+        that.isHome = false;
+
+        if (that.state.current.name == 'home') {
+            that.isHome = true;
+        }
+
 
         that.isAuth = auth.authentication.isLogged;
 
@@ -20,7 +27,6 @@
 
         $rootScope.$on('restaurantSelected', function () {
             that.permissions = restaurant.data.permissions;
-
 
             that.closeReadingItems = function (menuItemId) {
                 for (var i = 0; that.menuItems.length > i; i++) {
