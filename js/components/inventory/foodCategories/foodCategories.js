@@ -4,10 +4,10 @@
     angular.module('inspinia').config(function ($stateProvider) {
 
         $stateProvider
-            .state('inventory.inventoryCategories', {
-                url: "/inventory_categories",
-                templateUrl: 'js/components/inventory/inventoryCategories/inventoryCategories.html',
-                data: {pageTitle: 'Inventory Categories'},
+            .state('inventory.foodCategories', {
+                url: "/food_categories",
+                templateUrl: 'js/components/inventory/foodCategories/foodCategories.html',
+                data: {pageTitle: 'Food Categories'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
