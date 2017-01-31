@@ -135,6 +135,15 @@
             });
         };
 
+        serviceFactory.get_credit_card_checker = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: appConfig.apiBincodesDomain + 'cc/',
+                params: model
+            });
+        };
+
         return serviceFactory;
     };
 
