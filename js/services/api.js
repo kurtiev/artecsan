@@ -180,6 +180,14 @@
             });
         };
 
+        serviceFactory.update_user_info = function (id, model) {
+            return $http.put(serviceBase + 'users/' + id, model, getAuthConfig());
+        };
+
+        serviceFactory.get_user_info = function (id) {
+            return $http.get(serviceBase + 'users/' + id, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 

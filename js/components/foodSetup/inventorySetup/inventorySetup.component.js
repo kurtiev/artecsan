@@ -139,7 +139,6 @@
         };
 
 
-        // todo
         that.addInventory = function (inventory) {
 
             var id = that.restaurant_id.restaurant_id;
@@ -173,7 +172,7 @@
         that.next = function () {
 
             if (currentVendor.is_last) {
-                $state.go('food.recipeSetup');
+                $state.go('foodSetup.recipe');
             } else {
                 var nextVendor;
 
