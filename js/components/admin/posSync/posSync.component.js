@@ -15,7 +15,9 @@
         that.auth = auth;
         that.posSyncList = [];
 
-        that.pos_id = localStorageService.get('pos_id').pos_id;
+        that.pos_id = $state.params.pos_id;
+
+
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
 
         if (!that.restaurant_id) {
@@ -24,9 +26,6 @@
         }
 
         that.selectSyncPos = function (pos) {
-            localStorageService.set('pos_id', {
-                pos_id: pos.id
-            });
             $state.go('admin.addPosHere', {pos_id: pos.id});
         };
 

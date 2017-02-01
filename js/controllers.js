@@ -3,12 +3,21 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope) {
 
     var that = this;
     that.api = api;
 
     that.inviteForm = {};
+
+    $rootScope.$on('restaurantSelected', function () {
+        that.permissions = restaurant.data.permissions;
+    });
+
+
+    that.$onInit = function () {
+        that.permissions = restaurant.data.permissions;
+    };
 
     var invite_key = $location.search()['invite_key'];
 
