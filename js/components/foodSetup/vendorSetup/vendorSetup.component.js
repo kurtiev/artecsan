@@ -25,7 +25,7 @@
         that.vendorList = [];
         that.vendorsSelected = [];
         that.searchModel = {
-            order_by: 'vendor_name', // id, name, city, date, zip
+            order_by: null, // id, name, city, date, zip
             order_way: "DESC",  //ASC/DESC
             paginationOffset: 0, // 0 by default
             paginationCount: 25, //25 by default,
