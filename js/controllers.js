@@ -373,6 +373,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
         this.posIndex = 2;
         this.isRegistration = false;
         this.isFoodSetup = false;
+        auth.logOut();
     };
 
     this.reset = function () {
