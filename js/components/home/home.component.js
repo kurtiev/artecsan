@@ -13,6 +13,7 @@
 
         that.restaurantService = restaurant;
         that.restaurantsList = [];
+        that.employees_list = [];
         that.api = api;
 
         core.data.new_restaurant = null; // reset recently editable or added restaurant
@@ -84,7 +85,38 @@
 
         that.editRestaurant = function (restaurant) {
             that.restaurantService.set_to_edit(restaurant.id).then(function () {
-                $state.go('registration', {id: restaurant.id});
+
+                api.get_restaurant(restaurant.id).then(function (res) {
+                    that.employees_list = res.data.data.restaurants_list[0].employees;
+
+                    console.log('employees_list', that.employees_list.length);
+
+                    if (that.employees_list.length) {
+
+                        api.get_chosen_vendors(restaurant.id).then(function (res) {
+
+                            that.vendorsSelected = res.data.data.vendors;
+
+                            console.log('vendorsSelected', that.vendorsSelected.length);
+
+                            if (that.vendorsSelected.length) {
+                                $state.go('foodSetup.inventory');
+                            } else {
+                                $state.go('foodSetup.vendor');
+                            }
+
+                        });
+
+                        $state.go('foodSetup.vendor');
+
+                    } else {
+                        $state.go('invite', {id: restaurant.id});
+
+                    }
+
+
+                });
+
             });
         };
 
