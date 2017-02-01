@@ -20,6 +20,13 @@
             return that.userData;
         };
 
+        var updateMyInfo = function (user) {
+            that.userData.user = user;
+            localStorageService.set('adminAuthorizationData', {
+                authenticationInfo: setUser(user)
+            });
+        };
+
         var clearUserData = function () {
             that.userData = {
                 isLogged: false,
@@ -72,6 +79,7 @@
             logOut: logOut,
             fillAuthData: fillAuthData,
             setUser: setUser,
+            updateMyInfo: updateMyInfo,
             authentication: that.userData
         };
     };

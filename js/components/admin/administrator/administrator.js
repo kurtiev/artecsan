@@ -4,11 +4,10 @@
     angular.module('inspinia').config(function ($stateProvider) {
 
         $stateProvider
-            .state('foodSetup', {
-                url: "/food",
-                data: {pageTitle: ' Food Setup'},
-                abstract: true,
-                template: '<ui-view></ui-view>',
+            .state('admin.administrator', {
+                url: "/administrator",
+                templateUrl: 'js/components/admin/administrator/administrator.html',
+                data: {pageTitle: 'Administrator'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([

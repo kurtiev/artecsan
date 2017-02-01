@@ -591,3 +591,47 @@ fieldset[disabled] .btn-primary.active {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.footable-sort > thead > tr > th span.footable-sort-indicator:before {
+    content: "\e022";
+}
+
+.footable-sort > thead > tr > th  span.footable-sort-indicator {
+    display: inline-block;
+    font-family: 'footable';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 5px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.active-vendor {
+    color: #fff;
+    background: #23c6c8;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.vendor {
+    vertical-align: bottom;
+    margin-left: 4px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.footable-sort > thead > tr > th.footable-sorted-desc span.footable-sort-indicator:before {
+    content: "\e012";
+}
+.footable-sort > thead > tr > th.footable-sorted span.footable-sort-indicator:before {
+    content: "\e013";
+}
