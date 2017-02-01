@@ -152,6 +152,34 @@
             return $http.put(serviceBase + 'restaurants/' + id + '/vendors', model, getAuthConfig());
         };
 
+        serviceFactory.add_inventory = function (id, model) {
+            return $http.put(serviceBase + 'restaurants/' + id + '/vendors_sku', model, getAuthConfig());
+        };
+
+        serviceFactory.get_inventory_by_vendor = function (model, id) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'vendors/' + id + '/inventory',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.get_active_inventory_by_vendor = function (model, id) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'restaurants/' + id + '/vendors_sku',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
         return serviceFactory;
     };
 

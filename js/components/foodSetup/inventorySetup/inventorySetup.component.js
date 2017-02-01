@@ -22,19 +22,29 @@
         }
 
 
-        that.vendorList = [];
-        that.vendorsSelected = [];
+        that.inventoryList = [];
+        that.vendors = [];
+        that.inventoryListSelected = [];
+        var currentVendor = null;
         that.searchModel = {
-            order_by: 'vendor_name', // id, name, city, date, zip
+            order_by: 'vendor_sku', // id, name, city, date, zip
             order_way: "DESC",  //ASC/DESC
             paginationOffset: 0, // 0 by default
             paginationCount: 25, //25 by default,
             inRequest: false,
-            search_by: null,
             paginationTotal: 0,
+
             city: null,
-            vendor_name: null,
-            zip_code: null
+            item_name: null,
+            sub_category: null,
+            vendor_sku: null,
+            category: null
+        };
+
+        var getInventoriesByVendor = function () {
+            that.api.get_active_inventory_by_vendor({vendor_id: currentVendor.id}, that.restaurant_id.restaurant_id).then(function (res) {
+                that.inventoryListSelected = res.data.data.sku
+            });
         };
 
         that.search = function (keyword) {
@@ -46,10 +56,12 @@
                 order_way: that.searchModel.order_way,
                 paginationOffset: that.searchModel.paginationOffset,
                 paginationCount: that.searchModel.paginationCount,
-                search_by: that.searchModel.search_by,
+
                 city: that.searchModel.city,
-                vendor_name: that.searchModel.vendor_name,
-                zip_code: that.searchModel.zip_code
+                item_name: that.searchModel.item_name,
+                sub_category: that.searchModel.sub_category,
+                vendor_sku: that.searchModel.vendor_sku,
+                category: that.searchModel.category
             };
 
             for (var i in m) {
@@ -73,9 +85,9 @@
             }
 
 
-            api.get_vendors(m).then(function (res) {
+            api.get_inventory_by_vendor(m, currentVendor.id).then(function (res) {
                 try {
-                    that.vendorList = res.data.data.vendors;
+                    that.inventoryList = res.data.data.sku;
                     that.searchModel.paginationTotal = res.data.data.total;
                 } catch (e) {
                     console.log(e);
@@ -83,48 +95,108 @@
                 that.searchModel.inRequest = false;
             }, function () {
                 that.searchModel.inRequest = false;
-            })
+            });
+
+            getInventoriesByVendor()
         };
 
-        that.search();
+        that.selectVendor = function (vendor) {
 
-        // TODO
+            that.vendors.forEach(function (val, key) {
+                if (vendor.id == val.id) {
+                    val.is_selected = true
+                } else {
+                    val.is_selected = false
+                }
+            });
+
+            currentVendor = vendor;
+
+            that.search();
+
+
+        };
+
+
         var getChosenVendors = function () {
-            var m = {
 
-            };
-
-            api.get_chosen_vendors(m).then(function (res) {
+            api.get_chosen_vendors(that.restaurant_id.restaurant_id).then(function (res) {
                 try {
-                    that.vendorsSelected = res.data.data;
+                    that.vendors = res.data.data.vendors;
+                    if (!that.vendors.length) {
+                        $state.go('foodSetup.vendor');
+                        return
+                    }
+                    that.vendors[0].is_selected = true;
+                    that.vendors[0].is_first = true;
+                    that.vendors[that.vendors.length - 1].is_last = true;
+                    currentVendor = that.vendors[0];
+                    that.search();
                 } catch (e) {
                     console.log(e);
                 }
-
-            }, function () {
             })
         };
 
-        // TODO
-        that.addVendor = function (vendor) {
-            console.log(vendor);
 
+        // todo
+        that.addInventory = function (inventory) {
+
+            var id = that.restaurant_id.restaurant_id;
+
+            var m = {
+                vendor_id: currentVendor.id,
+                sku_id: inventory.id,
+                is_active: inventory.is_used
+            };
+
+            that.api.add_inventory(id, m).then(getInventoriesByVendor);
+
+        };
+
+        that.back = function () {
+            if (currentVendor.is_first) {
+                $state.go('foodSetup.vendor');
+            } else {
+                var prevVendor;
+
+                for (var i = 0; that.vendors.length > i; i++) {
+                    if (that.vendors[i].is_selected) {
+                        prevVendor = that.vendors[i - 1]
+                    }
+                }
+
+                that.selectVendor(prevVendor);
+            }
         };
 
         that.next = function () {
 
-            if (that.vendorsSelected.length) {
-                $state.go('foodSetup.inventory');
-                return;
+            if (currentVendor.is_last) {
+                $state.go('food.recipeSetup');
+            } else {
+                var nextVendor;
+
+                for (var i = 0; that.vendors.length > i; i++) {
+                    if (that.vendors[i].is_selected) {
+                        nextVendor = that.vendors[i + 1]
+                    }
+                }
+
+                that.selectVendor(nextVendor);
             }
 
-            SweetAlert.swal({
-                title: 'At first select vendors',
-                showConfirmButton: false,
-                type: "error",
-                timer: 2000
-            });
-        }
+            // SweetAlert.swal({
+            //     title: 'At first select inventory',
+            //     showConfirmButton: false,
+            //     type: "error",
+            //     timer: 2000
+            // });
+        };
+
+        that.$onInit = function () {
+            getChosenVendors()
+        };
 
     }
 
