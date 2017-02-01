@@ -39,11 +39,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         //         }
         //     }
         // })
-        // .state('admin', {
-        //     abstract: true,
-        //     url: "/admin",
-        //     templateUrl: "views/common/content.html",
-        // })
+        .state('admin', {
+            abstract: true,
+            url: "/admin",
+            templateUrl: "views/common/content.html",
+        })
         // .state('home', {
         //     abstract: true,
         //     url: "/home",
