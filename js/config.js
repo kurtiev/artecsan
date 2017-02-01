@@ -95,11 +95,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
-        // .state('admin.administrator', {
-        //     url: "/administrator",
-        //     templateUrl: "views/administrator.html",
-        //     data: {pageTitle: 'Administrator'}
-        // })
+        .state('admin.administrator', {
+            url: "/administrator",
+            templateUrl: "views/administrator.html",
+            data: {pageTitle: 'Administrator'}
+        })
         .state('admin.managementCategories', {
             url: "/management_categories",
             templateUrl: "views/managementCategories.html",
