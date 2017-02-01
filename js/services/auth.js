@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $injector) {
+    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $injector, $state) {
 
         var that = this;
         that.userData = {
@@ -61,6 +61,7 @@
 
         var logOut = function () {
             clearUserData();
+            $state.go('login');
         };
 
         var fillAuthData = function () {
@@ -84,7 +85,7 @@
         };
     };
 
-    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$injector'];
+    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$injector', '$state'];
     angular.module('inspinia').factory('auth', authService);
 
 })();

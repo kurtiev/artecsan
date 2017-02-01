@@ -75,10 +75,11 @@
 
             that.m.inRequest = true;
             var m = {username: that.m.email, password: that.m.password};
-            auth.login(m).then(function () {
+            auth.login(m).then(function (res) {
                 that.m.inRequest = false;
                 $state.go('home');
-            }, function () {
+            }, function (error) {
+                that.m.errorMessage = true;
                 that.m.inRequest = false;
             });
         };
