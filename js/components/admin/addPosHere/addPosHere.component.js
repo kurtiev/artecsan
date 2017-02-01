@@ -24,12 +24,6 @@
             return
         }
 
-        if (!that.pos_id) {
-            that.pos_id = localStorageService.get('pos_id').pos_id;
-        }
-
-        console.log(that.pos_id);
-
         that.$onInit = function () {
             api.get_pos_list().then(function (res) {
                 that.posSyncList = res.data.data.list;
@@ -41,6 +35,10 @@
                 }
             });
 
+        };
+
+        that.backPosSync = function () {
+            $state.go('admin.posSync', {pos_id: that.pos_id});
         };
 
 
