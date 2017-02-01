@@ -88,26 +88,28 @@
 
         that.search();
 
-        // TODO
+
         var getChosenVendors = function () {
-            var m = {
 
-            };
-
-            api.get_chosen_vendors(m).then(function (res) {
+            api.get_chosen_vendors(that.restaurant_id.restaurant_id).then(function (res) {
                 try {
-                    that.vendorsSelected = res.data.data;
+                    that.vendorsSelected = res.data.data.vendors;
                 } catch (e) {
                     console.log(e);
                 }
-
-            }, function () {
             })
         };
 
-        // TODO
+
         that.addVendor = function (vendor) {
-            console.log(vendor);
+
+            var id = that.restaurant_id.restaurant_id;
+            var m = {
+                vendor_id: vendor.id,
+                is_active: vendor.is_used,
+                inventory_type_id: 2
+            };
+            that.api.add_vendor(id, m).then(getChosenVendors);
 
         };
 
@@ -124,7 +126,11 @@
                 type: "error",
                 timer: 2000
             });
-        }
+        };
+
+        that.$onInit = function () {
+            getChosenVendors()
+        };
     }
 
     vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert'];
