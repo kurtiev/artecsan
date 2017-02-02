@@ -46,17 +46,22 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="recipe in main.recipeList">
-                                                <td>{{recipe.name}}</td>
-                                                <td>{{recipe.type}}</td>
-                                                <td>{{recipe.cnt}}</td>
+                                            <tr ng-repeat="r in $ctr.recipes track by $index">
+                                                <td>{{r.recipe_name}}</td>
+                                                <td>{{$ctr.get_refbooks.recipe_types | recipeTypeFilter : r.recipe_type_id}}</td>
+                                                <td>{{r.recipe_items.length}}</td>
                                                 <td class="text-right">
                                                     <button class="btn btn-warning " type="button"
-                                                            ng-click="main.open5(main)"><i class="fa fa-edit"></i>&nbsp;Edit
+                                                            ng-click="$ctr.edit(r, $index)"><i class="fa fa-edit"></i>&nbsp;Edit
                                                     </button>
-                                                    <button class="btn btn-danger " type="button"><i
-                                                            class="fa fa-times"></i>&nbsp;Delete
+                                                    <button class="btn btn-danger" type="button" ng-click="$ctr.delete(r, $index)">
+                                                        <i class="fa fa-times"></i>&nbsp;Delete
                                                     </button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!$ctr.recipes.length">
+                                                <td colspan="4" class="text-center">
+                                                    <span class="m-t-lg m-b-lg">No results</span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -65,7 +70,7 @@
                                 </div>
 
                                 <div class="col-xs-6 text-left">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" ui-sref="foodSetup.inventory">
                                         &lt;&lt; Back
                                     </button>
                                 </div>
@@ -92,38 +97,37 @@
 
 <script type="text/ng-template" id="add_new_recipe_item.html">
     <div class="inmodal">
-        <form name="$ctr.form" autocomplete="off" novalidate ng-submit="$ctr.submit()">
+        <form name="$ctr.form" autocomplete="off" novalidate ng-submit="$ctr.submit($ctr.form)">
             <div class="modal-header">
-                <h4 class="modal-title" ng-if="!$ctr.isEdit">Create Recipe</h4>
-                <h4 class="modal-title" ng-if="$ctr.isEdit">Edit Recipe</h4>
+                <h4 class="modal-title" ng-if="!$ctr.recipe">Create Recipe</h4>
+                <h4 class="modal-title" ng-if="$ctr.recipe">Edit Recipe</h4>
             </div>
             <div class="modal-body">
                 <div class="row no-padding">
                     <div class="col-xs-12 col-sm-6">
                         <label>Recipe Name</label>
-                        <input type="text" placeholder="Recipe Name" class="form-control" ng-model="$ctr.model.recipe_name">
+                        <input type="text" placeholder="Recipe Name" class="form-control" ng-model="$ctr.model.recipe_name" required>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <label>Servings</label>
-                        <input type="number" placeholder="# Servings" class="form-control" ng-model="$ctr.model.serving">
+                        <input type="number" min="0" placeholder="# Servings" class="form-control" ng-model="$ctr.model.servings" required>
                     </div>
                 </div>
                 <div class="row no-padding">
                     <div class="col-xs-12 col-sm-4">
                         <label>Recipe Type</label>
-                        <select class="form-control" ng-model="$ctr.model.recipe_type">
-                            <option value="Single Serving">Single Serving</option>
-                            <option value="Batch Serving">Batch Serving</option>
+                        <select class="form-control" ng-model="$ctr.model.recipe_type" required
+                                ng-options="value.id as value.name for value in $ctr.get_refbooks.recipe_types">
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-5">
                         <label>Shelf Life</label>
                         <input type="number" placeholder="# Shelf Life-days" class="form-control"
-                               ng-model="$ctr.model.shelf_life">
+                               ng-model="$ctr.model.shelf_life" required min="0">
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Yield</label>
-                        <input type="text" placeholder="# Yield %" class="form-control" ng-model="$ctr.model.yield">
+                        <input type="number" min="0" placeholder="# Yield %" class="form-control" ng-model="$ctr.model.yield" required>
                     </div>
                 </div>
 
@@ -137,78 +141,79 @@
                 </div>
 
                 <div class="form-group">
-                    <table class="table ng-scope" ng-if="$ctr.ingredients.length > 0">
+                    <table class="table ng-scope" ng-if="$ctr.model.ingredients.length">
                         <thead>
                         <tr>
                             <th>Ingredient Name</th>
                             <th class="width-150">Measurement Type</th>
                             <th class="width-150">Measure Like</th>
                             <th class="width-150">Unit of Measure</th>
-                            <th class="width-80">Amount</th>
-                            <th class="width-80">Cost</th>
-                            <th class="width-80">Yield</th>
+                            <th class="width-100">Amount</th>
+                            <th class="width-100">Cost</th>
+                            <th class="width-100">Yield</th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="ingredient in $ctr.ingredients" ng-form="ingredientForm">
-                        <tr>
-                            <td>
-                                <select class="form-control" ng-model="ingredient.inventory"
-                                        ng-options="opt as opt.name for opt in inventory_items track by opt.id">
-                                    <option value="?" selected="selected" label=""></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-control" ng-model="ingredient.measurement_type">
-                                    <option value="? undefined:undefined ?"></option>
-                                    <option value="Dry Measurements">Dry Measurements</option>
-                                    <option value="Liquid Measurements">Liquid Measurements</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-control" ng-model="ingredient.measure_like">
-                                    <option value="? undefined:undefined ?"></option>
-                                    <option value="Dry Measurements">Butter</option>
-                                    <option value="Dry Measurements">Parsley</option>
-                                    <option value="Dry Measurements">Nuts</option>
-                                    <option value="Dry Measurements">Sugar</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="form-control" ng-model="ingredient.unit_of_measure">
-                                    <option value=""></option>
-                                    <option value="">Ounces</option>
-                                    <option value="">Grams</option>
-                                    <option value="">Liters</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" placeholder="00" class="form-control" ng-model="ingredient.amount">
-                            </td>
-                            <td>
-                                <input type="number" placeholder="$0.00" class="form-control"
-                                       ng-model="ingredient.cost">
-                            </td>
-                            <td>-</td>
-                            <td class="text-right">
-                                <button class="btn btn-danger btn-circle" type="button"
-                                        ng-click="$ctr.removeIngredient($index)"><i class="fa fa-times"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        <tbody ng-repeat="i in $ctr.model.ingredients track by i.time">
+                        <ng-form name="ingredientForm">
+                            <tr>
+                                <td>
+                                    <select class="form-control" ng-model="i.model"
+                                            ng-change="$ctr.ingredientSelected(i.model, $index); $ctr.calculateCost($index)"
+                                            ng-options="value.item_name group by value.category for value in $ctr.ingredients | orderBy:'item_name'" required>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="i.measurement_type" required
+                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-options="value.id as value.name for value in $ctr.get_refbooks.measurement_types | orderBy:'name'">
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="i.measurement_like" required
+                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-disabled="i.measurement_type === 2"
+                                            ng-options="value.name group by value.category_name for value in $ctr.get_refbooks.measurement_likes | orderBy:'name'">
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="i.unit_of_measure" required
+                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-options="value.name for value in $ctr.get_refbooks.measurement_units | orderBy:'name' | filter: {measurement_type_id: i.measurement_type}">
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="00" class="form-control" ng-model="i.amount" min="0" required
+                                           ng-change="$ctr.calculateCost($index)">
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="$0.00" class="form-control" min="0"
+                                           ng-model="i.cost" required>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="0.00%" class="form-control" min="0"
+                                           ng-model="i.yield" required>
+                                </td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-danger btn-circle" type="button"
+                                            ng-click="$ctr.removeIngredient($index, i)" ><i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-form>
                         </tbody>
                     </table>
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <button id="btnAddRecipe" name="btnAddRecipe" class="btn btn-info"
+                            <button type="button" id="btnAddRecipe" name="btnAddRecipe" class="btn btn-info"
                                     ng-click="$ctr.addIngredient()"><i class="glyphicon glyphicon-plus"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-                <button type="button" class="btn btn-primary" ng-click="ok($ctr.user)">Save</button>
+                <button type="button" class="btn btn-white" ng-click="$ctr.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>

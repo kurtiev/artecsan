@@ -34,15 +34,17 @@
 
                 var keys = {
                     refbooks: [
+                        "inventory_types",
+                        "liquid_dry_conversion",
+                        "measurement_types",
+                        "measurement_categories",
+                        "measurement_likes",
+                        "measurement_units",
+                        "recipe_types",
                         'country_states',
-                        // "platforms",
                         "user_types",
-                        // "sex",
                         "entity_types",
-                        // "countries",
                         "content_types",
-                        // "city",
-                        // "city_zips",
                         "invite_status",
                         "menu_items"
                     ]
