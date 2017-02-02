@@ -95,11 +95,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
-        // .state('admin.administrator', {
-        //     url: "/administrator",
-        //     templateUrl: "views/administrator.html",
-        //     data: {pageTitle: 'Administrator'}
-        // })
+        .state('admin.administrator', {
+            url: "/administrator",
+            templateUrl: "views/administrator.html",
+            data: {pageTitle: 'Administrator'}
+        })
         .state('admin.managementCategories', {
             url: "/management_categories",
             templateUrl: "views/managementCategories.html",
@@ -120,21 +120,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/comingSoon.html",
             data: {pageTitle: 'Coming Soon'}
         })
-        // .state('admin.posSync', {
-        //     url: "/pos_sync",
-        //     templateUrl: "views/posSync.html",
-        //     data: {pageTitle: 'POS Sync'}
-        // })
+        .state('admin.posSync', {
+            url: "/pos_sync",
+            templateUrl: "views/posSync.html",
+            data: {pageTitle: 'POS Sync'}
+        })
         .state('admin.dashboardSubCategories', {
             url: "/dashboard_sub_categories",
             templateUrl: "views/dashboardSubCategories.html",
             data: {pageTitle: 'Dashboard Sub Categories'}
         })
-        // .state('admin.addPosHere', {
-        //     url: "/add_pos_here",
-        //     templateUrl: "views/addPosHere.html",
-        //     data: {pageTitle: 'Add Pos Here'}
-        // })
+        .state('admin.addPosHere', {
+            url: "/add_pos_here",
+            templateUrl: "views/addPosHere.html",
+            data: {pageTitle: 'Add Pos Here'}
+        })
         .state('admin.greatJob', {
             url: "/great_job",
             templateUrl: "views/greatJob.html",
@@ -238,7 +238,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/deliverySetup.html",
             data: {pageTitle: 'Delivery Setup'}
         })
-        .state('food.foodSubCategories', {
+        .state('foodSubCategories', {
             url: "/food_sub_categories",
             templateUrl: "views/foodSubCategories.html",
             data: {pageTitle: 'Food Sub Categories'}
@@ -252,11 +252,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/order_summary",
             templateUrl: "views/orderSummary.html",
             data: {pageTitle: 'Order Summary'}
-        })
-        .state('food.performanceScore', {
-            url: "/performance_score",
-            templateUrl: "views/performanceScore.html",
-            data: {pageTitle: 'Performance Score'}
         })
         .state('food.foodDetail', {
             url: "/food_detail",
@@ -320,6 +315,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+         .state('performanceScore', {
+             url: "/performance_score",
+             templateUrl: "views/performanceScore.html",
+             data: {pageTitle: 'Performance Score'}
+         })
         .state('user', {
             abstract: true,
             url: "/user",

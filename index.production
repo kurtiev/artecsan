@@ -91,6 +91,8 @@
 <script src="js/directives/acPhone.js?ver=@@hash"></script>
 
 <!-- components -->
+<script src="js/components/foodSetup/recipeSetup/recipeSetup.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/recipeSetup/recipeSetup.component.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/inventorySetup/inventorySetup.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/inventorySetup/inventorySetup.component.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/vendorSetup/vendorSetup.js?ver=@@hash"></script>
