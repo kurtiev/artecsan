@@ -39,49 +39,49 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.newFoodOrder">
+                                <div ng-if="main.permissions['28'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.newFoodOrder">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">New Food Orders</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.orderSummary">
+                                <div ng-if="main.permissions['29'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.orderSummary">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Confirm Food Delivery</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.foodInventory">
+                                <div ng-if="main.permissions['30'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.foodInventory">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Begin Food Inventory Count</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.vendor">
+                                <div ng-if="main.permissions['31'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.vendor">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Add New Food Vendor</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-4" ng-click="main.isFoodSetup = true" ui-sref="food.recipeSetup">
+                                <div ng-if="main.permissions['32'].r" class="col-sm-12 col-md-6 col-lg-4" ng-click="main.isFoodSetup = true" ui-sref="food.recipeSetup">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Modify Food Menu/Recipe</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-4" ng-click="main.isFoodSetup = true" ui-sref="food.deliverySetup">
+                                <div ng-if="main.permissions['33'].r" class="col-sm-12 col-md-6 col-lg-4" ng-click="main.isFoodSetup = true" ui-sref="food.deliverySetup">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Modify Food Delivery Schedule</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4" ui-sref="admin.comingSoon">
+                                <div ng-if="main.permissions['34'].r" class="col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4" ui-sref="admin.comingSoon">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Food Inventory Quick-View Pricing Update</a>

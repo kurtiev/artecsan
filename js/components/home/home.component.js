@@ -30,6 +30,19 @@
 
         that.selectRestaurant = function (restaurant) {
             that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
+
+
+                for (var i in res.employees) {
+                    console.log(res.employees[i].type_ids);
+                    if (res.employees[i].type_ids === 5) {
+                        $state.go('admin.inventoryCategories');
+                        return;
+                    }
+                    if (res.employees[i].type_ids === 6) {
+                        $state.go('admin.inventoryCategories');
+                        return
+                    }
+                }
                 $state.go('admin.homeMenu');
             });
         };
@@ -89,7 +102,7 @@
                 api.get_restaurant(restaurant.id).then(function (res) {
                     that.employees_list = res.data.data.restaurants_list[0].employees;
 
-                    console.log('employees_list', that.employees_list.length);
+                    console.log('employees_list -', that.employees_list.length);
 
                     if (that.employees_list.length) {
 
@@ -97,7 +110,7 @@
 
                             that.vendorsSelected = res.data.data.vendors;
 
-                            console.log('vendorsSelected', that.vendorsSelected.length);
+                            console.log('vendorsSelected -', that.vendorsSelected);
 
                             if (that.vendorsSelected.length) {
                                 $state.go('foodSetup.inventory');
