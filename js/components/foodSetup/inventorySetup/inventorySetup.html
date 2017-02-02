@@ -77,13 +77,13 @@
                                     <thead>
                                     <tr>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Category
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Sub Category
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
@@ -103,31 +103,31 @@
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Case
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Pack
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Size
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                     Unit
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
-                                                <span class="no-wrap cursor-pointer">
+                                                <span class="no-wrap">
                                                      Price
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
@@ -183,7 +183,8 @@
                                 <!--<button type="submit" class="btn btn-primary block m-b float-right" ng-click="main.isSecondVendor = true">Next</button>-->
                                 <!--</div>-->
                                 <div class="col-xs-6">
-                                    <button type="button" class="btn btn-primary block m-b float-right" ng-click="$ctr.next()">Next - Recipe Setup
+                                    <button type="button" class="btn btn-primary block m-b float-right" ng-click="$ctr.next()">
+                                        Next <span ng-show="$ctr.currentVendor.is_last">- Recipe Setup</span>
                                     </button>
                                 </div>
                             </div>

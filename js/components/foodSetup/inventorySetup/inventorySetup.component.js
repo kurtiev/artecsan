@@ -25,7 +25,7 @@
         that.inventoryList = [];
         that.vendors = [];
         that.inventoryListSelected = [];
-        var currentVendor = null;
+        that.currentVendor = null;
         that.searchModel = {
             order_by: 'vendor_sku', // id, name, city, date, zip
             order_way: "DESC",  //ASC/DESC
@@ -42,7 +42,7 @@
         };
 
         var getInventoriesByVendor = function () {
-            that.api.get_active_inventory_by_vendor({vendor_id: currentVendor.id}, that.restaurant_id.restaurant_id).then(function (res) {
+            that.api.get_active_inventory_by_vendor({vendor_id: that.currentVendor.id}, that.restaurant_id.restaurant_id).then(function (res) {
                 that.inventoryListSelected = res.data.data.sku
             });
         };
@@ -85,7 +85,7 @@
             }
 
 
-            api.get_inventory_by_vendor(m, currentVendor.id).then(function (res) {
+            api.get_inventory_by_vendor(m, that.currentVendor.id).then(function (res) {
                 try {
                     that.inventoryList = res.data.data.sku;
                     that.searchModel.paginationTotal = res.data.data.total;
@@ -110,7 +110,7 @@
                 }
             });
 
-            currentVendor = vendor;
+            that.currentVendor = vendor;
 
             that.search();
 
@@ -130,7 +130,7 @@
                     that.vendors[0].is_selected = true;
                     that.vendors[0].is_first = true;
                     that.vendors[that.vendors.length - 1].is_last = true;
-                    currentVendor = that.vendors[0];
+                    that.currentVendor = that.vendors[0];
                     that.search();
                 } catch (e) {
                     console.log(e);
@@ -144,7 +144,7 @@
             var id = that.restaurant_id.restaurant_id;
 
             var m = {
-                vendor_id: currentVendor.id,
+                vendor_id: that.currentVendor.id,
                 sku_id: inventory.id,
                 is_active: inventory.is_used
             };
@@ -154,7 +154,7 @@
         };
 
         that.back = function () {
-            if (currentVendor.is_first) {
+            if (that.currentVendor.is_first) {
                 $state.go('foodSetup.vendor');
             } else {
                 var prevVendor;
@@ -171,7 +171,7 @@
 
         that.next = function () {
 
-            if (currentVendor.is_last) {
+            if (that.currentVendor.is_last) {
                 $state.go('foodSetup.recipe');
             } else {
                 var nextVendor;
