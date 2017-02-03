@@ -188,9 +188,8 @@
             return $http.get(serviceBase + 'users/' + id, getAuthConfig());
         };
 
-        // TODO
-        serviceFactory.save_recipe = function (id, model) {
-            return $http.post(serviceBase + '/' + id, model, getAuthConfig());
+        serviceFactory.save_recipe = function (model) {
+            return $http.post(serviceBase + 'recipes', model, getAuthConfig());
         };
 
         serviceFactory.get_recipes = function () {
@@ -199,6 +198,14 @@
 
         serviceFactory.get_recipe = function (id) {
             return $http.get(serviceBase + 'recipes/' + id, getAuthConfig());
+        };
+
+        serviceFactory.delete_recipe = function (id) {
+            return $http.delete(serviceBase + 'recipes/' + id, getAuthConfig());
+        };
+
+        serviceFactory.update_recipe = function (id, model) {
+            return $http.put(serviceBase + 'recipes/' + id, model, getAuthConfig());
         };
 
         return serviceFactory;

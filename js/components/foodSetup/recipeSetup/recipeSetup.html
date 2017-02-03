@@ -54,7 +54,7 @@
                                                     <button class="btn btn-warning " type="button"
                                                             ng-click="$ctr.edit(r, $index)"><i class="fa fa-edit"></i>&nbsp;Edit
                                                     </button>
-                                                    <button class="btn btn-danger" type="button" ng-click="$ctr.delete(r, $index)">
+                                                    <button class="btn btn-danger" type="button" ng-click="$ctr.delete(r)">
                                                         <i class="fa fa-times"></i>&nbsp;Delete
                                                     </button>
                                                 </td>
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <button class="btn btn-primary margin-right-10 float-right"
-                                            ui-sref="food.menuSetup">Next - Menu Setup
+                                            ui-sref="food.menuSetup" ng-disabled="!$ctr.recipes.length">Next - Menu Setup
                                     </button>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control" ng-model="i.measurement_like" required
+                                    <select class="form-control" ng-model="i.measurement_like" ng-required="i.measurement_type === 1"
                                             ng-change="$ctr.calculateCost($index)"
                                             ng-disabled="i.measurement_type === 2"
                                             ng-options="value.name group by value.category_name for value in $ctr.get_refbooks.measurement_likes | orderBy:'name'">
@@ -191,7 +191,8 @@
                                            ng-model="i.cost" required>
                                 </td>
                                 <td>
-                                    <input type="number" placeholder="0.00%" class="form-control" min="0"
+                                    <input type="number" placeholder="0.00%" class="form-control" min="0" max="100"
+                                           ng-change="$ctr.countYield($index)"
                                            ng-model="i.yield" required>
                                 </td>
                                 <td class="text-right">

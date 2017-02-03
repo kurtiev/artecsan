@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function modalController($uibModalInstance, recipe, get_refbooks, ingredients, alertService) {
+    function modalController($uibModalInstance, recipe, get_refbooks, ingredients, alertService, api) {
 
 
         var that = this;
@@ -13,6 +13,7 @@
         that.get_refbooks = get_refbooks;
         that.recipe = recipe;
         that.showCategory = false;
+        that.api = api;
 
         that.model = {
             recipe_name: recipe ? recipe.recipe_name : null,
@@ -26,23 +27,54 @@
 
                 var resArr = [];
 
-                for (var i = 0; recipe.recipe_items.length > i; i++) {
-                    resArr.push({
-                        ingredient_id: recipe.recipe_items[i].id,
-                        measurement_type: recipe.recipe_items[i].measurement_type_id,
-                        measurement_like: recipe.recipe_items[i].measurement_like_type_id,
-                        unit_of_measure: null,
-                        amount: recipe.recipe_items[i].amount,
-                        cost: recipe.recipe_items[i].cost,
-                        yield: recipe.recipe_items[i].yield,
-                        time: new Date().getTime() + i // fix ng-repeat
-                    })
-                }
+                if (recipe.recipe_items) {
+                    for (var i = 0; recipe.recipe_items.length > i; i++) {
+                        resArr.push({
 
+                            model: null,
+                            measurement_like: recipe.recipe_items[i].measurement_like_type_id,
+                            unit_of_measure: recipe.recipe_items[i].uom_id,
+
+                            measurement_type: recipe.recipe_items[i].measurement_type_id,
+                            ingredient_id: recipe.recipe_items[i].vendor_sku_id,
+                            amount: recipe.recipe_items[i].amount,
+                            cost: recipe.recipe_items[i].cost,
+                            yield: recipe.recipe_items[i].yield,
+                            time: new Date().getTime() + i // fix ng-repeat
+                        });
+
+                        // find Ingredient Name
+                        var last_index = resArr.length - 1;
+
+                        for (i = 0; that.ingredients.length > i; i++) {
+                            if (that.ingredients[i].id === resArr[last_index].ingredient_id) {
+                                resArr[last_index].model = that.ingredients[i];
+                                break
+                            }
+                        }
+
+                        // find Measure Like
+                        for (i = 0; that.get_refbooks.measurement_likes.length > i; i++) {
+                            if (that.get_refbooks.measurement_likes[i].id === resArr[last_index].measurement_like) {
+                                resArr[last_index].measurement_like = that.get_refbooks.measurement_likes[i];
+                                break
+                            }
+                        }
+
+                        // find Unit of Measure
+                        for (i = 0; that.get_refbooks.measurement_units.length > i; i++) {
+                            if (that.get_refbooks.measurement_units[i].id === resArr[last_index].unit_of_measure) {
+                                resArr[last_index].unit_of_measure = that.get_refbooks.measurement_units[i];
+                                break
+                            }
+                        }
+                    }
+                }
                 return resArr;
 
             })()
         };
+
 
         that.calculateCost = function ($index) {
 
@@ -60,29 +92,27 @@
                         return that.get_refbooks.liquid_dry_conversion[i].metric_conv_liq_dry
                     }
                 }
-                return 0;
+                return 1
             };
 
             var caseCost = m.model.case_cost;
             var total_unit = m.model.total_unit_size;
             var metric_counter_liq_dry = findMetricLiqDry(m.model.unit_of_delivery, m.unit_of_measure.name, m.measurement_type);
-            var amount;
-            var yeld;
-            var cost;
+            var amount = m.amount;
+            var yeld = m.yield;
+            var cost = 0;
 
             var measure_like = m.measurement_like ? m.measurement_like.converter_value : 1; // USE JUST FOR DRY
 
-            console.log(caseCost, total_unit, metric_counter_liq_dry, measure_like);
-
-            //cost = caseCost / total_unit * metric_counter_liq_dry * amount * measure_like / yeld;
+            // measurement_type === DRY
             if (m.measurement_type === 1) {
-                // DRY
-
+                cost = caseCost / total_unit * metric_counter_liq_dry * amount * measure_like;
             } else {
-                // LIQUID
-                // console.log(that.get_refbooks);
-                // console.log('LIQUID', m);
+                cost = caseCost / total_unit * metric_counter_liq_dry * amount;
+            }
 
+            if (yeld !== 100) {
+                cost = cost / (yeld / 100)
             }
 
             that.model.ingredients[$index].cost = cost;
@@ -90,7 +120,35 @@
 
         that.ingredientSelected = function (item, $index) {
             that.model.ingredients[$index].ingredient_id = item.id;
-            that.model.ingredients[$index].yield = item.yield;
+            that.model.ingredients[$index].yield = item.yield * 100;
+
+            var sum = 0;
+
+            var count = 0;
+
+            for (var i = 0; that.model.ingredients.length > i; i++) {
+                if (that.model.ingredients[i].ingredient_id) {
+                    sum += that.model.ingredients[i].yield;
+                    count++
+                }
+            }
+            that.model.yield = parseFloat((sum / count).toFixed(2));
+        };
+
+        that.countYield = function ($index) {
+            var sum = 0;
+            var count = 0;
+
+            for (var i = 0; that.model.ingredients.length > i; i++) {
+                if (that.model.ingredients[i].ingredient_id) {
+                    sum += that.model.ingredients[i].yield;
+                    count++
+                }
+            }
+
+            that.model.yield = parseFloat((sum / count).toFixed(2));
+
+            that.calculateCost($index);
         };
 
 
@@ -108,7 +166,11 @@
         };
 
         that.removeIngredient = function ($index) {
-            that.model.ingredients.splice($index, 1)
+            that.model.ingredients.splice($index, 1);
+            if (that.model.ingredients.length) {
+                that.countYield($index)
+            }
+
         };
 
         that.submit = function (form) {
@@ -136,23 +198,40 @@
                 m.recipe_items.push({
                     vendor_sku_id: that.model.ingredients[i].ingredient_id,
                     measurement_type_id: that.model.ingredients[i].measurement_type,
-                    measurement_like_type_id: that.model.ingredients[i].measurement_like_type_id,
-                    uom_id: 66,
-                    amount: 121.1,
-                    cost: 121.25,
-                    yield: 0.9563
-                })
+                    uom_id: that.model.ingredients[i].unit_of_measure.id, // unit of measure
+                    amount: that.model.ingredients[i].amount,
+                    cost: that.model.ingredients[i].cost,
+                    yield: that.model.ingredients[i].yield
+                });
+
+                if (that.model.ingredients[i].measurement_type === 1) {
+                    m.recipe_items[m.recipe_items.length - 1].measurement_like_type_id = that.model.ingredients[i].measurement_like.id
+                }
             }
 
-            that.api.save_recipe().then(function (res) {
-                try {
-                    if (res.data.data.code === 1000) {
-                        $uibModalInstance.close(recipe);
+            // create
+            if (!that.recipe) {
+                that.api.save_recipe(m).then(function (res) {
+                    try {
+                        if (res.data.data.code === 1000) {
+                            $uibModalInstance.close();
+                        }
+                    } catch (e) {
+                        console.log(e)
                     }
-                } catch (e) {
-                    console.log(e)
-                }
-            });
+                });
+            } else {
+                // update
+                that.api.update_recipe(that.recipe.id, m).then(function (res) {
+                    try {
+                        if (res.data.data.code === 1000) {
+                            $uibModalInstance.close();
+                        }
+                    } catch (e) {
+                        console.log(e)
+                    }
+                });
+            }
 
         };
 
@@ -161,7 +240,7 @@
         };
     }
 
-    function recipeSetupController(api, $state, auth, localStorageService, $uibModal, core, alertService) {
+    function recipeSetupController(api, $state, auth, localStorageService, $uibModal, core, alertService, SweetAlert) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -188,8 +267,20 @@
             });
         };
 
-        that.delete = function (recipe, $index) {
-            console.log(recipe);
+        that.delete = function (recipe) {
+            SweetAlert.swal({
+                    title: "Are you sure?",
+                    text: "This recipe will be deleted",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#ed5565",
+                    confirmButtonText: "Confirm"
+                },
+                function (res) {
+                    if (res) {
+                        that.api.delete_recipe(recipe.id).then(that.getAllRecipes);
+                    }
+                });
         };
 
         that.getAllRecipes = function () {
@@ -244,7 +335,7 @@
 
     }
 
-    recipeSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService'];
+    recipeSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert'];
 
     angular.module('inspinia').component('recipeSetupComponent', {
         templateUrl: 'js/components/foodSetup/recipeSetup/recipeSetup.html',
