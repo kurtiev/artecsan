@@ -64,9 +64,18 @@
                                                     <input type="text" class="form-control input-sm m-b-xs"
                                                            placeholder="SKU" ng-model="$ctr.searchModel.vendor_sku">
                                                 </div>
-                                                <div class="col-xs-12 text-right padding-top-20">
+                                                <div class="col-xs-12 col-md-4 pull-right text-right padding-top-20">
                                                     <button type="submit" class="btn btn-primary">Search</button>
                                                 </div>
+                                                <div class="col-xs-12 col-md-8">
+                                                    <ol class="breadcrumb" style="font-size: 18px; padding: 20px 0">
+                                                        <li class="active" ng-repeat="vendor in $ctr.vendors" ng-if="vendor.is_selected">
+                                                           <strong class="text-info vendor" style="margin-left: 0px;"
+                                                                    ng-class="{'active-vendor':vendor.is_selected}">{{vendor.vendor_name}}</strong>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+
                                             </fieldset>
                                         </form>
                                     </div>
