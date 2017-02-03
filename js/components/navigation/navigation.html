@@ -40,8 +40,8 @@
                     <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="food.deliverySetup">Delivery Schedule</a></li>
                 </ul>
             </li>
-
-            <li ng-if="$ctr.permissions['11'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="bar" ng-hide="$ctr.state.includes('home')">
+            <!--&& $ctr.state.includes('foodSetup') || $ctr.state.includes('food')-->
+            <li ng-if="$ctr.permissions['11'].r " id="bar" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['17'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="p.o.s.sync" ng-hide="$ctr.state.includes('home')">
@@ -59,7 +59,7 @@
 
             <hr ng-if="$ctr.state.includes('foodSetup') || $ctr.state.includes('food')">
 
-            <li ui-sref-active="active" ng-hide="$ctr.state.includes('home')">
+            <li ui-sref-active="active" ng-if="$ctr.permissions['20'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.homeMenu"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'Home' }}</span> </a>
             </li>
             <li ui-sref-active="active" ng-if="$ctr.permissions['21'].r" id="management" ng-hide="$ctr.state.includes('home')">
@@ -71,13 +71,13 @@
             <li ng-if="$ctr.permissions['42'].r" id="consumer_reviews" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-hide="$ctr.state.includes('home')">
+            <li ng-if="$ctr.permissions['50'].r" ui-sref-active="active" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="performanceScore"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'Performance Score' }}</span> </a>
             </li>
             <li ui-sref-active="active" ng-if="$ctr.permissions['43'].r" id="reports" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-hide="$ctr.state.includes('home')">
+            <li ui-sref-active="active" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.administrator"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">

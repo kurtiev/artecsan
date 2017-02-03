@@ -13,6 +13,7 @@
 
         that.restaurantService = restaurant;
         that.restaurantsList = [];
+        that.employees_list = [];
         that.api = api;
 
         core.data.new_restaurant = null; // reset recently editable or added restaurant
@@ -29,6 +30,19 @@
 
         that.selectRestaurant = function (restaurant) {
             that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
+
+
+                for (var i in res.employees) {
+                    console.log(res.employees[i].type_ids);
+                    if (res.employees[i].type_ids === 5) {
+                        $state.go('admin.inventoryCategories');
+                        return;
+                    }
+                    if (res.employees[i].type_ids === 6) {
+                        $state.go('admin.inventoryCategories');
+                        return
+                    }
+                }
                 $state.go('admin.homeMenu');
             });
         };
@@ -83,8 +97,56 @@
         that.search();
 
         that.editRestaurant = function (restaurant) {
+            that.restaurantService.set_restaurant(restaurant.id);
             that.restaurantService.set_to_edit(restaurant.id).then(function () {
-                $state.go('registration', {id: restaurant.id});
+
+                api.get_restaurant(restaurant.id).then(function (res) {
+                    that.employees_list = res.data.data.restaurants_list[0].employees;
+
+                    console.log('employees -', that.employees_list.length);
+
+                    if (that.employees_list.length) {
+
+                        api.get_chosen_vendors(restaurant.id).then(function (res) {
+
+                            that.vendorsSelected = res.data.data.vendors;
+
+                            console.log('vendors -', that.vendorsSelected.length);
+
+                            if (that.vendorsSelected.length) {
+
+
+                                 api.get_active_inventory_by_vendor({},restaurant.id).then(function (res) {
+                                    that.inventoryListSelected = res.data.data.sku;
+                                     console.log('inventoryListSelected -', that.inventoryListSelected.length);
+
+                                     if (that.inventoryListSelected.length) {
+                                         $state.go('foodSetup.recipe');
+                                     } else {
+                                         $state.go('foodSetup.inventory');
+                                     }
+
+
+
+                                 });
+
+                                $state.go('foodSetup.inventory');
+                            } else {
+                                $state.go('foodSetup.vendor');
+                            }
+
+                        });
+
+                        $state.go('foodSetup.vendor');
+
+                    } else {
+                        $state.go('invite', {id: restaurant.id});
+
+                    }
+
+
+                });
+
             });
         };
 
