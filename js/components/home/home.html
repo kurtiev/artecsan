@@ -32,7 +32,7 @@
                                 </div>
                             </form>
                             <div class="col-md-5 text-right padding-top-5">
-                                <button class="btn btn-primary" ui-sref="registration">Add new Restaurant</button>
+                                <button ng-if="$ctr.permissions['2'].r" class="btn btn-primary" ui-sref="registration">Add new Restaurant</button>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -63,13 +63,13 @@
                                         <td>{{restaurant.restaurant_name}}</td>
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
-                                            <button class="btn btn-primary" ng-disabled="{{restaurant.is_setup_completed == 0}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
-                                            <button class="btn btn-primary" ng-click="$ctr.editRestaurant(restaurant)">Setup Process</button>
+                                            <button ng-if="$ctr.permissions['3'].r" class="btn btn-primary" ng-disabled="{{restaurant.is_setup_completed == 0}}" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
+                                            <button ng-if="$ctr.permissions['4'].r" class="btn btn-primary" ng-click="$ctr.editRestaurant(restaurant)">Setup Process</button>
                                         </td>
                                     </tr>
                                     <tr ng-show="!$ctr.restaurantsList.length">
                                         <td colspan="4" class="text-center">
-                                            <b>You haven't any restaurants yet. Now you can <a href="" ui-sref="registration">add new</a></b>
+                                            <b>You haven't any restaurants yet. <span ng-if="$ctr.permissions['2'].r">Now you can <a href="" ui-sref="registration">add new</a></span></b>
                                         </td>
                                     </tr>
                                 </tbody>

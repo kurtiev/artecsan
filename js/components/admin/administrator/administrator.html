@@ -15,28 +15,28 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="profile.userSetup">
+                        <div ng-if="main.permissions['52'].r" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="profile.userSetup">
                             <div class="widget style1 lazur-bg">
                                 <div class="text-center home-element">
                                     <a class="pos-title" >Create/Delete/Modify Users</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.comingSoon">
+                        <div ng-if="main.permissions['53'].r" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.comingSoon">
                             <div class="widget style1 lazur-bg">
                                 <div class="text-center home-element">
                                     <a class="pos-title">Billing</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.posSync">
+                        <div ng-if="main.permissions['54'].r" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.posSync">
                             <div class="widget style1 lazur-bg">
                                 <div class="text-center home-element">
                                     <a class="pos-title">POS Sync</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.comingSoon">
+                        <div ng-if="main.permissions['55'].r" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.comingSoon">
                             <div class="widget style1 lazur-bg">
                                 <div class="text-center home-element">
                                     <a class="pos-title">Accounting Sync</a>
