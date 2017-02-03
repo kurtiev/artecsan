@@ -101,8 +101,11 @@
             var amount = m.amount;
             var yeld = m.yield;
             var cost = 0;
+            var measure_like;
 
-            var measure_like = m.measurement_like ? m.measurement_like.converter_value : 1; // USE JUST FOR DRY
+            if (m.measurement_like) {
+                measure_like = m.measurement_like.converter_value || 1
+            }
 
             // measurement_type === DRY
             if (m.measurement_type === 1) {
