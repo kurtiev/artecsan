@@ -160,12 +160,16 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Name</th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="vendor in $ctr.vendorsSelected">
                                                     <td>{{vendor.id}}</td>
                                                     <td>{{vendor.vendor_name}}</td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-circle" type="button" ng-click="$ctr.deleteVendor(vendor)" ><i class="fa fa-times"></i></button>
+                                                    </td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.vendorsSelected.length">
                                                     <td class="text-center" colspan="2">

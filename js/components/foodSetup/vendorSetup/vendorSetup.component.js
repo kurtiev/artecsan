@@ -113,6 +113,21 @@
 
         };
 
+        that.deleteVendor = function (vendor) {
+
+            var id = that.restaurant_id.restaurant_id;
+            var m = {
+                vendor_id: vendor.id,
+                is_active: 0,
+                inventory_type_id: 2
+            };
+            that.api.add_vendor(id, m).then(function () {
+                getChosenVendors();
+                that.search()
+            });
+
+        };
+
         that.next = function () {
 
             if (that.vendorsSelected.length) {
