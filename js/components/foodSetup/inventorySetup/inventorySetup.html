@@ -154,7 +154,7 @@
                                         <td>{{i.pack}}</td>
                                         <td>{{i.size}}</td>
                                         <td>{{i.unit_of_delivery}}</td>
-                                        <td>{{i[price_field]}}</td>
+                                        <td>{{i[price_field] || i.case_cost}}</td>
                                         <td class="text-right">
                                             <label class="switch">
                                                 <input type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>

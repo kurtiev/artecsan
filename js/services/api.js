@@ -208,6 +208,26 @@
             return $http.put(serviceBase + 'recipes/' + id, model, getAuthConfig());
         };
 
+        serviceFactory.get_menus = function () {
+            return $http.get(serviceBase + 'menus', getAuthConfig());
+        };
+
+        serviceFactory.save_menu = function (model) {
+            return $http.post(serviceBase + 'menus', model, getAuthConfig());
+        };
+
+        serviceFactory.update_menu = function (id, model) {
+            return $http.put(serviceBase + 'menus/' + id, model, getAuthConfig());
+        };
+
+        serviceFactory.get_menu_by_id = function (id) {
+            return $http.get(serviceBase + 'menus/' + id, getAuthConfig());
+        };
+
+        serviceFactory.delete_menu = function (id) {
+            return $http.delete(serviceBase + 'menus/' + id, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 
