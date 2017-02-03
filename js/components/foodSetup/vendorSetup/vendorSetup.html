@@ -101,7 +101,7 @@
                                                 <td>{{vendor.zip_code}}</td>
                                                 <td class="text-right">
                                                     <label class="switch">
-                                                        <input type="checkbox" ng-model="vendor.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addVendor(vendor)"><i></i>
+                                                        <input ng-disabled="vendor.is_has_active_sku_uses" type="checkbox" ng-model="vendor.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addVendor(vendor)"><i></i>
                                                     </label>
                                                 </td>
                                             </tr>
@@ -168,7 +168,7 @@
                                                     <td>{{vendor.id}}</td>
                                                     <td>{{vendor.vendor_name}}</td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-circle" type="button" ng-click="$ctr.deleteVendor(vendor)" ><i class="fa fa-times"></i></button>
+                                                        <a href="" class="btn btn-danger btn-circle"  ng-click="$ctr.deleteVendor(vendor)" ><i class="fa fa-times"></i></a>
                                                     </td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.vendorsSelected.length">

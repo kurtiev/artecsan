@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function homeController(appConfig, $state, auth, api, alertService, core, restaurant, localStorageService, $scope) {
+    function homeController(appConfig, $state, auth, api, alertService, core, restaurant, localStorageService, $scope, $rootScope) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -26,6 +26,15 @@
             inRequest: false,
             search_by: null,
             paginationTotal: 0
+        };
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
+
+
+        that.$onInit = function () {
+            that.permissions = restaurant.data.permissions;
         };
 
         that.selectRestaurant = function (restaurant) {
@@ -97,7 +106,9 @@
         that.search();
 
         that.editRestaurant = function (restaurant) {
+
             that.restaurantService.set_restaurant(restaurant.id);
+
             that.restaurantService.set_to_edit(restaurant.id).then(function () {
 
                 api.get_restaurant(restaurant.id).then(function (res) {
@@ -115,36 +126,38 @@
 
                             if (that.vendorsSelected.length) {
 
-
                                  api.get_active_inventory_by_vendor({},restaurant.id).then(function (res) {
                                     that.inventoryListSelected = res.data.data.sku;
-                                     console.log('inventoryListSelected -', that.inventoryListSelected.length);
+                                     console.log('inventories -', that.inventoryListSelected.length);
 
                                      if (that.inventoryListSelected.length) {
+
+                                         api.get_recipes().then(function (res) {
+
+                                                 that.recipes = res.data.data.recipes_list;
+                                                 console.log('recipes -', that.recipes.length);
+
+                                             if (that.recipes.length) {
+                                                 $state.go('food.menuSetup');
+                                             } else {
+                                                 $state.go('foodSetup.recipe');
+                                             }
+
+                                         });
                                          $state.go('foodSetup.recipe');
                                      } else {
                                          $state.go('foodSetup.inventory');
                                      }
-
-
-
                                  });
-
                                 $state.go('foodSetup.inventory');
                             } else {
                                 $state.go('foodSetup.vendor');
                             }
-
                         });
-
                         $state.go('foodSetup.vendor');
-
                     } else {
                         $state.go('invite', {id: restaurant.id});
-
                     }
-
-
                 });
 
             });
@@ -153,7 +166,7 @@
 
     }
 
-    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', 'restaurant', 'localStorageService', '$scope'];
+    homeController.$inject = ['appConfig', '$state', 'auth', 'api', 'alertService', 'core', 'restaurant', 'localStorageService', '$scope', '$rootScope'];
 
     angular.module('inspinia').component('homeComponent', {
         templateUrl: 'js/components/home/home.html',
