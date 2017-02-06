@@ -21,6 +21,12 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
         }
     });
 
+
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+        $rootScope.previousState = from.name;
+        $rootScope.currentState = to.name;
+    });
+
     that.$onInit = function () {
         that.permissions = restaurant.data.permissions;
     };
@@ -69,7 +75,6 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
                                 }
                                 return;
                             }
-
 
 
                             var m = {

@@ -12,8 +12,6 @@
         that.get_vendors_categories = get_vendors_categories;
         that.api = api;
 
-        console.log(schedule);
-
         that.model = {
             inventory_type_id: 1,
             vendor_id: schedule ? schedule.vendor_id : null,

@@ -1,0 +1,74 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
+
+        <!-- Main view  -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>POS Sync</h2>
+                <p class="padding-top-5">
+                    Please select the P.O.S. system that your restaurant currently uses. If you do not
+                    see your P.O.S. unfortunately our system will not work for you however we're
+                    consistently adding new connections but feel free to contact us with your brand of POS
+                    and we'll expedite the process.
+                </p>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-primary" ng-click="$ctr.back()">&lt;&lt; Back</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ui-sref="admin.addPosHere">-->
+                                <!--<div class="widget style1 yellow-bg">-->
+                                <!--<div class="text-center button-element">-->
+                                <!--<a class="pos-title">Aloha<br>-->
+                                <!--<span class="font-14">click to connect...</span></a>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="posSync in $ctr.posSyncList track by $index" ng-click="$ctr.selectSyncPos(posSync)">
+                                    <div class="widget style1 navy-bg pos_item cursor-pointer" ng-class="{'selected': $ctr.pos_id == posSync.id}">
+                                        <div class="text-center pos-element">
+                                            <img src="" ng-src="{{$ctr.base_api_url}}{{posSync.logo_content_item_url}}" alt="{{posSync.name}}" class="pos_logo">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="widget style1 navy-bg pos_item soon">
+                                        <div class="text-center pos-element">
+                                            <a class="pos-title">More Connections Coming soon</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

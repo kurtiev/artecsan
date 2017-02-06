@@ -91,6 +91,8 @@
 <script src="js/directives/acPhone.js?ver=@@hash"></script>
 
 <!-- components -->
+<script src="js/components/foodSetup/addPosHere/addPosHere.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/posSync/posSync.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/deliverySetup/deliverySetup.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/deliverySetup/deliverySetup.component.js?ver=@@hash"></script>
 <script src="js/components/foodSetup/menuSetup/menuSetup.js?ver=@@hash"></script>
@@ -122,11 +124,13 @@
 <script src="js/components/home/home.component.js?ver=@@hash"></script>
 <script src="js/components/home/home.js?ver=@@hash"></script>
 <script src="js/components/navigation/navigation.component.js?ver=@@hash"></script>
-<script src="js/components/admin/administrator/administrator.js?ver=@@hash"></script>
-<script src="js/components/admin/posSync/posSync.js?ver=@@hash"></script>
-<script src="js/components/admin/posSync/posSync.component.js?ver=@@hash"></script>
-<script src="js/components/admin/addPosHere/addPosHere.js?ver=@@hash"></script>
-<script src="js/components/admin/addPosHere/addPosHere.component.js?ver=@@hash"></script>
+<script src="js/components/administrator/menu/menu.js?ver=@@hash"></script>
+<script src="js/components/administrator/inventoryComplete/inventoryComplete.js?ver=@@hash"></script>
+<script src="js/components/administrator/administrator.js?ver=@@hash"></script>
+<script src="js/components/administrator/posSync/posSync.js?ver=@@hash"></script>
+<script src="js/components/administrator/posSync/posSync.component.js?ver=@@hash"></script>
+<script src="js/components/administrator/addPosHere/addPosHere.js?ver=@@hash"></script>
+<script src="js/components/administrator/addPosHere/addPosHere.component.js?ver=@@hash"></script>
 
 
 <!-- filters -->

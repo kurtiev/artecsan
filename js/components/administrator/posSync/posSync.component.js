@@ -16,11 +16,11 @@
         that.posSyncList = [];
 
         $rootScope.$on('restaurantSelected', function () {
-            that.pos_id = restaurant.data.info.pos_id
+            that.pos_id = $state.params.pos_id || restaurant.data.info.pos_id
         });
 
         if (restaurant.data.info) {
-            that.pos_id = restaurant.data.info.pos_id
+            that.pos_id = $state.params.pos_id || restaurant.data.info.pos_id
         }
 
         // that.pos_id = $state.params.pos_id;
@@ -34,7 +34,11 @@
         }
 
         that.selectSyncPos = function (pos) {
-            $state.go('admin.addPosHere');
+            if ($state.includes('foodSetup')) {
+                $state.go('foodSetup.addPosHere', {pos_id: pos.id});
+            } else {
+                $state.go('administrator.addPosHere', {pos_id: pos.id});
+            }
         };
 
         that.$onInit = function () {
@@ -43,12 +47,21 @@
             })
         };
 
+        that.back = function () {
+            if ($state.includes('foodSetup')) {
+                $state.go('food.setupConfirmation');
+            } else {
+                $state.go('administrator.menu');
+            }
+
+        };
+
     }
 
     posSyncController.$inject = ['api', '$state', 'auth', 'localStorageService', 'restaurant', '$rootScope'];
 
     angular.module('inspinia').component('posSyncComponent', {
-        templateUrl: 'js/components/admin/posSync/posSync.html',
+        templateUrl: 'js/components/administrator/posSync/posSync.html',
         controller: posSyncController,
         controllerAs: '$ctr',
         bindings: {}

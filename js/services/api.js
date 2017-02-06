@@ -248,6 +248,10 @@
             return $http.get(serviceBase + 'vendors/get_vendors_categories', getAuthConfig());
         };
 
+        serviceFactory.get_omnivore_location = function (id) {
+            return $http.get(serviceBase + 'pos/omnivore/locations/' + id, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 
