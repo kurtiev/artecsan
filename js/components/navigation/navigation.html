@@ -76,7 +76,7 @@
             <li ui-sref-active="active" ng-if="$ctr.permissions['43'].r" id="reports" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-class="{'active': $ctr.state.includes('admin')}" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
+            <li ui-sref-active="active" ng-class="{'active': $ctr.state.includes('admin.administrator')}" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.administrator"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">

@@ -122,12 +122,12 @@
                         <div class="col-sm-3">
                             <label>Cost %</label>
                             <input type="number" placeholder="10%" class="form-control"
-                                   ng-model="$ctr.model.cost_margin" required>
+                                   ng-model="$ctr.model.cost_margin" required readonly>
                         </div>
                         <div class="col-sm-2">
                             <label>Cost($)</label>
                             <input type="number" placeholder="$0.00" class="form-control" ng-model="$ctr.model.cost"
-                                   required>
+                                   required min="0" readonly>
                         </div>
                     </div>
 

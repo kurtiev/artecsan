@@ -3,7 +3,7 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack) {
 
     var that = this;
     that.api = api;
@@ -14,6 +14,12 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
         that.permissions = restaurant.data.permissions;
     });
 
+    $rootScope.$on('$stateChangeStart', function (event) {
+        var top = $uibModalStack.getTop();
+        if (top) {
+            $uibModalStack.dismissAll();
+        }
+    });
 
     that.$onInit = function () {
         that.permissions = restaurant.data.permissions;

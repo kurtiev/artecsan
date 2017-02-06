@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('admin.addPosHere', {
-                url: "/add_pos_here/:pos_id",
+                url: "/add_pos_here",
                 template: "<add-pos-here-component></add-pos-here-component>",
                 data: {pageTitle: 'Add POS Here'},
                 params: {

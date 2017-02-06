@@ -68,7 +68,9 @@
 
             that.model.cost = parseFloat((sum).toFixed(2));
 
-            that.model.cost_margin = parseFloat((that.model.price - that.model.cost).toFixed(2));
+            that.model.cost_margin = parseFloat(((that.model.price - that.model.cost) * 100 / that.model.cost).toFixed(2));
+
+            // that.model.cost_margin = parseFloat((that.model.price - that.model.cost).toFixed(2));
 
         };
 

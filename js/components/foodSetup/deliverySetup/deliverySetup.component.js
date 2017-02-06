@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function modalController($uibModalInstance, schedule, vendors, api) {
+    function modalController($uibModalInstance, schedule, vendors, api, get_vendors_categories) {
 
         var that = this;
 
@@ -9,7 +9,10 @@
 
         that.schedule = schedule;
         that.vendors = vendors;
+        that.get_vendors_categories = get_vendors_categories;
         that.api = api;
+
+        console.log(schedule);
 
         that.model = {
             inventory_type_id: 1,
@@ -33,7 +36,7 @@
             var m = {
                 inventory_type_id: that.model.inventory_type_id,
                 vendor_id: that.model.vendor_id,
-                vendor_category_id: 15,
+                vendor_category_id: that.model.vendor_category_id,
                 is_on_monday: that.model.is_on_monday,
                 is_on_tuesday: that.model.is_on_tuesday,
                 is_on_wednesday: that.model.is_on_wednesday,
@@ -138,6 +141,16 @@
                         return api.get_chosen_vendors(that.restaurant_id.restaurant_id).then(function (res) {
                             try {
                                 return that.vendors = res.data.data.vendors;
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        })
+                    },
+                    get_vendors_categories: function () {
+                        if (that.get_vendors_categories) return that.get_vendors_categories;
+                        return api.get_vendors_categories({is_restaurant_used_only: 1}).then(function (res) {
+                            try {
+                                return that.get_vendors_categories = res.data.data.categories;
                             } catch (e) {
                                 console.log(e);
                             }

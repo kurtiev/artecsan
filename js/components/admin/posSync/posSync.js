@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('admin.posSync', {
-                url: "/pos_sync/:pos_id",
+                url: "/pos_sync",
                 template: "<pos-sync-component></pos-sync-component>",
                 data: {pageTitle: 'POS Sync'},
                 resolve: {

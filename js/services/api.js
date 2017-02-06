@@ -236,12 +236,16 @@
             return $http.post(serviceBase + 'delivery_schedules', model, getAuthConfig());
         };
 
-        serviceFactory.update_delivery = function (model, id) {
+        serviceFactory.update_delivery = function (id, model) {
             return $http.put(serviceBase + 'delivery_schedules/' + id, model, getAuthConfig());
         };
 
         serviceFactory.delete_delivery = function (id) {
             return $http.delete(serviceBase + 'delivery_schedules/' + id, getAuthConfig());
+        };
+
+        serviceFactory.get_vendors_categories = function () {
+            return $http.get(serviceBase + 'vendors/get_vendors_categories', getAuthConfig());
         };
 
         return serviceFactory;

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function posSyncController(api, $state, auth, localStorageService, SweetAlert, core) {
+    function posSyncController(api, $state, auth, localStorageService, restaurant, $rootScope) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -15,7 +15,15 @@
         that.auth = auth;
         that.posSyncList = [];
 
-        that.pos_id = $state.params.pos_id;
+        $rootScope.$on('restaurantSelected', function () {
+            that.pos_id = restaurant.data.info.pos_id
+        });
+
+        if (restaurant.data.info) {
+            that.pos_id = restaurant.data.info.pos_id
+        }
+
+        // that.pos_id = $state.params.pos_id;
 
 
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
@@ -26,7 +34,7 @@
         }
 
         that.selectSyncPos = function (pos) {
-            $state.go('admin.addPosHere', {pos_id: pos.id});
+            $state.go('admin.addPosHere');
         };
 
         that.$onInit = function () {
@@ -37,7 +45,7 @@
 
     }
 
-    posSyncController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', 'core'];
+    posSyncController.$inject = ['api', '$state', 'auth', 'localStorageService', 'restaurant', '$rootScope'];
 
     angular.module('inspinia').component('posSyncComponent', {
         templateUrl: 'js/components/admin/posSync/posSync.html',

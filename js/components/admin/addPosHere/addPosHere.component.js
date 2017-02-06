@@ -9,7 +9,7 @@
         }
 
         $rootScope.$on('restaurantSelected', function () {
-            that.pos_id = restaurant.data.info
+            that.pos_id = restaurant.data.info.pos_id
         });
 
         var that = this;
@@ -29,6 +29,9 @@
         }
 
         that.$onInit = function () {
+
+            that.pos_id = restaurant.data.info.pos_id;
+
             api.get_pos_list().then(function (res) {
                 that.posSyncList = res.data.data.list;
 
@@ -42,7 +45,7 @@
         };
 
         that.backPosSync = function () {
-            $state.go('admin.posSync', {pos_id: that.pos_id});
+            $state.go('admin.posSync');
         };
 
 
