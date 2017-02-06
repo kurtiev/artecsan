@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert) {
+    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -41,8 +41,19 @@
             category: null
         };
 
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
+        }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
+
         var getInventoriesByVendor = function () {
-            that.api.get_active_inventory_by_vendor({vendor_id: that.currentVendor.id, inventory_type_id: 1}, that.restaurant_id.restaurant_id).then(function (res) {
+            that.api.get_active_inventory_by_vendor({
+                vendor_id: that.currentVendor.id,
+                inventory_type_id: 1
+            }, that.restaurant_id.restaurant_id).then(function (res) {
                 that.inventoryListSelected = res.data.data.sku
             });
         };
@@ -157,7 +168,7 @@
 
         that.deleteInventory = function (inventory) {
 
-            if (inventory.is_used_by_receipts == 1){
+            if (inventory.is_used_by_receipts == 1) {
                 SweetAlert.swal({
                     title: '',
                     text: 'You can not remove the inventory item, if he has any elements with historical data, or if the item is used in any recipe. Instead, you can disable inventory item, but first remove it from recipes in which it is used.',
@@ -176,7 +187,7 @@
                 inventory_type_id: 1
             };
 
-            that.api.add_inventory(id, m).then( function(){
+            that.api.add_inventory(id, m).then(function () {
                 getInventoriesByVendor();
                 that.search();
 
@@ -230,7 +241,7 @@
 
     }
 
-    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert'];
+    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant'];
 
     angular.module('inspinia').component('inventorySetupComponent', {
         templateUrl: 'js/components/foodSetup/inventorySetup/inventorySetup.html',

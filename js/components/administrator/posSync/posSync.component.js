@@ -16,8 +16,13 @@
         that.posSyncList = [];
 
         $rootScope.$on('restaurantSelected', function () {
-            that.pos_id = $state.params.pos_id || restaurant.data.info.pos_id
+            that.pos_id = $state.params.pos_id || restaurant.data.info.pos_id;
+            that.permissions = restaurant.data.permissions;
         });
+
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
+        }
 
         if (restaurant.data.info) {
             that.pos_id = $state.params.pos_id || restaurant.data.info.pos_id

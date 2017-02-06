@@ -34,7 +34,7 @@
         };
     }
 
-    function addPosHereController(api, $state, auth, localStorageService, alertService, $uibModal) {
+    function addPosHereController(api, $state, auth, localStorageService, alertService, $uibModal, $rootScope, restaurant) {
 
         if (!auth.authentication.isLogged || !parseInt($state.params.pos_id)) {
             $state.go('home');
@@ -58,6 +58,14 @@
         if (!that.restaurant_id) {
             $state.go('home');
             return
+        }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
+
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
         }
 
         that.connect = function () {
@@ -103,7 +111,7 @@
 
     }
 
-    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$uibModal'];
+    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$uibModal', '$rootScope', 'restaurant'];
 
     angular.module('inspinia').component('addPosHereComponent', {
         templateUrl: 'js/components/administrator/addPosHere/addPosHere.html',

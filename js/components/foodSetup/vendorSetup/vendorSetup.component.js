@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function vendorSetupController(api, $state, auth, localStorageService, SweetAlert) {
+    function vendorSetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -21,6 +21,13 @@
             return
         }
 
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
+        }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
 
         that.vendorList = [];
         that.vendorsSelected = [];
@@ -115,7 +122,7 @@
 
         that.deleteVendor = function (vendor) {
 
-            if (vendor.is_has_active_sku_uses == 1){
+            if (vendor.is_has_active_sku_uses == 1) {
                 SweetAlert.swal({
                     title: '',
                     text: 'You can not delete the vendor, if he has any elements with historical data, or if elements are used in any recipe. Instead, you can disable the provider, but first remove all the items belonging to the supplier, which are associated with the recipe.',
@@ -158,7 +165,7 @@
         };
     }
 
-    vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert'];
+    vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant'];
 
     angular.module('inspinia').component('vendorSetupComponent', {
         templateUrl: 'js/components/foodSetup/vendorSetup/vendorSetup.html',

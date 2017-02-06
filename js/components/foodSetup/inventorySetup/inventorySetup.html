@@ -1,5 +1,5 @@
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" ng-if="$ctr.permissions['7'].r">
 
     <header-component></header-component>
 
@@ -157,7 +157,7 @@
                                         <td>{{i[price_field] || i.case_cost}}</td>
                                         <td class="text-right">
                                             <label class="switch">
-                                                <input ng-disabled="i.is_used_by_receipts" type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>
+                                                <input ng-disabled="i.is_used_by_receipts || !$ctr.permissions['7'].w" type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>
                                             </label>
                                         </td>
                                     </tr>
@@ -227,7 +227,7 @@
                                                     <td>{{i.id}}</td>
                                                     <td>{{i.item_name}}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-danger btn-circle"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
+                                                        <a href="" class="btn btn-danger btn-circle" ng-if="$ctr.permissions['7'].d"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
                                                     </td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.inventoryListSelected.length">

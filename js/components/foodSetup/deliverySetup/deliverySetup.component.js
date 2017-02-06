@@ -75,7 +75,7 @@
         };
     }
 
-    function deliverySetupController(api, $state, auth, localStorageService, $uibModal, core, alertService, SweetAlert) {
+    function deliverySetupController(api, $state, auth, localStorageService, $uibModal, core, alertService, SweetAlert, $rootScope, restaurant) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -95,6 +95,14 @@
             $state.go('home');
             return
         }
+
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
+        }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
 
         that.delete = function (schedule) {
             SweetAlert.swal({
@@ -165,7 +173,7 @@
 
     }
 
-    deliverySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert'];
+    deliverySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert', '$rootScope', 'restaurant'];
 
     angular.module('inspinia').component('deliverySetupComponent', {
         templateUrl: 'js/components/foodSetup/deliverySetup/deliverySetup.html',

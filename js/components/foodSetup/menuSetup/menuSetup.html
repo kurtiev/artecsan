@@ -1,5 +1,5 @@
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" ng-if="$ctr.permissions['9'].r">
 
     <header-component></header-component>
 
@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <h3 class="text-center">Menu</h3>
-                                    <button class="btn btn-primary float-right" ng-click="$ctr.add()">Add Menu Item
+                                    <button class="btn btn-primary float-right" ng-if="$ctr.permissions['9'].w" ng-click="$ctr.add()">Add Menu Item
                                     </button>
                                 </div>
                                 <div class="col-xs-12">
@@ -53,12 +53,14 @@
                                                 <td>{{m.cost}}</td>
                                                 <td class="text-right">
                                                     <button class="btn btn-warning " type="button"
-                                                            ng-click="$ctr.edit(m, $index)">
+                                                            ng-click="$ctr.edit(m, $index)"
+                                                            ng-if="$ctr.permissions['9'].w">
                                                         <i class="fa fa-edit"></i>&nbsp;
                                                         Edit
                                                     </button>
                                                     <button class="btn btn-danger" type="button"
-                                                            ng-click="$ctr.delete(m)">
+                                                            ng-click="$ctr.delete(m)"
+                                                            ng-if="$ctr.permissions['9'].d">
                                                         <i class="fa fa-times"></i>&nbsp;Delete
                                                     </button>
                                                 </td>

@@ -243,7 +243,7 @@
         };
     }
 
-    function recipeSetupController(api, $state, auth, localStorageService, $uibModal, core, alertService, SweetAlert) {
+    function recipeSetupController(api, $state, auth, localStorageService, $uibModal, core, alertService, SweetAlert, $rootScope, restaurant) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -263,6 +263,14 @@
             $state.go('home');
             return
         }
+
+        if (restaurant.data.permissions) {
+            that.permissions = restaurant.data.permissions
+        }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.permissions = restaurant.data.permissions;
+        });
 
         that.edit = function (recipe) {
             that.api.get_recipe(recipe.id).then(function (res) {
@@ -338,7 +346,7 @@
 
     }
 
-    recipeSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert'];
+    recipeSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert', '$rootScope', 'restaurant'];
 
     angular.module('inspinia').component('recipeSetupComponent', {
         templateUrl: 'js/components/foodSetup/recipeSetup/recipeSetup.html',
