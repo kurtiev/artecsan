@@ -52,7 +52,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <button class="btn btn-warning " type="button"
-                                                            ng-click="$ctr.edit(d, $index)">
+                                                            ng-click="$ctr.add(d, $index)">
                                                         <i class="fa fa-edit"></i>&nbsp;
                                                         Edit
                                                     </button>
@@ -108,11 +108,20 @@
             <div class="modal-body max-height-340">
                 <fieldset>
                     <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Vendors: </label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select class="form-control" ng-model="$ctr.model.vendor_id" ng-options="vendor.id as vendor.vendor_name for vendor in $ctr.vendors" required></select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <label>Inventory Category: </label>
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" ng-model="delivery.inventoryCategory">
+                            <!-- todo -->
+                            <select class="form-control" ng-model="delivery.inventoryCategory" required>
                                 <option value="? undefined:undefined ?"></option>
                                 <option value="Produce">Produce</option>
                                 <option value="Meat">Meat</option>
@@ -130,33 +139,33 @@
                         </div>
                         <div class="col-md-8">
                             <label>
-                                <input type="checkbox" checklist-value="'Sun'"> Sun
+                                <input type="checkbox" ng-model="$ctr.model.is_on_sunday" ng-true-value="1" ng-false-value="0"> Sun
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Mon'"> Mon
+                                <input type="checkbox" ng-model="$ctr.model.is_on_monday" ng-true-value="1" ng-false-value="0"> Mon
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Tue'"> Tue
+                                <input type="checkbox" ng-model="$ctr.model.is_on_tuesday" ng-true-value="1" ng-false-value="0"> Tue
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Wed'"> Wed
+                                <input type="checkbox" ng-model="$ctr.model.is_on_wednesday" ng-true-value="1" ng-false-value="0"> Wed
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Thur'"> Thur
+                                <input type="checkbox" ng-model="$ctr.model.is_on_thursday" ng-true-value="1" ng-false-value="0"> Thur
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Fri'"> Fri
+                                <input type="checkbox" ng-model="$ctr.model.is_on_friday" ng-true-value="1" ng-false-value="0"> Fri
                             </label>
                             <label>
-                                <input type="checkbox" checklist-value="'Sat'"> Sat
+                                <input type="checkbox" ng-model="$ctr.model.is_on_saturday" ng-true-value="1" ng-false-value="0"> Sat
                             </label>
                         </div>
                     </div>
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-                <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
+                <button type="button" class="btn btn-white" ng-click="$ctr.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>

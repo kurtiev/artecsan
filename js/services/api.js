@@ -232,6 +232,18 @@
             return $http.get(serviceBase + 'delivery_schedules', getAuthConfig());
         };
 
+        serviceFactory.save_delivery = function (model) {
+            return $http.post(serviceBase + 'delivery_schedules', model, getAuthConfig());
+        };
+
+        serviceFactory.update_delivery = function (model, id) {
+            return $http.put(serviceBase + 'delivery_schedules/' + id, model, getAuthConfig());
+        };
+
+        serviceFactory.delete_delivery = function (id) {
+            return $http.delete(serviceBase + 'delivery_schedules/' + id, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 

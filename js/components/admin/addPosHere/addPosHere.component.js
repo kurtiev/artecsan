@@ -1,12 +1,16 @@
 (function () {
     'use strict';
 
-    function addPosHereController(api, $state, auth, localStorageService, SweetAlert) {
+    function addPosHereController(api, $state, auth, localStorageService, restaurant, $rootScope) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
             return;
         }
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.pos_id = restaurant.data.info
+        });
 
         var that = this;
         that.base_api_url = appConfig.apiDomain;
@@ -15,7 +19,7 @@
         that.auth = auth;
         that.posSyncList = [];
         that.instalation_manual = null;
-        that.pos_id = $state.params.pos_id;
+        // that.pos_id = $state.params.pos_id;
 
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
 
@@ -44,7 +48,7 @@
 
     }
 
-    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert'];
+    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'restaurant', '$rootScope'];
 
     angular.module('inspinia').component('addPosHereComponent', {
         templateUrl: 'js/components/admin/addPosHere/addPosHere.html',

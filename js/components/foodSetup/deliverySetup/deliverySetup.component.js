@@ -1,116 +1,51 @@
 (function () {
     'use strict';
 
-    function modalController($uibModalInstance, menu, get_refbooks, recipes_list, alertService, api) {
-
+    function modalController($uibModalInstance, schedule, vendors, api) {
 
         var that = this;
 
         that.form = {};
 
-        that.recipes = recipes_list;
-        that.get_refbooks = get_refbooks;
-        that.menu = menu;
+        that.schedule = schedule;
+        that.vendors = vendors;
         that.api = api;
 
         that.model = {
-            menu_item_name: that.menu ? that.menu.menu_item_name : null,
-            description: that.menu ? that.menu.description : null,
-            price: that.menu ? that.menu.price : null,
-            cost_margin: that.menu ? that.menu.cost_margin : null,
-            cost: that.menu ? that.menu.cost : null,
-            menu_items: []
-        };
-
-        if (that.menu) {
-            if (that.menu.menu_items) {
-
-                for (var j = 0; that.recipes.length > j; j++) {
-
-                    for (var i = 0; that.menu.menu_items.length > i; i++) {
-
-                        if (that.menu.menu_items[i].recipe_id === that.recipes[j].id) {
-
-                            that.model.menu_items.push({
-                                recipe: that.menu.menu_items[i].recipe_id,
-                                cost: that.menu.menu_items[i].cost,
-                                id: that.menu.menu_items[i].id,
-                                time: new Date().getTime() + i// fix ng-repeat
-                            });
-
-                        }
-                    }
-
-                }
-
-            }
-        }
-
-        that.addRecipe = function () {
-            that.model.menu_items.push({
-                recipe: null,
-                cost: null,
-                time: new Date().getTime() // fix ng-repeat
-            })
-        };
-
-        that.countCost = function () {
-            var sum = 0;
-
-            var count = 0;
-
-            for (var i = 0; that.model.menu_items.length > i; i++) {
-                if (that.model.menu_items[i].recipe) {
-                    sum += that.model.menu_items[i].cost;
-                    count++
-                }
-            }
-
-            that.model.cost = parseFloat((sum).toFixed(2));
-
-            that.model.cost_margin = parseFloat((that.model.price - that.model.cost).toFixed(2));
-
-        };
-
-        that.remove = function ($index) {
-            that.model.menu_items.splice($index, 1);
-            if (that.model.ingredients.length) {
-                that.countCost($index)
-            }
+            inventory_type_id: 1,
+            vendor_id: schedule ? schedule.vendor_id : null,
+            vendor_category_id: schedule ? schedule.vendor_category_id : 0, // todo
+            is_on_monday: schedule ? schedule.is_on_monday : 0,
+            is_on_tuesday: schedule ? schedule.is_on_tuesday : 0,
+            is_on_wednesday: schedule ? schedule.is_on_wednesday : 0,
+            is_on_thursday: schedule ? schedule.is_on_thursday : 0,
+            is_on_friday: schedule ? schedule.is_on_friday : 0,
+            is_on_saturday: schedule ? schedule.is_on_saturday : 0,
+            is_on_sunday: schedule ? schedule.is_on_sunday : 0
         };
 
         that.submit = function (form) {
-
-            if (!that.model.menu_items.length) {
-                alertService.showError('Please add at least one recipe');
-                return
-            }
 
             if (!form.$valid) {
                 return
             }
 
             var m = {
-                inventory_type_id: 1,
-                menu_item_name: that.model.menu_item_name,
-                description: that.model.description,
-                price: that.model.price,
-                cost_margin: that.model.cost_margin,
-                cost: that.model.cost,
-                menu_items: []
+                inventory_type_id: that.model.inventory_type_id,
+                vendor_id: that.model.vendor_id,
+                vendor_category_id: 15,
+                is_on_monday: that.model.is_on_monday,
+                is_on_tuesday: that.model.is_on_tuesday,
+                is_on_wednesday: that.model.is_on_wednesday,
+                is_on_thursday: that.model.is_on_thursday,
+                is_on_friday: that.model.is_on_friday,
+                is_on_saturday: that.model.is_on_saturday,
+                is_on_sunday: that.model.is_on_sunday
             };
 
-            for (var i = 0; that.model.menu_items.length > i; i++) {
-                m.menu_items.push({
-                    recipe_id: that.model.menu_items[i].recipe,
-                    id: that.model.menu_items[i].id,
-                    cost: that.model.menu_items[i].cost
-                })
-            }
-
             // create
-            if (!that.menu) {
-                that.api.save_menu(m).then(function (res) {
+            if (!that.schedule) {
+                that.api.save_delivery(m).then(function (res) {
                     try {
                         if (res.data.data.code === 1000) {
                             $uibModalInstance.close();
@@ -121,7 +56,7 @@
                 });
             } else {
                 // update
-                that.api.update_menu(that.menu.id, m).then(function (res) {
+                that.api.update_delivery(that.schedule.id, m).then(function (res) {
                     try {
                         if (res.data.data.code === 1000) {
                             $uibModalInstance.close();
@@ -160,16 +95,10 @@
             return
         }
 
-        that.edit = function (menu) {
-            that.api.get_menu_by_id(menu.id).then(function (res) {
-                that.add(res.data.data.menus_list[0]);
-            });
-        };
-
-        that.delete = function (menu) {
+        that.delete = function (schedule) {
             SweetAlert.swal({
                     title: "Are you sure?",
-                    text: "This menu will be deleted",
+                    text: "This schedule will be deleted",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#ed5565",
@@ -177,7 +106,7 @@
                 },
                 function (res) {
                     if (res) {
-                        that.api.delete_menu(menu.id).then(that.getAllDeliveries);
+                        that.api.delete_delivery(schedule.id).then(that.getAllDeliveries);
                     }
                 });
         };
@@ -194,26 +123,24 @@
 
         that.getAllDeliveries();
 
-        that.add = function (menu) {
+        that.add = function (schedule) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'add_new_delivery_item.html',
                 controller: modalController,
                 windowClass: "animated fadeIn modal-lgg",
                 controllerAs: '$ctr',
                 resolve: {
-                    menu: function () {
-                        return menu;
+                    schedule: function () {
+                        return schedule;
                     },
-                    get_refbooks: function () {
-                        if (that.get_refbooks) return that.get_refbooks;
-                        return that.core.getRefbooks().then(function (res) {
-                            return that.get_refbooks = res;
-                        })
-                    },
-                    recipes_list: function () {
-                        if (that.recipes) return that.recipes;
-                        return that.api.get_recipes().then(function (res) {
-                            return res.data.data.recipes_list
+                    vendors: function () {
+                        if (that.vendors) return that.vendors;
+                        return api.get_chosen_vendors(that.restaurant_id.restaurant_id).then(function (res) {
+                            try {
+                                return that.vendors = res.data.data.vendors;
+                            } catch (e) {
+                                console.log(e);
+                            }
                         })
                     }
                 }
@@ -222,12 +149,6 @@
             modalInstance.result.then(function () {
                 alertService.showAlertSave();
                 that.getAllDeliveries();
-            });
-        };
-
-        that.$onInit = function () {
-            that.core.getRefbooks().then(function (res) {
-                that.get_refbooks = res;
             });
         };
 

@@ -36,8 +36,8 @@
                     <li ui-sref-active="active" ng-if="$ctr.permissions['6'].r" id="food_vendor_setupv"><a ui-sref="foodSetup.vendor">Vendor Setup</a></li>
                     <li ui-sref-active="active" ng-if="$ctr.permissions['7'].r" id="food_inventory_setup"><a ui-sref="foodSetup.inventory">Inventory Setup</a></li>
                     <li ui-sref-active="active" ng-if="$ctr.permissions['8'].r" id="food_recipe_setup"><a ui-sref="foodSetup.recipe">Recipe Setup</a></li>
-                    <li ui-sref-active="active" ng-if="$ctr.permissions['9'].r" id="food_menu_setup"><a ui-sref="food.menuSetup">Menu Setup</a></li>
-                    <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="food.deliverySetup">Delivery Schedule</a></li>
+                    <li ui-sref-active="active" ng-if="$ctr.permissions['9'].r" id="food_menu_setup"><a ui-sref="foodSetup.menu">Menu Setup</a></li>
+                    <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="foodSetup.delivery">Delivery Schedule</a></li>
                 </ul>
             </li>
             <li ng-if="$ctr.permissions['11'].r" id="bar" ng-hide="$ctr.state.includes('home')">
@@ -76,7 +76,7 @@
             <li ui-sref-active="active" ng-if="$ctr.permissions['43'].r" id="reports" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
+            <li ui-sref-active="active" ng-class="{'active': $ctr.state.includes('admin')}" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.administrator"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
