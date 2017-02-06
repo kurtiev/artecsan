@@ -113,48 +113,67 @@
 
                 api.get_restaurant(restaurant.id).then(function (res) {
                     that.employees_list = res.data.data.restaurants_list[0].employees;
-
                     console.log('employees -', that.employees_list.length);
 
                     if (that.employees_list.length) {
 
+                        for (var i = 0; that.employees_list.length > i; i++) {
+                            if (that.employees_list[i].type_ids === 4) {
+                                $state.go('admin.comingSoon');
+                                return;
+                            }
+                        }
+
                         api.get_chosen_vendors(restaurant.id).then(function (res) {
-
                             that.vendorsSelected = res.data.data.vendors;
-
                             console.log('vendors -', that.vendorsSelected.length);
 
                             if (that.vendorsSelected.length) {
 
-                                 api.get_active_inventory_by_vendor({},restaurant.id).then(function (res) {
+                                api.get_active_inventory_by_vendor({}, restaurant.id).then(function (res) {
                                     that.inventoryListSelected = res.data.data.sku;
-                                     console.log('inventories -', that.inventoryListSelected.length);
+                                    console.log('inventories -', that.inventoryListSelected.length);
 
-                                     if (that.inventoryListSelected.length) {
+                                    if (that.inventoryListSelected.length) {
 
-                                         api.get_recipes().then(function (res) {
+                                        api.get_recipes().then(function (res) {
+                                            that.recipes = res.data.data.recipes_list;
+                                            console.log('recipes -', that.recipes.length);
 
-                                                 that.recipes = res.data.data.recipes_list;
-                                                 console.log('recipes -', that.recipes.length);
+                                            if (that.recipes.length) {
 
-                                             if (that.recipes.length) {
-                                                 $state.go('food.menuSetup');
-                                             } else {
-                                                 $state.go('foodSetup.recipe');
-                                             }
+                                                api.get_menus().then(function (res) {
+                                                    that.menus = res.data.data.menus_list;
+                                                    console.log('menus -', that.menus.length);
 
-                                         });
-                                         $state.go('foodSetup.recipe');
-                                     } else {
-                                         $state.go('foodSetup.inventory');
-                                     }
-                                 });
-                                $state.go('foodSetup.inventory');
+                                                    if (that.menus.length) {
+
+                                                        that.api.delivery_schedules().then(function (res) {
+                                                            that.deliveries = res.data.data.delivery_schedules_list;
+                                                            console.log('deliveries -', that.deliveries.length);
+
+                                                            if (that.deliveries.length) {
+                                                                $state.go('admin.posSync');
+                                                            } else {
+                                                                $state.go('foodSetup.delivery');
+                                                            }
+                                                        });
+                                                    } else {
+                                                        $state.go('foodSetup.menu');
+                                                    }
+                                                });
+                                            } else {
+                                                $state.go('foodSetup.recipe');
+                                            }
+                                        });
+                                    } else {
+                                        $state.go('foodSetup.inventory');
+                                    }
+                                });
                             } else {
                                 $state.go('foodSetup.vendor');
                             }
                         });
-                        $state.go('foodSetup.vendor');
                     } else {
                         $state.go('invite', {id: restaurant.id});
                     }
