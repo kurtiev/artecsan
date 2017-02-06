@@ -228,6 +228,10 @@
             return $http.delete(serviceBase + 'menus/' + id, getAuthConfig());
         };
 
+        serviceFactory.delivery_schedules = function () {
+            return $http.get(serviceBase + 'delivery_schedules', getAuthConfig());
+        };
+
         return serviceFactory;
     };
 
