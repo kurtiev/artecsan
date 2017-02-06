@@ -42,7 +42,7 @@
         };
 
         var getInventoriesByVendor = function () {
-            that.api.get_active_inventory_by_vendor({vendor_id: that.currentVendor.id}, that.restaurant_id.restaurant_id).then(function (res) {
+            that.api.get_active_inventory_by_vendor({vendor_id: that.currentVendor.id, inventory_type_id: 1}, that.restaurant_id.restaurant_id).then(function (res) {
                 that.inventoryListSelected = res.data.data.sku
             });
         };
@@ -61,7 +61,8 @@
                 item_name: that.searchModel.item_name,
                 sub_category: that.searchModel.sub_category,
                 vendor_sku: that.searchModel.vendor_sku,
-                category: that.searchModel.category
+                category: that.searchModel.category,
+                inventory_type_id: 1
             };
 
             for (var i in m) {
@@ -146,10 +147,40 @@
             var m = {
                 vendor_id: that.currentVendor.id,
                 sku_id: inventory.id,
-                is_active: inventory.is_used
+                is_active: inventory.is_used,
+                inventory_type_id: 1
             };
 
             that.api.add_inventory(id, m).then(getInventoriesByVendor);
+
+        };
+
+        that.deleteInventory = function (inventory) {
+
+            if (inventory.is_used_by_receipts == 1){
+                SweetAlert.swal({
+                    title: '',
+                    text: 'You can not remove the inventory item, if he has any elements with historical data, or if the item is used in any recipe. Instead, you can disable inventory item, but first remove it from recipes in which it is used.',
+                    type: "warning",
+                    confirmButtonColor: "#DD6B55"
+                });
+                return;
+            }
+
+            var id = that.restaurant_id.restaurant_id;
+
+            var m = {
+                vendor_id: that.currentVendor.id,
+                sku_id: inventory.id,
+                is_active: 0,
+                inventory_type_id: 1
+            };
+
+            that.api.add_inventory(id, m).then( function(){
+                getInventoriesByVendor();
+                that.search();
+
+            });
 
         };
 
