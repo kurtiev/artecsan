@@ -111,7 +111,7 @@
                 <fieldset>
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <label>Vendors: </label>
+                            <label>Vendors: <span class="text-danger">*</span></label>
                         </div>
                         <div class="col-md-8 form-group">
                             <select class="form-control" ng-model="$ctr.model.vendor_id" ng-options="vendor.id as vendor.vendor_name for vendor in $ctr.vendors" required></select>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label>Inventory Category: </label>
+                            <label>Inventory Category: <span class="text-danger">*</span></label>
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" required

@@ -112,22 +112,22 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-4">
-                            <label>Menu Item Name</label>
+                            <label>Menu Item Name <span class="text-danger">*</span></label>
                             <input type="text" placeholder="Menu Item Name" class="form-control"
                                    ng-model="$ctr.model.menu_item_name" required>
                         </div>
                         <div class="col-sm-3">
-                            <label>Price($)</label>
+                            <label>Price($) <span class="text-danger">*</span></label>
                             <input type="number" placeholder="$0.00" class="form-control" ng-model="$ctr.model.price"
                                    required ng-change="$ctr.countCost()">
                         </div>
                         <div class="col-sm-3">
-                            <label>Cost %</label>
+                            <label>Cost(%) <span class="text-danger">*</span></label>
                             <input type="number" placeholder="10%" class="form-control"
                                    ng-model="$ctr.model.cost_margin" required readonly>
                         </div>
                         <div class="col-sm-2">
-                            <label>Cost($)</label>
+                            <label>Cost($) <span class="text-danger">*</span></label>
                             <input type="number" placeholder="$0.00" class="form-control" ng-model="$ctr.model.cost"
                                    required min="0" readonly>
                         </div>
@@ -146,8 +146,8 @@
                         <table class="table ng-scope" ng-if="$ctr.model.menu_items.length">
                             <thead>
                             <tr>
-                                <th>Recipe</th>
-                                <th class="width-120">Cost</th>
+                                <th>Recipe <span class="text-danger">*</span></th>
+                                <th class="width-120">Cost($) <span class="text-danger">*</span></th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -185,7 +185,7 @@
                     <div class="form-group">
                         <label class="col-md-3">Comments</label>
                         <div class="col-md-9 no-padding">
-                            <textarea class="form-control" required ng-model="$ctr.model.description"></textarea>
+                            <textarea class="form-control" ng-model="$ctr.model.description"></textarea>
                         </div>
                     </div>
                 </div>
