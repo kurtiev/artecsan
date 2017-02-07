@@ -131,6 +131,8 @@
 <script src="js/components/administrator/posSync/posSync.component.js?ver=@@hash"></script>
 <script src="js/components/administrator/addPosHere/addPosHere.js?ver=@@hash"></script>
 <script src="js/components/administrator/addPosHere/addPosHere.component.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/foodInventory/foodInventory.component.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/foodInventory/foodInventory.js?ver=@@hash"></script>
 
 
 <!-- filters -->

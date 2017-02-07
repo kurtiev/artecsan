@@ -635,3 +635,9 @@ fieldset[disabled] .btn-primary.active {
 .footable-sort > thead > tr > th.footable-sorted span.footable-sort-indicator:before {
     content: "\e013";
 }
+
+.selected-row {
+    background-color: #ddd;
+    color: #2f4050;
+    font-weight: 600;
+}

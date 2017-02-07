@@ -244,8 +244,16 @@
             return $http.delete(serviceBase + 'delivery_schedules/' + id, getAuthConfig());
         };
 
-        serviceFactory.get_vendors_categories = function () {
-            return $http.get(serviceBase + 'vendors/get_vendors_categories', getAuthConfig());
+        serviceFactory.get_vendors_categories = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'vendors/get_vendors_categories',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
         };
 
         serviceFactory.get_omnivore_location = function (id) {
