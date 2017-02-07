@@ -17,10 +17,11 @@
 
         that.model = {
             recipe_name: recipe ? recipe.recipe_name : null,
-            servings: recipe ? recipe.servings : null,
-            recipe_type: recipe ? recipe.recipe_type_id : null,
-            shelf_life: recipe ? recipe.shelf_life : null,
-            yield: recipe ? recipe.yield : null,
+            servings: recipe ? recipe.servings : 1,
+            recipe_type: recipe ? recipe.recipe_type_id : 1,
+            shelf_life: recipe ? recipe.shelf_life : 1,
+            yield: recipe ? recipe.yield : 100,
+            cost: recipe ? recipe.cost : 0, // TODO backend
             ingredients: (function () {
 
                 if (!recipe) return [];
@@ -39,7 +40,6 @@
                             ingredient_id: recipe.recipe_items[i].vendor_sku_id,
                             amount: recipe.recipe_items[i].amount,
                             cost: recipe.recipe_items[i].cost,
-                            yield: recipe.recipe_items[i].yield,
                             time: new Date().getTime() + i // fix ng-repeat
                         });
 
@@ -76,19 +76,67 @@
         };
 
 
-        that.calculateCost = function ($index) {
+        that.calculateCostYield = function () {
+
+            that.model.cost = 0;
+            that.model.yield = 0;
+            var totalAmount = 0;
+            var yieldValue = 0;
+            var yieldTotal = [];
+
+            for (var i = 0; that.model.ingredients.length > i; i++) {
+
+                that.model.cost += that.model.ingredients[i].cost;
+
+                // for dry
+                if (that.model.ingredients[i].measurement_like && that.model.ingredients[i].measurement_type === 1) {
+
+                    if (that.model.ingredients[i].measurement_like.yield && that.model.ingredients[i].amount) {
+
+                        yieldTotal.push(that.model.ingredients[i].measurement_like.yield * that.model.ingredients[i].amount);
+                        totalAmount += that.model.ingredients[i].amount;
+
+                    }
+                }
+
+                // for liquid
+                if (that.model.ingredients[i].measurement_type === 2) {
+                    yieldTotal.push(1 * that.model.ingredients[i].amount);
+                    totalAmount += that.model.ingredients[i].amount;
+                }
+            }
+
+            for (i = 0; yieldTotal.length > i; i++) {
+                yieldValue += yieldTotal[i];
+            }
+
+
+            that.model.cost = parseFloat(that.model.cost.toFixed(2));
+
+            that.model.yield = parseFloat(((yieldValue / totalAmount) * 100).toFixed(2));
+
+            if (isNaN(that.model.yield)) {
+                that.model.yield = 100;
+            }
+
+
+        };
+
+        that.calculate = function ($index) {
 
             var m = that.model.ingredients[$index];
 
-            if (!m.model || (m.measurement_type === 1 && !m.measurement_like) || !m.unit_of_measure || !m.measurement_type || !m.amount) {
+            if (!m) return;
+
+            if (!m.model || (m.measurement_type === 1 && !m.measurement_like) || !m.unit_of_measure || !m.measurement_type) {
                 return
             }
 
             var findMetricLiqDry = function (deliveryIn, measureIn, measurement_type_id) {
                 for (var i = 0; that.get_refbooks.liquid_dry_conversion.length > i; i++) {
                     if (that.get_refbooks.liquid_dry_conversion[i].measurement_type_id === measurement_type_id
-                        && that.get_refbooks.liquid_dry_conversion[i].unit_of_delivery_table.toLowerCase() == deliveryIn.toLowerCase()
-                        && that.get_refbooks.liquid_dry_conversion[i].unit_of_measure_table.toLowerCase() == measureIn.toLowerCase()) {
+                        && that.get_refbooks.liquid_dry_conversion[i].uom_id_of_delivery_unit == deliveryIn
+                        && that.get_refbooks.liquid_dry_conversion[i].uom_id == measureIn) {
                         return that.get_refbooks.liquid_dry_conversion[i].metric_conv_liq_dry
                     }
                 }
@@ -97,9 +145,10 @@
 
             var caseCost = m.model.case_cost;
             var total_unit = m.model.total_unit_size;
-            var metric_counter_liq_dry = findMetricLiqDry(m.model.unit_of_delivery, m.unit_of_measure.name, m.measurement_type);
-            var amount = m.amount;
-            var yeld = m.yield;
+
+            var metric_counter_liq_dry = findMetricLiqDry(m.model.uom_id_of_delivery_unit, m.unit_of_measure.id, m.measurement_type);
+            var amount = m.amount || 0;
+            var yeld = m.measurement_like ? m.measurement_like.yield : null;
             var cost = 0;
             var measure_like;
 
@@ -109,49 +158,23 @@
 
             // measurement_type === DRY
             if (m.measurement_type === 1) {
-                cost = caseCost / total_unit * metric_counter_liq_dry * amount * measure_like;
+                cost = caseCost / total_unit * metric_counter_liq_dry * measure_like * amount;
             } else {
                 cost = caseCost / total_unit * metric_counter_liq_dry * amount;
             }
 
-            if (yeld !== 100) {
+            if (yeld !== null) {
                 cost = cost / (yeld / 100)
             }
 
             that.model.ingredients[$index].cost = cost;
+
+            that.calculateCostYield();
+
         };
 
         that.ingredientSelected = function (item, $index) {
             that.model.ingredients[$index].ingredient_id = item.id;
-            that.model.ingredients[$index].yield = item.yield * 100;
-
-            var sum = 0;
-
-            var count = 0;
-
-            for (var i = 0; that.model.ingredients.length > i; i++) {
-                if (that.model.ingredients[i].ingredient_id) {
-                    sum += that.model.ingredients[i].yield;
-                    count++
-                }
-            }
-            that.model.yield = parseFloat((sum / count).toFixed(2));
-        };
-
-        that.countYield = function ($index) {
-            var sum = 0;
-            var count = 0;
-
-            for (var i = 0; that.model.ingredients.length > i; i++) {
-                if (that.model.ingredients[i].ingredient_id) {
-                    sum += that.model.ingredients[i].yield;
-                    count++
-                }
-            }
-
-            that.model.yield = parseFloat((sum / count).toFixed(2));
-
-            that.calculateCost($index);
         };
 
 
@@ -162,17 +185,14 @@
                 measurement_like: null,
                 unit_of_measure: null,
                 amount: null,
-                cost: null,
-                yield: null,
+                cost: 0,
                 time: new Date().getTime() // fix ng-repeat
             })
         };
 
         that.removeIngredient = function ($index) {
             that.model.ingredients.splice($index, 1);
-            if (that.model.ingredients.length) {
-                that.countYield($index)
-            }
+            that.calculateCostYield()
 
         };
 
@@ -191,9 +211,10 @@
                 inventory_type_id: 1,
                 recipe_name: that.model.recipe_name,
                 recipe_type_id: that.model.recipe_type,
-                servings: that.model.servings,
-                shelf_life: that.model.shelf_life,
+                servings: that.model.recipe_type === 2 ? that.model.servings : 1,
+                shelf_life: that.model.recipe_type === 2 ? that.model.shelf_life : 1,
                 yield: that.model.yield,
+                cost: that.model.cost,
                 recipe_items: []
             };
 

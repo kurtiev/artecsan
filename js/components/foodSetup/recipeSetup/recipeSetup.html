@@ -105,31 +105,35 @@
                 <h4 class="modal-title" ng-if="$ctr.recipe">Edit Recipe</h4>
             </div>
             <div class="modal-body">
-                <div class="row no-padding">
+                <div class="row m-b">
                     <div class="col-xs-12 col-sm-6">
                         <label>Recipe Name</label>
                         <input type="text" placeholder="Recipe Name" class="form-control" ng-model="$ctr.model.recipe_name" required>
                     </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <label>Servings</label>
-                        <input type="number" min="0" placeholder="# Servings" class="form-control" ng-model="$ctr.model.servings" required>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Yield (%)</label>
+                        <input type="number" min="0" placeholder="# Yield %" class="form-control" ng-model="$ctr.model.yield" readonly>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Cost($)</label>
+                        <input type="number" min="0" placeholder="$0.00" class="form-control" ng-model="$ctr.model.cost" required readonly>
                     </div>
                 </div>
-                <div class="row no-padding">
+                <div class="row">
                     <div class="col-xs-12 col-sm-4">
                         <label>Recipe Type</label>
                         <select class="form-control" ng-model="$ctr.model.recipe_type" required
                                 ng-options="value.id as value.name for value in $ctr.get_refbooks.recipe_types">
                         </select>
                     </div>
-                    <div class="col-xs-12 col-sm-5">
+                    <div class="col-xs-12 col-sm-4" ng-show="$ctr.model.recipe_type === 2">
+                        <label>Servings</label>
+                        <input type="number" min="0" placeholder="# Servings" class="form-control" ng-model="$ctr.model.servings" ng-required="$ctr.model.recipe_type === 2">
+                    </div>
+                    <div class="col-xs-12 col-sm-4" ng-show="$ctr.model.recipe_type === 2">
                         <label>Shelf Life</label>
                         <input type="number" placeholder="# Shelf Life-days" class="form-control"
-                               ng-model="$ctr.model.shelf_life" required min="0">
-                    </div>
-                    <div class="col-xs-12 col-sm-3">
-                        <label>Yield</label>
-                        <input type="number" min="0" placeholder="# Yield %" class="form-control" ng-model="$ctr.model.yield" required readonly>
+                               ng-model="$ctr.model.shelf_life" min="0" ng-required="$ctr.model.recipe_type === 2">
                     </div>
                 </div>
 
@@ -152,7 +156,6 @@
                             <th class="width-150">Unit of Measure</th>
                             <th class="width-100">Amount</th>
                             <th class="width-100">Cost</th>
-                            <th class="width-100">Yield</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -161,41 +164,37 @@
                             <tr>
                                 <td>
                                     <select class="form-control" ng-model="i.model"
-                                            ng-change="$ctr.ingredientSelected(i.model, $index); $ctr.calculateCost($index)"
+                                            ng-change="$ctr.ingredientSelected(i.model, $index); $ctr.calculate($index)"
                                             ng-options="value.item_name group by value.category for value in $ctr.ingredients | orderBy:'item_name'" required>
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" ng-model="i.measurement_type" required
-                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-change="$ctr.calculate($index)"
                                             ng-options="value.id as value.name for value in $ctr.get_refbooks.measurement_types | orderBy:'name'">
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" ng-model="i.measurement_like" ng-required="i.measurement_type === 1"
-                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-change="$ctr.calculate($index)"
                                             ng-disabled="i.measurement_type === 2"
                                             ng-options="value.name group by value.category_name for value in $ctr.get_refbooks.measurement_likes | orderBy:'name'">
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" ng-model="i.unit_of_measure" required
-                                            ng-change="$ctr.calculateCost($index)"
+                                            ng-change="$ctr.calculate($index)"
                                             ng-options="value.name for value in $ctr.get_refbooks.measurement_units | orderBy:'name' | filter: {measurement_type_id: i.measurement_type}">
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" placeholder="00" class="form-control" ng-model="i.amount" min="0" required
-                                           ng-change="$ctr.calculateCost($index)">
+                                    <input type="number" placeholder="00" class="form-control" ng-model="i.amount" min="1" required
+                                           ng-change="$ctr.calculate($index)">
                                 </td>
                                 <td>
                                     <input type="number" placeholder="$0.00" class="form-control" min="0"
+                                           ng-change="$ctr.calculate($index)"
                                            ng-model="i.cost" required>
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="0.00%" class="form-control" min="0" max="100"
-                                           ng-change="$ctr.countYield($index)"
-                                           ng-model="i.yield" required>
                                 </td>
                                 <td class="text-right">
                                     <button type="button" class="btn btn-danger btn-circle" type="button"
