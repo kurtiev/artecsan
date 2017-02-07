@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function modalController($uibModalInstance, api) {
+    function modalController($uibModalInstance, api, alertService) {
 
 
         var that = this;
@@ -19,8 +19,19 @@
 
             that.api.get_omnivore_location(that.location).then(function (res) {
                 try {
-                    if (res.data.data.code === 1000) {
+
+                    if (!res.data.data.pos_info.errors) {
                         $uibModalInstance.close();
+                    } else {
+                        var reasons = [];
+
+                        for (var i = 0; res.data.data.pos_info.errors.length > i; i++) {
+                            reasons.push(res.data.data.pos_info.errors[i].description)
+                        }
+
+                        var message = reasons.join(', ');
+
+                        alertService.showErrorInvitation('', message);
                     }
                 } catch (e) {
 
