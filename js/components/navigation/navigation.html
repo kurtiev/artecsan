@@ -30,7 +30,7 @@
             <li ui-sref-active="active"  id="select_restaurant">
                 <a  ui-sref="home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>
             </li>
-            <li ng-show="$ctr.permissions['5'].r && !$ctr.state.includes('home')" ng-class="{'active': $ctr.state.includes('foodSetup')}"  id="food">
+            <li ng-show="$ctr.permissions['5'].r && !$ctr.state.includes('home') && $ctr.state.includes('foodSetup')" ng-class="{'active': $ctr.state.includes('foodSetup')}"  id="food">
                 <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'Food Setup' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $ctr.state.includes('foodSetup') || $ctr.state.includes('food')}">
                     <li ui-sref-active="active" ng-if="$ctr.permissions['6'].r" id="food_vendor_setupv"><a ui-sref="foodSetup.vendor">Vendor Setup</a></li>
@@ -40,7 +40,7 @@
                     <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="foodSetup.delivery">Delivery Schedule</a></li>
                 </ul>
             </li>
-            <li ng-if="$ctr.permissions['11'].r" id="bar" ng-hide="$ctr.state.includes('home')">
+            <li ng-if="$ctr.permissions['11'].r && $ctr.state.includes('foodSetup')" id="bar" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['17'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="p.o.s.sync" ng-hide="$ctr.state.includes('home')">
