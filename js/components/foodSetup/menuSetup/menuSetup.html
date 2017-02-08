@@ -122,14 +122,14 @@
                                    required ng-change="$ctr.countCost()">
                         </div>
                         <div class="col-sm-3">
-                            <label>Cost(%) <span class="text-danger">*</span></label>
+                            <label>Cost(%) </label>
                             <input type="number" placeholder="10%" class="form-control"
-                                   ng-model="$ctr.model.cost_margin" required readonly>
+                                   ng-model="$ctr.model.cost_margin"  readonly>
                         </div>
                         <div class="col-sm-2">
-                            <label>Cost($) <span class="text-danger">*</span></label>
+                            <label>Cost($) </label>
                             <input type="number" placeholder="$0.00" class="form-control" ng-model="$ctr.model.cost"
-                                   required min="0" readonly>
+                                    min="0" readonly>
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@
                             <thead>
                             <tr>
                                 <th>Recipe <span class="text-danger">*</span></th>
-                                <th class="width-120">Cost($) <span class="text-danger">*</span></th>
+                                <th class="width-120">Cost($)</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -156,12 +156,10 @@
                                 <tr>
                                     <td>
                                         <select class="form-control" ng-model="m.recipe" required
-                                                ng-options="value.id as value.recipe_name for value in $ctr.recipes"></select>
+                                                ng-options="value.recipe_name for value in $ctr.recipes" ng-change="$ctr.countCost()"></select>
                                     </td>
                                     <td>
-                                        <input type="number" placeholder="$0.00" class="form-control" ng-model="m.cost"
-                                               ng-change="$ctr.countCost()"
-                                               required min="0">
+                                        <input type="number" placeholder="$0.00" class="form-control" ng-model="m.recipe.cost" readonly  min="0">
                                     </td>
                                     <td class="text-right">
                                         <button type="button" class="btn btn-danger btn-circle" type="button"

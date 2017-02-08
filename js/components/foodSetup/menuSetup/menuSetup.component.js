@@ -30,9 +30,8 @@
                     for (var i = 0; that.menu.menu_items.length > i; i++) {
 
                         if (that.menu.menu_items[i].recipe_id === that.recipes[j].id) {
-
                             that.model.menu_items.push({
-                                recipe: that.menu.menu_items[i].recipe_id,
+                                recipe: that.recipes[j],
                                 cost: that.menu.menu_items[i].cost,
                                 id: that.menu.menu_items[i].id,
                                 time: new Date().getTime() + i// fix ng-repeat
@@ -60,15 +59,15 @@
             var count = 0;
 
             for (var i = 0; that.model.menu_items.length > i; i++) {
-                if (that.model.menu_items[i].recipe) {
-                    sum += that.model.menu_items[i].cost;
+                if (that.model.menu_items[i].recipe.id) {
+                    sum += that.model.menu_items[i].recipe.cost;
                     count++
                 }
             }
 
             that.model.cost = parseFloat((sum).toFixed(2));
 
-            that.model.cost_margin = parseFloat(((that.model.price - that.model.cost) * 100 / that.model.cost).toFixed(2));
+            that.model.cost_margin = parseFloat(((that.model.cost / that.model.price) * 100).toFixed(2));
 
             // that.model.cost_margin = parseFloat((that.model.price - that.model.cost).toFixed(2));
 
@@ -76,7 +75,7 @@
 
         that.remove = function ($index) {
             that.model.menu_items.splice($index, 1);
-            if (that.model.ingredients.length) {
+            if (that.model.menu_items.length) {
                 that.countCost($index)
             }
         };
@@ -104,9 +103,9 @@
 
             for (var i = 0; that.model.menu_items.length > i; i++) {
                 m.menu_items.push({
-                    recipe_id: that.model.menu_items[i].recipe,
+                    recipe_id: that.model.menu_items[i].recipe.id,
                     id: that.model.menu_items[i].id,
-                    cost: that.model.menu_items[i].cost
+                    cost: that.model.menu_items[i].recipe.cost
                 })
             }
 
