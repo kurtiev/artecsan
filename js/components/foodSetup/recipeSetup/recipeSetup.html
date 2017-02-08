@@ -107,7 +107,7 @@
             <div class="modal-body">
                 <div class="row m-b">
                     <div class="col-xs-12 col-sm-6">
-                        <label>Recipe Name</label>
+                        <label>Recipe Name <span class="text-danger">*</span></label>
                         <input type="text" placeholder="Recipe Name" class="form-control" ng-model="$ctr.model.recipe_name" required>
                     </div>
                     <div class="col-xs-12 col-sm-3">
@@ -127,11 +127,11 @@
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-4" ng-show="$ctr.model.recipe_type === 2">
-                        <label>Servings</label>
+                        <label>Servings <span class="text-danger">*</span></label>
                         <input type="number" min="0" placeholder="# Servings" class="form-control" ng-model="$ctr.model.servings" ng-required="$ctr.model.recipe_type === 2">
                     </div>
                     <div class="col-xs-12 col-sm-4" ng-show="$ctr.model.recipe_type === 2">
-                        <label>Shelf Life</label>
+                        <label>Shelf Life <span class="text-danger">*</span></label>
                         <input type="number" placeholder="# Shelf Life-days" class="form-control"
                                ng-model="$ctr.model.shelf_life" min="0" ng-required="$ctr.model.recipe_type === 2">
                     </div>
@@ -150,12 +150,12 @@
                     <table class="table ng-scope" ng-if="$ctr.model.ingredients.length">
                         <thead>
                         <tr>
-                            <th>Ingredient Name</th>
-                            <th class="width-150">Measurement Type</th>
-                            <th class="width-150">Measure Like</th>
-                            <th class="width-150">Unit of Measure</th>
-                            <th class="width-100">Amount</th>
-                            <th class="width-100">Cost</th>
+                            <th>Ingredient Name <span class="text-danger">*</span></th>
+                            <th class="width-180">Measurement Type <span class="text-danger">*</span></th>
+                            <th class="width-150">Measure Like <span ng-show="$ctr.model.ingredients[0].measurement_type == 1" class="text-danger">*</span></th>
+                            <th class="width-150">Unit of Measure <span class="text-danger">*</span></th>
+                            <th class="width-100">Amount <span class="text-danger">*</span></th>
+                            <th class="width-100">Cost($)</th>
                             <th></th>
                         </tr>
                         </thead>
