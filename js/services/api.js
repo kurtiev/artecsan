@@ -260,6 +260,22 @@
             return $http.get(serviceBase + 'pos/omnivore/locations/' + id, getAuthConfig());
         };
 
+        serviceFactory.get_inventory_audit = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'inventory',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.update_inventory_audit = function (model) {
+            return $http.put(serviceBase + 'inventory', model, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 
