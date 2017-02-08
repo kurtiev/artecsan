@@ -164,7 +164,7 @@
             }
 
             if (yeld !== null) {
-                cost = cost / (yeld / 100)
+                cost = cost / yeld
             }
 
             that.model.ingredients[$index].cost = cost;
