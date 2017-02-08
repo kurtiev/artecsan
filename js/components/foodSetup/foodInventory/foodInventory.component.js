@@ -49,6 +49,16 @@
             }
         };
 
+        that.calculateCount = function (item, $index) {
+
+            var totalUnits = item.total_unit_size || 0;
+
+            if (that.inventories[$index].case_or_qty == 'Case') {
+                that.inventories[$index].item_qty = (that.inventories[$index].item_qty / totalUnits)
+            } else {
+                that.inventories[$index].item_qty = (totalUnits * that.inventories[$index].item_qty)
+            }
+        };
 
         api.get_vendors_categories({is_restaurant_used_only: 1}).then(function (res) {
             try {

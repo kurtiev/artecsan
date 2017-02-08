@@ -59,7 +59,8 @@
                                                     <input type="number" class="form-control" ng-model="i.item_qty" required min="0">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" ng-model="i.case_or_qty" required>
+                                                    <select class="form-control" ng-model="i.case_or_qty" required
+                                                    ng-change="$ctr.calculateCount(i, $index)">
                                                         <option value="Case">Case</option>
                                                         <option value="Quantity">Quantity</option>
                                                     </select>
