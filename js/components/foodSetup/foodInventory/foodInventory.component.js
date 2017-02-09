@@ -40,10 +40,10 @@
 
         that.model = {
             vendor_category_id: null,
-            measurement_units: function (id) {
-                for (var i = 0; that.refbooks.measurement_units.length > i; i++) {
-                    if (that.refbooks.measurement_units[i].id === id) {
-                        return [that.refbooks.measurement_units[i]]
+            measurement_units_of_delivery: function (id) {
+                for (var i = 0; that.refbooks.measurement_units_of_delivery.length > i; i++) {
+                    if (that.refbooks.measurement_units_of_delivery[i].id === id) {
+                        return that.refbooks.measurement_units_of_delivery[i].name;
                     }
                 }
             }
@@ -63,6 +63,7 @@
         api.get_vendors_categories({is_restaurant_used_only: 1}).then(function (res) {
             try {
                 that.get_vendors_categories = res.data.data.categories;
+                that.get_vendors_categories.unshift({id: 'all', category: 'All Items'});
                 that.model.vendor_category_id = res.data.data.categories[0].id;
                 that.getInventories(that.model.vendor_category_id)
             } catch (e) {
@@ -73,7 +74,7 @@
         that.getInventories = function (categoryId, categoryOldId) {
             var m = {
                 inventory_type_id: 1,
-                vendor_cat_id: categoryId
+                vendor_cat_id: categoryId == 'all' ? null : categoryId
             };
 
             if (!_.isEqual(INVENTORIES, that.inventories)) {
@@ -106,7 +107,7 @@
 
         };
 
-        that.saveAll = function (form) {
+        that.saveAll = function (form, is_final_save) {
 
             var deferred = $q.defer();
 
@@ -114,15 +115,16 @@
 
             var m = {
                 inventory_type_id: 1,
+                is_final_save: is_final_save || 0,
                 inventory_items: []
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
                 m.inventory_items.push({
                     id: that.inventories[i].id,
-                    case_or_qty: that.inventories[i].case_or_qty,
-                    uom_id_of_delivery_unit: that.inventories[i].uom_id_of_delivery_unit,
-                    item_qty: that.inventories[i].item_qty
+                    item_qty: that.inventories[i].item_qty,
+                    cases_qty: that.inventories[i].cases_qty,
+                    packs_qty: that.inventories[i].packs_qty
                 })
             }
 

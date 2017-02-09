@@ -28,7 +28,7 @@
                                             <label class="font-noraml">Select Category:</label>
                                         </div>
                                         <div class="form-group float-left">
-                                            <select class="form-control" required
+                                            <select class="form-control"
                                                     ng-model="$ctr.model.vendor_category_id"
                                                     ng-change="$ctr.getInventories($ctr.model.vendor_category_id, {{$ctr.model.vendor_category_id}});"
                                                     ng-options="vendor.id as vendor.category for vendor in  $ctr.get_vendors_categories"></select>
@@ -39,10 +39,11 @@
                                     <table class="table table-bordered">
                                         <thead class="th-text-center th-vertical-align-middle">
                                         <tr>
-                                            <th>SKU</th>
+                                            <th class="width-120">SKU</th>
                                             <th class="min-width-150">Inventory Item</th>
-                                            <th class="width-100">Item Qty</th>
-                                            <th class="width-120">Case or Qty</th>
+                                            <th class="width-100">Total Case(s)</th>
+                                            <th class="width-100">Total Pack(s)</th>
+                                            <th class="width-100">Partial Item Qty</th>
                                             <th class="width-120">Unit of Delivery</th>
                                         </tr>
                                         </thead>
@@ -56,18 +57,22 @@
                                                    </span>
                                                 </td>
                                                 <td>
+                                                    <input type="number" class="form-control" ng-model="i.cases_qty" required min="0">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" ng-model="i.packs_qty" required min="0">
+                                                </td>
+                                                <td>
                                                     <input type="number" class="form-control" ng-model="i.item_qty" required min="0">
                                                 </td>
+
                                                 <td>
-                                                    <select class="form-control" ng-model="i.case_or_qty" required
-                                                    ng-change="$ctr.calculateCount(i, $index)">
-                                                        <option value="Case">Case</option>
-                                                        <option value="Quantity">Quantity</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control" ng-model="i.uom_id_of_delivery_unit" required
-                                                    ng-options="u.id as u.name for u in $ctr.model.measurement_units(i.uom_id_of_delivery_unit)"></select>
+                                                    {{$ctr.model.measurement_units_of_delivery(i.uom_id_of_delivery_unit)}}
+                                                 <!--   <select class="form-control" ng-model="i.uom_id_of_delivery_unit"  disabled
+
+                                                         ng-options="u.id as u.name for u in $ctr.model.measurement_units_of_delivery(i.uom_id_of_delivery_unit)">
+                                                    </select>-->
+
                                                 </td>
                                             </tr>
                                         </ng-form>
@@ -81,6 +86,7 @@
                                         </button>
                                     </div>
                                     <div class="col-xs-6 text-right">
+                                        <button class="btn btn-warning" ng-click="$ctr.saveAll($ctr.form, 1);" type="button">Final Save</button>
                                         <button type="submit" class="btn btn-primary" scroll-top>Save</button>
                                     </div>
                                 </div>

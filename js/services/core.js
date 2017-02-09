@@ -46,7 +46,8 @@
                         "entity_types",
                         "content_types",
                         "invite_status",
-                        "menu_items"
+                        "menu_items",
+                        "measurement_units_of_delivery"
                     ]
                 };
 
