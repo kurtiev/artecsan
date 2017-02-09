@@ -23,6 +23,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
 
     $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+        window.onbeforeunload = null;
         $rootScope.previousState = from.name;
         $rootScope.currentState = to.name;
     });

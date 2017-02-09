@@ -164,19 +164,25 @@
                             if (res) {
                                 that.saveAll(that.form).then(function () {
                                     INVENTORIES = angular.copy(that.inventories);
+                                    window.onbeforeunload = null;
                                     $state.go(toState);
                                 });
                             } else {
                                 INVENTORIES = angular.copy(that.inventories);
+                                window.onbeforeunload = null;
                                 $state.go(toState)
                             }
                         });
 
 
                 }
-            })
+            });
 
 
+
+        window.onbeforeunload = function() {
+            return 'You have not yet saved' ;
+        }
     }
 
     foodInventoryController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q'];
