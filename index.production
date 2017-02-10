@@ -74,6 +74,7 @@
 
 <!-- main controllers -->
 <script src="js/controllers/homeMenuController.js?ver=@@hash"></script>
+<script src="js/components/foodSetup/inventorySetup/addUniqueItems/addUniqueItems.controller.js?ver=@@hash"></script>
 
 <!-- services -->
 <script src="js/services/interceptor.js?ver=@@hash"></script>

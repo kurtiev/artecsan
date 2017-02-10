@@ -1,0 +1,166 @@
+
+    <div class="inmodal">
+        <form name="$ctr.form" autocomplete="off" novalidate ng-submit="$ctr.submit($ctr.form)">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Pricing/Add Unique Items</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row m-b">
+
+                    <div class="table-responsive">
+                        <table class="table ng-scope  footable-sort">
+                            <thead class="th-text-center th-vertical-align-middle ">
+                            <tr>
+                                <th ng-click="$ctr.search('item_name')" class="width-100"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                     <span class="no-wrap cursor-pointer">
+                                       SKU
+                                       <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-100"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Pack
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-100"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Size
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-100"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Unit
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-100"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Brand
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Desc / name
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-150"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Cat
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-120"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Sub Category
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-120"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Case($)
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th ng-click="$ctr.search('item_name')" class="width-120"
+                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                    <span class="no-wrap cursor-pointer">
+                                         Minimum Order
+                                        <span class="footable-sort-indicator"></span>
+                                    </span>
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="item in $ctr.model.uniqueItem">
+                            <ng-form name="items">
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control"  required min="0">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" required min="0">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control"  required min="0">
+                                    </td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>OZ</option>
+                                            <option>LB</option>
+                                            <option>G</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>PHILA</option>
+                                            <option>PHILA</option>
+                                            <option>PHILA</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" class="form-control"  required min="0">
+                                    </td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>Dairy Products</option>
+                                            <option>Dairy Products</option>
+                                            <option>Dairy Products</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>Butter</option>
+                                            <option>Butter</option>
+                                            <option>Butter</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control"  required min="0">
+                                    </td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>CASE</option>
+                                            <option>PACK</option>
+                                            <option>EACH</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="$ctr.removeUniqueItem($index, i)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </ng-form>
+                            </tbody>
+                        </table>
+
+                            <div class="text-right">
+                                <button type="button" id="btnAddRecipe" name="btnAddRecipe" class="btn btn-info"
+                                        ng-click="$ctr.addUniqueItem()"><i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" ng-click="$ctr.cancel()"><< Back</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>

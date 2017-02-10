@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant) {
+    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant, $uibModal) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -195,6 +195,25 @@
 
         };
 
+        that.addUniqueItems = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'js/components/foodSetup/inventorySetup/addUniqueItems/addUniqueItems.html',
+                controller: 'addUniqueItemsController',
+                windowClass: "animated fadeIn modal-lgg",
+                controllerAs: '$ctr',
+                size: 'lg2x',
+                resolve: {
+                }
+            });
+
+            modalInstance.result.then(function (result) {
+
+            }, function (reason) {
+
+            });
+        };
+
+
         that.back = function () {
             if (that.currentVendor.is_first) {
                 $state.go('foodSetup.vendor');
@@ -241,7 +260,7 @@
 
     }
 
-    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant'];
+    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant', '$uibModal'];
 
     angular.module('inspinia').component('inventorySetupComponent', {
         templateUrl: 'js/components/foodSetup/inventorySetup/inventorySetup.html',
