@@ -276,6 +276,30 @@
             return $http.put(serviceBase + 'inventory', model, getAuthConfig());
         };
 
+        serviceFactory.brand_lookup = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'rb/brand_lookup',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.vendors_sku = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'vendors/sku',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
         return serviceFactory;
     };
 

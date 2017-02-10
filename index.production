@@ -91,6 +91,7 @@
 <script src="js/directives/acPassword.js?ver=@@hash"></script>
 <script src="js/directives/acPhone.js?ver=@@hash"></script>
 <script src="js/directives/scrollTop.js?ver=@@hash"></script>
+<script src="js/directives/uniqueSku.js?ver=@@hash"></script>
 
 <!-- components -->
 <script src="js/components/foodSetup/addPosHere/addPosHere.js?ver=@@hash"></script>

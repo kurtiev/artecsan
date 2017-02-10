@@ -203,6 +203,10 @@
                 controllerAs: '$ctr',
                 size: 'lg2x',
                 resolve: {
+                    searchParams: {
+                        vendor_id: that.currentVendor.id,
+                        restaurant_id: that.restaurant_id.restaurant_id
+                    }
                 }
             });
 
