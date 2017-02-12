@@ -47,6 +47,8 @@
                         "content_types",
                         "invite_status",
                         "menu_items",
+                        "vendor_sub_cat",
+                        "vendor_cat",
                         "measurement_units_of_delivery"
                     ]
                 };

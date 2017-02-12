@@ -300,6 +300,22 @@
             });
         };
 
+        serviceFactory.add_update_own_inventory = function (id, model) {
+            return $http.post(serviceBase + 'vendors/' + id + '/inventory', model, getAuthConfig());
+        };
+
+        serviceFactory.get_own_inventory = function (id, model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + '',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
         return serviceFactory;
     };
 

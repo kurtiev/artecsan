@@ -3,10 +3,12 @@ function uniqueSku(api) {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, elem, attr, ngModel) {
-console.log(scope)
             $(elem).blur(function (event) {
                 if (ngModel.$viewValue) {
-                    api.vendors_sku({vendor_sku: ngModel.$viewValue, vendor_id: scope.searchParams.vendor_id}).then(function (res) {
+                    api.vendors_sku({
+                        vendor_sku: ngModel.$viewValue,
+                        vendor_id: scope.searchParams.vendor_id
+                    }).then(function (res) {
                         if (!res.data.data) {
                             ngModel.$setValidity('unique', false);
                         } else {
@@ -17,8 +19,6 @@ console.log(scope)
                         console.log(e);
                     });
                 }
-
-
             })
         },
         scope: {
