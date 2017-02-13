@@ -316,6 +316,10 @@
             });
         };
 
+        serviceFactory.delete_my_sku = function (vendor_id, sku_id) {
+            return $http.delete(serviceBase + 'vendors/' + vendor_id + '/inventory/' + sku_id, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 

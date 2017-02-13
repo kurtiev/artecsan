@@ -54,15 +54,23 @@
                                                            placeholder="Sub Category"
                                                            ng-model="$ctr.searchModel.sub_category">
                                                 </div>
-                                                <div class="col-xs-6">
-                                                    <label>Name</label>
+                                                <div class="col-xs-4">
+                                                    <label>Inventory Name</label>
                                                     <input type="text" class="form-control input-sm m-b-xs"
                                                            placeholder="Name" ng-model="$ctr.searchModel.item_name">
                                                 </div>
-                                                <div class="col-xs-6">
+                                                <div class="col-xs-4">
                                                     <label>SKU (Vendor)</label>
                                                     <input type="text" class="form-control input-sm m-b-xs"
                                                            placeholder="SKU" ng-model="$ctr.searchModel.vendor_sku">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>Owner</label>
+                                                    <select class="form-control" ng-model="$ctr.searchModel.filter">
+                                                        <option value="any">Any</option>
+                                                        <option value="common">Common</option>
+                                                        <option value="own">Own</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4 pull-right text-right padding-top-20">
                                                     <button type="submit" class="btn btn-primary">Search</button>

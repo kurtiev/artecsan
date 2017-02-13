@@ -38,6 +38,7 @@
             item_name: null,
             sub_category: null,
             vendor_sku: null,
+            filter: 'any',
             category: null
         };
 
@@ -72,6 +73,7 @@
                 item_name: that.searchModel.item_name,
                 sub_category: that.searchModel.sub_category,
                 vendor_sku: that.searchModel.vendor_sku,
+                filter: that.searchModel.filter,
                 category: that.searchModel.category,
                 inventory_type_id: 1
             };
