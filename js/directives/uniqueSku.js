@@ -4,6 +4,9 @@ function uniqueSku(api) {
         require: 'ngModel',
         link: function (scope, elem, attr, ngModel) {
             $(elem).blur(function (event) {
+
+                if (!ngModel.$dirty) return;
+
                 if (ngModel.$viewValue) {
                     api.vendors_sku({
                         vendor_sku: ngModel.$viewValue,
@@ -13,6 +16,7 @@ function uniqueSku(api) {
                             ngModel.$setValidity('unique', false);
                         } else {
                             ngModel.$setValidity('unique', true);
+                            ngModel.$setPristine();
                         }
 
                     }, function (e) {
