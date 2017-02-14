@@ -26,6 +26,9 @@
             category: null
         };
 
+        that.categories = [];
+        that.sub_categories = [];
+
 
         core.getRefbooks().then(function (res) {
             that.deliveryMeasure = res.measurement_units_of_delivery;
@@ -101,15 +104,14 @@
                 uom_id_of_delivery_unit: null,
                 brand: null,
                 item_name: null,
-                vendor_cat_id: null,
-                vendor_sub_cat_id: null,
+                vendor_cat_id: that.categories.length ? that.categories[0].id : null,
+                vendor_sub_cat_id: that.sub_categories.length ? that.sub_categories[0].id : null,
                 is_active: 1,
                 size: null,
                 case_cost: null,
                 minimum_order_type: 'Case',
                 id: null
             })
-
         };
 
         that.removeUniqueItem = function ($index) {

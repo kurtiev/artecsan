@@ -22,6 +22,10 @@ function uniqueSku(api) {
                     }, function (e) {
                         console.log(e);
                     });
+                } else {
+                    ngModel.$setValidity('unique', true);
+                    ngModel.$setPristine();
+                    ngModel.$setUntouched();
                 }
             })
         },
