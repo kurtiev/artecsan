@@ -100,7 +100,7 @@
                                                 <input type="text" class="form-control" only-digits ng-model="item.size" required minlength="0">
                                             </td>
                                             <td>
-                                                <select class="form-control" ng-model="item.uom_id_of_delivery_unit" required ng-options="item.id as item.name for item in $ctr.deliveryMeasure"></select>
+                                                <select class="form-control" ng-model="item.uom_id_of_delivery_unit" ng-disabled="item.is_used_by_receipts" required ng-options="item.id as item.name for item in $ctr.deliveryMeasure"></select>
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" required
