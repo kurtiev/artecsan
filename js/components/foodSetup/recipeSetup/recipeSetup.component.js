@@ -7,7 +7,6 @@
         var that = this;
 
         that.form = {};
-
         that.ingredients = ingredients;
         that.recipes = [];
         that.get_refbooks = get_refbooks;
@@ -21,7 +20,7 @@
             recipe_type: recipe ? recipe.recipe_type_id : 1,
             shelf_life: recipe ? recipe.shelf_life : 1,
             yield: recipe ? recipe.yield : 100,
-            cost: recipe ? recipe.cost : 0, // TODO backend
+            cost: recipe ? recipe.cost : 0,
             ingredients: (function () {
 
                 if (!recipe) return [];
@@ -43,33 +42,32 @@
                             time: new Date().getTime() + i // fix ng-repeat
                         });
 
-                        // find Ingredient Name
-                        var last_index = resArr.length - 1;
 
-                        for (i = 0; that.ingredients.length > i; i++) {
-                            if (that.ingredients[i].id === resArr[last_index].ingredient_id) {
-                                resArr[last_index].model = that.ingredients[i];
+                        for (var j = 0; that.ingredients.length > j; j++) {
+                            if (that.ingredients[j].id === resArr[i].ingredient_id) {
+                                resArr[i].model = that.ingredients[j];
                                 break
                             }
                         }
 
                         // find Measure Like
-                        for (i = 0; that.get_refbooks.measurement_likes.length > i; i++) {
-                            if (that.get_refbooks.measurement_likes[i].id === resArr[last_index].measurement_like) {
-                                resArr[last_index].measurement_like = that.get_refbooks.measurement_likes[i];
+                        for (var l = 0; that.get_refbooks.measurement_likes.length > l; l++) {
+                            if (that.get_refbooks.measurement_likes[l].id === resArr[i].measurement_like) {
+                                resArr[i].measurement_like = that.get_refbooks.measurement_likes[l];
                                 break
                             }
                         }
 
                         // find Unit of Measure
-                        for (i = 0; that.get_refbooks.measurement_units.length > i; i++) {
-                            if (that.get_refbooks.measurement_units[i].id === resArr[last_index].unit_of_measure) {
-                                resArr[last_index].unit_of_measure = that.get_refbooks.measurement_units[i];
+                        for (var k = 0; that.get_refbooks.measurement_units.length > k; k++) {
+                            if (that.get_refbooks.measurement_units[k].id === resArr[i].unit_of_measure) {
+                                resArr[i].unit_of_measure = that.get_refbooks.measurement_units[k];
                                 break
                             }
                         }
                     }
                 }
+
                 return resArr;
 
             })()
