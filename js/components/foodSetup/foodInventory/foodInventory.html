@@ -42,7 +42,7 @@
                                                        datetime-picker="MM/dd/yyyy HH:mm"
                                                        ng-model="$ctr.pickers.beginDate.date"
                                                        is-open="$ctr.pickers.beginDate.open"
-                                                       datepicker-append-to-body="true" required>
+                                                       datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-click="$ctr.openCalendar($event, 'beginDate')">
@@ -56,7 +56,7 @@
                                                        datetime-picker="MM/dd/yyyy HH:mm"
                                                        ng-model="$ctr.pickers.endDate.date"
                                                        is-open="$ctr.pickers.endDate.open"
-                                                       datepicker-append-to-body="true" required>
+                                                       datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-click="$ctr.openCalendar($event, 'endDate')">
@@ -118,8 +118,8 @@
                                         </button>
                                     </div>
                                     <div class="col-xs-6 text-right">
-                                        <button class="btn btn-warning" ng-click="$ctr.saveAll($ctr.form, 1);" type="button">Final Save</button>
-                                        <button type="submit" class="btn btn-primary" scroll-top>Save</button>
+                                        <button class="btn btn-warning" scroll-top ng-click="$ctr.is_final_save = true; $ctr.saveAll($ctr.form, 1)" type="button">Final Save</button>
+                                        <button type="submit" class="btn btn-primary" scroll-top ng-click="$ctr.is_final_save = false;">Save</button>
                                     </div>
                                 </div>
                             </form>

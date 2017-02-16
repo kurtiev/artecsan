@@ -15,6 +15,7 @@
         that.get_vendors_categories = [];
         that.selectedRow = null;
         that.inventories = [];
+        that.is_final_save = false;
         that.pickers = {
             beginDate: {
                 open: false,
@@ -123,6 +124,10 @@
             var deferred = $q.defer();
 
             if (!form.$valid) return;
+
+            if (is_final_save && (!that.pickers.beginDate.date || !that.pickers.endDate.date)) {
+                return
+            }
 
             var m = {
                 inventory_type_id: 1,
