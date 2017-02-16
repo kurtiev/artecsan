@@ -42,7 +42,7 @@
                                                        datetime-picker="MM/dd/yyyy HH:mm"
                                                        ng-model="$ctr.pickers.beginDate.date"
                                                        is-open="$ctr.pickers.beginDate.open"
-                                                       datepicker-append-to-body="true">
+                                                       datepicker-append-to-body="true" required>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-click="$ctr.openCalendar($event, 'beginDate')">
@@ -56,7 +56,7 @@
                                                        datetime-picker="MM/dd/yyyy HH:mm"
                                                        ng-model="$ctr.pickers.endDate.date"
                                                        is-open="$ctr.pickers.endDate.open"
-                                                       datepicker-append-to-body="true">
+                                                       datepicker-append-to-body="true" required>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-click="$ctr.openCalendar($event, 'endDate')">
