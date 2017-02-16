@@ -218,9 +218,9 @@
             });
 
             modalInstance.result.then(function (result) {
-
+                that.search()
             }, function (reason) {
-
+                that.search()
             });
         };
 

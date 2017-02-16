@@ -9,7 +9,8 @@
         'ngIdle',                       // Idle timer
         'ngSanitize',                   // ngSanitize
         'oitozero.ngSweetAlert',
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'ui.bootstrap.datetimepicker'
     ])
 })();
 
