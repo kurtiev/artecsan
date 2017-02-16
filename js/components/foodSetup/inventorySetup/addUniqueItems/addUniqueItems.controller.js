@@ -10,6 +10,13 @@
         that.uniqueItem = [];
         that.searchParams = searchParams;
 
+        that.vandorsNmae = that.searchParams.vendors_name;
+        for (var i = 0; that.vandorsNmae.length > i; i++) {
+            if (that.vandorsNmae[i].is_selected == true) {
+                that.vandorNmae = that.vandorsNmae[i].vendor_name;
+            }
+        }
+
         that.searchModel = {
             order_by: 'vendor_sku', // "upc", "vendor_sku", "item_name", "item_desc", 'pack', 'size','unit_of_delivery', 'brand', 'category', 'sub_category', 'case_cost', 'minimum_order_type'
             order_way: "DESC",  //ASC/DESC

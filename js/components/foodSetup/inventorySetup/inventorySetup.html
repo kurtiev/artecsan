@@ -210,9 +210,6 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-lg-4">
-                    <div class="col-lg-12 text-center" style="margin-bottom: 20px;padding: 0px;">
-                        <button ng-click="$ctr.addUniqueItems()" class="btn btn-primary btn-lg btn-block" >Update Pricing/Add Unique Items</button>
-                    </div>
                     <div class="ibox ">
                         <div class="ibox-content">
                             <div class="tab-content">
@@ -223,6 +220,11 @@
                                             <hr/>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 pull-right" style="margin-right: 13px;">
+                                            <button ng-click="$ctr.addUniqueItems()" class="btn btn-primary " >Modify/Add</button>
+                                        </div>
+                                    </div>
                                     <div>
                                         <div class="table-responsive">
                                             <table class="table table-stripped">
@@ -230,7 +232,7 @@
                                                 <tr>
                                                     <th>SKU</th>
                                                     <th>Name</th>
-                                                    <th>Price($)</th>
+                                                    <th class="width-50">Price($)</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
@@ -240,7 +242,7 @@
                                                     <td>{{i.item_name}}</td>
                                                     <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-danger btn-circle" ng-if="$ctr.permissions['7'].d"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
+                                                        <a href="" class="btn btn-danger pull-right btn-circle" ng-if="$ctr.permissions['7'].d"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
                                                     </td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.inventoryListSelected.length">
@@ -248,6 +250,13 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 pull-right" style="margin-right: 8px;">
+                                            <button scroll-top type="button" class="btn btn-primary block m-b float-right" ng-click="$ctr.next()">
+                                                Next <span ng-show="$ctr.currentVendor.is_last">- Recipe Setup</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

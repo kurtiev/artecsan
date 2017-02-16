@@ -164,7 +164,11 @@
                 inventory_type_id: 1
             };
 
-            that.api.add_inventory(id, m).then(getInventoriesByVendor);
+            that.api.add_inventory(id, m).then(function () {
+                getInventoriesByVendor();
+                that.search();
+
+            });
 
         };
 
@@ -207,7 +211,8 @@
                 resolve: {
                     searchParams: {
                         vendor_id: that.currentVendor.id,
-                        restaurant_id: that.restaurant_id.restaurant_id
+                        restaurant_id: that.restaurant_id.restaurant_id,
+                        vendors_name: that.vendors
                     }
                 }
             });
