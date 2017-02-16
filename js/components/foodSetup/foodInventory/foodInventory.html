@@ -23,7 +23,7 @@
                         <div class="ibox-content overflow-x-auto">
                             <form novalidate autocomplete="off" name="$ctr.form" ng-submit="$ctr.saveAll($ctr.form)">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12 col-sm-6">
                                         <div class="form-group float-left select-category">
                                             <label class="font-noraml">Select Category:</label>
                                         </div>
@@ -32,6 +32,38 @@
                                                     ng-model="$ctr.model.vendor_category_id"
                                                     ng-change="$ctr.getInventories($ctr.model.vendor_category_id, {{$ctr.model.vendor_category_id}});"
                                                     ng-options="vendor.id as vendor.category for vendor in  $ctr.get_vendors_categories"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-inline pull-right">
+                                            <label for="begin_date">Begin Date</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="begin_date"
+                                                       datetime-picker="MM/dd/yyyy HH:mm"
+                                                       ng-model="$ctr.pickers.beginDate.date"
+                                                       is-open="$ctr.pickers.beginDate.open"
+                                                       datepicker-append-to-body="true">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button"
+                                                            ng-click="$ctr.openCalendar($event, 'beginDate')">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <label for="end_date">End Date</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="end_date"
+                                                       datetime-picker="MM/dd/yyyy HH:mm"
+                                                       ng-model="$ctr.pickers.endDate.date"
+                                                       is-open="$ctr.pickers.endDate.open"
+                                                       datepicker-append-to-body="true">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button"
+                                                            ng-click="$ctr.openCalendar($event, 'endDate')">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

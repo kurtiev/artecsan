@@ -15,6 +15,17 @@
         that.get_vendors_categories = [];
         that.selectedRow = null;
         that.inventories = [];
+        that.pickers = {
+            beginDate: {
+                open: false,
+                date: new Date()
+            },
+            endDate: {
+                open: false,
+                date: new Date()
+            }
+        };
+
         var INVENTORIES = []; // const for compare, to change model
 
 
@@ -115,6 +126,8 @@
 
             var m = {
                 inventory_type_id: 1,
+                counting_started_at: new Date(that.pickers.beginDate.date).getTime(),
+                counting_ended_at: new Date(that.pickers.endDate.date).getTime(),
                 is_final_save: is_final_save || 0,
                 inventory_items: []
             };
@@ -179,10 +192,15 @@
             });
 
 
+        that.openCalendar = function (e, picker) {
+            that.pickers[picker].open = true;
+        };
 
-        window.onbeforeunload = function() {
-            return 'You have not yet saved' ;
-        }
+
+        // TODO
+        // window.onbeforeunload = function() {
+        //     return 'You have not yet saved' ;
+        // }
     }
 
     foodInventoryController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q'];
