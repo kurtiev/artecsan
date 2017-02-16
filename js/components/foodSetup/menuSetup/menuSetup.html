@@ -40,8 +40,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Menu Item Name</th>
-                                                <th>Price</th>
-                                                <th>Cost</th>
+                                                <th>Price($)</th>
+                                                <th>Cost($)</th>
                                                 <th class="max-180"></th>
                                             </tr>
                                             </thead>
@@ -49,8 +49,8 @@
                                             <tr ng-repeat="m in $ctr.menus track by $index">
                                                 <td>{{m.id}}</td>
                                                 <td>{{m.menu_item_name}}</td>
-                                                <td>{{m.price}}</td>
-                                                <td>{{m.cost}}</td>
+                                                <td>{{m.price | currency: ''}}</td>
+                                                <td>{{m.cost | currency: ''}}</td>
                                                 <td class="text-right">
                                                     <button class="btn btn-warning " type="button"
                                                             ng-click="$ctr.edit(m, $index)"

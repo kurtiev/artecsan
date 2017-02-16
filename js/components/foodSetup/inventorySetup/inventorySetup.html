@@ -145,7 +145,7 @@
                                         </th>
                                         <th>
                                                 <span class="no-wrap">
-                                                     Price
+                                                     Price($)
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
@@ -162,7 +162,7 @@
                                         <td>{{i.pack}}</td>
                                         <td>{{i.size}}</td>
                                         <td>{{i.unit_of_delivery}}</td>
-                                        <td>{{i[price_field] || i.case_cost}}</td>
+                                        <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
                                         <td class="text-right">
                                             <label class="switch">
                                                 <input ng-disabled="i.is_used_by_receipts || !$ctr.permissions['7'].w" type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>
@@ -223,20 +223,22 @@
                                             <hr/>
                                         </div>
                                     </div>
-                                    <div class="">
-                                        <div class="full-height-scroll" full-scroll>
+                                    <div>
+                                        <div class="table-responsive">
                                             <table class="table table-stripped">
                                                 <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th>SKU</th>
                                                     <th>Name</th>
+                                                    <th>Price($)</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="i in $ctr.inventoryListSelected">
-                                                    <td>{{i.id}}</td>
+                                                    <td>{{i.vendor_sku}}</td>
                                                     <td>{{i.item_name}}</td>
+                                                    <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
                                                     <td>
                                                         <a href="" class="btn btn-danger btn-circle" ng-if="$ctr.permissions['7'].d"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
                                                     </td>
