@@ -37,7 +37,7 @@
                     <li ui-sref-active="active" ng-if="$ctr.permissions['7'].r" id="food_inventory_setup"><a ui-sref="foodSetup.inventory">Inventory Setup</a></li>
                     <li ui-sref-active="active" ng-if="$ctr.permissions['8'].r" id="food_recipe_setup"><a ui-sref="foodSetup.recipe">Recipe Setup</a></li>
                     <li ui-sref-active="active" ng-if="$ctr.permissions['9'].r" id="food_menu_setup"><a ui-sref="foodSetup.menu">Menu Setup</a></li>
-                    <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="foodSetup.delivery">Delivery Schedule</a></li>
+                    <li ui-sref-active="active" ng-if="$ctr.permissions['10'].r" id="delivery_shedule"><a ui-sref="foodSetup.delivery">Order Schedule</a></li>
                 </ul>
             </li>
             <li ng-if="$ctr.permissions['11'].r && $ctr.state.includes('foodSetup')" id="bar" ng-hide="$ctr.state.includes('home')">
