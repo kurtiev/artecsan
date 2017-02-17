@@ -135,7 +135,7 @@
                     if (that.get_refbooks.liquid_dry_conversion[i].measurement_type_id === measurement_type_id
                         && that.get_refbooks.liquid_dry_conversion[i].uom_id_of_delivery_unit == deliveryIn
                         && that.get_refbooks.liquid_dry_conversion[i].uom_id == measureIn) {
-                        return that.get_refbooks.liquid_dry_conversion[i].metric_conv_liq_dry
+                        return that.get_refbooks.liquid_dry_conversion[i].metric_conv_liq_dry || 1
                     }
                 }
                 return 1
