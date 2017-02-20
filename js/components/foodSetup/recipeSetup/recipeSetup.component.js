@@ -110,7 +110,7 @@
             }
 
 
-            that.model.cost = parseFloat(that.model.cost.toFixed(2));
+            // that.model.cost = parseFloat(that.model.cost.toFixed(2));
 
             that.model.yield = parseFloat(((yieldValue / totalAmount) * 100).toFixed(2));
 
@@ -374,6 +374,8 @@
 
             modalInstance.result.then(function () {
                 alertService.showAlertSave();
+                that.getAllRecipes();
+            }, function () {
                 that.getAllRecipes();
             });
         };
