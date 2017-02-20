@@ -164,13 +164,13 @@
                             <tr>
                                 <td>
                                     <select class="form-control" ng-model="i.model"
-                                            ng-change="$ctr.ingredientSelected(i.model, $index); $ctr.calculate($index)"
+                                            ng-change="$ctr.ingredientSelected(i.model, $index); $ctr.calculate($index); $ctr.get_measure_units(i, $index);"
                                             ng-options="value.item_name group by value.category for value in $ctr.ingredients | orderBy:'item_name'" required>
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" ng-model="i.measurement_type" required
-                                            ng-change="$ctr.calculate($index)"
+                                            ng-change="$ctr.calculate($index); $ctr.get_measure_units(i, $index);"
                                             ng-options="value.id as value.name for value in $ctr.get_refbooks.measurement_types | orderBy:'name'">
                                     </select>
                                 </td>
@@ -182,9 +182,13 @@
                                     </select>
                                 </td>
                                 <td>
+                                    <!--<select class="form-control" ng-model="i.unit_of_measure" required-->
+                                            <!--ng-change="$ctr.calculate($index)"-->
+                                            <!--ng-options="value.name for value in $ctr.get_refbooks.measurement_units | orderBy:'name' | filter: {measurement_type_id: i.measurement_type}">-->
+                                    <!--</select>-->
                                     <select class="form-control" ng-model="i.unit_of_measure" required
                                             ng-change="$ctr.calculate($index)"
-                                            ng-options="value.name for value in $ctr.get_refbooks.measurement_units | orderBy:'name' | filter: {measurement_type_id: i.measurement_type}">
+                                            ng-options="value.name for value in $ctr.measurement_units[$index]">
                                     </select>
                                 </td>
                                 <td>

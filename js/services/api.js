@@ -304,20 +304,20 @@
             return $http.post(serviceBase + 'vendors/' + id + '/inventory', model, getAuthConfig());
         };
 
-        serviceFactory.get_own_inventory = function (id, model) {
+        serviceFactory.delete_my_sku = function (vendor_id, sku_id) {
+            return $http.delete(serviceBase + 'vendors/' + vendor_id + '/inventory/' + sku_id, getAuthConfig());
+        };
+
+        serviceFactory.get_measure_units = function (model) {
             var auth = $injector.get('auth');
             return $http({
                 method: 'GET',
-                url: serviceBase + '',
+                url: serviceBase + 'rb/uom_conformity',
                 headers: {
                     'Authorization': appConfig.apiAuthorization
                 },
                 params: model
             });
-        };
-
-        serviceFactory.delete_my_sku = function (vendor_id, sku_id) {
-            return $http.delete(serviceBase + 'vendors/' + vendor_id + '/inventory/' + sku_id, getAuthConfig());
         };
 
         return serviceFactory;
