@@ -76,11 +76,26 @@
 
                     for (var i = 0; recipe.recipe_items.length > i; i++) {
                         var a = [];
+
                         for (var j = 0; uomConformity.length > j; j++) {
-                            if (uomConformity[j].vendor_sku_id === recipe.recipe_items[i].vendor_sku_id && (recipe.recipe_items[i].measurement_type_id === uomConformity[j].measurement_type_id)) {
-                                a.push(uomConformity[j])
+                            if (uomConformity[j].vendor_sku_id === recipe.recipe_items[i].vendor_sku_id &&
+                                (recipe.recipe_items[i].measurement_type_id === uomConformity[j].measurement_type_id)) {
+
+                                // delete duplicates from "a" array
+                                for (var l = 0; a.length > l; l++) {
+
+                                    if (a[l].name === uomConformity[j].name
+                                        && a[l].measurement_type_id === uomConformity[j].measurement_type_id
+                                        && a[l].vendor_sku_id === uomConformity[j].vendor_sku_id) {
+                                        a.splice(l, 1)
+                                    }
+
+                                }
+
+                                a.push(uomConformity[j]);
                             }
                         }
+
                         that.measurement_units[i] = a
                     }
 
@@ -209,7 +224,6 @@
 
         that.ingredientSelected = function (item, $index) {
             that.model.ingredients[$index].ingredient_id = item.id;
-            that.model.ingredients[$index].uom_id = item.uom_id_of_delivery_unit;
         };
 
 

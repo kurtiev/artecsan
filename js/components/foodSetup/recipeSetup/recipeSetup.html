@@ -184,7 +184,7 @@
                                 <td>
                                     <select class="form-control" ng-model="i.uom_id" required
                                             ng-change="$ctr.calculate($index)"
-                                            ng-options="value.uom_id as value.name for value in $ctr.measurement_units[$index]">
+                                            ng-options="value.measure_unit_id as value.name for value in $ctr.measurement_units[$index]">
                                     </select>
                                 </td>
                                 <td>
