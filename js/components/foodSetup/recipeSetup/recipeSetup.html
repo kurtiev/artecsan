@@ -182,13 +182,9 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <!--<select class="form-control" ng-model="i.unit_of_measure" required-->
-                                            <!--ng-change="$ctr.calculate($index)"-->
-                                            <!--ng-options="value.name for value in $ctr.get_refbooks.measurement_units | orderBy:'name' | filter: {measurement_type_id: i.measurement_type}">-->
-                                    <!--</select>-->
-                                    <select class="form-control" ng-model="i.unit_of_measure" required
+                                    <select class="form-control" ng-model="i.uom_id" required
                                             ng-change="$ctr.calculate($index)"
-                                            ng-options="value.name for value in $ctr.measurement_units[$index]">
+                                            ng-options="value.uom_id as value.name for value in $ctr.measurement_units[$index]">
                                     </select>
                                 </td>
                                 <td>

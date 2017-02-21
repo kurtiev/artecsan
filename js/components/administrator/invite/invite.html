@@ -1,0 +1,287 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg"
+         ng-class="{'navigation-hide' : !main.isFoodSetup && main.isRegistration}">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>User Setup</h2>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <h3 class="text-center">Users</h3>
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-primary float-right" ng-click="$ctr.addUser()">Add
+                                                User
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-stripped">
+                                            <thead>
+                                                <tr>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Email</th>
+                                                    <th>Type</th>
+                                                    <th class="width-70">Active</th>
+                                                    <th class="width-180"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="user in $ctr.usersList">
+                                                <td>{{user.first_name}}</td>
+                                                <td>{{user.last_name}}</td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{::$ctr.userTypesFilter(user.type_ids)}}</td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" ng-model="user.is_disabled" ng-true-value="1" ng-false-value="0" ng-change="$ctr.changeUserStatus(user, $index)"><i></i>
+                                                    </label>
+                                                </td>
+                                                <td class="text-right">
+                                                    <button class="btn btn-warning " type="button"
+                                                            ng-if="!user.id"
+                                                            ng-click="$ctr.editUser(user, $index)"><i
+                                                            class="fa fa-edit"></i>&nbsp;Edit
+                                                    </button>
+                                                    <button class="btn btn-danger" type="button"
+                                                            ng-click="$ctr.delete($index)"><i class="fa fa-times"></i>&nbsp;Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    <button class="btn btn-primary float-left" ui-sref="administrator.menu">&lt;&lt; Back</button>
+                                    <button class="btn btn-primary" ng-click="$ctr.sentInvitations(false)" ng-disabled="!$ctr.usersList.length">Invite Users
+                                        and Processed
+                                    </button>
+                                    <button class="btn btn-primary margin-left-10"
+                                            ng-click="$ctr.sentInvitations(true)" ng-disabled="!$ctr.usersList.length">Invite Users & Exit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+
+<script type="text/ng-template" id="add-user-for-invite.html">
+    <div class="inmodal">
+        <form novalidate autocomplete="off" name="vm.form" ng-submit="vm.add(vm.form)">
+            <div class="modal-header">
+                <h4 class="modal-title">Invite User</h4>
+            </div>
+            <div class="modal-body max-height-340">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-12 no-padding">
+                            <label>First Name <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="First Name" maxlength="50" class="form-control" ng-model="vm.m.first_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Last Name <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="Last Name" maxlength="50" class="form-control" ng-model="vm.m.last_name" required>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>Email <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="Email" class="form-control" ng-model="vm.m.email" required
+                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <label>User Type <span class="text-danger">*</span></label>
+                            <select class="form-control" ng-model="vm.m.type_ids"
+                                    ng-options="user.id as user.name for user in vm.userTypes" required>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-if="vm.user.userType == 'Custom Roles'">
+                    <div class="ibox-content padding-top-20">
+                        <h3 class="text-center">Permissions Management</h3>
+                        <table class="table table-stripped">
+                            <tbody>
+                            <tr>
+                                <td>Restaurant Module</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Billing</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Users</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Setup Wizard</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>POS Setup</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Management</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Inventory</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Begin Food Inventory Count</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Consumer Reviews</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dashboard / Reports</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Food Details</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Performance Score</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Administrator</td>
+                                <td></td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Billing</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Users</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="vm.close()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Invite</button>
+            </div>
+        </form>
+    </div>
+</script>

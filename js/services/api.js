@@ -309,15 +309,16 @@
         };
 
         serviceFactory.get_measure_units = function (model) {
-            var auth = $injector.get('auth');
-            return $http({
-                method: 'GET',
-                url: serviceBase + 'rb/uom_conformity',
-                headers: {
-                    'Authorization': appConfig.apiAuthorization
-                },
-                params: model
-            });
+            // var auth = $injector.get('auth');
+            // return $http({
+            //     method: 'GET',
+            //     url: serviceBase + 'rb/uom_conformity',
+            //     headers: {
+            //         'Authorization': appConfig.apiAuthorization
+            //     },
+            //     params: model
+            // });
+            return $http.post(serviceBase + 'rb/uom_conformity', model, getAuthConfig());
         };
 
         return serviceFactory;
