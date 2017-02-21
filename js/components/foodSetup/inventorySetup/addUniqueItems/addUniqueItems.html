@@ -14,7 +14,7 @@
                                 <table class="table ng-scope  footable-sort">
                                     <thead class="th-text-center th-vertical-align-middle ">
                                     <tr>
-                                      <!--  <th ng-click="$ctr.getMyItems('vendor_sku')" class="width-100"
+                                        <th ng-click="$ctr.getMyItems('vendor_sku')" class="width-100"
                                             ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">
                                          <span class="no-wrap cursor-pointer">
                                            SKU
@@ -84,81 +84,87 @@
                                             <span class="footable-sort-indicator"></span>
                                         </span>
                                         </th>
-                                        <th style="text-align: right;">Delete</th>-->
-                                        <th ng-click="$ctr.searchModel.order_by = 'vendor_sku'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">
-                                         <span class="no-wrap cursor-pointer">
-                                           SKU
-                                           <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'pack'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'pack' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'pack' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Pack <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'size'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Size <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'unit_of_delivery'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'unit_of_delivery' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'unit_of_delivery' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Unit <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'brand'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'brand' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'brand' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Brand <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'item_name'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Desc / name <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'category'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-150"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'category' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'category' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Cat <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'sub_category'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Sub Category <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'case_cost'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'case_cost' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'case_cost' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Case($) <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
-                                        <th ng-click="$ctr.searchModel.order_by = 'minimum_order_type'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'minimum_order_type' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'minimum_order_type' && $ctr.searchModel.order_way == 'ASC')}">
-                                        <span class="no-wrap cursor-pointer">
-                                             Minimum Order <span class="text-danger">*</span>
-                                            <span class="footable-sort-indicator"></span>
-                                        </span>
-                                        </th>
                                         <th style="text-align: right;">Delete</th>
+
+
+
+
+                                        <!---->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'vendor_sku'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                         <!--<span class="no-wrap cursor-pointer">-->
+                                           <!--SKU-->
+                                           <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'pack'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'pack' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'pack' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Pack <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'size'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Size <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'unit_of_delivery'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'unit_of_delivery' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'unit_of_delivery' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Unit <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'brand'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-100"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'brand' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'brand' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Brand <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'item_name'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Desc / name <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'category'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-150"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'category' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'category' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Cat <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'sub_category'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Sub Category <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'case_cost'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'case_cost' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'case_cost' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Case($) <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.searchModel.order_by = 'minimum_order_type'; $ctr.searchModel.order_way = $ctr.searchModel.order_way == 'DESC' ? 'ASC' : 'DESC'; reverse = !reverse" class="width-120"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'minimum_order_type' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'minimum_order_type' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                        <!--<span class="no-wrap cursor-pointer">-->
+                                             <!--Minimum Order <span class="text-danger">*</span>-->
+                                            <!--<span class="footable-sort-indicator"></span>-->
+                                        <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th style="text-align: right;">Delete</th>-->
                                     </tr>
                                     </thead>
-                                    <tbody ng-repeat="item in $ctr.uniqueItem | orderBy: $ctr.searchModel.order_by : reverse">
+                                    <!--<tbody ng-repeat="item in $ctr.uniqueItem | orderBy: $ctr.searchModel.order_by : reverse">-->
+                                    <tbody ng-repeat="item in $ctr.uniqueItem">
                                     <ng-form name="items">
                                         <tr>
                                             <td>
