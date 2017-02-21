@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function addUniqueItemsController($uibModalInstance, alertService, api, core, searchParams) {
+    function addUniqueItemsController($uibModalInstance, alertService, api, core, searchParams, SweetAlert, $q) {
 
 
         var that = this;
@@ -9,6 +9,12 @@
         that.form = {};
         that.uniqueItem = [];
         that.searchParams = searchParams;
+
+        var INVENTORIES = []; // const for compare, that model was changed, -- copy from that.uniqueItem
+
+        var checkChanges = function () {
+            return _.isEqual(INVENTORIES, JSON.parse(angular.toJson(that.uniqueItem)))
+        };
 
         that.vandorsNmae = that.searchParams.vendors_name;
         for (var i = 0; that.vandorsNmae.length > i; i++) {
@@ -57,16 +63,19 @@
         };
 
 
-        that.submit = function (form) {
+        that.submit = function (form, get_list) {
 
+            var deferred = $q.defer();
 
             if (!form.$valid) {
-                return
+                deferred.reject();
+                return deferred.promise;
             }
 
             if (!that.uniqueItem.length) {
                 alertService.showError('Please, add at least one item');
-                return
+                deferred.reject();
+                return deferred.promise;
             }
 
             var id = that.searchParams.vendor_id;
@@ -97,9 +106,14 @@
             that.api.add_update_own_inventory(id, m).then(function (res) {
                 if (res.data.data.code === 1000) {
                     alertService.showAlertSave();
-                    that.getMyItems();
+                    deferred.resolve();
+                    if (get_list) {
+                        _search();
+                    }
                 }
             });
+
+            return deferred.promise;
 
         };
 
@@ -131,7 +145,7 @@
                 that.api.delete_my_sku(vendor_id, that.uniqueItem[$index].id).then(function (res) {
                         if (res.data.data.code === 1000) {
                             for (var i = 0; that.uniqueItem.length > i; i++) {
-                                if (item.id  === that.uniqueItem[i].id) {
+                                if (item.id === that.uniqueItem[i].id) {
                                     that.uniqueItem.splice(i, 1);
                                     break;
                                 }
@@ -145,7 +159,7 @@
         };
 
 
-        that.getMyItems = function (keyword) {
+        var _search = function (keyword) {
 
             that.searchModel.inRequest = true;
 
@@ -180,6 +194,7 @@
             that.api.get_inventory_by_vendor(m, vendorId).then(function (res) {
                 try {
                     that.uniqueItem = res.data.data.sku;
+                    INVENTORIES = angular.copy(that.uniqueItem);
                     that.searchModel.inRequest = false;
                 } catch (e) {
                     console.log(e);
@@ -190,15 +205,62 @@
             });
         };
 
+        that.getMyItems = function (keyword) {
+
+            if (!checkChanges()) {
+                SweetAlert.swal({
+                        title: "Save changes?",
+                        text: "Changes not been saved yet!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#337ab7",
+                        confirmButtonText: "Save"
+                    },
+                    function (res) {
+                        if (res) {
+                            that.form.$setSubmitted();
+                            that.submit(that.form).then(function () {
+                                _search(keyword)
+                            })
+                        } else {
+                            _search(keyword)
+                        }
+                    });
+            } else {
+                _search(keyword)
+            }
+        };
+
         that.getMyItems();
 
 
         that.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
+            if (!checkChanges()) {
+                SweetAlert.swal({
+                        title: "Save changes?",
+                        text: "Changes not been saved yet!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#337ab7",
+                        confirmButtonText: "Save"
+                    },
+                    function (res) {
+                        if (res) {
+                            that.form.$setSubmitted();
+                            that.submit(that.form).then(function () {
+                                $uibModalInstance.dismiss('cancel');
+                            })
+                        } else {
+                            $uibModalInstance.dismiss('cancel');
+                        }
+                    });
+            } else {
+                $uibModalInstance.dismiss('cancel');
+            }
         };
     }
 
-    addUniqueItemsController.$inject = ['$uibModalInstance', 'alertService', 'api', 'core', 'searchParams'];
+    addUniqueItemsController.$inject = ['$uibModalInstance', 'alertService', 'api', 'core', 'searchParams', 'SweetAlert', '$q'];
     angular
         .module('inspinia')
         .controller('addUniqueItemsController', addUniqueItemsController)
