@@ -121,14 +121,26 @@
             })
         };
 
-        that.removeUniqueItem = function ($index) {
+        that.removeUniqueItem = function ($index, item) {
             if (!that.uniqueItem[$index].id) {
                 that.uniqueItem.splice($index, 1);
             } else {
 
                 var vendor_id = that.searchParams.vendor_id;
 
-                that.api.delete_my_sku(vendor_id, that.uniqueItem[$index].id).then(that.getMyItems)
+                that.api.delete_my_sku(vendor_id, that.uniqueItem[$index].id).then(function (res) {
+                        if (res.data.data.code === 1000) {
+                            for (var i = 0; that.uniqueItem.length > i; i++) {
+                                if (item.id  === that.uniqueItem[i].id) {
+                                    that.uniqueItem.splice(i, 1);
+                                    break;
+                                }
+                            }
+
+                        }
+                    }
+                    // that.getMyItems
+                )
             }
         };
 
