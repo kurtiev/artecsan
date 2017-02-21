@@ -64,7 +64,7 @@
                                         <td>{{restaurant.address}}</td>
                                         <td class="center">
                                             <button  class="btn btn-primary" ng-disabled="!restaurant.is_setup_completed" ng-click="$ctr.selectRestaurant(restaurant)">Select</button>
-                                            <button  class="btn btn-primary" ng-click="$ctr.editRestaurant(restaurant)" ng-hide="restaurant.is_setup_completed">Setup Process</button>
+                                            <button  class="btn btn-primary" ng-click="$ctr.editRestaurant(restaurant)" ng-disabled="restaurant.is_setup_completed">Setup Process</button>
                                         </td>
                                     </tr>
                                     <tr ng-show="!$ctr.restaurantsList.length">
