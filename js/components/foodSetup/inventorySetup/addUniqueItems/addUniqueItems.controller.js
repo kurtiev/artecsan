@@ -128,7 +128,15 @@
 
                 var vendor_id = that.searchParams.vendor_id;
 
-                that.api.delete_my_sku(vendor_id, that.uniqueItem[$index].id).then(that.getMyItems)
+                that.api.delete_my_sku(vendor_id, that.uniqueItem[$index].id).then(function (res) {
+                    try {
+                        if (res.data.data.code === 1000) {
+                            that.uniqueItem.splice($index, 1);
+                        }
+                    } catch (e) {
+
+                    }
+                })
             }
         };
 

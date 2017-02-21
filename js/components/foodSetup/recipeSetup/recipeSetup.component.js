@@ -13,7 +13,7 @@
         that.recipe = recipe;
         that.showCategory = false;
         that.api = api;
-        that.measurement_units = []; // dynamic filters array
+        that.measurement_units = []; // dynamic array for select menu
 
         that.model = {
             recipe_name: recipe ? recipe.recipe_name : null,
@@ -35,6 +35,7 @@
                             model: null,
                             measurement_like: recipe.recipe_items[i].measurement_like_type_id,
                             unit_of_measure: recipe.recipe_items[i].uom_id,
+                            uom_id: recipe.recipe_items[i].uom_id,
 
                             measurement_type: recipe.recipe_items[i].measurement_type_id,
                             ingredient_id: recipe.recipe_items[i].vendor_sku_id,
@@ -59,13 +60,15 @@
                             }
                         }
 
+                        // TODO
+                        that.measurement_units.push({});
                         // find Unit of Measure
-                        for (var k = 0; that.get_refbooks.measurement_units.length > k; k++) {
-                            if (that.get_refbooks.measurement_units[k].id === resArr[i].unit_of_measure) {
-                                resArr[i].unit_of_measure = that.get_refbooks.measurement_units[k];
-                                break
-                            }
-                        }
+                        // for (var k = 0; that.get_refbooks.measurement_units.length > k; k++) {
+                        //     if (that.get_refbooks.measurement_units[k].id === resArr[i].unit_of_measure) {
+                        //         resArr[i].unit_of_measure = that.get_refbooks.measurement_units[k];
+                        //         break
+                        //     }
+                        // }
                     }
                 }
 
@@ -178,6 +181,7 @@
 
         that.ingredientSelected = function (item, $index) {
             that.model.ingredients[$index].ingredient_id = item.id;
+            that.model.ingredients[$index].uom_id = item.uom_id_of_delivery_unit;
         };
 
 
@@ -189,6 +193,7 @@
                 unit_of_measure: null,
                 amount: null,
                 cost: 0,
+                uom_id: null,
                 time: new Date().getTime() // fix ng-repeat
             });
             that.measurement_units.push({});
@@ -227,7 +232,7 @@
                 m.recipe_items.push({
                     vendor_sku_id: that.model.ingredients[i].ingredient_id,
                     measurement_type_id: that.model.ingredients[i].measurement_type,
-                    uom_id: that.model.ingredients[i].unit_of_measure.id, // unit of measure
+                    uom_id: that.model.ingredients[i].uom_id, // unit of measure
                     amount: that.model.ingredients[i].amount,
                     cost: that.model.ingredients[i].cost,
                     yield: that.model.ingredients[i].yield
