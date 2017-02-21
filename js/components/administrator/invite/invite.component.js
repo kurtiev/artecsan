@@ -88,18 +88,30 @@
 
         };
 
-        that.delete = function ($index) {
+        that.delete = function ($index, user) {
             if (that.usersList[$index].id) {
 
-                var m = {
-                    ids: [that.usersList[$index].id]
-                };
+                SweetAlert.swal({
+                        title: "Are you sure?",
+                        text: "This user will be deleted from this restaurant",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#ed5565",
+                        confirmButtonText: "Confirm"
+                    },
+                    function (res) {
+                        if (res) {
+                            var m = {
+                                user_id: user.id
+                            };
 
-                that.api.delete_invite(m).then(function (res) {
-                    if (res.data.data.code === 1000) {
-                        that.usersList.splice($index, 1)
-                    }
-                });
+                            that.api.delete_invite(that.restaurant_id.restaurant_id, m).then(function (res) {
+                                if (res.data.data.code === 1000) {
+                                    that.usersList.splice($index, 1)
+                                }
+                            });
+                        }
+                    });
 
             } else {
                 that.usersList.splice($index, 1)

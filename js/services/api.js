@@ -107,11 +107,11 @@
             return $http.put(serviceBase + 'restaurants/' + id + '/employees', model, getAuthConfig());
         };
 
-        serviceFactory.delete_invite = function (model) {
+        serviceFactory.delete_invite = function (id, model) {
             var auth = $injector.get('auth');
             return $http({
                 method: 'DELETE',
-                url: serviceBase + 'users/invite',
+                url: serviceBase + 'restaurants/'+id+'/invited',
                 headers: {
                     'Authorization': appConfig.apiAuthorization
                 },

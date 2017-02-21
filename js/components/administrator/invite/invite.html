@@ -63,8 +63,13 @@
                                                             class="fa fa-edit"></i>&nbsp;Edit
                                                     </button>
                                                     <button class="btn btn-danger" type="button"
-                                                            ng-click="$ctr.delete($index)"><i class="fa fa-times"></i>&nbsp;Delete
+                                                            ng-click="$ctr.delete($index, user)"><i class="fa fa-times"></i>&nbsp;Delete
                                                     </button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!$ctr.usersList.length">
+                                                <td colspan="6" class="text-center">
+                                                    No Users
                                                 </td>
                                             </tr>
                                             </tbody>
