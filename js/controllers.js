@@ -53,7 +53,8 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
                         self.decline = function () {
                             var m = {
                                 invite_key: invite_key,
-                                status_id: 2
+                                status_id: 2,
+                                is_new_user:  self.user.is_new_user
                             };
 
                             that.api.redeem_invitation(m).then(function (res) {
@@ -80,7 +81,8 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
                             var m = {
                                 invite_key: invite_key,
-                                status_id: 1
+                                status_id: 1,
+                                is_new_user:  self.user.is_new_user
                             };
 
                             if (self.user.is_new_user) {
