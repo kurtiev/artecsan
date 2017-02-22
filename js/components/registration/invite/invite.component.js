@@ -137,7 +137,7 @@
         };
 
         that.changeUserStatus = function (user, $index) {
-            if (user) {
+            if (user.id) {
                 SweetAlert.swal({
                         title: "Are you sure?",
                         text: "This user will be blocked and wouldn't be able work with this restaurant",
@@ -152,7 +152,7 @@
                             var m = {
                                 employees: [{
                                     user_id: user.id,
-                                    is_disabled: user.is_disabled ? 0 : 1
+                                    is_disabled: user.is_disabled
                                 }]
                             };
 
@@ -184,7 +184,7 @@
                     first_name: that.usersList[i].first_name,
                     last_name: that.usersList[i].last_name,
                     type_ids: [that.usersList[i].type_ids],
-                    is_active: that.usersList[i].is_disabled // TODO confuse
+                    is_disabled: that.usersList[i].is_disabled // confuse
                 };
                 sentList.push(u)
             }
