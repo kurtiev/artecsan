@@ -102,13 +102,27 @@
 <!-- End wrapper-->
 
 
+<script type="text/ng-template" id="permissions_template.html">
+   <div class="clearfix border-bottom-td">
+       {{m.name}}
+       <div class="pull-right" ng-if="m.is_gui_adjustable">
+           <label class="switch">
+               <input type="checkbox" ng-model="m.r" ng-true-value="1" ng-false-value="0"><i></i>
+           </label>
+       </div>
+   </div>
+    <ul>
+        <li class="list-unstyled padding-top-15" ng-repeat="m in m.children" ng-include="'permissions_template.html'"></li>
+    </ul>
+</script>
+
 <script type="text/ng-template" id="add-user-for-invite.html">
     <div class="inmodal">
         <form novalidate autocomplete="off" name="vm.form" ng-submit="vm.add(vm.form)">
             <div class="modal-header">
                 <h4 class="modal-title">Invite User</h4>
             </div>
-            <div class="modal-body max-height-340">
+            <div class="modal-body">
                 <fieldset>
                     <div class="form-group">
                         <div class="col-md-12 no-padding">
@@ -132,154 +146,14 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset ng-if="vm.user.userType == 'Custom Roles'">
+                <fieldset ng-if="vm.m.type_ids === 7">
                     <div class="ibox-content padding-top-20">
                         <h3 class="text-center">Permissions Management</h3>
-                        <table class="table table-stripped">
-                            <tbody>
-                            <tr>
-                                <td>Restaurant Module</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Billing</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Users</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Setup Wizard</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Food</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>POS Setup</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Management</td>
-                                <td></td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Inventory</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Food</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Begin Food Inventory Count</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Consumer Reviews</td>
-                                <td></td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dashboard / Reports</td>
-                                <td></td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Food Details</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Performance Score</td>
-                                <td></td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Administrator</td>
-                                <td></td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Billing</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Users</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="clearfix">
+                            <ul class="no-padding">
+                                <li class="list-unstyled padding-top-15" ng-repeat="m in vm.modules" ng-include="'permissions_template.html'"></li>
+                            </ul>
+                        </div>
                     </div>
                 </fieldset>
             </div>

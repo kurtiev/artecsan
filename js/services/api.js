@@ -308,16 +308,11 @@
             return $http.delete(serviceBase + 'vendors/' + vendor_id + '/inventory/' + sku_id, getAuthConfig());
         };
 
+        serviceFactory.get_modules = function (model) {
+            return $http.post(serviceBase + 'rb/get_modules', model, getAuthConfig());
+        };
+
         serviceFactory.get_measure_units = function (model) {
-            // var auth = $injector.get('auth');
-            // return $http({
-            //     method: 'GET',
-            //     url: serviceBase + 'rb/uom_conformity',
-            //     headers: {
-            //         'Authorization': appConfig.apiAuthorization
-            //     },
-            //     params: model
-            // });
             return $http.post(serviceBase + 'rb/uom_conformity', model, getAuthConfig());
         };
 
