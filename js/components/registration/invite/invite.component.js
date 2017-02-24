@@ -76,6 +76,7 @@
             if (that.usersList[$index].id) {
 
                 var m = {
+                    user_type_id: that.usersList[$index].type_ids,
                     ids: [that.usersList[$index].id]
                 };
 

@@ -118,6 +118,7 @@
                     function (res) {
                         if (res) {
                             var m = {
+                                user_type_id: user.type_ids,
                                 user_id: user.id
                             };
 
