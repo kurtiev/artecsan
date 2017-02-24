@@ -1,5 +1,9 @@
 # artecsan
 
+install grunt
+**npm install -g grunt-cli**
+
+
 install all dependencies
 **npm install**
 
