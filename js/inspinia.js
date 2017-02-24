@@ -52,16 +52,16 @@ $(document).ready(function () {
 
     setTimeout(function(){
         fix_height();
-    }, 1000)
-});
+    }, 1000);
 
-// Minimalize menu when screen is less than 768px
-$(function() {
-    $(window).bind("load resize", function() {
-        if ($(document).width() < 769) {
-            $('body').addClass('body-small')
-        } else {
-            $('body').removeClass('body-small')
-        }
+    // Minimalize menu when screen is less than 76
+    $(function() {
+        $(window).bind("load resize", function() {
+            if ($(document).width() < 769) {
+                $('body').addClass('body-small')
+            } else {
+                $('body').removeClass('body-small')
+            }
+        })
     })
-})
+});
