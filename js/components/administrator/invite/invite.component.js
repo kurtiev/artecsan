@@ -81,7 +81,7 @@
         api.get_restaurant(that.restaurant_id.restaurant_id).then(function (res) {
             try {
                 var restaurant_to_edit = res.data.data.restaurants_list[0];
-                that.usersList = restaurant_to_edit.employees;
+                that.usersList = restaurant_to_edit.employees || [];
             } catch (e) {
                 $state.go('home');
             }
