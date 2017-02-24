@@ -67,82 +67,24 @@
 <script src="js/plugins/sweetalert/angular-sweetalert.min.js?ver=@@hash"></script>
 
 <!-- Angular App Script -->
-<script src="js/app.js?ver=@@hash"></script>
-<script src="js/config.js?ver=@@hash"></script>
-<script src="js/directives.js?ver=@@hash"></script>
-<script src="js/controllers.js?ver=@@hash"></script>
+<script src="dist/app.js?ver=@@hash"></script>
 
 
 <!-- main controllers -->
 <script src="js/controllers/homeMenuController.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/inventorySetup/addUniqueItems/addUniqueItems.controller.js?ver=@@hash"></script>
 
 <!-- services -->
-<script src="js/services/interceptor.js?ver=@@hash"></script>
-<script src="js/services/core.js?ver=@@hash"></script>
-<script src="js/services/auth.js?ver=@@hash"></script>
-<script src="js/services/api.js?ver=@@hash"></script>
-<script src="js/services/alertService.js?ver=@@hash"></script>
-<script src="js/services/restaurant.js?ver=@@hash"></script>
-<script src="js/services/utils.js?ver=@@hash"></script>
+<script src="dist/services.js?ver=@@hash"></script>
 
 <!-- directives -->
-<script src="js/directives/onlyDigits.js?ver=@@hash"></script>
-<script src="js/directives/compareTo.js?ver=@@hash"></script>
-<script src="js/directives/acPassword.js?ver=@@hash"></script>
-<script src="js/directives/acPhone.js?ver=@@hash"></script>
-<script src="js/directives/scrollTop.js?ver=@@hash"></script>
-<script src="js/directives/uniqueSku.js?ver=@@hash"></script>
+<script src="dist/directives.js?ver=@@hash"></script>
 
 <!-- components -->
-<script src="js/components/foodSetup/addPosHere/addPosHere.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/posSync/posSync.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/deliverySetup/deliverySetup.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/deliverySetup/deliverySetup.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/menuSetup/menuSetup.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/menuSetup/menuSetup.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/recipeSetup/recipeSetup.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/recipeSetup/recipeSetup.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/inventorySetup/inventorySetup.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/inventorySetup/inventorySetup.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/vendorSetup/vendorSetup.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/vendorSetup/vendorSetup.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/foodSetup.js?ver=@@hash"></script>
-<script src="js/components/registration/invite/invite.js?ver=@@hash"></script>
-<script src="js/components/registration/invite/invite.component.js?ver=@@hash"></script>
-<script src="js/components/registration/terms/terms.js?ver=@@hash"></script>
-<script src="js/components/registration/terms/terms.component.js?ver=@@hash"></script>
-<script src="js/components/registration/payment/payment.js?ver=@@hash"></script>
-<script src="js/components/registration/payment/payment.component.js?ver=@@hash"></script>
-<script src="js/components/registration/restaurantProfile/restaurantProfile.js?ver=@@hash"></script>
-<script src="js/components/registration/restaurantProfile/restaurantProfile.component.js?ver=@@hash"></script>
-<script src="js/components/registration/restaurantUserProfile/restaurantUserProfile.js?ver=@@hash"></script>
-<script src="js/components/registration/restaurantUserProfile/restaurantUserProfile.component.js?ver=@@hash"></script>
-<script src="js/components/registration/subscription/subscription.js?ver=@@hash"></script>
-<script src="js/components/registration/subscription/subscription.component.js?ver=@@hash"></script>
-<script src="js/components/login/login.js?ver=@@hash"></script>
-<script src="js/components/login/login.component.js?ver=@@hash"></script>
-<script src="js/components/registration/registration.js?ver=@@hash"></script>
-<script src="js/components/registration/registration.component.js?ver=@@hash"></script>
-<script src="js/components/header/header.component.js?ver=@@hash"></script>
-<script src="js/components/home/home.component.js?ver=@@hash"></script>
-<script src="js/components/home/home.js?ver=@@hash"></script>
-<script src="js/components/navigation/navigation.component.js?ver=@@hash"></script>
-<script src="js/components/administrator/menu/menu.js?ver=@@hash"></script>
-<script src="js/components/administrator/inventoryComplete/inventoryComplete.js?ver=@@hash"></script>
-<script src="js/components/administrator/administrator.js?ver=@@hash"></script>
-<script src="js/components/administrator/posSync/posSync.js?ver=@@hash"></script>
-<script src="js/components/administrator/posSync/posSync.component.js?ver=@@hash"></script>
-<script src="js/components/administrator/invite/invite.js?ver=@@hash"></script>
-<script src="js/components/administrator/invite/invite.component.js?ver=@@hash"></script>
-<script src="js/components/administrator/addPosHere/addPosHere.js?ver=@@hash"></script>
-<script src="js/components/administrator/addPosHere/addPosHere.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/foodInventory/foodInventory.component.js?ver=@@hash"></script>
-<script src="js/components/foodSetup/foodInventory/foodInventory.js?ver=@@hash"></script>
+<script src="dist/components.js?ver=@@hash"></script>
 
 
 <!-- filters -->
-<script src="js/filters/recipeTypesFilter.js?ver=@@hash"></script>
+<script src="dist/filters.js?ver=@@hash"></script>
 
 
 <script src='https://www.google.com/recaptcha/api.js'></script>

@@ -53,7 +53,7 @@ function acPhone ($filter, $parse) {
             function getViewValue(p) {
                 // +1 (000) 000 0000
 
-                return `${p[1]}${p[2]}${p[3]}${p[4]}${p[5]}${p[6]}${p[7]}${p[8]}${p[9]}${p[10]}`;
+                return '${p[1]}${p[2]}${p[3]}${p[4]}${p[5]}${p[6]}${p[7]}${p[8]}${p[9]}${p[10]}';
             }
 
             function formatter(input) {
