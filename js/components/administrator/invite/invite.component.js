@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var addUserInviteController = function (user, refbooks, modules, $uibModalInstance) {
+    var addUserInviteController = function (user, refbooks, modules, $uibModalInstance, restaurant) {
 
         var that = this;
 
@@ -10,6 +10,7 @@
         that.userTypes = refbooks.user_types;
 
         that.modules = modules;
+        that.myGrantLevel = restaurant.data.info.grant_level;
 
         if (user) {
             if (user.permissions) {
@@ -23,6 +24,10 @@
             last_name: user ? user.last_name : null,
             type_ids: user ? user.type_ids : null,
             is_disabled: user ? user.is_disabled : 1
+        };
+
+        that.grantLevelFilter = function (user) {
+            return user.grant_level >= that.myGrantLevel;
         };
 
         that.add = function (form) {
@@ -57,6 +62,7 @@
         that.api = api;
         that.usersList = [];
         that.get_refbooks = [];
+        that.authenticationUserId = auth.authentication.user.id;
 
         that.api.get_modules({is_tree_mode: 1}).then(function (res) {
             that.modules_tree = res.data.data.modules_tree;
@@ -118,6 +124,7 @@
                     function (res) {
                         if (res) {
                             var m = {
+                                user_type_id: user.type_ids,
                                 user_id: user.id
                             };
 

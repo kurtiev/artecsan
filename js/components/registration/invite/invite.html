@@ -120,7 +120,7 @@
                         <div class="col-md-12 no-padding">
                             <label>User Type <span class="text-danger">*</span></label>
                             <select class="form-control" ng-model="vm.m.type_ids"
-                                    ng-options="user.id as user.name for user in vm.userTypes" required>
+                                    ng-options="user.id as user.name for user in vm.userTypes | filter: vm.grantLevelFilter " required>
                             </select>
                         </div>
                     </div>
