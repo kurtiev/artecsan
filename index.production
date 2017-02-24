@@ -34,28 +34,8 @@
 <!-- Main view  -->
 <div ui-view></div>
 
-<!-- Angular App Script -->
-<script src="js/jquery/jquery-2.1.1.min.js?ver=@@hash"></script>
-<script src="js/angular/angular.min.js?ver=@@hash"></script>
 
-<!-- main app -->
-<script src="dist/app.js?ver=@@hash"></script>
-
-<!-- thirty part libs -->
-<script src="dist/plugins.js?ver=@@hash"></script>
-
-<!-- services -->
-<script src="dist/services.js?ver=@@hash"></script>
-
-<!-- directives -->
-<script src="dist/directives.js?ver=@@hash"></script>
-
-<!-- components -->
-<script src="dist/components.js?ver=@@hash"></script>
-
-
-<!-- filters -->
-<script src="dist/filters.js?ver=@@hash"></script>
+<script src="dist/main.js?ver=@@hash"></script>
 
 
 <script src='https://www.google.com/recaptcha/api.js'></script>

@@ -10,6 +10,8 @@ module.exports = function (grunt) {
         'js/plugins/angular-local-storage.min.js', 'js/plugins/sweetalert/sweetalert.min.js', 'js/plugins/sweetalert/angular-sweetalert.min.js', 'js/controllers/homeMenuController.js'
     ];
 
+    var uglify_all = ['js/jquery/jquery-2.1.1.min.js', 'js/angular/angular.min.js', 'dist/app.js', 'dist/plugins.js', 'dist/services.js', 'dist/directives.js', 'dist/components.js', 'dist/filters.js'];
+
     // var styles = ['css/bootstrap.min.css', 'font-awesome/css/font-awesome.css', 'css/plugins/sweetalert/sweetalert.css', 'css/animate.css', 'css/style.css', 'css/Artecsan.css'];
 
     grunt.initConfig({
@@ -32,6 +34,16 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
+            all: {
+                options: {
+                    mangle: false,
+                    sourceMap: false,
+                    banner: '/* Artecsan */'
+                },
+                files: {
+                    'dist/main.js': uglify_all
+                }
+            },
             dist: {
                 options: {
                     mangle: false,
@@ -52,9 +64,26 @@ module.exports = function (grunt) {
                 stripBanners: true,
                 banner: '/* Artecsan */'
             },
+            all: {
+                src: ['dist/app.js', 'dist/plugins.js', 'dist/services.js', 'dist/directives.js', 'dist/components.js', 'dist/filters.js'],
+                dest: 'dist/main.js'
+            },
             dist: {
                 src: plugins,
                 dest: 'dist/plugins.js'
+            }
+        },
+        clean: {
+            js: ['dist/*.js', '!dist/main.js']
+        },
+        watch: {
+            scripts: {
+                files: ['js/**/*.js'],
+                tasks: ['default'],
+                options: {
+                    spawn: false,
+                    event: ['all', 'changed', 'added', 'deleted']
+                }
             }
         }
     });
@@ -62,8 +91,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-    grunt.registerTask('default', ['uglify', 'concat', 'replace']);
+    grunt.registerTask('default', ['uglify:dist', 'concat:dist', 'concat:all', 'uglify:all', 'replace', 'clean']);
+
+    grunt.registerTask('dev', ['uglify:dist', 'concat:dist', 'concat:all', 'uglify:all', 'replace', 'clean', 'watch']);
 
 };
