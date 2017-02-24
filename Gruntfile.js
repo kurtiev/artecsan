@@ -82,7 +82,15 @@ module.exports = function (grunt) {
                 tasks: ['default'],
                 options: {
                     spawn: false,
-                    event: ['all', 'changed', 'added', 'deleted']
+                    interrupt: true,
+                    event: ['changed', 'added', 'deleted']
+                }
+            }
+        },
+        express: {
+            dev: {
+                options: {
+                    script: 'server.js'
                 }
             }
         }
@@ -92,11 +100,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     grunt.registerTask('default', ['uglify:dist', 'concat:dist', 'concat:all', 'uglify:all', 'replace', 'clean']);
 
-    grunt.registerTask('dev', ['uglify:dist', 'concat:dist', 'concat:all', 'uglify:all', 'replace', 'clean', 'watch']);
+    grunt.registerTask('dev', ['uglify:dist', 'concat:dist', 'concat:all', 'uglify:all', 'replace', 'clean', 'express', 'watch']);
 
 };
