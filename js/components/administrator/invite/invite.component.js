@@ -57,6 +57,7 @@
         that.api = api;
         that.usersList = [];
         that.get_refbooks = [];
+        that.authenticationUserId = auth.authentication.user.id;
 
         that.api.get_modules({is_tree_mode: 1}).then(function (res) {
             that.modules_tree = res.data.data.modules_tree;
