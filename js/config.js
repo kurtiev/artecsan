@@ -7,6 +7,15 @@ var appConfig = {
     apiBincodesDomain: 'https://api.bincodes.com/'
 };
 
+var ENV = '@@CONFIG_ENV';
+
+if (ENV === 'production') {
+    appConfig.apiDomain = 'http://52.173.17.59/';
+} else if (ENV === 'staging') {
+
+}
+
+
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdleProvider, localStorageServiceProvider, $httpProvider, $locationProvider) {
 
     // Configure Idle settings

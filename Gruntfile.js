@@ -14,6 +14,10 @@ module.exports = function (grunt) {
 
     // var styles = ['css/bootstrap.min.css', 'font-awesome/css/font-awesome.css', 'css/plugins/sweetalert/sweetalert.css', 'css/animate.css', 'css/style.css', 'css/Artecsan.css'];
 
+    var argv = require('yargs').argv;
+
+    var ENV  = argv.env || 'development';
+
     grunt.initConfig({
         replace: {
             build_replace: {
@@ -29,6 +33,20 @@ module.exports = function (grunt) {
                     {
                         src: ['index.production'],
                         dest: 'index.html'
+                    }
+                ]
+            },
+            CONFIG_ENV: {
+                options: {
+                    variables: {
+                        'CONFIG_ENV': ENV
+                    }
+                },
+                // Source and destination files
+                files: [
+                    {
+                        src: ['dist/main.js'],
+                        dest: 'dist/main.js'
                     }
                 ]
             }
