@@ -46,6 +46,12 @@
                                                 <label>Street Address <span class="text-danger">*</span></label>
                                                 <input maxlength="50" type="text" class="form-control" placeholder="Street Address" ng-model="$ctr.model.address" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Zip code <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="Zip code" ng-model="$ctr.model.zip" required
+                                                       ng-pattern="/^\d+$/" minlength="3" maxlength="6"
+                                                       ng-change="$ctr.onZipChanged()" name="zip">
+                                            </div>
                                             <div class="form-group dropdown-overflow">
                                                 <label>City <span class="text-danger">*</span></label>
                                                 <!--<input type="text" class="form-control" placeholder="City" ng-model="$ctr.model.city" required ng-keyup="$ctr.get_location($ctr.model.city, 'city')">-->
@@ -63,12 +69,6 @@
                                                        typeahead-on-select="$ctr.selectState($item, $model, $label, $event)">
                                             </div>
                                             <div class="form-group">
-                                                <label>Zip code <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Zip code" ng-model="$ctr.model.zip" required
-                                                       ng-pattern="/^\d+$/" minlength="3" maxlength="6"
-                                                       ng-change="$ctr.onZipChanged()" name="zip">
-                                            </div>
-                                            <div class="form-group">
                                                 <label>Phone Number <span class="text-danger">*</span></label>
                                                 <!--<input type="text" class="form-control" only-digits placeholder="Phone Number" ng-model="$ctr.model.phone_number" required>-->
                                                 <div class="phone-input">
@@ -78,6 +78,7 @@
                                                         </div>
                                                     </div>
                                                     <input name="phone" type="text" class="form-control"
+                                                           only-digits
                                                            ng-model="$ctr.model.phone_number" ac-phone maxlength="10" required placeholder="Phone Number">
                                                 </div>
 
