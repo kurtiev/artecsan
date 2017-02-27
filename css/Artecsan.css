@@ -650,3 +650,14 @@ fieldset[disabled] .btn-primary.active {
     width: 100%;
     max-width: 1600px;
 }
+
+.dropdown-menu-left {
+    margin-left: -53px;
+}
+
+
+@media (max-width: 480px) {
+    .dropdown-menu-left {
+        margin-left: 0;
+    }
+}

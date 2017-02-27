@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var addUserInviteController = function (user, refbooks, $uibModalInstance, restaurant) {
+    var addUserInviteController = function (user, refbooks, $uibModalInstance, restaurant, modules) {
 
         var that = this;
 
@@ -9,7 +9,15 @@
 
         that.userTypes = refbooks.user_types;
 
+        that.modules = modules;
+
         that.myGrantLevel = restaurant.data.info.grant_level;
+
+        if (user) {
+            if (user.permissions) {
+                that.modules = user.permissions
+            }
+        }
 
         that.m = {
             email: user ? user.email : null,
@@ -28,6 +36,11 @@
             if (!form.$valid) {
                 return
             }
+
+            if (that.m.type_ids === 7) {
+                that.m.permissions = that.modules
+            }
+
 
             $uibModalInstance.close(that.m);
 
@@ -51,6 +64,10 @@
         that.api = api;
         that.usersList = [];
         that.get_refbooks = [];
+
+        that.api.get_modules({is_tree_mode: 1}).then(function (res) {
+            that.modules_tree = res.data.data.modules_tree;
+        });
 
         api.get_restaurant($state.params.id).then(function (res) {
             try {
@@ -107,7 +124,8 @@
                     user: function () {
                         return null
                     },
-                    refbooks: that.get_refbooks
+                    refbooks: that.get_refbooks,
+                    modules: angular.copy(that.modules_tree)
                 }
             });
 
@@ -130,7 +148,8 @@
                     user: function () {
                         return user
                     },
-                    refbooks: that.get_refbooks
+                    refbooks: that.get_refbooks,
+                    modules: angular.copy(that.modules_tree)
                 }
             });
 
@@ -194,6 +213,11 @@
                     type_ids: [that.usersList[i].type_ids],
                     is_disabled: that.usersList[i].is_disabled // confuse
                 };
+
+                if (that.usersList[i].permissions) {
+                    u.permissions = that.usersList[i].permissions
+                }
+
                 sentList.push(u)
             }
 
