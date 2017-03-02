@@ -2,10 +2,12 @@
 <div id="wrapper">
 
     <header-component></header-component>
+    <navigation-component ng-if="$ctr.isAdministratorEdit"></navigation-component>
+
 
     <!-- Page wraper -->
-    <div id="page-wrapper" class="gray-bg navigation-hide"
-         ng-class="{'navigation-hide' : !main.isFoodSetup && main.isRegistration}">
+    <div id="page-wrapper" class="gray-bg"
+         ng-class="{'navigation-hide' : !$ctr.isAdministratorEdit}">
 
 
         <!-- Main view  -->
@@ -133,11 +135,14 @@
                                                 <button type="button" class="btn btn-primary" ng-click="$ctr.back()"> &lt;&lt; Back</button>
                                             </div>
                                             <div class="col-sm-8">
-                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="!$ctr.$state.params.id">
+                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="!$ctr.$state.params.id && !$ctr.isAdministratorEdit">
                                                     Next - Disclaimer and Confidentiality Agreement
                                                 </button>
-                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="$ctr.$state.params.id">
+                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="$ctr.$state.params.id && !$ctr.isAdministratorEdit">
                                                     Next - User Setup
+                                                </button>
+                                                <button type="submit" class="btn btn-primary block float-right m-b" ng-show="$ctr.isAdministratorEdit">
+                                                    Save
                                                 </button>
                                             </div>
                                         </div>
