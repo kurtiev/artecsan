@@ -1,0 +1,77 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
+
+        <!-- Main view  -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Menu Items Mapping</h2>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div  class="col-sm-12" >
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="th-text-center th-vertical-align-middle">
+                                            <tr>
+                                                <th class="width-120">SKU</th>
+                                                <th class="min-width-150">Inventory Item</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <ng-form>
+                                                <tr>
+                                                    <td>{{'32353453'}}</td>
+                                                    <td>
+                                                   <span class="no-wrap">
+                                                        {{'test item'}}
+                                                   </span>
+                                                    </td>
+
+                                                </tr>
+                                            </ng-form>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <button type="button" scroll-top class="btn btn-primary"
+                                                    onclick="window.history.go(-1); return false;">&lt;&lt; Back
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <button type="submit" class="btn btn-primary" scroll-top >Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

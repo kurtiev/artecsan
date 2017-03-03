@@ -73,8 +73,11 @@
             <li ng-if="$ctr.permissions['50'].r" ui-sref-active="active" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="performanceScore"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'Performance Score' }}</span> </a>
             </li>
-            <li ui-sref-active="active" ng-if="$ctr.permissions['43'].r" id="reports" ng-hide="$ctr.state.includes('home')">
-                <a ui-sref="admin.dashboardSubCategories"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span> </a>
+            <li ui-sref-active="active" ng-class="{'active': $ctr.state.includes('reports')}" ng-if="$ctr.permissions['43'].r" id="reports" ng-hide="$ctr.state.includes('home')">
+                <a ui-sref="reports.reportsCategory"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Reports' }}</span>
+
+                    <i class="fa fa-warning fa-lg pull-right m-t-xs" style="color: #ed5565"></i>
+                </a>
             </li>
             <li ui-sref-active="active" ng-class="{'active': $ctr.state.includes('administrator')}" ng-if="$ctr.permissions['51'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="administrator.menu"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'Administrator' }}</span> </a>
