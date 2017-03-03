@@ -1,9 +1,11 @@
 (function () {
     'use strict';
 
-    function restaurantProfileController(api, $state, $timeout, core, utils, restaurant, auth, SweetAlert) {
+    function restaurantProfileController(api, $state, $timeout, core, utils, restaurant, auth, SweetAlert, localStorageService) {
 
         var that = this;
+        that.$state = $state;
+        that.isAdministratorEdit = ($state.includes('administrator.restaurantProfile') && (typeof localStorageService.get('restaurant_id') === 'object'));
         that.form = {};
         that.api = api;
         that.auth = auth;
@@ -27,8 +29,19 @@
             };
         };
 
-        if (!core.data.new_restaurant && !$state.params.id) {
+        var restaurant_id = $state.params.id;
+
+        if (that.isAdministratorEdit) {
+            restaurant_id = localStorageService.get('restaurant_id').restaurant_id;
+        }
+
+        if (!core.data.new_restaurant && !restaurant_id && !that.isAdministratorEdit) {
             $state.go('registration');
+            return;
+        }
+
+        if (!restaurant_id && that.isAdministratorEdit) {
+            $state.go('administrator.menu');
             return;
         }
 
@@ -45,34 +58,37 @@
                 return
             }
 
-            core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
-            core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
-            core.data.new_restaurant.restaurant.address = that.model.address;
-            core.data.new_restaurant.restaurant.city = that.model.city;
-            core.data.new_restaurant.restaurant.state = that.model.state;
-            core.data.new_restaurant.restaurant.zip = that.model.zip;
-            core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
+            if (!that.isAdministratorEdit) {
+                core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
+                core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
+                core.data.new_restaurant.restaurant.address = that.model.address;
+                core.data.new_restaurant.restaurant.city = that.model.city;
+                core.data.new_restaurant.restaurant.state = that.model.state;
+                core.data.new_restaurant.restaurant.zip = that.model.zip;
+                core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
+            }
 
-            if ($state.params.id) {
-                $state.go('payment', {id: $state.params.id})
+            if (!that.isAdministratorEdit) {
+                $state.go('payment', {id: restaurant_id})
             } else {
-                $state.go('payment')
+                $state.go('administrator.restaurantPayment')
             }
         };
 
         that.back = function () {
-            core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
-            core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
-            core.data.new_restaurant.restaurant.address = that.model.address;
-            core.data.new_restaurant.restaurant.city = that.model.city;
-            core.data.new_restaurant.restaurant.state = that.model.state;
-            core.data.new_restaurant.restaurant.zip = that.model.zip;
-            core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
 
-            if ($state.params.id) {
-                $state.go('subscription', {id: $state.params.id})
+            if (!that.isAdministratorEdit) {
+                core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
+                core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
+                core.data.new_restaurant.restaurant.address = that.model.address;
+                core.data.new_restaurant.restaurant.city = that.model.city;
+                core.data.new_restaurant.restaurant.state = that.model.state;
+                core.data.new_restaurant.restaurant.zip = that.model.zip;
+                core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
+
+                $state.go('subscription', {id: restaurant_id})
             } else {
-                $state.go('subscription')
+                $state.go('administrator.menu')
             }
         };
 
@@ -80,8 +96,8 @@
             core.getRefbooks().then(function (res) {
                 that.get_refbooks = res;
                 // get restaurant for edit, run if we can direct going to this step or just after reloading page
-                if ($state.params.id && auth.authentication.isLogged && !core.data.new_restaurant) {
-                    restaurant.set_to_edit($state.params.id).then(function () {
+                if (restaurant_id && auth.authentication.isLogged && !core.data.new_restaurant) {
+                    restaurant.set_to_edit(restaurant_id).then(function () {
                         initModel();
                         that.onZipChanged();
                     })
@@ -121,7 +137,7 @@
                 var zip = that.model.zip;
 
                 if (zip) {
-                    that.api.locations_lookup({search_for: zip}).then(function (response) {
+                    that.api.locations_lookup({search_for: zip.toString()}).then(function (response) {
 
                             if (response.data.data.locations.length) {
                                 that.model.city = response.data.data.locations[0].clear_name;
@@ -157,9 +173,59 @@
                 }
             }, 300);
         };
+
+        that.saveProfile = function (form) {
+
+            console.log(core.data);
+
+
+            if (!form.$valid || !parseInt(restaurant_id)) {
+                return
+            }
+
+            var m = {
+                // subscription_type_id: core.data.new_restaurant.subscription_type_id,
+                pos_id: core.data.new_restaurant.pos_id,
+                restaurant: {
+                    restaurant_name: core.data.new_restaurant.restaurant.restaurant_name,
+                    entity_type_id: core.data.new_restaurant.restaurant.entity_type_id,
+                    address: core.data.new_restaurant.restaurant.address,
+                    city_geoname_id: core.data.new_restaurant.restaurant.city_geoname_id,
+                    logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
+                    state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
+                    zip: core.data.new_restaurant.restaurant.zip ? core.data.new_restaurant.restaurant.zip.toString() : null,
+                    phone_number: core.data.new_restaurant.restaurant.phone_number
+                },
+                // payment: {
+                //     card_number: core.data.new_restaurant.payment.card_number,
+                //     expiration_month: core.data.new_restaurant.payment.expiration_month,
+                //     expiration_year: core.data.new_restaurant.payment.expiration_year,
+                //     coupon_code: core.data.new_restaurant.payment.coupon_code ? core.data.new_restaurant.payment.coupon_code.toString() : core.data.new_restaurant.payment.coupon_code,
+                //     first_name: core.data.new_restaurant.payment.first_name,
+                //     last_name: core.data.new_restaurant.payment.last_name,
+                //     zip: core.data.new_restaurant.payment.zip ? core.data.new_restaurant.payment.zip.toString() : null,
+                //     billing_address: core.data.new_restaurant.payment.billing_address,
+                //     cv_code: core.data.new_restaurant.payment.cv_code
+                // }
+            };
+            that.api.update_restaurant(m, restaurant_id).then(function (res) {
+                try {
+                    if (res.data.data.code === 1000) {
+                        alertService.showAlertSave();
+                        if (!that.isAdministratorEdit) {
+                            setTimeout(function () {
+                                $state.go('invite', {id: restaurant_id});
+                            }, 1000);
+                        }
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            });
+        };
     }
 
-    restaurantProfileController.$inject = ['api', '$state', '$timeout', 'core', 'utils', 'restaurant', 'auth', 'SweetAlert'];
+    restaurantProfileController.$inject = ['api', '$state', '$timeout', 'core', 'utils', 'restaurant', 'auth', 'SweetAlert', 'localStorageService'];
 
     angular.module('inspinia').component('restaurantProfileComponent', {
         templateUrl: 'js/components/registration/restaurantProfile/restaurantProfile.html',

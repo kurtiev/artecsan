@@ -3,9 +3,11 @@
 
     <header-component></header-component>
 
+    <navigation-component ng-if="$ctr.isAdministratorEdit"></navigation-component>
+
     <!-- Page wraper -->
-    <div id="page-wrapper" class="gray-bg navigation-hide"
-         ng-class="{'navigation-hide' : !main.isFoodSetup && main.isRegistration}">
+    <div id="page-wrapper" class="gray-bg"
+         ng-class="{'navigation-hide' : !$ctr.isAdministratorEdit}">
 
 
         <!-- Main view  -->
@@ -86,10 +88,12 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6 text-left">
-                                                    <button type="button" class="btn btn-primary" ng-click="$ctr.back()">&lt;&lt; Back</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="$ctr.back()" ng-show="!$ctr.isAdministratorEdit">&lt;&lt; Back</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="$ctr.back()" ng-show="$ctr.isAdministratorEdit" scroll-top>&lt;&lt; Back</button>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <button type="submit" class="btn btn-primary block float-right m-b">Next - Payment Setup</button>
+                                                    <!--<button type="button" class="btn btn-primary block float-right m-b m-r-sm" ng-show="$ctr.isAdministratorEdit" ng-click="$ctr.saveProfile($ctr.form)">Save</button>-->
                                                 </div>
                                             </div>
                                         </fieldset>
