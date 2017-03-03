@@ -1,5 +1,5 @@
 <!-- Wrapper-->
-<div id="wrapper" ng-if="$ctr.permissions['43'].r">
+<div id="wrapper" ng-if="$ctr.permissions['45'].r || $ctr.permissions['46'].r">
 
     <header-component></header-component>
 
@@ -70,9 +70,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <button type="button" scroll-top class="btn btn-primary m-t-md"
-                                                    onclick="window.history.go(-1); return false;">&lt;&lt; Back
-                                            </button>
+                                            <a href="" ui-sref="reports.reportsCategory" type="button" scroll-top class="btn btn-primary m-t-md">&lt;&lt; Back
+                                            </a>
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <div class="pull-right">

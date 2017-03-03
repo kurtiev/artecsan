@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div  class="col-sm-12 col-md-6 col-lg-4" ui-sref="reports.menuItemsMapping">
+                                <div  class="col-sm-12 col-md-6 col-lg-4" ng-if="$ctr.permissions['45'].r || $ctr.permissions['46'].r" ui-sref="reports.menuItemsMapping">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <i class="fa fa-warning fa-lg pull-right m-t-xs text-warning" ng-show="report_items_match_to_show"></i>
