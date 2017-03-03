@@ -3,7 +3,7 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack, $interval) {
 
     var that = this;
     that.api = api;
@@ -28,8 +28,24 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
         $rootScope.currentState = to.name;
     });
 
+
+    var _report_items_match = function () {
+        that.api.report_items_match().then(function (res) {
+            $rootScope.report_items_match_to_show = res.data.data.items_to_match;
+        })
+    };
+
+    _report_items_match();
+
     that.$onInit = function () {
         that.permissions = restaurant.data.permissions;
+
+        if ($rootScope.report_items_match_interval) {
+            $interval.cancel($rootScope.report_items_match_interval);
+        }
+
+        $rootScope.report_items_match_interval =  $interval(_report_items_match, 1000 * 60)
+
     };
 
     var invite_key = $location.search()['invite_key'];

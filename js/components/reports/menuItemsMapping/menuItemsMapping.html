@@ -1,5 +1,5 @@
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" ng-if="$ctr.permissions['43'].r">
 
     <header-component></header-component>
 
@@ -23,26 +23,46 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="row">
-                                <div  class="col-sm-12" >
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 m-b-lg">
+                                    <div>
+                                        <label for="status">Status:</label>
+                                        <select id="status" class="form-control" ng-model="$ctr.searchModel.is_active" ng-change="$ctr.getItems()">
+                                            <option value="1">Active</option>
+                                            <option value="0">Archived</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div  class="col-xs-12" >
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
                                             <thead class="th-text-center th-vertical-align-middle">
                                             <tr>
-                                                <th class="width-120">SKU</th>
-                                                <th class="min-width-150">Inventory Item</th>
-
+                                                <th class="width-120">Total</th>
+                                                <th class="width-120">Name</th>
+                                                <th class="min-width-150">Menu Item</th>
+                                                <th class="width-60"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <ng-form>
-                                                <tr>
-                                                    <td>{{'32353453'}}</td>
-                                                    <td>
-                                                   <span class="no-wrap">
-                                                        {{'test item'}}
-                                                   </span>
+                                                <tr ng-repeat="item in $ctr.items track by $index">
+                                                    <td class="text-center">
+                                                        {{::item.total}}
                                                     </td>
-
+                                                    <td>
+                                                        {{::item.name}}
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" ng-model="item.menu_item_id" ng-change="$ctr.setMenuItemId(item)" ng-options="menu.id as menu.menu_item_name for menu in $ctr.menus"></select>
+                                                    </td>
+                                                    <td>
+                                                        <a href="" ng-click="$ctr.removeItem($index, item)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr ng-show="!$ctr.items.length">
+                                                    <td colspan="4" class="text-center">
+                                                        No Results
+                                                    </td>
                                                 </tr>
                                             </ng-form>
                                             </tbody>
@@ -50,12 +70,22 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <button type="button" scroll-top class="btn btn-primary"
+                                            <button type="button" scroll-top class="btn btn-primary m-t-md"
                                                     onclick="window.history.go(-1); return false;">&lt;&lt; Back
                                             </button>
                                         </div>
                                         <div class="col-xs-6 text-right">
-                                            <button type="submit" class="btn btn-primary" scroll-top >Save</button>
+                                            <div class="pull-right">
+                                                <ul uib-pagination total-items="$ctr.searchModel.total"
+                                                    ng-model="$ctr.searchModel.paginationOffset"
+                                                    max-size="10"
+                                                    class="pagination-sm"
+                                                    items-per-page="$ctr.searchModel.paginationCount"
+                                                    ng-change="$ctr.getItems()"
+                                                    boundary-link-numbers="true"
+                                                    rotate="false"></ul>
+                                            </div>
+                                            <!--<button type="submit" class="btn btn-primary" scroll-top >Save</button>-->
                                         </div>
                                     </div>
                                 </div>

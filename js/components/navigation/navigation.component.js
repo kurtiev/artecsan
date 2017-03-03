@@ -8,6 +8,7 @@
         that.api = api;
         that.auth = auth;
         that.user = auth.authentication.user;
+        that.report_items_match_to_show = $rootScope.report_items_match_to_show;
 
         that.state = $state;
 

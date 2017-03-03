@@ -7,7 +7,9 @@
             .state('reports.reportsCategory', {
                 url: "/reports-category",
                 templateUrl: 'js/components/reports/reportsCategory/reportsCategory.html',
-                data: {pageTitle: 'Administrator'}
+                data: {pageTitle: 'Reports'},
+                controllerAs: '$ctr',
+                controller: function ($rootScope) {}
             });
     })
 

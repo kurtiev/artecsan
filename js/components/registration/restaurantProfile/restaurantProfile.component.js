@@ -58,15 +58,14 @@
                 return
             }
 
-            if (!that.isAdministratorEdit) {
-                core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
-                core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
-                core.data.new_restaurant.restaurant.address = that.model.address;
-                core.data.new_restaurant.restaurant.city = that.model.city;
-                core.data.new_restaurant.restaurant.state = that.model.state;
-                core.data.new_restaurant.restaurant.zip = that.model.zip;
-                core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
-            }
+            core.data.new_restaurant.restaurant.restaurant_name = that.model.restaurant_name;
+            core.data.new_restaurant.restaurant.entity_type_id = that.model.entity_type_id;
+            core.data.new_restaurant.restaurant.address = that.model.address;
+            core.data.new_restaurant.restaurant.city = that.model.city;
+            core.data.new_restaurant.restaurant.state = that.model.state;
+            core.data.new_restaurant.restaurant.zip = that.model.zip;
+            core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
+            core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
 
             if (!that.isAdministratorEdit) {
                 $state.go('payment', {id: restaurant_id})
@@ -85,6 +84,7 @@
                 core.data.new_restaurant.restaurant.state = that.model.state;
                 core.data.new_restaurant.restaurant.zip = that.model.zip;
                 core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
+                core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
 
                 $state.go('subscription', {id: restaurant_id})
             } else {
@@ -174,9 +174,8 @@
             }, 300);
         };
 
+        // TODO still unused
         that.saveProfile = function (form) {
-
-            console.log(core.data);
 
 
             if (!form.$valid || !parseInt(restaurant_id)) {
@@ -194,7 +193,8 @@
                     logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
                     state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
                     zip: core.data.new_restaurant.restaurant.zip ? core.data.new_restaurant.restaurant.zip.toString() : null,
-                    phone_number: core.data.new_restaurant.restaurant.phone_number
+                    phone_number: core.data.new_restaurant.restaurant.phone_number,
+                    pos_report_url: core.data.new_restaurant.restaurant.pos_report_url,
                 },
                 // payment: {
                 //     card_number: core.data.new_restaurant.payment.card_number,

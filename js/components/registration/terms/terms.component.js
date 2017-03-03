@@ -35,7 +35,8 @@
                     logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
                     state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
                     zip: core.data.new_restaurant.restaurant.zip,
-                    phone_number: core.data.new_restaurant.restaurant.phone_number
+                    phone_number: core.data.new_restaurant.restaurant.phone_number,
+                    pos_report_url: core.data.new_restaurant.restaurant.pos_report_url
                 },
                 payment: {
                     card_number: core.data.new_restaurant.payment.card_number,

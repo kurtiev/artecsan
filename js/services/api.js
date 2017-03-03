@@ -111,7 +111,7 @@
             var auth = $injector.get('auth');
             return $http({
                 method: 'DELETE',
-                url: serviceBase + 'restaurants/'+id+'/invited',
+                url: serviceBase + 'restaurants/' + id + '/invited',
                 headers: {
                     'Authorization': appConfig.apiAuthorization
                 },
@@ -314,6 +314,26 @@
 
         serviceFactory.get_measure_units = function (model) {
             return $http.post(serviceBase + 'rb/uom_conformity', model, getAuthConfig());
+        };
+
+        serviceFactory.getItemsForMap = function (id, model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'restaurants/' + id + '/report',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.setItemsForMap = function (id, model) {
+            return $http.post(serviceBase + 'restaurants/' + id + '/report_items_match', model, getAuthConfig());
+        };
+
+        serviceFactory.report_items_match = function (id) {
+            return $http.get(serviceBase + 'restaurants/' + id + '/report_items_match', getAuthConfig());
         };
 
         return serviceFactory;
