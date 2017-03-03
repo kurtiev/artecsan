@@ -89,7 +89,7 @@
                     name: item.name,
                     focus_item_id: item.focus_item_id,
                     menu_item_id: item.menu_item_id,
-                    is_active: item === 1 ? 0 : 1
+                    is_active: item.is_active === 1 ? 0 : 1
                 }]
             };
 
