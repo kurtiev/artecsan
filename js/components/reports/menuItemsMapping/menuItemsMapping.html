@@ -44,7 +44,7 @@
                                                 <th class="min-width-150">POS Menu Item</th>
                                                 <th class="min-width-150">Artecsan Menu Item</th>
                                                 <th ng-if="$ctr.searchModel.is_active == 1" class="width-100">Move to Archived</th>
-                                                <th ng-if="$ctr.searchModel.is_active != 1" class="width-100">Restore to Archived</th>
+                                                <th ng-if="$ctr.searchModel.is_active != 1" class="width-100">Restore to Active</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -62,7 +62,7 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <a ng-if="$ctr.searchModel.is_active == 1" title="Move to Archived" href="" ng-click="$ctr.removeItem($index, item)" class="btn btn-danger btn-circle" ><i class="fa fa-times"></i></a>
-                                                        <a ng-if="$ctr.searchModel.is_active != 1" title="Restore to Archived" href="" ng-click="$ctr.removeItem($index, item)"><i class="fa fa-upload fa-2x"></i></a>
+                                                        <a ng-if="$ctr.searchModel.is_active != 1" title="Restore to Active" href="" ng-click="$ctr.removeItem($index, item)"><i class="fa fa-upload fa-2x"></i></a>
                                                     </td>
                                                 </tr>
                                                 <tr ng-show="!$ctr.items.length">
@@ -77,7 +77,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button ng-disabled="$ctr.searchModel.isDisabledBtn" ng-if="$ctr.searchModel.is_active == 1" ng-click="$ctr.deleteChecked();"   class="btn btn-danger pull-right">Move selected to Archived</button>
-                                            <button ng-disabled="$ctr.searchModel.isDisabledBtn" ng-if="$ctr.searchModel.is_active != 1" ng-click="$ctr.deleteChecked();"  class="btn btn-success pull-right">Restore selected to Archived</button>
+                                            <button ng-disabled="$ctr.searchModel.isDisabledBtn" ng-if="$ctr.searchModel.is_active != 1" ng-click="$ctr.deleteChecked();"  class="btn btn-success pull-right">Restore selected to Active</button>
                                         </div>
                                     </div>
                                     <div class="row">
