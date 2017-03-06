@@ -78,6 +78,7 @@
                             zip: restaurant_to_edit.zip,
                             city_geoname_id: restaurant_to_edit.city_geoname_id,
                             state_geoname_id: restaurant_to_edit.state_geoname_id,
+                            pos_report_url: restaurant_to_edit.pos_report_url,
                             phone_number: restaurant_to_edit.phone_number
                         },
                         payment: {
