@@ -13,6 +13,13 @@
 
             var deferred = $q.defer();
 
+            if (!id) {
+                data.info = null;
+                data.permissions = null;
+                deferred.resolve();
+                return deferred.promise;
+            }
+
             api.get_restaurant(id).then(function (res1) {
 
                 api.set_active_restaurant({restaurant_id: id}).then(function (res) {
