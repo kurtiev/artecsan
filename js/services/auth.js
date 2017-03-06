@@ -37,6 +37,10 @@
             // Clear all static data and User info
             localStorageService.clearAll();
             var auth = $injector.get('auth');
+            var restaurant = $injector.get('restaurant');
+
+            restaurant.set_restaurant(0);
+
             auth.authentication = that.userData;
         };
 
