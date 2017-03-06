@@ -25,6 +25,7 @@
                 city: core.data.new_restaurant ? core.data.new_restaurant.restaurant.city : null,
                 state: core.data.new_restaurant ? core.data.new_restaurant.restaurant.state : null,
                 zip: core.data.new_restaurant ? core.data.new_restaurant.restaurant.zip : null,
+                pos_report_url: core.data.new_restaurant ? core.data.new_restaurant.restaurant.pos_report_url : null,
                 phone_number: core.data.new_restaurant ? core.data.new_restaurant.restaurant.phone_number : null
             };
         };
