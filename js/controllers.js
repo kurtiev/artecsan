@@ -32,6 +32,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
 
     var _report_items_match = function () {
+        if (!that.restaurant_id) return;
         that.api.report_items_match(that.restaurant_id.restaurant_id).then(function (res) {
             $rootScope.report_items_match_to_show = res.data.data.items_to_match;
         })
