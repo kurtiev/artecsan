@@ -86,7 +86,7 @@
 
             SweetAlert.swal({
                     title: "Are you sure?",
-                    text: item.is_active === 1 ? "This item will be moved to Archived" : 'This item will be Restored to Archived',
+                    text: item.is_active === 1 ? "This item will be moved to Archived" : 'This item will be Restored to Active',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#ed5565",
@@ -144,7 +144,7 @@
 
             SweetAlert.swal({
                     title: "Are you sure?",
-                    text: that.searchModel.is_active == 1 ? "All selected items will be moved to Archived" : 'All selected items will be Restored to Archived',
+                    text: that.searchModel.is_active == 1 ? "All selected items will be moved to Archived" : 'All selected items will be Restored to Active',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#ed5565",
