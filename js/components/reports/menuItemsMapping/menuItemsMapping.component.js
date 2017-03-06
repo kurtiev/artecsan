@@ -107,7 +107,7 @@
                         that.api.setItemsForMap(that.restaurant_id.restaurant_id, m).then(function (res) {
                             if (res.data.data.code === 1000) {
                                 that.getItems();
-                                that.api.report_items_match().then(function (res) {
+                                that.api.report_items_match(that.restaurant_id.restaurant_id).then(function (res) {
                                     $rootScope.report_items_match_to_show = res.data.data.items_to_match;
                                 })
                             }
@@ -172,7 +172,7 @@
                         that.api.setItemsForMap(that.restaurant_id.restaurant_id, itemsIsArchived).then(function (res) {
                             if (res.data.data.code === 1000) {
                                 that.getItems();
-                                that.api.report_items_match().then(function (res) {
+                                that.api.report_items_match(that.restaurant_id.restaurant_id).then(function (res) {
                                     $rootScope.report_items_match_to_show = res.data.data.items_to_match;
                                 })
                             }

@@ -3,12 +3,14 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack, $interval) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack, $interval, localStorageService) {
 
     var that = this;
     that.api = api;
 
     that.inviteForm = {};
+
+    that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
 
     $rootScope.$on('restaurantSelected', function () {
         that.permissions = restaurant.data.permissions;
@@ -30,7 +32,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
 
     var _report_items_match = function () {
-        that.api.report_items_match().then(function (res) {
+        that.api.report_items_match(that.restaurant_id.restaurant_id).then(function (res) {
             $rootScope.report_items_match_to_show = res.data.data.items_to_match;
         })
     };

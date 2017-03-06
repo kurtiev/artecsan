@@ -40,7 +40,7 @@
         that.selectRestaurant = function (restaurant) {
             that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
 
-                that.api.report_items_match().then(function (res) {
+                that.api.report_items_match(restaurant.id).then(function (res) {
                     $rootScope.report_items_match_to_show = res.data.data.items_to_match;
                 });
 
