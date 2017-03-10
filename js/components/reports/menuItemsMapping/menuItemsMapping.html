@@ -55,7 +55,7 @@
                                                         <label for="chbDelay1-{{$index}}"></label>
                                                     </td>
                                                     <td>
-                                                        {{::item.name}}
+                                                        {{item.name}}
                                                     </td>
                                                     <td>
                                                         <select class="form-control" ng-model="item.menu_item_id" ng-change="$ctr.setMenuItemId(item)" ng-options="menu.id as menu.menu_item_name for menu in $ctr.menus"></select>
