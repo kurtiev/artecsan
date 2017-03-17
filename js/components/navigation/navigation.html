@@ -44,7 +44,7 @@
                 <a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['17'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="p.o.s.sync" ng-hide="$ctr.state.includes('home')">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-table"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>
+                <a ui-sref="foodSetup.posSync"><i class="fa fa-print"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['18'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="payroll_setup" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-money"></i> <span class="nav-label">{{ 'Payroll' }}</span> </a>
@@ -52,8 +52,11 @@
             <li ng-if="$ctr.permissions['19'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="accounting" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-calculator"></i> <span class="nav-label">{{ 'Accounting' }}</span> </a>
             </li>
-            <li ng-if="$ctr.permissions['52'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="users" ng-hide="$ctr.state.includes('home')">
-                <a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>
+            <!--<li ng-if="$ctr.permissions['52'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="users" ng-hide="$ctr.state.includes('home')">-->
+                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>-->
+            <!--</li>-->
+            <li ng-if="$ctr.permissions['26'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="users" ng-hide="$ctr.state.includes('home')">
+                <a ng-click="$ctr.linkInventory();"><i class="fa fa-table"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
             </li>
 
             <hr ng-if="$ctr.state.includes('foodSetup') || $ctr.state.includes('food')">
@@ -65,7 +68,7 @@
                 <a ui-sref="admin.managementCategories"><i class="fa fa-edit"></i> <span class="nav-label">{{ 'Management' }}</span> </a>
             </li>
             <li ui-sref-active="active" ng-if="$ctr.permissions['26'].r" id="inventory" ng-hide="$ctr.state.includes('home')">
-                <a ui-sref="admin.inventoryCategories"><i class="fa fa-desktop"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
+                <a ng-click="$ctr.linkInventory();"><i class="fa fa-table"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['42'].r" id="consumer_reviews" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>

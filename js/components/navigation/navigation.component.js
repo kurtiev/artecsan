@@ -9,7 +9,6 @@
         that.auth = auth;
         that.user = auth.authentication.user;
         that.report_items_match_to_show = $rootScope.report_items_match_to_show;
-
         that.state = $state;
 
 
@@ -41,6 +40,19 @@
         that.logOut = function () {
             auth.logOut();
             $state.go('login')
+        };
+
+        that.linkInventory = function () {
+            if ($rootScope.subscription_type_id == 3) {
+                $state.go('admin.inventoryCategories')
+            } else {
+                if ($rootScope.subscription_type_id == 2) {
+                    $state.go('foodSubCategories')
+                }
+                if ($rootScope.subscription_type_id == 1) {
+                    $state.go('admin.comingSoon')
+                }
+            }
         }
 
     }

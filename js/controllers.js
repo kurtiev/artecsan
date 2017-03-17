@@ -13,7 +13,10 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
     that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
 
     $rootScope.$on('restaurantSelected', function () {
+        $rootScope.restaurant_id = restaurant.data.info.id;
         that.permissions = restaurant.data.permissions;
+        that.subscription_type_id = restaurant.data.info.subscription_type_id;
+        console.log(that.subscription_type_id);
     });
 
     $rootScope.$on('$stateChangeStart', function (event) {
@@ -32,8 +35,8 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
 
     var _report_items_match = function () {
-        if (!that.restaurant_id) return;
-        that.api.report_items_match(that.restaurant_id.restaurant_id).then(function (res) {
+        if (!$rootScope.restaurant_id) return;
+        that.api.report_items_match($rootScope.restaurant_id).then(function (res) {
             $rootScope.report_items_match_to_show = res.data.data.items_to_match;
         })
     };
