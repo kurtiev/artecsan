@@ -15,8 +15,8 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
     $rootScope.$on('restaurantSelected', function () {
         $rootScope.restaurant_id = restaurant.data.info.id;
         that.permissions = restaurant.data.permissions;
+        $rootScope.subscription_type_id = restaurant.data.info.subscription_type_id;
         that.subscription_type_id = restaurant.data.info.subscription_type_id;
-        console.log(that.subscription_type_id);
     });
 
     $rootScope.$on('$stateChangeStart', function (event) {
