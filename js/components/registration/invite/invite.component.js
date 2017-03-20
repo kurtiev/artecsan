@@ -35,6 +35,9 @@
             if (that.restaurantSubscriptionTypeId == 1) {
                 return user.subscription_type_id == 1 || user.subscription_type_id == 3
             }
+            if (that.restaurantSubscriptionTypeId == 3) {
+                return user.subscription_type_id == 1 || user.subscription_type_id == 2 || user.subscription_type_id == 3
+            }
             // return user.grant_level >= that.myGrantLevel;
         };
 
