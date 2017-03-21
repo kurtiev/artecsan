@@ -196,7 +196,7 @@
             var yeld = m.measurement_like ? m.measurement_like.yield : null;
             var cost = 0;
             var measure_like;
-            var pack_cost = m.model.pack_cost || (m.model.case_cost / m.model.pack);
+            var pack_cost = m.model.pack_cost / m.model.total_unit_size || (m.model.case_cost / m.model.pack / m.model.total_unit_size);
 
             // 11 - it is ID of unit measure called "Each ..."
             var unit_cost = m.uom_id !== 11 ? caseCost / total_unit : pack_cost;
