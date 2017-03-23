@@ -63,6 +63,7 @@
         that.posSyncList = [];
         that.instalation_manual = null;
         that.pos_id = $state.params.pos_id;
+        that.pos_report_url = null;
 
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
 
@@ -94,6 +95,22 @@
             });
         };
 
+        that.updateCsvPath= function (form) {
+            if (!form.$valid) {
+                return
+            }
+            that.api.update_csv_path(that.restaurant_id.restaurant_id, {pos_report_url: that.pos_report_url}).then(function (res) {
+                try {
+                    if (res.data.data.code === 1000) {
+                        alertService.showAlertSave();
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            });
+
+        };
+
 
         that.$onInit = function () {
 
@@ -104,6 +121,14 @@
                     if (that.posSyncList[i].id == that.pos_id) {
                         that.instalation_manual = that.posSyncList[i].instalation_manual;
                     }
+                }
+            });
+
+            api.get_restaurant(that.restaurant_id.restaurant_id).then(function (res) {
+                try {
+                    that.pos_report_url = res.data.data.restaurants_list[0].pos_report_url;
+                } catch (e) {
+                   console.log(e)
                 }
             });
 

@@ -12,6 +12,7 @@
         that.modules = modules;
 
         that.myGrantLevel = restaurant.data.info.grant_level;
+        that.restaurantSubscriptionTypeId = restaurant.data.info.subscription_type_id;
 
         if (user) {
             if (user.permissions) {
@@ -25,6 +26,19 @@
             last_name: user ? user.last_name : null,
             type_ids: user ? user.type_ids : null,
             is_disabled: user ? user.is_disabled : 1
+        };
+
+        that.roleFilter = function (user) {
+            if (that.restaurantSubscriptionTypeId == 2) {
+                return user.subscription_type_id == 2 || user.subscription_type_id == 3
+            }
+            if (that.restaurantSubscriptionTypeId == 1) {
+                return user.subscription_type_id == 1 || user.subscription_type_id == 3
+            }
+            if (that.restaurantSubscriptionTypeId == 3) {
+                return user.subscription_type_id == 1 || user.subscription_type_id == 2 || user.subscription_type_id == 3
+            }
+            // return user.grant_level >= that.myGrantLevel;
         };
 
         that.grantLevelFilter = function (user) {
@@ -52,7 +66,7 @@
 
     };
 
-    function inviteController(api, $state, auth, core, $uibModal, alertService, SweetAlert) {
+    function inviteController(api, $state, auth, core, $uibModal, alertService, SweetAlert, $rootScope) {
 
         if (!auth.authentication.isLogged || !parseInt($state.params.id)) {
             $state.go('registration');
@@ -65,8 +79,21 @@
         that.usersList = [];
         that.get_refbooks = [];
 
-        that.api.get_modules({is_tree_mode: 1}).then(function (res) {
+        that.api.get_modules({
+            is_tree_mode: 1,
+            subscription_type_id: $rootScope.subscription_type_id
+        }).then(function (res) {
             that.modules_tree = res.data.data.modules_tree;
+        });
+
+
+        $rootScope.$on('restaurantSelected', function () {
+            that.api.get_modules({
+                is_tree_mode: 1,
+                subscription_type_id: $rootScope.subscription_type_id
+            }).then(function (res) {
+                that.modules_tree = res.data.data.modules_tree;
+            });
         });
 
         api.get_restaurant($state.params.id).then(function (res) {
@@ -245,7 +272,7 @@
 
     }
 
-    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'alertService', 'SweetAlert'];
+    inviteController.$inject = ['api', '$state', 'auth', 'core', '$uibModal', 'alertService', 'SweetAlert', '$rootScope'];
 
     angular.module('inspinia').component('inviteComponent', {
         templateUrl: 'js/components/registration/invite/invite.html',

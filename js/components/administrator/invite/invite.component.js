@@ -11,6 +11,7 @@
 
         that.modules = modules;
         that.myGrantLevel = restaurant.data.info.grant_level;
+        that.restaurantSubscriptionTypeId = restaurant.data.info.subscription_type_id;
 
         if (user) {
             if (user.permissions) {
@@ -24,6 +25,19 @@
             last_name: user ? user.last_name : null,
             type_ids: user ? user.type_ids : null,
             is_disabled: user ? user.is_disabled : 1
+        };
+
+        that.roleFilter = function (user) {
+            if (that.restaurantSubscriptionTypeId == 2) {
+                return user.subscription_type_id == 2 || user.subscription_type_id == 3
+            }
+            if (that.restaurantSubscriptionTypeId == 1) {
+                return user.subscription_type_id == 1 || user.subscription_type_id == 3
+            }
+            if (that.restaurantSubscriptionTypeId == 3) {
+                return user.subscription_type_id == 1 || user.subscription_type_id == 2 || user.subscription_type_id == 3
+            }
+            // return user.grant_level >= that.myGrantLevel;
         };
 
         that.grantLevelFilter = function (user) {
@@ -64,7 +78,10 @@
         that.get_refbooks = [];
         that.authenticationUserId = auth.authentication.user.id;
 
-        that.api.get_modules({is_tree_mode: 1}).then(function (res) {
+        that.api.get_modules({
+            is_tree_mode: 1,
+            subscription_type_id: $rootScope.subscription_type_id
+        }).then(function (res) {
             that.modules_tree = res.data.data.modules_tree;
         });
 
@@ -74,9 +91,13 @@
             $state.go('home');
             return
         }
-
-
         $rootScope.$on('restaurantSelected', function () {
+            that.api.get_modules({
+                is_tree_mode: 1,
+                subscription_type_id: $rootScope.subscription_type_id
+            }).then(function (res) {
+                that.modules_tree = res.data.data.modules_tree;
+            });
             that.permissions = restaurant.data.permissions;
         });
 

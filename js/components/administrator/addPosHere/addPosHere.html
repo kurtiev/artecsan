@@ -19,7 +19,7 @@
         </div>
         <div class="wrapper wrapper-content  animated fadeInRight">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12" ng-class="{'col-lg-6 col-md-12': $ctr.pos_id == 1}">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="row">
@@ -29,8 +29,19 @@
                                 </div>
                                 <div class="col-xs-12">
                                     <div ng-bind-html="$ctr.instalation_manual"></div>
+                                    <div class="row">
+                                        <div ng-if="$ctr.pos_id == 1" class="col-md-12 col-xs-12">
+                                            <form class="m-t" autocomplete="off" novalidate name="$ctr.form" ng-submit="$ctr.updateCsvPath($ctr.form)">
+                                                <div class="form-group">
+                                                    <label>POS Report path to CSV <span class="text-danger">*</span></label>
+                                                    <input type="text" placeholder="Enter your path to FTP folder" ng-pattern="/^[a-z0-9._\-\/]+$/i" class="form-control"  ng-model="$ctr.pos_report_url" required>
+                                                    <button type="submit" class="btn btn-primary block  float-right m-t-md">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-12">
+                                <div ng-if="$ctr.pos_id != 1" class="col-xs-12">
                                     <button class="btn btn-primary margin-right-10 float-right"
                                             ng-click="$ctr.connect()">Connect <span ng-show="$ctr.inRequest">...</span>
                                     </button>

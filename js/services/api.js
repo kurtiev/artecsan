@@ -336,6 +336,10 @@
             return $http.get(serviceBase + 'restaurants/' + id + '/report_items_match', getAuthConfig());
         };
 
+        serviceFactory.update_csv_path = function (id, model) {
+            return $http.put(serviceBase + 'restaurants/' + id + '/updateCsvPath', model, getAuthConfig());
+        };
+
         return serviceFactory;
     };
 

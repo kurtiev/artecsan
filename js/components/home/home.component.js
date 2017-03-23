@@ -39,19 +39,19 @@
 
         that.selectRestaurant = function (restaurant) {
             that.restaurantService.set_restaurant(restaurant.id).then(function (res) {
-
                 that.api.report_items_match(restaurant.id).then(function (res) {
                     $rootScope.report_items_match_to_show = res.data.data.items_to_match;
+                    $rootScope.restaurant_id = restaurant.id;
+                    $rootScope.subscription_type_id = restaurant.subscription_type_id;
                 });
 
                 for (var i in res.employees) {
-                    console.log(res.employees[i].type_ids);
                     if (res.employees[i].type_ids === 5) {
-                        $state.go('admin.inventoryCategories');
+                        $state.go('foodSetup.foodInventory');
                         return;
                     }
                     if (res.employees[i].type_ids === 6) {
-                        $state.go('admin.inventoryCategories');
+                        $state.go('admin.comingSoon');
                         return
                     }
                 }

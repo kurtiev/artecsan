@@ -25,7 +25,7 @@
                 city: core.data.new_restaurant ? core.data.new_restaurant.restaurant.city : null,
                 state: core.data.new_restaurant ? core.data.new_restaurant.restaurant.state : null,
                 zip: core.data.new_restaurant ? core.data.new_restaurant.restaurant.zip : null,
-                pos_report_url: core.data.new_restaurant ? core.data.new_restaurant.restaurant.pos_report_url : null,
+                // pos_report_url: core.data.new_restaurant ? core.data.new_restaurant.restaurant.pos_report_url : null,
                 phone_number: core.data.new_restaurant ? core.data.new_restaurant.restaurant.phone_number : null
             };
         };
@@ -66,7 +66,7 @@
             core.data.new_restaurant.restaurant.state = that.model.state;
             core.data.new_restaurant.restaurant.zip = that.model.zip;
             core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
-            core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
+            // core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
 
             if (!that.isAdministratorEdit) {
                 $state.go('payment', {id: restaurant_id})
@@ -85,7 +85,7 @@
                 core.data.new_restaurant.restaurant.state = that.model.state;
                 core.data.new_restaurant.restaurant.zip = that.model.zip;
                 core.data.new_restaurant.restaurant.phone_number = that.model.phone_number;
-                core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
+                // core.data.new_restaurant.restaurant.pos_report_url = that.model.pos_report_url;
 
                 $state.go('subscription', {id: restaurant_id})
             } else {
@@ -194,8 +194,8 @@
                     logo_content_item_id: core.data.new_restaurant.restaurant.logo_content_item_id,
                     state_geoname_id: core.data.new_restaurant.restaurant.state_geoname_id,
                     zip: core.data.new_restaurant.restaurant.zip ? core.data.new_restaurant.restaurant.zip.toString() : null,
-                    phone_number: core.data.new_restaurant.restaurant.phone_number,
-                    pos_report_url: core.data.new_restaurant.restaurant.pos_report_url,
+                    phone_number: core.data.new_restaurant.restaurant.phone_number
+                    // pos_report_url: core.data.new_restaurant.restaurant.pos_report_url,
                 },
                 // payment: {
                 //     card_number: core.data.new_restaurant.payment.card_number,
