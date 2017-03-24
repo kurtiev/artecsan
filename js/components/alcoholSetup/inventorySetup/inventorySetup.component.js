@@ -53,7 +53,7 @@
         var getInventoriesByVendor = function () {
             that.api.get_active_inventory_by_vendor({
                 vendor_id: that.currentVendor.id,
-                inventory_type_id: 1
+                inventory_type_id: 2
             }, that.restaurant_id.restaurant_id).then(function (res) {
                 that.inventoryListSelected = res.data.data.sku
             });
@@ -75,7 +75,7 @@
                 vendor_sku: that.searchModel.vendor_sku,
                 filter: that.searchModel.filter,
                 category: that.searchModel.category,
-                inventory_type_id: 1
+                inventory_type_id: 2
             };
 
             for (var i in m) {
@@ -134,11 +134,11 @@
 
         var getChosenVendors = function () {
 
-            api.get_chosen_vendors(that.restaurant_id.restaurant_id, {vendor_type_id: 1}).then(function (res) {
+            api.get_chosen_vendors(that.restaurant_id.restaurant_id, {vendor_type_id: 2}).then(function (res) {
                 try {
                     that.vendors = res.data.data.vendors;
                     if (!that.vendors.length) {
-                        $state.go('foodSetup.vendor');
+                        $state.go('alcoholSetup.vendor');
                         return
                     }
                     that.vendors[0].is_selected = true;
@@ -161,7 +161,7 @@
                 vendor_id: that.currentVendor.id,
                 sku_id: inventory.id,
                 is_active: inventory.is_used,
-                inventory_type_id: 1
+                inventory_type_id: 2
             };
 
             that.api.add_inventory(id, m).then(function () {
@@ -190,7 +190,7 @@
                 vendor_id: that.currentVendor.id,
                 sku_id: inventory.id,
                 is_active: 0,
-                inventory_type_id: 1
+                inventory_type_id: 2
             };
 
             that.api.add_inventory(id, m).then(function () {
@@ -203,8 +203,8 @@
 
         that.addUniqueItems = function () {
             var modalInstance = $uibModal.open({
-                templateUrl: 'js/components/foodSetup/inventorySetup/addUniqueItems/addUniqueItems.html',
-                controller: 'addUniqueItemsController',
+                templateUrl: 'js/components/alcoholSetup/inventorySetup/addUniqueItems/addUniqueItems.html',
+                controller: 'alcoholAddUniqueItemsController',
                 windowClass: "animated fadeIn modal-lgg",
                 controllerAs: '$ctr',
                 size: 'lg2x',
@@ -227,7 +227,7 @@
 
         that.back = function () {
             if (that.currentVendor.is_first) {
-                $state.go('foodSetup.vendor');
+                $state.go('alcoholSetup.vendor');
             } else {
                 var prevVendor;
 
@@ -244,7 +244,7 @@
         that.next = function () {
 
             if (that.currentVendor.is_last) {
-                $state.go('foodSetup.recipe');
+                $state.go('alcoholSetup.serving-details');
             } else {
                 var nextVendor;
 
@@ -273,8 +273,8 @@
 
     inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant', '$uibModal'];
 
-    angular.module('inspinia').component('inventorySetupComponent', {
-        templateUrl: 'js/components/foodSetup/inventorySetup/inventorySetup.html',
+    angular.module('inspinia').component('alcoholInventorySetupComponent', {
+        templateUrl: 'js/components/alcoholSetup/inventorySetup/inventorySetup.html',
         controller: inventorySetupController,
         controllerAs: '$ctr',
         bindings: {}

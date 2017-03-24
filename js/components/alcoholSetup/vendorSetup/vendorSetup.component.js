@@ -49,7 +49,7 @@
             that.searchModel.inRequest = true;
 
             var m = {
-                vendor_type_id: 1, // 1 - alcohol 2 - food 3- all
+                vendor_type_id: 2, // 1 - alcohol 2 - food 3- all
                 order_by: that.searchModel.order_by,
                 order_way: that.searchModel.order_way,
                 paginationOffset: that.searchModel.paginationOffset,
@@ -99,7 +99,7 @@
 
         var getChosenVendors = function () {
 
-            api.get_chosen_vendors(that.restaurant_id.restaurant_id, {vendor_type_id: 1}).then(function (res) {
+            api.get_chosen_vendors(that.restaurant_id.restaurant_id, {vendor_type_id: 2}).then(function (res) {
                 try {
                     that.vendorsSelected = res.data.data.vendors;
                 } catch (e) {
@@ -149,7 +149,7 @@
         that.next = function () {
 
             if (that.vendorsSelected.length) {
-                $state.go('foodSetup.inventory');
+                $state.go('alcoholSetup.inventory');
                 return;
             }
 
@@ -168,8 +168,8 @@
 
     vendorSetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant'];
 
-    angular.module('inspinia').component('vendorSetupComponent', {
-        templateUrl: 'js/components/foodSetup/vendorSetup/vendorSetup.html',
+    angular.module('inspinia').component('alcoholVendorSetupComponent', {
+        templateUrl: 'js/components/alcoholSetup/vendorSetup/vendorSetup.html',
         controller: vendorSetupController,
         controllerAs: '$ctr',
         bindings: {}

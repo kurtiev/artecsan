@@ -144,8 +144,16 @@
             });
         };
 
-        serviceFactory.get_chosen_vendors = function (id) {
-            return $http.get(serviceBase + 'restaurants/' + id + '/vendors', getAuthConfig());
+        serviceFactory.get_chosen_vendors = function (id, model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                url: serviceBase + 'restaurants/' + id + '/vendors',
+                params: model
+            });
         };
 
         serviceFactory.add_vendor = function (id, model) {
@@ -338,6 +346,14 @@
 
         serviceFactory.update_csv_path = function (id, model) {
             return $http.put(serviceBase + 'restaurants/' + id + '/updateCsvPath', model, getAuthConfig());
+        };
+
+        serviceFactory.bar_serving_details = function (id) {
+            return $http.get(serviceBase + 'restaurants/' + id + '/bar_serving_details', getAuthConfig());
+        };
+
+        serviceFactory.save_bar_serving_details = function (id, model) {
+            return $http.post(serviceBase + 'restaurants/' + id + '/bar_serving_details', model, getAuthConfig());
         };
 
         return serviceFactory;

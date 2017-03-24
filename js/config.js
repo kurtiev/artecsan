@@ -114,6 +114,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/foodSubCategories.html",
             data: {pageTitle: 'Food Sub Categories'}
         })
+        .state('alcoholSubCategories', {
+            url: "/alcohol_sub_categories",
+            templateUrl: "views/alcoholSubCategories.html",
+            data: {pageTitle: 'Alcohol Sub Categories'}
+        })
         .state('food.newFoodOrder', {
             url: "/new_food_order",
             templateUrl: "views/newFoodOrder.html",

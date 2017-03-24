@@ -34,6 +34,8 @@
 
                 var keys = {
                     refbooks: [
+                        "tare_types",
+                        "bar_serving_details_types",
                         "inventory_types",
                         "liquid_dry_conversion",
                         "measurement_types",

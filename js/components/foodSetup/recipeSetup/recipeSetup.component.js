@@ -413,7 +413,7 @@
                     },
                     ingredients: function () {
                         if (that.ingredients) return that.ingredients;
-                        return that.api.get_active_inventory_by_vendor(null, that.restaurant_id.restaurant_id).then(function (res) {
+                        return that.api.get_active_inventory_by_vendor({inventory_type_id: 1}, that.restaurant_id.restaurant_id).then(function (res) {
                             return res.data.data.sku
                         })
                     }
