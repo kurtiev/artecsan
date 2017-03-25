@@ -1,0 +1,231 @@
+<!-- Wrapper-->
+<div id="wrapper" ng-if="$ctr.permissions['8'].r">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>Create Menu Item</h2>
+                <p class="padding-top-5">
+                    Instructions to restaurant user: This section is a duplicate of the menu which you provide to your
+                    customers. This section is also the link between your POS and your restaurant intelligence so it has
+                    to be 100% accurate. The Menu Item Name should be the exact name you have in your POS.
+                </p>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h3 class="text-center">Menu</h3>
+                                    <button class="btn btn-primary float-right" ng-if="$ctr.permissions['8'].w" ng-click="$ctr.add()">Add Menu Item</button>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-stripped" data-page-size="8">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Menu Item Name</th>
+                                                <th>Price($)</th>
+                                                <th>Cost($)</th>
+                                                <th class="max-180"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="r in $ctr.menus track by $index">
+                                                <td>{{r.id}}</td>
+                                                <td>{{r.menu_item_name}}</td>
+                                                <td>{{r.price}}</td>
+                                                <td>{{r.cost}}</td>
+                                                <td class="text-right">
+                                                    <button class="btn btn-warning " type="button"
+                                                            ng-if="$ctr.permissions['8'].w"
+                                                            ng-click="$ctr.edit(r, $index)"><i class="fa fa-edit"></i>&nbsp;Edit
+                                                    </button>
+                                                    <button class="btn btn-danger" type="button" ng-click="$ctr.delete(r)"
+                                                            ng-if="$ctr.permissions['8'].d">
+                                                        <i class="fa fa-times"></i>&nbsp;Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!$ctr.menus.length">
+                                                <td colspan="5" class="text-center">
+                                                    <span class="m-t-lg m-b-lg">No results</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 text-left">
+                                    <button scroll-top class="btn btn-primary" ui-sref="alcoholSetup.serving-details">
+                                        &lt;&lt; Back
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button scroll-top class="btn btn-primary margin-right-10 float-right"
+                                            ui-sref="foodSetup.menu" ng-disabled="!$ctr.menus.length">Next - Order Shedule
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+<script type="text/ng-template" id="add_new_menu_item.html">
+    <div class="inmodal">
+        <form name="$ctr.form" autocomplete="off" novalidate ng-submit="$ctr.submit($ctr.form)">
+            <div class="modal-header">
+                <h4 class="modal-title" ng-if="!$ctr.menu">Create Menu Item</h4>
+                <h4 class="modal-title" ng-if="$ctr.menu">Edit Menu Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row m-b">
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Menu Item Name <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Menu Item Name" class="form-control" ng-model="$ctr.model.menu_item_name" required>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Price ($) <span class="text-danger">*</span></label>
+                        <input type="number" min="0" placeholder="Price ($)" class="form-control" ng-model="$ctr.model.price" required>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Cost(%)</label>
+                        <input type="number" min="0" placeholder="$0.00" class="form-control" ng-model="$ctr.model.cost_margin" readonly>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Total Cost($)</label>
+                        <input type="number" min="0" placeholder="$0.00" class="form-control" ng-model="$ctr.model.total_cost" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Serving Type <span class="text-danger" ng-show="!$ctr.menu">*</span></label>
+                        <select class="form-control" ng-model="$ctr.model.serving_type" ng-required="!$ctr.menu" ng-disabled="$ctr.menu"
+                                ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_serving_types">
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Serving Size <span class="text-danger">*</span></label>
+                        <input type="number" min="0" placeholder="Serving Size" class="form-control" ng-model="$ctr.model.serving_size" required>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Total Recipe Oz <span class="text-danger">*</span></label>
+                        <input type="number" placeholder="Total Recipe Oz" class="form-control"
+                               ng-model="$ctr.model.total_recipe_oz" min="0" readonly>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <label>Total Servings <span class="text-danger">*</span></label>
+                        <input type="number" placeholder="Total Servings" class="form-control"
+                               ng-model="$ctr.model.total_servings" min="0" readonly>
+                    </div>
+                </div>
+
+                <br>
+                <div class="col-md-2 no-padding">
+                    <h3>Ingredients</h3>
+                </div>
+
+                <div class="col-md-10 no-padding">
+                    <hr>
+                </div>
+
+                <div class="form-group">
+                    <table class="table ng-scope" ng-if="$ctr.model.ingredients.length">
+                        <thead>
+                        <tr>
+                            <th>Ingredient Item Name <span class="text-danger">*</span></th>
+                            <th class="width-180">Unit of Measure <span class="text-danger">*</span></th>
+                            <th class="width-150">Recipe Amt <span class="text-danger">*</span></th>
+                            <th class="width-150">Ounces per Serving</th>
+                            <th class="width-100">Usage per Recipe</th>
+                            <th class="width-100">Cost($)</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="i in $ctr.model.ingredients track by $index">
+                        <ng-form name="ingredientForm">
+                            <tr>
+                                <td>
+                                    <select class="form-control" ng-model="i.vendor_sku_id"
+                                            ng-change="$ctr.calculate($index)"
+                                            ng-options="value.id as value.item_name for value in $ctr.ingredients | orderBy:'item_name'" required>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="i.bar_recipe_uom_id" required
+                                            ng-change="$ctr.calculate($index)"
+                                            ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_recipe_measurement_types">
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="00" class="form-control" ng-model="i.recipes_amount" min="0"
+                                           ng-change="$ctr.calculate($index)" required>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="00" class="form-control" ng-model="i.oz_per_serving" readonly>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="00" class="form-control" ng-model="i.usage_in_units" readonly>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="$0.00" class="form-control" ng-model="i.cost" readonly>
+                                </td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-danger btn-circle"
+                                            ng-click="$ctr.removeIngredient($index, i)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-form>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" name="btnAddMenu" class="btn btn-info"
+                                    ng-click="$ctr.addIngredient()"><i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="form-group">
+                        <label class="col-md-3">Comments</label>
+                        <div class="col-md-9 no-padding">
+                            <textarea class="form-control" ng-model="$ctr.model.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="$ctr.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</script>

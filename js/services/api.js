@@ -216,8 +216,16 @@
             return $http.put(serviceBase + 'recipes/' + id, model, getAuthConfig());
         };
 
-        serviceFactory.get_menus = function () {
-            return $http.get(serviceBase + 'menus', getAuthConfig());
+        serviceFactory.get_menus = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'menus',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
         };
 
         serviceFactory.save_menu = function (model) {
@@ -352,8 +360,8 @@
             return $http.get(serviceBase + 'restaurants/' + id + '/bar_serving_details', getAuthConfig());
         };
 
-        serviceFactory.save_bar_serving_details = function (id, model) {
-            return $http.post(serviceBase + 'restaurants/' + id + '/bar_serving_details', model, getAuthConfig());
+        serviceFactory.save_bar_serving_details = function (model) {
+            return $http.post(serviceBase + 'restaurants/bar_serving_details', model, getAuthConfig());
         };
 
         return serviceFactory;

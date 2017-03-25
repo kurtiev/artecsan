@@ -119,44 +119,44 @@
                                     <ng-form name="items">
                                         <tr>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="text" class="form-control" minlength="1" required ng-model="item.item_name">
+                                                <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" minlength="1" required ng-model="item.item_name">
                                             </td>
                                             <td>
-                                                <select ng-disabled="item.parent_id" class="form-control" ng-model="item.tare_type_id" required ng-options="item.tare_type_id as item.name for item in $ctr.refbooks['tare_types']"></select>
+                                                <select ng-disabled="item.parent_id" class="form-control min-width-115" ng-model="item.tare_type_id" required ng-options="item.tare_type_id as item.name for item in $ctr.refbooks['tare_types']"></select>
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control" ng-model="item.full_weight" required min="0">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.full_weight" required min="0">
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control" ng-model="item.size" required min="0">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.size" required min="0">
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control" ng-model="item.tare_weight" required min="0">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.tare_weight" required min="0">
                                             </td>
 
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="text" class="form-control" ng-model="item.manufacturer"  required minlength="1">
+                                                <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.manufacturer"  required minlength="1">
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="text" class="form-control" ng-model="item.vendor_sku">
+                                                <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.vendor_sku">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" required min="0" ng-model="item.case_qty" readonly>
+                                                <input type="number" class="form-control min-width-115" required min="0" ng-model="item.case_qty" readonly>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control"  required min="0" ng-model="item.total_unit_size">
+                                                <input type="number" class="form-control min-width-115"  required min="0" ng-model="item.total_unit_size">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" ng-model="item.case_cost" required min="0">
+                                                <input type="number" class="form-control min-width-115" ng-model="item.case_cost" required min="0">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" ng-model="item.unit_cost"  required min="0">
+                                                <input type="number" class="form-control min-width-115" ng-model="item.unit_cost"  required min="0">
                                             </td>
                                             <td>
-                                                <select ng-disabled="item.parent_id" class="form-control" ng-model="item.vendor_cat_id" required ng-options="item.id as item.category for item in $ctr.categories"></select>
+                                                <select ng-disabled="item.parent_id" class="form-control min-width-115" ng-model="item.vendor_cat_id" required ng-options="item.id as item.category for item in $ctr.categories"></select>
                                             </td>
                                             <td>
-                                                <select ng-disabled="item.parent_id" class="form-control" ng-model="item.vendor_sub_cat_id" required ng-options="item.id as item.sub_category for item in $ctr.sub_categories | filter: {vendor_cat_id: item.vendor_cat_id}"></select>
+                                                <select ng-disabled="item.parent_id" class="form-control min-width-115" ng-model="item.vendor_sub_cat_id" required ng-options="item.id as item.sub_category for item in $ctr.sub_categories | filter: {vendor_cat_id: item.vendor_cat_id}"></select>
                                             </td>
                                             <td style="padding-right: 0;">
                                                 <a href="" ng-click="$ctr.removeUniqueItem($index, item)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>

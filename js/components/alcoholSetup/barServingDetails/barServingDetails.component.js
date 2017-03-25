@@ -12,6 +12,7 @@
         var that = this;
 
         that.form = {};
+        that.$state = $state;
         that.core = core;
         that.api = api;
         that.auth = auth;
@@ -40,11 +41,25 @@
             if (!form.$valid) return;
 
             var m = {
-
+                restaurant_id: that.restaurant_id.restaurant_id,
+                serving_details: []
             };
 
-            that.api.save_bar_serving_details(m).then(function (res) {
+            for (var key in that.m) {
+                m.serving_details.push({
+                    serving_type_id: key,
+                    quantity: that.m[key]
+                })
+            }
 
+            that.api.save_bar_serving_details(m).then(function (res) {
+                try {
+                    if (res.data.data.code === 1000) {
+                        that.$state.go('alcoholSetup.menu')
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
             });
 
         };
