@@ -244,8 +244,16 @@
             return $http.delete(serviceBase + 'menus/' + id, getAuthConfig());
         };
 
-        serviceFactory.delivery_schedules = function () {
-            return $http.get(serviceBase + 'delivery_schedules', getAuthConfig());
+        serviceFactory.delivery_schedules = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'delivery_schedules',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            })
         };
 
         serviceFactory.save_delivery = function (model) {

@@ -13,7 +13,7 @@
         that.api = api;
 
         that.model = {
-            inventory_type_id: 1,
+            inventory_type_id: 2,
             vendor_id: schedule ? schedule.vendor_id : null,
             vendor_category_id: schedule ? schedule.vendor_category_id : 0, // todo
             is_on_monday: schedule ? schedule.is_on_monday : 0,
@@ -121,7 +121,7 @@
         };
 
         that.getAllDeliveries = function () {
-            that.api.delivery_schedules({inventory_type_id: 1}).then(function (res) {
+            that.api.delivery_schedules({inventory_type_id: 2}).then(function (res) {
                 try {
                     that.deliveries = res.data.data.delivery_schedules_list;
                 } catch (e) {
@@ -144,7 +144,7 @@
                     },
                     vendors: function () {
                         if (that.vendors) return that.vendors;
-                        return api.get_chosen_vendors(that.restaurant_id.restaurant_id, {inventory_type_id: 1}).then(function (res) {
+                        return api.get_chosen_vendors(that.restaurant_id.restaurant_id, {inventory_type_id: 2}).then(function (res) {
                             try {
                                 return that.vendors = res.data.data.vendors;
                             } catch (e) {
@@ -156,7 +156,7 @@
                         if (that.get_vendors_categories) return that.get_vendors_categories;
                         return api.get_vendors_categories({
                             is_restaurant_used_only: 1,
-                            inventory_type_id: 1
+                            inventory_type_id: 2
                         }).then(function (res) {
                             try {
                                 return that.get_vendors_categories = res.data.data.categories;
@@ -178,8 +178,8 @@
 
     deliverySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', '$uibModal', 'core', 'alertService', 'SweetAlert', '$rootScope', 'restaurant'];
 
-    angular.module('inspinia').component('deliverySetupComponent', {
-        templateUrl: 'js/components/foodSetup/deliverySetup/deliverySetup.html',
+    angular.module('inspinia').component('alcoholDeliverySetupComponent', {
+        templateUrl: 'js/components/alcoholSetup/deliverySetup/deliverySetup.html',
         controller: deliverySetupController,
         controllerAs: '$ctr',
         bindings: {}

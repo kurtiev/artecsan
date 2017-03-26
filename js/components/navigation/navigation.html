@@ -43,7 +43,8 @@
                 </ul>
             </li>
             <!-- TODO Permissions -->
-            <li ng-class="{'active': $ctr.state.includes('alcoholSetup')}"  id="alcohol">
+            <li ng-class="{'active': $ctr.state.includes('alcoholSetup')}"  id="alcohol"
+                ng-show="(!$ctr.state.includes('home') && $ctr.state.includes('foodSetup')) || (!$ctr.state.includes('home') && $ctr.state.includes('alcoholSetup'))">
                 <a href=""><i class="fa fa-glass"></i> <span class="nav-label">Bar Setup</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $ctr.state.includes('alcoholSetup') || $ctr.state.includes('alcohol')}">
                     <li ui-sref-active="active" id="alcohol_vendor_setupv"><a ui-sref="alcoholSetup.vendor">Vendor Setup</a></li>

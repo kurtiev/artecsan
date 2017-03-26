@@ -1,0 +1,166 @@
+<!-- Wrapper-->
+<div id="wrapper" ng-if="$ctr.permissions['10'].r">
+
+    <header-component></header-component>
+
+    <navigation-component></navigation-component>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
+
+
+        <!-- Main view  -->
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2>Order Schedule</h2>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content  animated fadeInRight owner-profile">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h3 class="text-center">Delivery</h3>
+                                    <button class="btn btn-primary float-right" ng-if="$ctr.permissions['10'].w" ng-click="$ctr.add()">Add Delivery Item
+                                    </button>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-stripped" data-page-size="8">
+                                            <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Delivery Days</th>
+                                                <th class="max-180"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="d in $ctr.deliveries track by $index">
+                                                <td>{{d.category}}</td>
+                                                <td>
+                                                    <span ng-show="d.is_on_sunday">Sun</span>
+                                                    <span ng-show="d.is_on_monday">Mod</span>
+                                                    <span ng-show="d.is_on_tuesday">Tue</span>
+                                                    <span ng-show="d.is_on_wednesday">Wen</span>
+                                                    <span ng-show="d.is_on_thursday">Thu</span>
+                                                    <span ng-show="d.is_on_friday">Fri</span>
+                                                    <span ng-show="d.is_on_saturday">Sat</span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <button class="btn btn-warning " type="button"
+                                                            ng-if="$ctr.permissions['10'].w"
+                                                            ng-click="$ctr.add(d, $index)">
+                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-danger" type="button"
+                                                            ng-if="$ctr.permissions['10'].d"
+                                                            ng-click="$ctr.delete(d)">
+                                                        <i class="fa fa-times"></i>&nbsp;Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!$ctr.deliveries.length">
+                                                <td colspan="5" class="text-center">
+                                                    <span class="m-t-lg m-b-lg">No results</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 text-left">
+                                    <button scroll-top class="btn btn-primary" ui-sref="alcoholSetup.menu">
+                                        &lt;&lt; Back
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button scroll-top class="btn btn-primary margin-right-10 float-right"
+                                            ui-sref="food.setupConfirmation">Next - Setup Confirmation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+<script type="text/ng-template" id="add_new_delivery_item.html">
+    <div class="inmodal">
+        <form novalidate autocomplete="off" name="form" ng-submit="$ctr.submit(form)">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Order Schedule</h4>
+            </div>
+            <div class="modal-body max-height-340">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>Vendors: <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select class="form-control" ng-model="$ctr.model.vendor_id" ng-options="vendor.id as vendor.vendor_name for vendor in $ctr.vendors" required></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Inventory Category: <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" required
+                                    ng-model="$ctr.model.vendor_category_id"
+                                    ng-options="vendor.id as vendor.category for vendor in  $ctr.get_vendors_categories"></select>
+                        </div>
+                    </div>
+                    <div class="row padding-top-20">
+                        <div class="col-md-4">
+                            <label>Delivery Days: </label>
+                        </div>
+                        <div class="col-md-8">
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_sunday" ng-true-value="1" ng-false-value="0"> Sun
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_monday" ng-true-value="1" ng-false-value="0"> Mon
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_tuesday" ng-true-value="1" ng-false-value="0"> Tue
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_wednesday" ng-true-value="1" ng-false-value="0"> Wed
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_thursday" ng-true-value="1" ng-false-value="0"> Thur
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_friday" ng-true-value="1" ng-false-value="0"> Fri
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="$ctr.model.is_on_saturday" ng-true-value="1" ng-false-value="0"> Sat
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="$ctr.cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</script>
