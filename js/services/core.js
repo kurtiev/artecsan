@@ -37,6 +37,7 @@
                         "tare_types",
                         "bar_serving_details_types",
                         "bar_serving_types",
+                        "default_weights",
                         "bar_recipe_measurement_types",
                         "inventory_types",
                         "liquid_dry_conversion",

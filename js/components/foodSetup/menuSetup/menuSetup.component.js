@@ -192,7 +192,7 @@
         };
 
         that.getAllMenus = function () {
-            that.api.get_menus().then(function (res) {
+            that.api.get_menus({inventory_type_id: 1}).then(function (res) {
                 try {
                     that.menus = res.data.data.menus_list;
                 } catch (e) {

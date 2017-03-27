@@ -177,7 +177,7 @@
             if (inventory.is_used_by_receipts == 1) {
                 SweetAlert.swal({
                     title: '',
-                    text: 'You can not remove the inventory item, if he has any elements with historical data, or if the item is used in any recipe. Instead, you can disable inventory item, but first remove it from recipes in which it is used.',
+                    text: 'You can not remove the inventory item, if he has any elements with historical data, or if the item is used in any menu. Instead, you can disable inventory item, but first remove it from menus in which it is used.',
                     type: "warning",
                     confirmButtonColor: "#DD6B55"
                 });
