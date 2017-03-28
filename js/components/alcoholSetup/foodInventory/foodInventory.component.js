@@ -72,7 +72,7 @@
             }
         };
 
-        api.get_vendors_categories({is_restaurant_used_only: 1}).then(function (res) {
+        api.get_vendors_categories({is_restaurant_used_only: 1, inventory_type_id: 2}).then(function (res) {
             try {
                 that.get_vendors_categories = res.data.data.categories;
                 that.get_vendors_categories.unshift({id: 'all', category: 'All Items'});
@@ -85,7 +85,7 @@
 
         that.getInventories = function (categoryId, categoryOldId) {
             var m = {
-                inventory_type_id: 1,
+                inventory_type_id: 2,
                 vendor_cat_id: categoryId == 'all' ? null : categoryId
             };
 
@@ -130,7 +130,7 @@
             }
 
             var m = {
-                inventory_type_id: 1,
+                inventory_type_id: 2,
                 counting_started_at: new Date(that.pickers.beginDate.date).getTime(),
                 counting_ended_at: new Date(that.pickers.endDate.date).getTime(),
                 is_final_save: is_final_save || 0,

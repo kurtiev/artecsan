@@ -136,6 +136,48 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
         inviteKeyPopup(invite_key);
     }
 
+    that.beginFoodInventoryCount = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/begin_food_inventory_count.html',
+            controller: ModalInstanceMenuCtrl,
+            windowClass: "animated fadeIn",
+            size: 'md',
+            controllerAs: '$ctr',
+            resolve: {
+                menu: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+
+        }, function (reason) {
+
+        });
+    };
+
+    that.beginAlcoholInventoryCount = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modal/begin_alcohol_inventory_count.html',
+            controller: ModalInstanceMenuCtrl,
+            windowClass: "animated fadeIn",
+            size: 'md',
+            controllerAs: '$ctr',
+            resolve: {
+                menu: function () {
+                    return null;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+
+        }, function (reason) {
+
+        });
+    };
+
     // that.passwordConfirm = function (form) {
     //     if (!form.$valid) {
     //         return

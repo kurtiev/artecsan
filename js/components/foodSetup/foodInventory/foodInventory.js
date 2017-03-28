@@ -5,7 +5,7 @@
 
         $stateProvider
             .state('foodSetup.foodInventory', {
-                url: "/food-inventory",
+                url: "/food-inventory/:isAdjustment",
                 template: "<food-inventory-component></food-inventory-component>",
                 data: {pageTitle: ' Food Inventory Audit Pad'},
                 resolve: {
