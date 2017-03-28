@@ -126,7 +126,7 @@
             if (vendor.is_has_active_sku_uses == 1) {
                 SweetAlert.swal({
                     title: '',
-                    text: 'You can not delete the vendor, if he has any elements with historical data, or if elements are used in any recipe. Instead, you can disable the provider, but first remove all the items belonging to the supplier, which are associated with the recipe.',
+                    text: 'You can not delete the vendor, if he has any elements with historical data, or if elements are used in any menu. Instead, you can disable the provider, but first remove all the items belonging to the supplier, which are associated with the menu.',
                     type: "warning",
                     confirmButtonColor: "#DD6B55"
                 });

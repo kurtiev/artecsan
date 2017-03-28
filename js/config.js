@@ -104,11 +104,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
-        .state('food.setupConfirmation', {
-            url: "/setup_confirmation",
-            templateUrl: "views/setupConfirmation.html",
-            data: {pageTitle: 'Setup Confirmation'}
-        })
         .state('foodSubCategories', {
             url: "/food_sub_categories",
             templateUrl: "views/foodSubCategories.html",

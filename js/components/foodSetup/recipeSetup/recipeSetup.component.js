@@ -383,7 +383,7 @@
         };
 
         that.getAllRecipes = function () {
-            that.api.get_recipes().then(function (res) {
+            that.api.get_recipes({inventory_type_id: 1}).then(function (res) {
                 try {
                     that.recipes = res.data.data.recipes_list;
                 } catch (e) {

@@ -91,7 +91,14 @@
 
             modalInstance.result.then(function () {
                 alertService.showAlertSave();
-                $state.go('administrator.inventoryComplete')
+                if (that.$state.includes('foodSetup')) {
+                    that.$state.go('foodSetup.inventoryComplete', {pos_id: $state.params.pos_id});
+                } else if (that.$state.includes('alcoholSetup')) {
+                    that.$state.go('alcoholSetup.inventoryComplete', {pos_id: $state.params.pos_id});
+                } else {
+                    that.$state.go('administrator.posSync', {pos_id: $state.params.pos_id});
+                }
+
             });
         };
 
@@ -138,6 +145,8 @@
 
             if (that.$state.includes('foodSetup')) {
                 that.$state.go('foodSetup.posSync', {pos_id: $state.params.pos_id});
+            } else if (that.$state.includes('alcoholSetup')) {
+                that.$state.go('alcoholSetup.posSync', {pos_id: $state.params.pos_id});
             } else {
                 that.$state.go('administrator.posSync', {pos_id: $state.params.pos_id});
             }

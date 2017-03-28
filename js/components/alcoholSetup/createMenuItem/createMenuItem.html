@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Price ($) <span class="text-danger">*</span></label>
-                        <input type="number" min="0" placeholder="Price ($)" class="form-control" ng-model="$ctr.model.price" required>
+                        <input type="number" min="0" ng-change="$ctr.calculate()" placeholder="Price ($)" class="form-control" ng-model="$ctr.model.price" required>
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Cost(%)</label>
@@ -127,12 +127,13 @@
                     <div class="col-xs-12 col-sm-3">
                         <label>Serving Type <span class="text-danger" ng-show="!$ctr.menu">*</span></label>
                         <select class="form-control" ng-model="$ctr.model.serving_type" ng-required="!$ctr.menu" ng-disabled="$ctr.menu"
+                                ng-change="$ctr.checkServingType()"
                                 ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_serving_types">
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Serving Size <span class="text-danger">*</span></label>
-                        <input type="number" min="0" placeholder="Serving Size" class="form-control" ng-model="$ctr.model.serving_size" required>
+                        <input type="number" min="0" ng-change="$ctr.calculate()" ng-disabled="$ctr.model.serving_type === 3" placeholder="Serving Size" class="form-control" ng-model="$ctr.model.serving_size" required>
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Total Recipe Oz <span class="text-danger">*</span></label>
@@ -173,13 +174,15 @@
                             <tr>
                                 <td>
                                     <select class="form-control" ng-model="i.vendor_sku_id"
-                                            ng-change="$ctr.calculate($index)"
+                                            ng-init="$ctr.setAdditionalFields($index)"
+                                            ng-change="$ctr.setAdditionalFields($index)"
                                             ng-options="value.id as value.item_name for value in $ctr.ingredients | orderBy:'item_name'" required>
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" ng-model="i.bar_recipe_uom_id" required
                                             ng-change="$ctr.calculate($index)"
+                                            ng-disabled="$ctr.model.serving_type === 3"
                                             ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_recipe_measurement_types">
                                     </select>
                                 </td>
@@ -198,6 +201,7 @@
                                 </td>
                                 <td class="text-right">
                                     <button type="button" class="btn btn-danger btn-circle"
+                                            ng-hide="$ctr.model.serving_type === 3"
                                             ng-click="$ctr.removeIngredient($index, i)">
                                         <i class="fa fa-times"></i>
                                     </button>
@@ -206,7 +210,7 @@
                         </ng-form>
                         </tbody>
                     </table>
-                    <div class="row">
+                    <div class="row" ng-if="$ctr.model.serving_type !== 3">
                         <div class="col-md-12 text-right">
                             <button type="button" name="btnAddMenu" class="btn btn-info"
                                     ng-click="$ctr.addIngredient()"><i class="glyphicon glyphicon-plus"></i></button>

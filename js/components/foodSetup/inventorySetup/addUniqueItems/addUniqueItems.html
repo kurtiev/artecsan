@@ -191,7 +191,7 @@
                                                 <input ng-disabled="item.parent_id" type="text" class="form-control" ng-model="item.item_name"  required min="0">
                                             </td>
                                             <td>
-                                                <select ng-disabled="item.parent_id" class="form-control" ng-model="item.vendor_cat_id" required ng-options="item.id as item.category for item in $ctr.categories"></select>
+                                                <select ng-disabled="item.parent_id" class="form-control" ng-model="item.vendor_cat_id" required ng-options="item.id as item.category for item in $ctr.categories | filter : {inventory_type_id: 1}"></select>
                                             </td>
                                             <td>
                                                 <select ng-disabled="item.parent_id" class="form-control" ng-model="item.vendor_sub_cat_id" required ng-options="item.id as item.sub_category for item in $ctr.sub_categories | filter: {vendor_cat_id: item.vendor_cat_id}"></select>

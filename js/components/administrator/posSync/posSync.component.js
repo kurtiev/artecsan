@@ -41,6 +41,8 @@
         that.selectSyncPos = function (pos) {
             if ($state.includes('foodSetup')) {
                 $state.go('foodSetup.addPosHere', {pos_id: pos.id});
+            } else if ($state.includes('alcoholSetup')) {
+                $state.go('alcoholSetup.addPosHere', {pos_id: pos.id});
             } else {
                 $state.go('administrator.addPosHere', {pos_id: pos.id});
             }
@@ -54,7 +56,9 @@
 
         that.back = function () {
             if ($state.includes('foodSetup')) {
-                $state.go('food.setupConfirmation');
+                $state.go('foodSetup.confirmation');
+            } else if ($state.includes('alcoholSetup')) {
+                $state.go('alcoholSetup.confirmation');
             } else {
                 $state.go('administrator.menu');
             }

@@ -24,7 +24,7 @@
         }
 
         that.searchModel = {
-            order_by: 'vendor_sku',
+            order_by: 'item_name',
             order_way: "DESC",  //ASC/DESC
             paginationOffset: 0, // 0 by default
             paginationCount: 9999,
@@ -110,6 +110,44 @@
             });
 
             return deferred.promise;
+
+        };
+
+        that.getSizes = function (cat_id, sub_cat_id) {
+
+            if (!cat_id && !sub_cat_id) return [];
+            var _a = [];
+
+            for (var i = 0; that.refbooks.default_weights.length > i; i++) {
+
+                if (that.refbooks.default_weights[i].vendor_cat_id === cat_id && that.refbooks.default_weights[i].vendor_sub_cat_id === sub_cat_id) {
+                    for (var j = 0; that.refbooks.tare_types.length > j; j++) {
+                        if (that.refbooks.tare_types[j].tare_type_id === that.refbooks.default_weights[i].tare_type_id) {
+
+                            if (_a.indexOf(that.refbooks.tare_types[j]) === -1) {
+                                _a.push(that.refbooks.tare_types[j])
+                            }
+                        }
+                    }
+                }
+            }
+
+            return _a;
+        };
+
+        that.setWeights = function ($index, cat_id, sub_cat_id, tare_type_id) {
+
+            for (var i = 0; that.refbooks.default_weights.length > i; i++) {
+
+                if (that.refbooks.default_weights[i].vendor_sub_cat_id === sub_cat_id
+                    && that.refbooks.default_weights[i].vendor_cat_id === cat_id
+                    && that.refbooks.default_weights[i].tare_type_id === tare_type_id) {
+                    that.uniqueItem[$index].tare_weight = that.refbooks.default_weights[i].tare_weight;
+                    that.uniqueItem[$index].full_weight = that.refbooks.default_weights[i].full_weight;
+                    that.uniqueItem[$index].content_weight = that.refbooks.default_weights[i].content_weight || (that.refbooks.default_weights[i].full_weight - that.refbooks.default_weights[i].tare_weight);
+                    break
+                }
+            }
 
         };
 
