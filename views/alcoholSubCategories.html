@@ -1,6 +1,5 @@
-<!-- TODO Permissions -->
 <!-- Wrapper-->
-<div id="wrapper" ng-if="main.subscription_type_id != 1 || main.subscription_type_id != 3">
+<div id="wrapper" ng-if="main.subscription_type_id != 2 || main.subscription_type_id != 3">
 
     <!--<div ng-include="'js/components/header/header.html'"></div>-->
     <header-component></header-component>
@@ -40,42 +39,42 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div ng-if="main.permissions['28'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.newFoodOrder">
+                                <div ng-if="main.permissions['36'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.newFoodOrder">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">New Alcohol Orders</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['29'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.orderSummary">
+                                <div ng-if="main.permissions['37'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.orderSummary">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Confirm Alcohol Delivery</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['30'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.foodInventory">
+                                <div ng-if="main.permissions['38'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.foodInventory">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Begin Alcohol Inventory Count</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['31'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="alcoholSetup.vendor">
+                                <div ng-if="main.permissions['39'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="alcoholSetup.vendor">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Add New Alcohol Vendor</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['32'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.recipe">
+                                <div ng-if="main.permissions['40'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="foodSetup.recipe">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Modify Alcohol Menu/Recipe</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['33'].r" class="col-sm-12 col-md-6 col-lg-4"  ui-sref="foodSetup.delivery">
+                                <div ng-if="main.permissions['41'].r" class="col-sm-12 col-md-6 col-lg-4"  ui-sref="foodSetup.delivery">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Modify Alcohol Order Schedule</a>

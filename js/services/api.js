@@ -204,6 +204,18 @@
             return $http.get(serviceBase + 'recipes', getAuthConfig());
         };
 
+        serviceFactory.get_recipes_setup_process = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'recipes',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
         serviceFactory.get_recipe = function (id) {
             return $http.get(serviceBase + 'recipes/' + id, getAuthConfig());
         };

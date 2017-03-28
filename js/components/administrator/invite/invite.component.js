@@ -75,6 +75,7 @@
         that.form = {};
         that.api = api;
         that.usersList = [];
+        that.typeIdSubscription = null;
         that.get_refbooks = [];
         that.authenticationUserId = auth.authentication.user.id;
 
@@ -109,6 +110,7 @@
             try {
                 var restaurant_to_edit = res.data.data.restaurants_list[0];
                 that.usersList = restaurant_to_edit.employees || [];
+                that.typeIdSubscription = restaurant_to_edit.subscription_type_id;
             } catch (e) {
                 $state.go('home');
             }
@@ -278,7 +280,11 @@
                     alertService.showSuccessText('Invitations were sent')
                 }
                 if (!isExit) {
-                    $state.go('foodSetup.vendor');
+                    if (that.typeIdSubscription == 1) {
+                        $state.go('alcoholSetup.vendor');
+                    } else {
+                        $state.go('foodSetup.vendor');
+                    }
                 } else {
                     $state.go('home');
                 }

@@ -9,6 +9,7 @@
         that.auth = auth;
         that.user = auth.authentication.user;
         that.report_items_match_to_show = $rootScope.report_items_match_to_show;
+        that.subscription_type_id = $rootScope.subscription_type_id;
         that.state = $state;
 
 
@@ -50,7 +51,7 @@
                     $state.go('foodSubCategories')
                 }
                 if ($rootScope.subscription_type_id == 1) {
-                    $state.go('admin.comingSoon')
+                    $state.go('alcoholSubCategories')
                 }
             }
         }

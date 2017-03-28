@@ -15,6 +15,7 @@
         that.restaurantsList = [];
         that.employees_list = [];
         that.api = api;
+        that.inventoryTypeId = null;
 
         core.data.new_restaurant = null; // reset recently editable or added restaurant
 
@@ -51,7 +52,7 @@
                         return;
                     }
                     if (res.employees[i].type_ids === 6) {
-                        $state.go('admin.comingSoon');
+                        $state.go('alcoholSubCategories');
                         return
                     }
                 }
@@ -121,19 +122,22 @@
                     if (that.employees_list.length) {
 
                         for (var i = 0; that.employees_list.length > i; i++) {
+                            console.log('type_ids- ', that.employees_list[i].type_ids);
                             if (that.employees_list[i].type_ids === 4) {
-                                $state.go('admin.comingSoon');
-                                return;
+                                that.inventoryTypeId = 2;
+                            }
+                            if (that.employees_list[i].type_ids === 3) {
+                                that.inventoryTypeId = 1;
                             }
                         }
 
-                        api.get_chosen_vendors(restaurant.id).then(function (res) {
+                        api.get_chosen_vendors(restaurant.id, {vendor_type_id: that.inventoryTypeId}).then(function (res) {
                             that.vendorsSelected = res.data.data.vendors;
                             console.log('vendors -', that.vendorsSelected.length);
 
                             if (that.vendorsSelected.length) {
 
-                                api.get_active_inventory_by_vendor({}, restaurant.id).then(function (res) {
+                                api.get_active_inventory_by_vendor({inventory_type_id: that.inventoryTypeId}, restaurant.id).then(function (res) {
                                     that.inventoryListSelected = res.data.data.sku;
                                     console.log('inventories -', that.inventoryListSelected.length);
 
@@ -145,36 +149,56 @@
 
                                             if (that.recipes.length) {
 
-                                                api.get_menus().then(function (res) {
+                                                api.get_menus({item_type_id: that.inventoryTypeId}).then(function (res) {
                                                     that.menus = res.data.data.menus_list;
                                                     console.log('menus -', that.menus.length);
 
                                                     if (that.menus.length) {
 
-                                                        that.api.delivery_schedules().then(function (res) {
+                                                        that.api.delivery_schedules({inventory_type_id: that.inventoryTypeId}).then(function (res) {
                                                             that.deliveries = res.data.data.delivery_schedules_list;
                                                             console.log('deliveries -', that.deliveries.length);
 
                                                             if (that.deliveries.length) {
-                                                                $state.go('admin.posSync');
+                                                                $state.go('foodSetup.posSync');
                                                             } else {
-                                                                $state.go('foodSetup.delivery');
+                                                                if (that.inventoryTypeId == 2) {
+                                                                    $state.go('alcoholSetup.delivery');
+                                                                } else {
+                                                                    $state.go('foodSetup.delivery');
+                                                                }
                                                             }
                                                         });
                                                     } else {
-                                                        $state.go('foodSetup.menu');
+                                                        if (that.inventoryTypeId == 2) {
+                                                            $state.go('alcoholSetup.menu');
+                                                        } else {
+                                                            $state.go('foodSetup.menu');
+                                                        }
                                                     }
                                                 });
                                             } else {
-                                                $state.go('foodSetup.recipe');
+                                                if (that.inventoryTypeId == 2) {
+                                                    $state.go('alcoholSetup.menu');
+                                                } else {
+                                                    $state.go('foodSetup.recipe');
+                                                }
                                             }
                                         });
                                     } else {
-                                        $state.go('foodSetup.inventory');
+                                        if (that.inventoryTypeId == 2) {
+                                            $state.go('alcoholSetup.inventory');
+                                        } else {
+                                            $state.go('foodSetup.inventory');
+                                        }
                                     }
                                 });
                             } else {
-                                $state.go('foodSetup.vendor');
+                                if (that.inventoryTypeId == 2) {
+                                    $state.go('alcoholSetup.vendor');
+                                } else {
+                                    $state.go('foodSetup.vendor');
+                                }
                             }
                         });
                     } else {
