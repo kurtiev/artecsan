@@ -104,6 +104,24 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state('alcohol', {
+            abstract: true,
+            url: "/alcohol",
+            templateUrl: "views/common/content.html",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                        },
+                        {
+                            name: 'ui.footable',
+                            files: ['js/plugins/footable/angular-footable.js']
+                        }
+                    ]);
+                }
+            }
+        })
         .state('foodSubCategories', {
             url: "/food_sub_categories",
             templateUrl: "views/foodSubCategories.html",
@@ -113,11 +131,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/alcohol_sub_categories",
             templateUrl: "views/alcoholSubCategories.html",
             data: {pageTitle: 'Alcohol Sub Categories'}
-        })
-        .state('food.newFoodOrder', {
-            url: "/new_food_order",
-            templateUrl: "views/newFoodOrder.html",
-            data: {pageTitle: 'New Food Order'}
         })
         .state('food.orderSummary', {
             url: "/order_summary",
