@@ -87,6 +87,7 @@
         that.api = api;
         that.core = core;
         that.auth = auth;
+        that.isCompleted = false;
 
 
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}
@@ -100,8 +101,13 @@
             that.permissions = restaurant.data.permissions
         }
 
+        if (restaurant.data.info) {
+            that.isCompleted = !!restaurant.data.info.pos_id;
+        }
+
         $rootScope.$on('restaurantSelected', function () {
             that.permissions = restaurant.data.permissions;
+            that.isCompleted = !!restaurant.data.info.pos_id;
         });
 
         that.delete = function (schedule) {
