@@ -1,0 +1,169 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>New Alcohol Order</h2>
+        <ol class="breadcrumb">
+            <li ui-sref="admin.inventoryCategories">
+                <a>Inventory</a>
+            </li>&nbsp;/&nbsp;
+            <li ui-sref="alcoholSubCategories">
+                <a>Alcohol Categories</a>
+            </li>&nbsp;/&nbsp;
+            <li class="active-page">
+                <a>New Alcohol Order</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="th-text-center th-vertical-align-middle">
+                            <tr>
+                                <th rowspan="2" class="min-width-115">Vendor</th>
+                                <th rowspan="2" class="min-width-150">Item Description</th>
+                                <th colspan="2">Suggested</th>
+                                <th colspan="2">Actual</th>
+                                <th rowspan="2" class="width-90 text-center">Item Cost</th>
+                                <th rowspan="2" class="width-90 text-center">Total Order Cost</th>
+                                <th rowspan="2" class="width-90 text-center">(+/-) Suggested Order</th>
+                                <th rowspan="2" class="width-70">Approve</th>
+                            </tr>
+                            <tr>
+                                <th class="width-60 text-center">Order</th>
+                                <th class="width-80">Order Type</th>
+                                <th class="min-width-90">Order</th>
+                                <th class="min-width-115">Order Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Sysco">Sysco</option>
+                                        <option value="Vendor">Vendor</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Chicken Breast">Chicken Breast</option>
+                                        <option value="Beef Patties">Beef Patties</option>
+                                        <option value="Flour">Flour</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">6</td>
+                                <td>Case</td>
+                                <td><input class="form-control" value="6"></td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Case">Case</option>
+                                        <option value="Unit">Unit</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">$1.25</td>
+                                <td class="text-center">$957.00</td>
+                                <td class="text-center">0</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Sysco">Sysco</option>
+                                        <option value="Vendor">Vendor</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Chicken Breast">Chicken Breast</option>
+                                        <option value="Beef Patties">Beef Patties</option>
+                                        <option value="Flour">Flour</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">2</td>
+                                <td>Case</td>
+                                <td><input class="form-control" value="4"></td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Case">Case</option>
+                                        <option value="Unit">Unit</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">$0.10</td>
+                                <td class="text-center">$225.00</td>
+                                <td class="text-center">2</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Sysco">Sysco</option>
+                                        <option value="Vendor">Vendor</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Chicken Breast">Chicken Breast</option>
+                                        <option value="Beef Patties">Beef Patties</option>
+                                        <option value="Flour">Flour</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">36</td>
+                                <td>Unit</td>
+                                <td><input class="form-control" value="24"></td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="Case">Case</option>
+                                        <option value="Unit">Unit</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">$1.25</td>
+                                <td class="text-center">$76.00</td>
+                                <td class="text-center">-12</td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox"><i></i>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="text-bold-total">
+                                <td colspan="3" class="text-right">TOTAL</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">$7.00</td>
+                                <td class="text-center">$96.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-right">
+                            <button class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="btn btn-primary"  onclick="window.history.go(-1); return false;">&lt;&lt; Back</button>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button class="btn btn-primary">Confirm and Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
