@@ -1,0 +1,116 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>
+            New
+            <span ng-show="$ctr.isFood">Food</span>
+            <span ng-show="!$ctr.isFood">Alcohol</span>
+            Order
+        </h2>
+        <ol class="breadcrumb">
+            <li ui-sref="admin.inventoryCategories">
+                <a>Inventory</a>
+            </li>&nbsp;/&nbsp;
+            <li ui-sref="foodSubCategories" ng-show="$ctr.isFood">
+                <a>Food Categories</a>
+            </li>
+            <li ui-sref="alcoholSubCategories" ng-show="!$ctr.isFood">
+                <a>Alcohol Categories</a>
+            </li>&nbsp;/&nbsp;
+            <li class="active-page">
+                <a ng-show="!$ctr.isFood">New Alcohol Order</a>
+                <a ng-show="$ctr.isFood">New Food Order</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form name="$ctr.form" novalidate autocomplete="off" ng-submit="$ctr.addNewOrder($ctr.form)">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="th-text-center th-vertical-align-middle">
+                                <tr>
+                                    <th rowspan="2" class="min-width-115">Vendor</th>
+                                    <th rowspan="2" class="min-width-150">Item Description</th>
+                                    <th colspan="2">Suggested</th>
+                                    <th colspan="2">Actual</th>
+                                    <th rowspan="2" class="width-90 text-center">Item Cost</th>
+                                    <th rowspan="2" class="width-90 text-center">Total Order Cost</th>
+                                    <th rowspan="2" class="width-90 text-center">(+/-) Suggested Order</th>
+                                    <th rowspan="2" class="width-70">Approve</th>
+                                    <th rowspan="2" class="width-70">Delete</th>
+                                </tr>
+                                <tr>
+                                    <th class="width-60 text-center">Order</th>
+                                    <th class="width-80">Order Type</th>
+                                    <th class="min-width-90">Order</th>
+                                    <th class="min-width-115">Order Type</th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="i in $ctr.orderModel.items">
+                                    <ng-form name="items">
+                                        <tr>
+                                            <td>
+                                                <select class="form-control" required ng-model="i.vendor_id" ng-change="$ctr.chooseVendor($index, i.vendor_id)" ng-options="v.id as v.vendor_name for v in $ctr.vendors"></select>
+                                            </td>
+                                            <td>
+                                                <select class="form-control" required ng-model="i.vendor_sku_id" ng-change="$ctr.chooseInventory($index, i.vendor_sku_id, $ctr.inventories[$index]); $ctr.calculate($index, i.vendor_sku_id)" ng-options="v.id as v.item_name for v in $ctr.inventories[$index]"></select>
+                                            </td>
+                                            <td class="text-center">0</td>
+                                            <td>Case</td>
+                                            <td><input type="text" ng-change="$ctr.calculate($index, i.vendor_sku_id)" only-digits class="form-control" ng-model="i.amount" required></td>
+                                            <td>
+                                                <select class="form-control" ng-model="i.order_type" ng-change="$ctr.calculate($index, i.vendor_sku_id)" ng-options="item for item in $ctr.order_types[$ctr.inventory_type_id]" required></select>
+                                            </td>
+                                            <td class="text-center">{{i.item_cost | currency: '$'}}</td>
+                                            <td class="text-center">{{i.total_cost | currency: '$'}}</td>
+                                            <td class="text-center">0</td>
+                                            <td>
+                                                <label class="switch">
+                                                    <input type="checkbox" ng-model="i.is_approved" ng-true-value="1" ng-false-value="0"><i></i>
+                                                </label>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="" ng-click="$ctr.delete($index, i)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    </ng-form>
+                                </tbody>
+                                <tbody>
+                                    <tr ng-show="!$ctr.orderModel.items.length">
+                                       <td colspan="11" class="text-center">
+                                           No added Inventory yet
+                                       </td>
+                                    </tr>
+                                    <tr class="text-bold-total">
+                                    <td colspan="3" class="text-right">TOTAL</td>
+                                    <td colspan="3"></td>
+                                    <td class="text-center">{{$ctr.orderModel.totalItems | currency: '$'}}</td>
+                                    <td class="text-center">{{$ctr.orderModel.totalCost | currency: '$'}}</td>
+                                    <td colspan="3"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-right">
+                                <button type="button" class="btn btn-info" ng-click="$ctr.pushNewItem()"><i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="row m-t-lg">
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary" type="button" onclick="window.history.go(-1); return false;">&lt;&lt; Back</button>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <button class="btn btn-primary" type="submit">Confirm and Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

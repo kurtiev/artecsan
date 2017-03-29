@@ -7,7 +7,7 @@
         $stateProvider
             .state('food.newFoodOrder', {
                 url: "/new-food-order",
-                template: "<new-food-order-component></new-food-order-component>",
+                template: "<new-order-component></new-order-component>",
                 data: {pageTitle: 'New Food Order'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {

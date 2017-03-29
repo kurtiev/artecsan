@@ -392,6 +392,35 @@
             return $http.post(serviceBase + 'restaurants/bar_serving_details', model, getAuthConfig());
         };
 
+        serviceFactory.get_order = function (id) {
+            return $http.get(serviceBase + 'orders/' + id, getAuthConfig());
+        };
+
+        serviceFactory.get_orders = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'orders',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
+        serviceFactory.create_order = function (model) {
+            return $http.post(serviceBase + 'orders', model, getAuthConfig());
+        };
+
+        serviceFactory.update_order = function (model, id) {
+            return $http.put(serviceBase + 'orders/' + id, model, getAuthConfig());
+        };
+
+        serviceFactory.delete_order = function (id) {
+            return $http.delete(serviceBase + 'orders/' + id, getAuthConfig());
+        };
+
+
         return serviceFactory;
     };
 

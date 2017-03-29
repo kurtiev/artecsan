@@ -7,7 +7,7 @@
         $stateProvider
             .state('alcohol.newAlcoholOrder', {
                 url: "/new-alcohol-order",
-                template: "<new-alcohol-order-component></new-alcohol-order-component>",
+                template: "<new-order-component></new-order-component>",
                 data: {pageTitle: 'New Alcohol Order'},
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
