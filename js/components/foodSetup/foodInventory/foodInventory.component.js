@@ -16,6 +16,8 @@
         that.selectedRow = null;
         that.inventories = [];
         that.is_final_save = false;
+        that.typeInventory = $state.params.typeInventory;  // full, adjustment
+
         that.pickers = {
             beginDate: {
                 open: false,
@@ -112,8 +114,20 @@
                     });
             } else {
                 that.api.get_inventory_audit(m).then(function (res) {
-                    that.inventories = res.data.data.inventory;
-                    INVENTORIES = angular.copy(res.data.data.inventory);
+                    if (that.typeInventory == 'adjustment'){
+                        that.inventories = res.data.data.inventory;
+                        for (var i = 0; that.inventories.length > i; i++) {
+                            for (var key in that.inventories[i]) {
+                                if (that.inventories[i][key] == 0){
+                                    that.inventories[i][key] = null;
+                                }
+                            }
+                        }
+                        INVENTORIES = angular.copy(res.data.data.inventory);
+                    } else {
+                        that.inventories = res.data.data.inventory;
+                        INVENTORIES = angular.copy(res.data.data.inventory);
+                    }
                 })
             }
 
@@ -128,23 +142,30 @@
             if (is_final_save && (!that.pickers.beginDate.date || !that.pickers.endDate.date)) {
                 return
             }
+            if (that.typeInventory == 'adjustment') {
+                var is_adjustment = 1;
+                    is_final_save = 1;
+            }
 
             var m = {
                 inventory_type_id: 1,
                 counting_started_at: new Date(that.pickers.beginDate.date).getTime(),
                 counting_ended_at: new Date(that.pickers.endDate.date).getTime(),
                 is_final_save: is_final_save || 0,
+                is_adjustment: is_adjustment || 0,
                 inventory_items: []
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
-                m.inventory_items.push({
-                    id: that.inventories[i].id,
-                    item_qty: that.inventories[i].item_qty,
-                    cases_qty: that.inventories[i].cases_qty,
-                    packs_qty: that.inventories[i].packs_qty
-                })
-            }
+                if (that.inventories[i].item_qty !== null && that.inventories[i].cases_qty !== null && that.inventories[i].packs_qty !== null) {
+                    m.inventory_items.push({
+                        id: that.inventories[i].id,
+                        item_qty: that.inventories[i].item_qty,
+                        cases_qty: that.inventories[i].cases_qty,
+                        packs_qty: that.inventories[i].packs_qty
+                    })
+                }
+             }
 
             that.api.update_inventory_audit(m).then(function (res) {
                 try {
