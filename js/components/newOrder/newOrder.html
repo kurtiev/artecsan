@@ -54,10 +54,10 @@
                                     <ng-form name="items">
                                         <tr>
                                             <td>
-                                                <select class="form-control" required ng-model="i.vendor_id" ng-change="$ctr.chooseVendor($index, i.vendor_id)" ng-options="v.id as v.vendor_name for v in $ctr.vendors"></select>
+                                                <select class="form-control" ng-disabled="i.id" ng-required="!i.id" ng-model="i.vendor_id" ng-change="$ctr.chooseVendor($index, i.vendor_id)" ng-options="v.id as v.vendor_name for v in $ctr.vendors"></select>
                                             </td>
                                             <td>
-                                                <select class="form-control" required ng-model="i.vendor_sku_id" ng-change="$ctr.chooseInventory($index, i.vendor_sku_id, $ctr.inventories[$index]); $ctr.calculate($index, i.vendor_sku_id)" ng-options="v.id as v.item_name for v in $ctr.inventories[$index]"></select>
+                                                <select class="form-control" required ng-model="i.vendor_sku_id" ng-change="$ctr.calculate($index, i.vendor_sku_id)" ng-options="v.id as v.item_name for v in $ctr.inventories[$index]"></select>
                                             </td>
                                             <td class="text-center">0</td>
                                             <td>Case</td>

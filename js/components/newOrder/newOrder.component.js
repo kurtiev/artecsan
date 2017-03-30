@@ -9,10 +9,18 @@
             return;
         }
 
+        if ($state.params.id) {
+            if (!parseInt($state.params.id)) {
+                $state.go('home');
+                return
+            }
+        }
+
         var that = this;
         that.api = api;
+        that.$state = $state;
         that.core = core;
-        that.isFood = $state.includes('food.newFoodOrder');
+        that.isFood = $state.includes('food.newFoodOrder') || $state.includes('food.editFoodOrder');
         that.isEdit = !!$state.params.id;
         that.vendors = [];
         that.inventories = [];
@@ -45,6 +53,55 @@
             that.permissions = restaurant.data.permissions;
         });
 
+        if (that.isEdit) {
+            that.api.get_order($state.params.id, {inventory_type_id: that.inventory_type_id}).then(function (res) {
+
+                var order = res.data.data.order;
+
+                if (_.isEmpty(order)) {
+                    window.history.go(-1);
+                    return
+                }
+
+                if (order) {
+
+                    angular.forEach(order.items, function (v, k) {
+                        that.orderModel.items.push({
+                            id: v.id,
+                            vendor_sku_id: v.vendor_sku_id,
+                            amount: v.amount,
+                            order_type: v.order_type,
+                            item_cost: v.item_cost,
+                            total_cost: v.total_cost,
+                            is_approved: v.is_approved
+                        });
+
+                    });
+
+
+                    that.api.get_active_inventory_by_vendor({
+                        vendor_id: order.vendor_id,
+                        inventory_type_id: that.inventory_type_id
+                    }, that.restaurant_id.restaurant_id).then(function (res) {
+
+                        angular.forEach(that.orderModel.items, function (v, k) {
+                            that.inventories[k] = res.data.data.sku;
+                            that.calculate(k, v.vendor_sku_id);
+                        });
+
+                    });
+
+
+                } else {
+                    var go = that.isFood ? 'food.orderSummary' : 'alcohol.orderSummary';
+                    that.$state.go(go);
+                }
+
+            }, function () {
+                var go = that.isFood ? 'food.orderSummary' : 'alcohol.orderSummary';
+                that.$state.go(go);
+            });
+        }
 
         that.getOrder = function () {
             if (!that.$state.params.id) return;
@@ -115,6 +172,7 @@
 
             for (var i = 0; that.orderModel.items.length > i; i++) {
                 m.items.push({
+                    id: that.orderModel.items[i].id,
                     vendor_id: that.orderModel.items[i].vendor_id,
                     vendor_sku_id: that.orderModel.items[i].vendor_sku_id,
                     amount: that.orderModel.items[i].amount,
