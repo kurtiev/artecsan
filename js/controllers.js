@@ -141,7 +141,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
             templateUrl: 'views/modal/begin_food_inventory_count.html',
             controller: ModalInstanceMenuCtrl,
             windowClass: "animated fadeIn",
-            size: 'md',
+            size: 'lg',
             controllerAs: '$ctr',
             resolve: {
                 menu: function () {
@@ -162,7 +162,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
             templateUrl: 'views/modal/begin_alcohol_inventory_count.html',
             controller: ModalInstanceMenuCtrl,
             windowClass: "animated fadeIn",
-            size: 'md',
+            size: 'lg',
             controllerAs: '$ctr',
             resolve: {
                 menu: function () {
