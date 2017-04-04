@@ -81,11 +81,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/comingSoon.html",
             data: {pageTitle: 'Coming Soon'}
         })
-        .state('admin.dashboardSubCategories', {
-            url: "/dashboard_sub_categories",
-            templateUrl: "views/dashboardSubCategories.html",
-            data: {pageTitle: 'Dashboard Sub Categories'}
-        })
         .state('food', {
             abstract: true,
             url: "/food",
@@ -137,29 +132,25 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         //     templateUrl: "views/orderSummary.html",
         //     data: {pageTitle: 'Order Summary'}
         // })
-        .state('food.foodDetail', {
+        .state('reports.food', {
+            url: "/food",
+            template: "<ui-view></ui-view>",
+            abstract: true
+        })
+        .state('reports.alcohol', {
+            url: "/alcohol",
+            template: "<ui-view></ui-view>",
+            abstract: true
+        })
+        .state('reports.alcohol.alcoholDetail', {
+            url: "/alcohol_detail",
+            templateUrl: "views/alcoholDetail.html",
+            data: {pageTitle: 'Alcohol Detail'}
+        })
+        .state('reports.food.foodDetail', {
             url: "/food_detail",
             templateUrl: "views/foodDetail.html",
             data: {pageTitle: 'Food Detail'}
-        })
-        .state('food.inventoryUsage', {
-            url: "/inventory_usage",
-            templateUrl: "views/inventoryUsage.html",
-            data: {pageTitle: 'Inventory Usage'},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
-                        {
-                            name: 'datePicker',
-                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                        }
-
-                    ]);
-                }
-            }
         })
         .state('food.inventoryPurchases', {
             url: "/inventory_purchases",

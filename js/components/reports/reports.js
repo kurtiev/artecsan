@@ -18,6 +18,13 @@
                             {
                                 name: 'ui.footable',
                                 files: ['js/plugins/footable/angular-footable.js']
+                            },
+                            {
+                                files: ['js/plugins/moment/moment.min.js']
+                            },
+                            {
+                                name: 'datePicker',
+                                files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
                             }
                         ]);
                     }

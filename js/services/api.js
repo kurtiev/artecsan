@@ -432,6 +432,18 @@
             return $http.delete(serviceBase + 'orders/' + id, getAuthConfig());
         };
 
+        serviceFactory.inventory_usage_report = function (model) {
+            var auth = $injector.get('auth');
+            return $http({
+                method: 'GET',
+                url: serviceBase + 'inventory/usage_report',
+                headers: {
+                    'Authorization': appConfig.apiAuthorization
+                },
+                params: model
+            });
+        };
+
 
         return serviceFactory;
     };

@@ -22,11 +22,11 @@
                 <div class="col-sm-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-primary"  onclick="window.history.go(-1); return false;">&lt;&lt; Back</button>
-                                </div>
-                            </div>
+                            <!--<div class="row">-->
+                                <!--<div class="col-xs-12">-->
+                                    <!--<button class="btn btn-primary" ui-sref="reports.reportsCategory">&lt;&lt; Back</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="row">
                                 <div ng-if="main.permissions['44'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.comingSoon">
                                     <div class="widget style1 lazur-bg">
@@ -35,14 +35,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['45'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="food.foodDetail">
+                                <div ng-if="main.permissions['45'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="reports.food.foodDetail">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Food Detail Report</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-if="main.permissions['46'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="admin.comingSoon">
+                                <div ng-if="main.permissions['46'].r" class="col-sm-12 col-md-6 col-lg-4" ui-sref="reports.alcohol.alcoholDetail">
                                     <div class="widget style1 lazur-bg">
                                         <div class="text-center button-element">
                                             <a class="pos-title">Alcohol Detail Report</a>
