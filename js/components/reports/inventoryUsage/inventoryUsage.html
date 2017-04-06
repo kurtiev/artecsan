@@ -107,7 +107,7 @@
                                         <td>{{$ctr.refbooks['inventory_types'] | recipeTypeFilter : i.inventory_type_id }}</td>
                                         <td>{{i.description}}</td>
                                         <td class="text-center">{{i.unit_cost | currency: '$'}}</td>
-                                        <td>{{$ctr.refbooks['measurement_units_of_delivery'] | recipeTypeFilter : i.unit_of_delivery_id }}</td>
+                                        <td>{{i.package_order_type}}</td>
                                         <td class="text-center">{{i.last_counted}}</td>
                                         <td class="text-center">{{i.purchased_this_period}}</td>
                                         <td class="text-center">{{i.counted_this_period}}</td>
@@ -120,14 +120,15 @@
                                         <td class="text-right" colspan="3"><strong>TOTAL</strong></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-center">37.10</td>
-                                        <td class="text-center">62</td>
-                                        <td class="text-center">41.40</td>
-                                        <td class="text-center">57.70</td>
-                                        <td class="text-center">50.42</td>
-                                        <td class="text-danger text-center">(7.28)</td>
-                                        <td class="performance-table-color text-center">(12.75)</td>
+                                        <td class="text-center">{{$ctr.totals.last_counted | number : 2}}</td>
+                                        <td class="text-center">{{$ctr.totals.purchased_this_period | number : 2}}</td>
+                                        <td class="text-center">{{$ctr.totals.counted_this_period | number : 2}}</td>
+                                        <td class="text-center">{{$ctr.totals.qty_used_this_period | number : 2}}</td>
+                                        <td class="text-center">{{$ctr.totals.pos_sales_this_period | number : 2}}</td>
+                                        <td class="text-danger text-center">({{$ctr.totals.over_this_period | number : 2}})</td>
+                                        <td class="performance-table-color text-center">({{$ctr.totals.cost_of_over_this_period | number : 2}})</td>
                                     </tr>
+
                                     </tbody>
                                 </table>
                             </div>

@@ -14,6 +14,15 @@
         that.auth = auth;
         that.core = core;
         that.data = [];
+        that.totals = {
+            last_counted: 0,
+            purchased_this_period: 0,
+            counted_this_period: 0,
+            qty_used_this_period: 0,
+            pos_sales_this_period: 0,
+            over_this_period: 0,
+            cost_of_over_this_period: 0
+        };
 
         that.isFood = $state.includes('reports.food');
 
@@ -41,9 +50,38 @@
             return
         }
 
-        that.search = function (form) {
+        that.calculate = function () {
 
-            if (!form.$valid) return;
+            var last_counted = 0;
+            var purchased_this_period = 0;
+            var counted_this_period = 0;
+            var qty_used_this_period = 0;
+            var pos_sales_this_period = 0;
+            var over_this_period = 0;
+            var cost_of_over_this_period = 0;
+
+            angular.forEach(that.data, function (v, k) {
+                console.log(v);
+                last_counted += parseFloat(v.last_counted) || 0;
+                purchased_this_period += parseFloat(v.purchased_this_period) || 0;
+                counted_this_period += parseFloat(v.counted_this_period) || 0;
+                qty_used_this_period += parseFloat(v.qty_used_this_period) || 0;
+                pos_sales_this_period += parseFloat(v.pos_sales_this_period) || 0;
+                over_this_period += parseFloat(v.over_this_period) || 0;
+                cost_of_over_this_period += parseFloat(v.cost_of_over_this_period) || 0;
+
+            });
+
+            that.totals.last_counted = last_counted;
+            that.totals.purchased_this_period = purchased_this_period;
+            that.totals.counted_this_period = counted_this_period;
+            that.totals.qty_used_this_period = qty_used_this_period;
+            that.totals.pos_sales_this_period = pos_sales_this_period;
+            that.totals.over_this_period = over_this_period;
+            that.totals.cost_of_over_this_period = cost_of_over_this_period;
+        };
+
+        that.search = function (form) {
 
             var m = {
                 inventory_type_id: that.inventory_type_id,
@@ -53,6 +91,7 @@
 
             that.api.inventory_usage_report(m).then(function (res) {
                 that.data = res.data.data.inventory_usage_report;
+                that.calculate();
             });
 
         };
