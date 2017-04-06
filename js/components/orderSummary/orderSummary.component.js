@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope, $filter, SweetAlert) {
+    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope, $filter, alertService) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -154,13 +154,13 @@
             }
 
             that.api.update_orders(m).then(function () {
-                SweetAlert.success('Saved')
+                alertService.showAlertSave();
             })
         };
 
     }
 
-    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope', '$filter', 'SweetAlert'];
+    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope', '$filter', 'alertService'];
 
     angular.module('inspinia').component('orderSummaryComponent', {
         templateUrl: 'js/components/orderSummary/orderSummary.html',
