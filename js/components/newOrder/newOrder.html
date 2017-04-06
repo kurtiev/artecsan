@@ -65,7 +65,17 @@
                                             <td>
                                                 <select class="form-control" ng-model="i.order_type" ng-change="$ctr.calculate($index, i.vendor_sku_id)" ng-options="item for item in $ctr.order_types[$ctr.inventory_type_id]" required></select>
                                             </td>
-                                            <td class="text-center">{{i.item_cost | currency: '$'}}</td>
+                                            <td class="text-center">
+                                                <span ng-if="!i.id">
+                                                    {{i.item_cost | currency: '$'}}
+                                                </span>
+                                                <div class="input-group width-120" ng-if="i.id">
+                                                      <span class="input-group-addon">
+                                                        <input type="checkbox" ng-model="i.item_cost_is_editable">
+                                                      </span>
+                                                    <input type="number" ng-disabled="!i.item_cost_is_editable" ng-model="i.item_cost" required class="form-control">
+                                                </div>
+                                            </td>
                                             <td class="text-center">{{i.total_cost | currency: '$'}}</td>
                                             <td class="text-center">0</td>
                                             <td>

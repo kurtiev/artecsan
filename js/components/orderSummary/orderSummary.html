@@ -58,13 +58,13 @@
                                             </td>
                                             <td class="text-center">
                                                 <label class="switch">
-                                                    <input type="checkbox" ng-model="i.is_delivery_confirmed" ng-true-value="1" ng-false-value="0"><i></i>
+                                                    <input type="checkbox" ng-disabled="i.invoice_total != i.total" ng-model="i.is_delivery_confirmed" ng-true-value="1" ng-false-value="0"><i></i>
                                                 </label>
                                                 <!--<span ng-show="i.is_delivery_confirmed">Yes</span>-->
                                                 <!--<span ng-show="!i.is_delivery_confirmed">No</span>-->
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" class="form-control" ng-model="i.invoice_number" ng-required="i.is_approved">
+                                                <input type="text" class="form-control" ng-model="i.invoice_number">
                                             </td>
                                             <td class="text-center" ng-init="i.delivery_date = $ctr.getDateObj(i.delivery_date)">
                                                 <input type="text" class="form-control" style="min-width: 101px"
