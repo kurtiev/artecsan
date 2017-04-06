@@ -69,6 +69,7 @@
                         that.orderModel.items.push({
                             id: v.id,
                             vendor_sku_id: v.vendor_sku_id,
+                            vendor_id: v.vendor_id,
                             amount: v.amount,
                             order_type: v.order_type,
                             item_cost: v.item_cost,
