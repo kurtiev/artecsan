@@ -88,19 +88,21 @@
                                                 <a href="" class="btn btn-warning" ng-show="$ctr.isFood" ui-sref="food.editFoodOrder({id: i.id})"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                                             </td>
                                         </tr>
-                                        <tr class="text-bold-total">
-                                            <td colspan="2" class="text-right">TOTAL</td>
-                                            <td></td>
-                                            <td class="text-center">
-                                                {{$ctr.orderModel.totalOrder | currency : '$'}}
-                                            </td>
-                                            <td colspan="4"></td>
-                                            <td class="text-center">
-                                                {{$ctr.orderModel.totalInvoice | currency : '$'}}
-                                            </td>
-                                            <td colspan="2"></td>
-                                        </tr>
                                     </ng-form>
+                                </tbody>
+                                <tbody>
+                                    <tr class="text-bold-total">
+                                        <td colspan="2" class="text-right">TOTAL</td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            {{$ctr.orderModel.totalOrder | currency : '$'}}
+                                        </td>
+                                        <td colspan="4"></td>
+                                        <td class="text-center">
+                                            {{$ctr.orderModel.totalInvoice | currency : '$'}}
+                                        </td>
+                                        <td colspan="2"></td>
+                                    </tr>
                                 </tbody>
                                 <tbody ng-show="!$ctr.inventories.length">
                                     <tr>

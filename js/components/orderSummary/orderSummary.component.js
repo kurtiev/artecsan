@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope) {
+    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope, $filter) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -106,8 +106,8 @@
             var totalOrder = 0;
 
             angular.forEach(that.inventories, function (v, k) {
-                totalInvoice += v.invoice_total || 0;
-                totalOrder += v.total || 0;
+                totalInvoice += parseFloat(v.invoice_total) || 0;
+                totalOrder += parseFloat(v.total) || 0;
             });
 
             that.orderModel.totalInvoice = totalInvoice;
@@ -131,23 +131,36 @@
 
             if (!form.$valid) return;
 
-            var m = {};
+            var m = {
+                inventory_type_id: that.inventory_type_id,
+                orders: []
+            };
+
 
             for (var i = 0; that.inventories.length > i; i++) {
 
+                m.orders.push({
+                    id: that.inventories[i].id,
+                    is_approved: that.inventories[i].is_approved,
+                    order_number: that.inventories[i].order_number,
+                    order_date: $filter('date')(that.inventories[i].order_date, 'yyyy-MM-dd'),
+                    total: that.inventories[i].total,
+                    is_delivery_confirmed: that.inventories[i].is_delivery_confirmed,
+                    invoice_number: that.inventories[i].invoice_number,
+                    invoice_total: that.inventories[i].invoice_total,
+                    delivery_date: $filter('date')(that.inventories[i].delivery_date, 'yyyy-MM-dd'),
+                    delivery_time: $filter('date')(that.inventories[i].delivery_date, 'HH:mm:ss')
+                })
             }
 
-            console.log(m);
-            return;
-
-            that.api.update_orders().then(function () {
+            that.api.update_orders(m).then(function () {
 
             })
         };
 
     }
 
-    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope'];
+    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope', '$filter'];
 
     angular.module('inspinia').component('orderSummaryComponent', {
         templateUrl: 'js/components/orderSummary/orderSummary.html',
