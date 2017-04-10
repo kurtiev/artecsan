@@ -31,7 +31,7 @@
                                         <th ng-click="$ctr.getMyItems('sub_category')" class="width-120"
                                             ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'sub_category' && $ctr.searchModel.order_way == 'ASC')}">
                                             <span class="no-wrap cursor-pointer">
-                                                Sub <br> Category <span class="text-danger">*</span>
+                                                Sub Category <span class="text-danger">*</span>
                                                 <span class="footable-sort-indicator"></span>
                                             </span>
                                         </th>
@@ -45,29 +45,28 @@
                                         <th ng-click="$ctr.search('full_weight')"
                                             ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'full_weight' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'full_weight' && $ctr.searchModel.order_way == 'ASC')}">
                                                 <span class="no-wrap cursor-pointer">
-                                                    Full Bottle <br> Weight
+                                                    Full Unit Weight
                                                     <span class="footable-sort-indicator"></span>
                                                 </span>
                                         </th>
-                                        <th ng-click="$ctr.search('size')"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'ASC')}">
-                                                <span class="no-wrap cursor-pointer">
-                                                    Content  <br> Weight
-                                                    <span class="footable-sort-indicator"></span>
-                                                </span>
-                                        </th>
-                                        <th ng-click="$ctr.search('tare_weight')"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'tare_weight' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'tare_weight' && $ctr.searchModel.order_way == 'ASC')}">
-                                                <span class="no-wrap cursor-pointer">
-                                                    Tare <br> Weight
-                                                    <span class="footable-sort-indicator"></span>
-                                                </span>
-                                        </th>
+                                        <!--<th ng-click="$ctr.search('size')"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'size' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                                <!--<span class="no-wrap cursor-pointer">-->
+                                                    <!--Content  <br> Weight-->
+                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                                <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.search('tare_weight')"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'tare_weight' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'tare_weight' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                                <!--<span class="no-wrap cursor-pointer">-->
+                                                    <!--Tare <br> Weight-->
+                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                                <!--</span>-->
+                                        <!--</th>-->
                                         <th ng-click="$ctr.search('manufacturer')"
                                             ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'manufacturer' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'manufacturer' && $ctr.searchModel.order_way == 'ASC')}">
                                                 <span class="no-wrap cursor-pointer">
                                                     Manufacturer
-                                                    <span class="text-danger">*</span>
                                                     <span class="footable-sort-indicator"></span>
                                                 </span>
                                         </th>
@@ -112,12 +111,12 @@
                                     </tr>
                                     </thead>
                                     <!--<tbody ng-repeat="item in $ctr.uniqueItem | orderBy: $ctr.searchModel.order_by : reverse">-->
-                                    <tbody ng-repeat="item in $ctr.uniqueItem">
+                                    <tbody ng-repeat="item in $ctr.uniqueItem" ng-if="$ctr.refbooks">
                                     <ng-form name="items">
                                         <tr>
                                             <td>
                                                 <span uib-tooltip="{{item.item_name}}" ng-if="item.parent_id">
-                                                    <input type="text" class="form-control min-width-115" minlength="1" required ng-model="item.item_name">
+                                                    <input type="text" class="form-control min-width-115" ng-model="item.item_name" readonly>
                                                 </span>
                                                 <span ng-if="!item.parent_id">
                                                     <input type="text" class="form-control min-width-115" minlength="1" required ng-model="item.item_name">
@@ -136,26 +135,27 @@
                                                         ng-options="item.tare_type_id as item.name for item in $ctr.getSizes(item.vendor_cat_id, item.vendor_sub_cat_id)"></select>
                                             </td>
                                             <td>
-                                                 <span ng-show="!item.parent_id">
-                                                     <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.full_weight" required min="0">
+                                                 <span ng-if="!item.parent_id">
+                                                     <span ng-if="(item.vendor_cat_id === 71)">-</span>
+                                                     <input ng-disabled="item.parent_id" ng-if="(item.vendor_cat_id !== 71)" type="number" class="form-control min-width-115" ng-model="item.full_weight" required min="0">
                                                 </span>
-                                                <span ng-show="item.parent_id">-</span>
+                                                <span ng-if="item.parent_id">-</span>
                                             </td>
-                                            <td>
-                                                <span ng-show="!item.parent_id">
-                                                    <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.size" required min="0">
-                                                </span>
-                                                <span ng-show="item.parent_id">-</span>
-                                            </td>
-                                            <td>
-                                                <span ng-show="!item.parent_id">
-                                                    <input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.tare_weight" required min="0">
-                                                </span>
-                                                <span ng-show="item.parent_id">-</span>
-                                            </td>
+                                            <!--<td>-->
+                                                <!--<span ng-show="!item.parent_id">-->
+                                                    <!--<input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.size" required min="0">-->
+                                                <!--</span>-->
+                                                <!--<span ng-show="item.parent_id">-</span>-->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                                <!--<span ng-show="!item.parent_id">-->
+                                                    <!--<input ng-disabled="item.parent_id" type="number" class="form-control min-width-115" ng-model="item.tare_weight" required min="0">-->
+                                                <!--</span>-->
+                                                <!--<span ng-show="item.parent_id">-</span>-->
+                                            <!--</td>-->
 
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.manufacturer"  required minlength="1">
+                                                <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.manufacturer">
                                             </td>
                                             <td>
                                                 <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.vendor_sku">
@@ -164,13 +164,13 @@
                                                 <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" required min="0" ng-model="item.case_qty">
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90"  required min="0" ng-model="item.total_unit_size">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" ng-change="$ctr.calculate($index)" required min="0" ng-model="item.total_unit_size">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control min-width-90" ng-model="item.case_cost" required min="0">
+                                                <input type="number" class="form-control min-width-90" ng-model="item.case_cost" readonly required min="0">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control min-width-90" ng-model="item.unit_cost"  required min="0">
+                                                <input type="number" class="form-control min-width-90" ng-model="item.unit_cost"  required min="0" ng-change="$ctr.calculate($index)">
                                             </td>
                                             <td style="padding-right: 0;">
                                                 <a href="" ng-click="$ctr.removeUniqueItem($index, item)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>

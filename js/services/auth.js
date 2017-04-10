@@ -2,10 +2,11 @@
 
     "use strict";
 
-    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $injector, $state) {
+    var authService = function (api, $q, localStorageService, $rootScope, appConfig, $injector, $state, $timeout) {
 
         var that = this;
         that.userData = {
+            showPopup: false, // "Session expired"
             isLogged: false,
             user: null
         };
@@ -17,6 +18,9 @@
             that.userData.user = user;
             appConfig.token = 'Bearer ' + that.userData.user.access_token;
             $rootScope.userData = that.userData;
+            $timeout(function () {
+                that.userData.showPopup = true
+            }, 10 * 1000);
             return that.userData;
         };
 
@@ -30,7 +34,8 @@
         var clearUserData = function () {
             that.userData = {
                 isLogged: false,
-                user: null
+                user: null,
+                showPopup: false // "Session expired"
             };
             appConfig.token = null;
             $rootScope.userData = that.userData;
@@ -89,7 +94,7 @@
         };
     };
 
-    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$injector', '$state'];
+    authService.$inject = ['api', '$q', 'localStorageService', '$rootScope', 'appConfig', '$injector', '$state', '$timeout'];
     angular.module('inspinia').factory('auth', authService);
 
 })();

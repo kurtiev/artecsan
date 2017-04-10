@@ -75,13 +75,13 @@
                                                     City
                                                     <span  class="footable-sort-indicator"></span>
                                                 </th>
-                                                <th ng-click="$ctr.search('created_at')"
-                                                    class="cursor-pointer min-width-90"
-                                                    data-sort-ignore="true"
-                                                    ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'ASC')}">
-                                                    Date
-                                                    <span  class="footable-sort-indicator"></span>
-                                                </th>
+                                                <!--<th ng-click="$ctr.search('created_at')"-->
+                                                    <!--class="cursor-pointer min-width-90"-->
+                                                    <!--data-sort-ignore="true"-->
+                                                    <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'created_at' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                                    <!--Date-->
+                                                    <!--<span  class="footable-sort-indicator"></span>-->
+                                                <!--</th>-->
                                                 <th ng-click="$ctr.search('zip_code')"
                                                     class="cursor-pointer min-width-90"
                                                     data-sort-ignore="true"
@@ -97,7 +97,7 @@
                                                 <td>{{vendor.id}}</td>
                                                 <td>{{vendor.vendor_name}}</td>
                                                 <td>{{vendor.city}}</td>
-                                                <td>{{vendor.created_at | date: 'MM/DD/YY'}}</td>
+                                                <!--<td>{{vendor.created_at | date: 'MM/DD/YY'}}</td>-->
                                                 <td>{{vendor.zip_code}}</td>
                                                 <td class="text-right">
                                                     <label class="switch">
@@ -106,7 +106,7 @@
                                                 </td>
                                             </tr>
                                             <tr ng-show="!$ctr.vendorList.length">
-                                                <td colspan="6" class="text-center">
+                                                <td colspan="5" class="text-center">
                                                     No results
                                                 </td>
                                             </tr>

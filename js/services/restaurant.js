@@ -17,6 +17,7 @@
                 data.info = null;
                 data.permissions = null;
                 deferred.resolve();
+                $rootScope.restaurant_id = null;
                 return deferred.promise;
             }
 

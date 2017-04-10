@@ -3,7 +3,7 @@
  * Contains several global data used in different view
  *
  */
-function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack, $interval, localStorageService) {
+function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restaurant, $rootScope, $uibModalStack, $interval, localStorageService, common) {
 
     var that = this;
     that.api = api;
@@ -35,7 +35,7 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
 
 
     var _report_items_match = function () {
-        if (!$rootScope.restaurant_id) return;
+        if (!$rootScope.restaurant_id || !auth.authentication.isLogged) return;
         that.api.report_items_match($rootScope.restaurant_id).then(function (res) {
             $rootScope.report_items_match_to_show = res.data.data.items_to_match;
         })
@@ -137,45 +137,11 @@ function MainCtrl($http, $uibModal, $scope, $location, api, auth, $state, restau
     }
 
     that.beginFoodInventoryCount = function () {
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/modal/begin_food_inventory_count.html',
-            controller: ModalInstanceMenuCtrl,
-            windowClass: "animated fadeIn",
-            size: 'lg',
-            controllerAs: '$ctr',
-            resolve: {
-                menu: function () {
-                    return null;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (result) {
-
-        }, function (reason) {
-
-        });
+        common.beginFoodInventoryCount();
     };
 
     that.beginAlcoholInventoryCount = function () {
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/modal/begin_alcohol_inventory_count.html',
-            controller: ModalInstanceMenuCtrl,
-            windowClass: "animated fadeIn",
-            size: 'lg',
-            controllerAs: '$ctr',
-            resolve: {
-                menu: function () {
-                    return null;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (result) {
-
-        }, function (reason) {
-
-        });
+        common.beginAlcoholInventoryCount();
     };
 
     // that.passwordConfirm = function (form) {

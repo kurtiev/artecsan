@@ -132,8 +132,8 @@
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-3">
-                        <label>Serving Size <span class="text-danger">*</span></label>
-                        <input type="number" min="0" ng-change="$ctr.calculate()" ng-disabled="$ctr.model.serving_type === 3" placeholder="Serving Size" class="form-control" ng-model="$ctr.model.serving_size" required>
+                        <label>Serving Size <span class="text-danger" ng-show="$ctr.model.serving_type === 2">*</span></label>
+                        <input type="number" min="0" ng-change="$ctr.calculate()" ng-disabled="$ctr.model.serving_type !== 2" ng-required="$ctr.model.serving_type !== 2" placeholder="Serving Size" class="form-control" ng-model="$ctr.model.serving_size">
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <label>Total Recipe Oz <span class="text-danger">*</span></label>

@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function navigationController($state, auth, restaurant, $rootScope, api, $uibModal, alertService) {
+    function navigationController($state, auth, restaurant, $rootScope, api, $uibModal, alertService, common) {
 
         var that = this;
         that.api = api;
@@ -44,21 +44,24 @@
         };
 
         that.linkInventory = function () {
+
             if ($rootScope.subscription_type_id == 3) {
                 $state.go('admin.inventoryCategories')
             } else {
                 if ($rootScope.subscription_type_id == 2) {
-                    $state.go('foodSubCategories')
+                    // $state.go('foodSubCategories')
+                    common.beginAlcoholInventoryCount();
                 }
                 if ($rootScope.subscription_type_id == 1) {
-                    $state.go('alcoholSubCategories')
+                    // $state.go('alcoholSubCategories')
+                    common.beginFoodInventoryCount();
                 }
             }
         }
 
     }
 
-    navigationController.$inject = ['$state', 'auth', 'restaurant', '$rootScope', 'api', '$uibModal', 'alertService'];
+    navigationController.$inject = ['$state', 'auth', 'restaurant', '$rootScope', 'api', '$uibModal', 'alertService', 'common'];
 
     angular.module('inspinia').component('navigationComponent', {
         templateUrl: 'js/components/navigation/navigation.html',

@@ -111,32 +111,32 @@
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
-                                        <th>
-                                                <span class="no-wrap">
-                                                    Size
+                                        <!--<th>-->
+                                                <!--<span class="no-wrap">-->
+                                                    <!--Size-->
+                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
+                                                <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.search('item_name')"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                                <!--<span class="no-wrap cursor-pointer">-->
+                                                    <!--Full Bottle <br> Weight-->
                                                     <!--<span class="footable-sort-indicator"></span>-->
-                                                </span>
-                                        </th>
-                                        <th ng-click="$ctr.search('item_name')"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
-                                                <span class="no-wrap cursor-pointer">
-                                                    Full Bottle <br> Weight
-                                                    <span class="footable-sort-indicator"></span>
-                                                </span>
-                                        </th>
-                                        <th ng-click="$ctr.search('vendor_sku')"
-                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">
-                                                <span class="no-wrap cursor-pointer">
-                                                    Content <br> Weight
-                                                    <span class="footable-sort-indicator"></span>
-                                                </span>
-                                        </th>
-                                        <th>
-                                                <span class="no-wrap">
-                                                    Tare <br> Weight
+                                                <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th ng-click="$ctr.search('vendor_sku')"-->
+                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">-->
+                                                <!--<span class="no-wrap cursor-pointer">-->
+                                                    <!--Content <br> Weight-->
                                                     <!--<span class="footable-sort-indicator"></span>-->
-                                                </span>
-                                        </th>
+                                                <!--</span>-->
+                                        <!--</th>-->
+                                        <!--<th>-->
+                                                <!--<span class="no-wrap">-->
+                                                    <!--Tare <br> Weight-->
+                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
+                                                <!--</span>-->
+                                        <!--</th>-->
                                         <th>
                                                 <span class="no-wrap">
                                                     Manufacturer
@@ -149,12 +149,12 @@
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
-                                        <th>
-                                                <span class="no-wrap">
-                                                    Case Qty
-                                                    <!--<span class="footable-sort-indicator"></span>-->
-                                                </span>
-                                        </th>
+                                        <!--<th>-->
+                                                <!--<span class="no-wrap">-->
+                                                    <!--Case Qty-->
+                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
+                                                <!--</span>-->
+                                        <!--</th>-->
                                         <th>
                                                 <span class="no-wrap">
                                                      Units
@@ -181,28 +181,28 @@
                                         <td>{{i.item_name}}</td>
                                         <td>{{i.category}}</td>
                                         <td>{{i.sub_category}}</td>
-                                        <td>{{i.size}}</td>
-                                        <td>
-                                            <span ng-show="!i.parent_id">
-                                                {{i.full_weight}}
-                                            </span>
-                                            <span ng-show="i.parent_id">-</span>
-                                        </td>
-                                        <td>
-                                            <span ng-show="!i.parent_id">
-                                                {{i.content_weight}}
-                                            </span>
-                                            <span ng-show="i.parent_id">-</span>
-                                        </td>
-                                        <td>
-                                            <span ng-show="!i.parent_id">
-                                                {{i.tare_weight}}
-                                            </span>
-                                            <span ng-show="i.parent_id">-</span>
-                                        </td>
+                                        <!--<td>{{i.size}}</td>-->
+                                        <!--<td>-->
+                                            <!--<span ng-show="!i.parent_id">-->
+                                                <!--{{i.full_weight}}-->
+                                            <!--</span>-->
+                                            <!--<span ng-show="i.parent_id">-</span>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<span ng-show="!i.parent_id">-->
+                                                <!--{{i.content_weight}}-->
+                                            <!--</span>-->
+                                            <!--<span ng-show="i.parent_id">-</span>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<span ng-show="!i.parent_id">-->
+                                                <!--{{i.tare_weight}}-->
+                                            <!--</span>-->
+                                            <!--<span ng-show="i.parent_id">-</span>-->
+                                        <!--</td>-->
                                         <td>{{i.manufacturer}}</td>
                                         <td>{{i.vendor_sku}}</td>
-                                        <td>{{i.case_qty}}</td>
+                                        <!--<td>{{i.case_qty}}</td>-->
                                         <td>{{i.total_unit_size}}</td>
                                         <td>{{i.case_cost | currency: ''}}</td>
                                         <td>{{i.unit_cost | currency: ''}}</td>

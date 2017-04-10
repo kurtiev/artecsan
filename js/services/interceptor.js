@@ -38,7 +38,9 @@
                     }
                     if (response.data.error.code == 2001) {
                         var authService = $injector.get('auth');
-                        alertService.showAlertTimeout();
+                        if (authService.authentication.showPopup) {
+                            alertService.showAlertTimeout();
+                        }
                         authService.logOut();
                     } else if (response.data.error.code != 2017) {
                         alertService.showAPIError(response.data.error, response.data.validation_Error);
