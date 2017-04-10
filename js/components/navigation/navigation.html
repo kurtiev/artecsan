@@ -82,7 +82,7 @@
                 <a ui-sref="admin.managementCategories"><i class="fa fa-edit"></i> <span class="nav-label">{{ 'Management' }}</span> </a>
             </li>
             <li ui-sref-active="active" ng-if="$ctr.permissions['26'].r" id="inventory" ng-hide="$ctr.state.includes('home')">
-                <a ng-click="$ctr.linkInventory();"><i class="fa fa-table"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
+                <a ng-click="$ctr.linkInventoryMain();"><i class="fa fa-table"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
             </li>
             <li ng-if="$ctr.permissions['42'].r" id="consumer_reviews" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'Consumer Reviews' }}</span> </a>

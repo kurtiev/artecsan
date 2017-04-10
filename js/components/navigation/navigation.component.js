@@ -46,16 +46,35 @@
         that.linkInventory = function () {
 
             if ($rootScope.subscription_type_id == 3) {
-                $state.go('admin.inventoryCategories')
-            } else {
-                if ($rootScope.subscription_type_id == 2) {
-                    // $state.go('foodSubCategories')
-                    common.beginAlcoholInventoryCount();
-                }
-                if ($rootScope.subscription_type_id == 1) {
-                    // $state.go('alcoholSubCategories')
-                    common.beginFoodInventoryCount();
-                }
+                $state.go('admin.inventoryCategories');
+                return
+            }
+
+            if ($rootScope.subscription_type_id == 2) {
+                common.beginFoodInventoryCount();
+                return
+            }
+
+            if ($rootScope.subscription_type_id == 1) {
+                common.beginAlcoholInventoryCount();
+            }
+
+        };
+
+        that.linkInventoryMain = function () {
+
+            if ($rootScope.subscription_type_id == 3) {
+                $state.go('admin.inventoryCategories');
+                return
+            }
+
+            if ($rootScope.subscription_type_id == 2) {
+                $state.go('foodSubCategories');
+                return
+            }
+
+            if ($rootScope.subscription_type_id == 1) {
+                $state.go('alcoholSubCategories');
             }
         }
 
