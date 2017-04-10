@@ -72,6 +72,7 @@
             var id = that.searchParams.vendor_id;
 
             var m = {
+                inventory_type_id: 2,
                 sku_items: []
             };
 
