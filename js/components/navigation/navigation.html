@@ -31,7 +31,7 @@
                 <a  ui-sref="home"><i class="fa fa-home"></i> <span class="nav-label">{{ 'Select Restaurant' }}</span> </a>
             </li>
             <li ng-show="($ctr.permissions['5'].r && !$ctr.state.includes('home') && $ctr.state.includes('foodSetup')) ||
-                           !$ctr.state.includes('home') && $ctr.subscription_type_id == 3 && ($ctr.state.includes('foodSetup') || $ctr.state.includes('alcoholSetup'))"
+                           !$ctr.state.includes('home') && $ctr.subscription_type_id == 3 && ($ctr.state.includes('foodSetup') || $ctr.state.includes('alcoholSetup')) || $ctr.state.includes('admin.inventoryAuditAsk')"
                 ng-class="{'active': $ctr.state.includes('foodSetup') && !$ctr.state.includes('foodSetup.posSync') && !$ctr.state.includes('foodSetup.addPosHere')}"  id="food">
                 <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'Food Setup' }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $ctr.state.includes('foodSetup') && !$ctr.state.includes('foodSetup.posSync') && !$ctr.state.includes('foodSetup.addPosHere')}">
@@ -44,7 +44,7 @@
             </li>
             <li ng-class="{'active': $ctr.state.includes('alcoholSetup') && !$ctr.state.includes('alcoholSetup.posSync') && !$ctr.state.includes('alcoholSetup.addPosHere')}"  id="alcohol"
                 ng-show="($ctr.permissions['11'].r && !$ctr.state.includes('home') && $ctr.state.includes('alcoholSetup')) ||
-                          !$ctr.state.includes('home') && $ctr.subscription_type_id == 3 && ($ctr.state.includes('alcoholSetup') || $ctr.state.includes('foodSetup'))">
+                          !$ctr.state.includes('home') && $ctr.subscription_type_id == 3 && ($ctr.state.includes('alcoholSetup') || $ctr.state.includes('foodSetup')) || $ctr.state.includes('admin.inventoryAuditAsk')">
                 <a href=""><i class="fa fa-glass"></i> <span class="nav-label">Bar Setup</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $ctr.state.includes('alcoholSetup') && !$ctr.state.includes('alcoholSetup.posSync') && !$ctr.state.includes('alcoholSetup.addPosHere')}">
                     <li ui-sref-active="active" ng-if="$ctr.permissions['12'].r" id="alcohol_vendor_setupv"><a ui-sref="alcoholSetup.vendor">Vendor Setup</a></li>
@@ -54,26 +54,20 @@
                     <li ui-sref-active="active" ng-if="$ctr.permissions['16'].r" id="alcohol_delivery_shedule"><a ui-sref="alcoholSetup.delivery">Order Schedule</a></li>
                 </ul>
             </li>
-            <!--<li ng-if="$ctr.permissions['11'].r && $ctr.state.includes('foodSetup')" id="bar" ng-hide="$ctr.state.includes('home')">-->
-                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-glass"></i> <span class="nav-label">{{ 'Bar Setup' }}</span> </a>-->
-            <!--</li>-->
-            <li ng-class="{'active': ($ctr.state.includes('foodSetup.posSync') || $ctr.state.includes('foodSetup.addPosHere')) || ($ctr.state.includes('alcoholSetup.posSync') || $ctr.state.includes('alcoholSetup.addPosHere')) }" ng-if="$ctr.permissions['17'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['17'].r && $ctr.state.includes('alcoholSetup')" id="p.o.s.sync" ng-hide="$ctr.state.includes('home')">
+            <li ng-class="{'active': ($ctr.state.includes('foodSetup.posSync') || $ctr.state.includes('foodSetup.addPosHere')) || ($ctr.state.includes('alcoholSetup.posSync') || $ctr.state.includes('alcoholSetup.addPosHere')) || $ctr.state.includes('admin.inventoryAuditAsk')}" ng-if="$ctr.permissions['17'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['17'].r && $ctr.state.includes('alcoholSetup') || $ctr.state.includes('admin.inventoryAuditAsk')" id="p.o.s.sync" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="foodSetup.posSync"><i class="fa fa-print"></i> <span class="nav-label">{{ 'POS Sync' }}</span> </a>
             </li>
-            <li ng-if="$ctr.permissions['18'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['18'].r && $ctr.state.includes('alcoholSetup')" id="payroll_setup" ng-hide="$ctr.state.includes('home')">
+            <li ng-if="$ctr.permissions['18'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['18'].r && $ctr.state.includes('alcoholSetup') || $ctr.state.includes('admin.inventoryAuditAsk')" id="payroll_setup" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-money"></i> <span class="nav-label">{{ 'Payroll' }}</span> </a>
             </li>
-            <li ng-if="$ctr.permissions['19'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['19'].r && $ctr.state.includes('alcoholSetup')" id="accounting" ng-hide="$ctr.state.includes('home')">
+            <li ng-if="$ctr.permissions['19'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['19'].r && $ctr.state.includes('alcoholSetup') || $ctr.state.includes('admin.inventoryAuditAsk')" id="accounting" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.comingSoon"><i class="fa fa-calculator"></i> <span class="nav-label">{{ 'Accounting' }}</span> </a>
             </li>
-            <!--<li ng-if="$ctr.permissions['52'].r && $ctr.state.includes('foodSetup') || $ctr.state.includes('food')" id="users" ng-hide="$ctr.state.includes('home')">-->
-                <!--<a ui-sref="admin.comingSoon"><i class="fa fa-users"></i> <span class="nav-label">{{ 'Users' }}</span> </a>-->
-            <!--</li>-->
-            <li ng-if="$ctr.permissions['26'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['26'].r && $ctr.state.includes('alcoholSetup')" id="users" ng-hide="$ctr.state.includes('home')">
+            <li ng-if="$ctr.permissions['26'].r && $ctr.state.includes('foodSetup') || $ctr.permissions['26'].r && $ctr.state.includes('alcoholSetup') || $ctr.state.includes('admin.inventoryAuditAsk')" id="users" ng-hide="$ctr.state.includes('home')">
                 <a ng-click="$ctr.linkInventory();"><i class="fa fa-table"></i> <span class="nav-label">{{ 'Inventory' }}</span> </a>
             </li>
 
-            <hr ng-if="$ctr.state.includes('foodSetup') || $ctr.state.includes('alcoholSetup')">
+            <hr ng-if="$ctr.state.includes('foodSetup') || $ctr.state.includes('alcoholSetup') || $ctr.state.includes('admin.inventoryAuditAsk')">
 
             <li ui-sref-active="active" ng-if="$ctr.permissions['20'].r" ng-hide="$ctr.state.includes('home')">
                 <a ui-sref="admin.homeMenu"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'Home' }}</span> </a>

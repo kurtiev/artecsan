@@ -95,81 +95,57 @@
                                     <tr>
                                         <th>
                                                 <span class="no-wrap">
-                                                    Alcohol
+                                                    Category
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
                                                 <span class="no-wrap">
-                                                     Category
+                                                    Sub Category
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
-                                        <th>
-                                                <span class="no-wrap">
-                                                     Sub-Category
-                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                        <th ng-click="$ctr.search('item_name')"
+                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">
+                                                <span class="no-wrap cursor-pointer">
+                                                    Inventory Name
+                                                    <span class="footable-sort-indicator"></span>
                                                 </span>
                                         </th>
-                                        <!--<th>-->
-                                                <!--<span class="no-wrap">-->
-                                                    <!--Size-->
-                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
-                                                <!--</span>-->
-                                        <!--</th>-->
-                                        <!--<th ng-click="$ctr.search('item_name')"-->
-                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'item_name' && $ctr.searchModel.order_way == 'ASC')}">-->
-                                                <!--<span class="no-wrap cursor-pointer">-->
-                                                    <!--Full Bottle <br> Weight-->
-                                                    <!--<span class="footable-sort-indicator"></span>-->
-                                                <!--</span>-->
-                                        <!--</th>-->
-                                        <!--<th ng-click="$ctr.search('vendor_sku')"-->
-                                            <!--ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">-->
-                                                <!--<span class="no-wrap cursor-pointer">-->
-                                                    <!--Content <br> Weight-->
-                                                    <!--<span class="footable-sort-indicator"></span>-->
-                                                <!--</span>-->
-                                        <!--</th>-->
-                                        <!--<th>-->
-                                                <!--<span class="no-wrap">-->
-                                                    <!--Tare <br> Weight-->
-                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
-                                                <!--</span>-->
-                                        <!--</th>-->
-                                        <th>
-                                                <span class="no-wrap">
-                                                    Manufacturer
-                                                    <!--<span class="footable-sort-indicator"></span>-->
-                                                </span>
-                                        </th>
-                                        <th>
-                                                <span class="no-wrap">
+                                        <th ng-click="$ctr.search('vendor_sku')"
+                                            ng-class="{'footable-sorted-desc': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'DESC'), 'footable-sorted': ($ctr.searchModel.order_by == 'vendor_sku' && $ctr.searchModel.order_way == 'ASC')}">
+                                                <span class="no-wrap cursor-pointer">
                                                     SKU
-                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                                    <span class="footable-sort-indicator"></span>
                                                 </span>
                                         </th>
-                                        <!--<th>-->
-                                                <!--<span class="no-wrap">-->
-                                                    <!--Case Qty-->
-                                                    <!--&lt;!&ndash;<span class="footable-sort-indicator"></span>&ndash;&gt;-->
-                                                <!--</span>-->
-                                        <!--</th>-->
                                         <th>
                                                 <span class="no-wrap">
-                                                     Units
+                                                    Case
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
                                                 <span class="no-wrap">
-                                                     Case $
+                                                    Pack
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
                                         <th>
                                                 <span class="no-wrap">
-                                                     Item $
+                                                    Size
+                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                                </span>
+                                        </th>
+                                        <th>
+                                                <span class="no-wrap">
+                                                    Unit
+                                                    <!--<span class="footable-sort-indicator"></span>-->
+                                                </span>
+                                        </th>
+                                        <th>
+                                                <span class="no-wrap">
+                                                     Price($)
                                                     <!--<span class="footable-sort-indicator"></span>-->
                                                 </span>
                                         </th>
@@ -178,34 +154,15 @@
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="i in $ctr.inventoryList track by $index">
-                                        <td>{{i.item_name}}</td>
                                         <td>{{i.category}}</td>
                                         <td>{{i.sub_category}}</td>
-                                        <!--<td>{{i.size}}</td>-->
-                                        <!--<td>-->
-                                            <!--<span ng-show="!i.parent_id">-->
-                                                <!--{{i.full_weight}}-->
-                                            <!--</span>-->
-                                            <!--<span ng-show="i.parent_id">-</span>-->
-                                        <!--</td>-->
-                                        <!--<td>-->
-                                            <!--<span ng-show="!i.parent_id">-->
-                                                <!--{{i.content_weight}}-->
-                                            <!--</span>-->
-                                            <!--<span ng-show="i.parent_id">-</span>-->
-                                        <!--</td>-->
-                                        <!--<td>-->
-                                            <!--<span ng-show="!i.parent_id">-->
-                                                <!--{{i.tare_weight}}-->
-                                            <!--</span>-->
-                                            <!--<span ng-show="i.parent_id">-</span>-->
-                                        <!--</td>-->
-                                        <td>{{i.manufacturer}}</td>
+                                        <td>{{i.item_name}}</td>
                                         <td>{{i.vendor_sku}}</td>
-                                        <!--<td>{{i.case_qty}}</td>-->
+                                        <td>{{i.case_qty}}</td>
+                                        <td>{{i.pack}}</td>
                                         <td>{{i.total_unit_size}}</td>
-                                        <td>{{i.case_cost | currency: ''}}</td>
-                                        <td>{{i.unit_cost | currency: ''}}</td>
+                                        <td>{{i.unit_of_delivery}}</td>
+                                        <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
                                         <td class="text-right">
                                             <label class="switch">
                                                 <input ng-disabled="i.is_used_by_receipts || !$ctr.permissions['13'].w" type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>

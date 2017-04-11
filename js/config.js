@@ -71,6 +71,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/managementCategories.html",
             data: {pageTitle: 'Management Categories'}
         })
+        .state('admin.inventoryAuditAsk', {
+            url: "/inventory-audit-ask",
+            templateUrl: "views/inventoryAuditAsk.html",
+            data: {pageTitle: 'Inventory Audit'}
+        })
         .state('admin.inventoryCategories', {
             url: "/inventory_categories",
             templateUrl: "views/inventoryCategories.html",

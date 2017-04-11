@@ -29,16 +29,17 @@
         that.checkServingType = function () {
 
             if (that.model.serving_type === 3) {
-                that.model.serving_size = 1;
+                // that.model.serving_size = that.model.total_recipe_oz;
             }
 
             if (that.model.serving_type === 1) {
-                that.model.serving_size = 1;
-                that.model.total_recipe_oz = 1;
+                // that.model.serving_size = that.model.total_recipe_oz;
+                // that.model.total_recipe_oz = 1;
                 that.model.total_servings = 1;
                 return
             }
 
+            // Only one Btl should be
             if (that.model.ingredients.length > 1 && that.model.serving_type === 3) {
                 that.model.ingredients = [{
                     recipe_id: null,
@@ -56,6 +57,7 @@
                 }];
             }
 
+            // Only one Btl should be
             if (!that.model.ingredients.length && that.model.serving_type === 3) {
                 that.model.ingredients = [{
                     recipe_id: null,
@@ -73,9 +75,6 @@
                 }];
             }
 
-            setTimeout(that.calculate, 500);
-
-
         };
 
         that.setAdditionalFields = function ($index) {
@@ -89,8 +88,6 @@
                     break
                 }
             }
-
-            setTimeout(that.calculate, 500);
         };
 
         that.calculate = function ($index) {
@@ -109,8 +106,10 @@
             var total_servings = 0;
 
             angular.forEach(that.model.ingredients, function (v, k) {
+                var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
+
                 // Full Btl or Oz
-                var oz = v.bar_recipe_uom_id === 1 ? (v.full_weight * v.recipes_amount) : v.recipes_amount;
+                var oz = v.bar_recipe_uom_id === 1 ? (content_weight * v.recipes_amount) : v.recipes_amount;
                 total_recipe_oz += oz || 0;
             });
 
@@ -119,7 +118,7 @@
             // count - Ounces per Serving
             angular.forEach(that.model.ingredients, function (v, k) {
                 if (v.recipes_amount === undefined || v.recipes_amount === null) return;
-                var oz = v.bar_recipe_uom_id === 1 ? (v.full_weight * v.recipes_amount) : v.recipes_amount;
+                var oz = v.bar_recipe_uom_id === 1 ? (v.content_weight * v.recipes_amount) : v.recipes_amount;
 
                 if (serving_type === 1) {
                     v.oz_per_serving = _p(v.recipes_amount / total_servings)
@@ -132,13 +131,18 @@
 
                 if (v.recipes_amount === undefined || v.recipes_amount === null) return;
 
-                v.usage_in_units = v.bar_recipe_uom_id === 1 ? _p(v.recipes_amount / v.content_weight) : v.recipes_amount;
+                var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
 
-                if (serving_type === 3) {
-                    v.cost = _p(v.content_weight * v.unit_cost * v.recipes_amount);
+                // Full Btl == 1
+                // Oz == 2
+                if (v.bar_recipe_uom_id === 1) {
+                    v.usage_in_units = content_weight * v.recipes_amount;
                 } else {
-                    v.cost = v.bar_recipe_uom_id === 2 ? _p(v.usage_in_units * v.unit_cost) : _p(v.unit_cost * v.recipes_amount);
+                    v.usage_in_units = v.recipes_amount;
                 }
+
+                v.cost = _p(v.usage_in_units / content_weight * v.unit_cost);
+
 
                 total_cost += v.cost;
             });
@@ -147,8 +151,11 @@
             that.model.total_recipe_oz = _p(total_recipe_oz);
             that.model.total_servings = _p(total_servings);
             that.model.total_cost = _p(total_cost);
-            that.model.cost_margin = price ?  _p((total_cost / (price || 1)) * 100): 0;
+            that.model.cost_margin = price ? _p((total_cost / ((price * (total_servings || 1)) || 1)) * 100) : 0;
 
+            if (that.model.serving_type !== 2) {
+                that.model.serving_size = that.model.total_recipe_oz;
+            }
         };
 
 

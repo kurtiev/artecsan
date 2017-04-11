@@ -45,7 +45,7 @@
         };
     }
 
-    function addPosHereController(api, $state, auth, localStorageService, alertService, $uibModal, $rootScope, restaurant) {
+    function addPosHereController(api, $state, auth, localStorageService, alertService, $uibModal, $rootScope, restaurant, common) {
 
         if (!auth.authentication.isLogged || !parseInt($state.params.pos_id)) {
             $state.go('home');
@@ -102,7 +102,7 @@
             });
         };
 
-        that.updateCsvPath= function (form) {
+        that.updateCsvPath = function (form) {
             if (!form.$valid) {
                 return
             }
@@ -110,6 +110,20 @@
                 try {
                     if (res.data.data.code === 1000) {
                         alertService.showAlertSave();
+                        if ($rootScope.subscription_type_id == 3) {
+                            $state.go('admin.inventoryAuditAsk');
+                            return
+                        }
+
+                        if ($rootScope.subscription_type_id == 2) {
+                            common.beginFoodInventoryCount();
+                            return
+                        }
+
+                        if ($rootScope.subscription_type_id == 1) {
+                            common.beginAlcoholInventoryCount();
+                        }
+
                     }
                 } catch (e) {
                     console.log(e);
@@ -135,7 +149,7 @@
                 try {
                     that.pos_report_url = res.data.data.restaurants_list[0].pos_report_url;
                 } catch (e) {
-                   console.log(e)
+                    console.log(e)
                 }
             });
 
@@ -156,7 +170,7 @@
 
     }
 
-    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$uibModal', '$rootScope', 'restaurant'];
+    addPosHereController.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$uibModal', '$rootScope', 'restaurant', 'common'];
 
     angular.module('inspinia').component('addPosHereComponent', {
         templateUrl: 'js/components/administrator/addPosHere/addPosHere.html',

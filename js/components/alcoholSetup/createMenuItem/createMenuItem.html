@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <button scroll-top class="btn btn-primary margin-right-10 float-right"
-                                            ui-sref="foodSetup.menu" ng-disabled="!$ctr.menus.length">Next - Order Shedule
+                                            ui-sref="alcoholSetup.delivery" ng-disabled="!$ctr.menus.length">Next - Order Shedule
                                     </button>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                     <div class="col-xs-12 col-sm-3">
                         <label>Serving Type <span class="text-danger" ng-show="!$ctr.menu">*</span></label>
                         <select class="form-control" ng-model="$ctr.model.serving_type" ng-required="!$ctr.menu" ng-disabled="$ctr.menu"
-                                ng-change="$ctr.checkServingType()"
+                                ng-change="$ctr.checkServingType(); $ctr.calculate()"
                                 ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_serving_types">
                         </select>
                     </div>
@@ -175,7 +175,7 @@
                                 <td>
                                     <select class="form-control" ng-model="i.vendor_sku_id"
                                             ng-init="$ctr.setAdditionalFields($index)"
-                                            ng-change="$ctr.setAdditionalFields($index)"
+                                            ng-change="$ctr.setAdditionalFields($index); $ctr.calculate($index)"
                                             ng-options="value.id as value.item_name for value in $ctr.ingredients | orderBy:'item_name'" required>
                                     </select>
                                 </td>
@@ -221,7 +221,7 @@
                     <div class="form-group">
                         <label class="col-md-3">Comments</label>
                         <div class="col-md-9 no-padding">
-                            <textarea class="form-control" ng-model="$ctr.model.description"></textarea>
+                            <textarea class="form-control" ng-click="$ctr.calculate()" ng-model="$ctr.model.description"></textarea>
                         </div>
                     </div>
                 </div>
