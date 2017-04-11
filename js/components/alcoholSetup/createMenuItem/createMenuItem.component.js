@@ -97,66 +97,124 @@
                 return parseFloat(v.toFixed(3));
             };
 
-            var price = that.model.price;
+            var price = that.model.price || 0;
             var total_cost = 0;
 
-            var serving_type = that.model.serving_type; // ID refbooks['bar_serving_types']
-            var serving_size = that.model.serving_size;
+            var serving_type = that.model.serving_type;  // ID refbooks['bar_serving_types']
+            var isButch = serving_type === 2;            // Batch  == 2
+            var serving_size = that.model.serving_size || 0;
             var total_recipe_oz = 0;
-            var total_servings = 0;
+            var total_servings = 1;
+            var cost_margin = 0;
+
+            if (isButch && (!serving_size || !serving_type || !price)) return;
+
+            angular.forEach(that.model.ingredients, function (v, k) {
+                if (v.recipes_amount === undefined || v.recipes_amount === null) return;
+                var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
+                // Usage Per Recipe
+                v.usage_in_units = _p(v.bar_recipe_uom_id === 1 ? content_weight * v.recipes_amount : v.recipes_amount);
+                total_recipe_oz += (v.usage_in_units || 0);
+            });
+
 
             angular.forEach(that.model.ingredients, function (v, k) {
                 var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
-
-                // Full Btl or Oz
-                var oz = v.bar_recipe_uom_id === 1 ? (content_weight * v.recipes_amount) : v.recipes_amount;
-                total_recipe_oz += oz || 0;
-            });
-
-            total_servings = (total_recipe_oz / serving_size) || 0;
-
-            // count - Ounces per Serving
-            angular.forEach(that.model.ingredients, function (v, k) {
-                if (v.recipes_amount === undefined || v.recipes_amount === null) return;
-                var oz = v.bar_recipe_uom_id === 1 ? (v.content_weight * v.recipes_amount) : v.recipes_amount;
-
-                if (serving_type === 1) {
-                    v.oz_per_serving = _p(v.recipes_amount / total_servings)
-                } else {
-                    v.oz_per_serving = _p(oz / total_servings)
-                }
-            });
-
-            angular.forEach(that.model.ingredients, function (v, k) {
-
-                if (v.recipes_amount === undefined || v.recipes_amount === null) return;
-
-                var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
-
-                // Full Btl == 1
-                // Oz == 2
-                if (v.bar_recipe_uom_id === 1) {
-                    v.usage_in_units = content_weight * v.recipes_amount;
-                } else {
-                    v.usage_in_units = v.recipes_amount;
-                }
-
                 v.cost = _p(v.usage_in_units / content_weight * v.unit_cost);
-
-
                 total_cost += v.cost;
+            });
+
+
+            if (!isButch) {
+                serving_size = total_recipe_oz;
+                cost_margin = price ? total_cost / price * 100 : 0;
+            }
+
+            if (isButch) {
+                total_servings = total_recipe_oz / serving_size;
+                cost_margin = price ? total_cost / (price * total_servings) * 100 : 0;
+            }
+
+            angular.forEach(that.model.ingredients, function (v, k) {
+                v.oz_per_serving = _p(isButch ? v.usage_in_units / total_servings : v.usage_in_units)
             });
 
 
             that.model.total_recipe_oz = _p(total_recipe_oz);
             that.model.total_servings = _p(total_servings);
+            that.model.serving_size = _p(serving_size);
             that.model.total_cost = _p(total_cost);
-            that.model.cost_margin = price ? _p((total_cost / ((price * (total_servings || 1)) || 1)) * 100) : 0;
+            that.model.cost_margin = _p(cost_margin);
 
-            if (that.model.serving_type !== 2) {
-                that.model.serving_size = that.model.total_recipe_oz;
-            }
         };
+
+        // that.calculate = function ($index) {
+        //
+        //     var _p = function (v) {
+        //         if (!v) return;
+        //         return parseFloat(v.toFixed(3));
+        //     };
+        //
+        //     var price = that.model.price;
+        //     var total_cost = 0;
+        //
+        //     var serving_type = that.model.serving_type; // ID refbooks['bar_serving_types']
+        //     var serving_size = that.model.serving_size;
+        //     var total_recipe_oz = 0;
+        //     var total_servings = 0;
+        //
+        //     angular.forEach(that.model.ingredients, function (v, k) {
+        //         var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
+        //
+        //         // Full Btl or Oz
+        //         var oz = v.bar_recipe_uom_id === 1 ? (content_weight * v.recipes_amount) : v.recipes_amount;
+        //         total_recipe_oz += oz || 0;
+        //     });
+        //
+        //     total_servings = (total_recipe_oz / serving_size) || 0;
+        //
+        //     // count - Ounces per Serving
+        //     angular.forEach(that.model.ingredients, function (v, k) {
+        //         if (v.recipes_amount === undefined || v.recipes_amount === null) return;
+        //         var oz = v.bar_recipe_uom_id === 1 ? (v.content_weight * v.recipes_amount) : v.recipes_amount;
+        //
+        //         if (serving_type === 1) {
+        //             v.oz_per_serving = _p(v.recipes_amount / total_servings)
+        //         } else {
+        //             v.oz_per_serving = _p(oz / total_servings)
+        //         }
+        //     });
+        //
+        //     angular.forEach(that.model.ingredients, function (v, k) {
+        //
+        //         if (v.recipes_amount === undefined || v.recipes_amount === null) return;
+        //
+        //         var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
+        //
+        //         // Full Btl == 1
+        //         // Oz == 2
+        //         if (v.bar_recipe_uom_id === 1) {
+        //             v.usage_in_units = content_weight * v.recipes_amount;
+        //         } else {
+        //             v.usage_in_units = v.recipes_amount;
+        //         }
+        //
+        //         v.cost = _p(v.usage_in_units / content_weight * v.unit_cost);
+        //
+        //
+        //         total_cost += v.cost;
+        //     });
+        //
+        //
+        //     that.model.total_recipe_oz = _p(total_recipe_oz);
+        //     that.model.total_servings = _p(total_servings);
+        //     that.model.total_cost = _p(total_cost);
+        //     that.model.cost_margin = price ? _p((total_cost / ((price * (total_servings || 1)) || 1)) * 100) : 0;
+        //
+        //     if (that.model.serving_type !== 2) {
+        //         that.model.serving_size = that.model.total_recipe_oz;
+        //     }
+        // };
 
 
         that.addIngredient = function () {

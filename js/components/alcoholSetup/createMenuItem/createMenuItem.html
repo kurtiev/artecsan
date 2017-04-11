@@ -182,7 +182,6 @@
                                 <td>
                                     <select class="form-control" ng-model="i.bar_recipe_uom_id" required
                                             ng-change="$ctr.calculate($index)"
-                                            ng-disabled="$ctr.model.serving_type === 3"
                                             ng-options="value.id as value.name for value in $ctr.get_refbooks.bar_recipe_measurement_types">
                                     </select>
                                 </td>
@@ -221,7 +220,7 @@
                     <div class="form-group">
                         <label class="col-md-3">Comments</label>
                         <div class="col-md-9 no-padding">
-                            <textarea class="form-control" ng-click="$ctr.calculate()" ng-model="$ctr.model.description"></textarea>
+                            <textarea class="form-control" ng-model="$ctr.model.description"></textarea>
                         </div>
                     </div>
                 </div>
