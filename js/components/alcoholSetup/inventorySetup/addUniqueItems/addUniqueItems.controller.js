@@ -157,7 +157,6 @@
                     that.uniqueItem[$index].tare_weight = (f - c) || 0;
                     that.uniqueItem[$index].content_weight = c;
 
-                    break
                 }
             }
 
