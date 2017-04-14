@@ -81,7 +81,7 @@
                 m.sku_items.push({
                     item_name: that.uniqueItem[i].item_name,
                     tare_type_id: that.uniqueItem[i].tare_type_id,  //tare_type_id, refbooks
-                    size: that.uniqueItem[i].content_weight || (that.uniqueItem[i].full_weight - that.uniqueItem[i].tare_weight),
+                    size: that.uniqueItem[i].content_weight,
                     full_weight: that.uniqueItem[i].full_weight,
                     tare_weight: that.uniqueItem[i].tare_weight,
                     manufacturer: that.uniqueItem[i].manufacturer,
@@ -143,18 +143,18 @@
 
         that.setWeights = function ($index, cat_id, sub_cat_id, tare_type_id) {
 
+
             for (var i = 0; that.refbooks.default_weights.length > i; i++) {
 
                 if (that.refbooks.default_weights[i].vendor_sub_cat_id === sub_cat_id
                     && that.refbooks.default_weights[i].vendor_cat_id === cat_id
                     && that.refbooks.default_weights[i].tare_type_id === tare_type_id) {
 
-                    var t = that.refbooks.default_weights[i].tare_weight || 0;
-                    var f = that.refbooks.default_weights[i].full_weight || 0;
-                    var c = that.refbooks.default_weights[i].content_weight || (f - t);
+                    var f = that.uniqueItem[$index].vendor_cat_id === 71 ? that.refbooks.default_weights[i].full_weight : that.uniqueItem[$index].full_weight;
+                    var c = that.refbooks.default_weights[i].content_weight;
 
-                    that.uniqueItem[$index].tare_weight = t;
-                    that.uniqueItem[$index].full_weight = f;
+                    //TODO need to clarify that full_weight can't be more than content_weight
+                    that.uniqueItem[$index].tare_weight = (f - c) || 0;
                     that.uniqueItem[$index].content_weight = c;
 
                     break

@@ -173,6 +173,7 @@
                     if (res.data.data.code === 1000) {
                         that.getInventories(that.model.vendor_category_id);
                         alertService.showAlertSave();
+                        $state.go('admin.homeMenu');
                         deferred.resolve()
                     }
                 } catch (e) {
