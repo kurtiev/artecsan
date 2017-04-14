@@ -93,13 +93,13 @@
                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.cases_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                    <input ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.cases_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.packs_qty" ng-required="$ctr.typeInventory == 'full'"  min="0">
+                                                    <input ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.packs_qty" ng-required="$ctr.typeInventory == 'full'"  min="0">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full'"  min="0">
+                                                    <input ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full'"  min="0">
                                                 </td>
 
                                                 <td>

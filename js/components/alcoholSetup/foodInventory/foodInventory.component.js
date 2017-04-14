@@ -74,6 +74,27 @@
             }
         };
 
+        that.calculateUnitWeight = function (item, $index) {
+            that.total_in_uom_of_delivery = 0;
+            var totalUnits = item.total_unit_size || 0;
+            var size = item.size;
+
+            if (item.inventory_type_id == 2) {
+                var tareWeight = that.inventories[$index].nof_bottles * item.tare_weight;
+            } else {
+                tareWeight = 0;
+            }
+
+            that.inventories[$index].total_in_uom_of_delivery = that.inventories[$index].cases_qty * totalUnits + that.inventories[$index].packs_qty * size + (that.inventories[$index].item_qty - tareWeight);
+        };
+
+        that.initOfBottle = function (item, $index) {
+            if (item.nof_bottles == 0 || item.nof_bottles == null) {
+                that.inventories[$index].nof_bottles = 1;
+            }
+        };
+
+
         api.get_vendors_categories({is_restaurant_used_only: 1, inventory_type_id: 2}).then(function (res) {
             try {
                 that.get_vendors_categories = res.data.data.categories;
@@ -114,11 +135,11 @@
                     });
             } else {
                 that.api.get_inventory_audit(m).then(function (res) {
-                    if (that.typeInventory == 'adjustment'){
+                    if (that.typeInventory == 'adjustment') {
                         that.inventories = res.data.data.inventory;
                         for (var i = 0; that.inventories.length > i; i++) {
                             for (var key in that.inventories[i]) {
-                                if (that.inventories[i][key] == 0){
+                                if (that.inventories[i][key] == 0) {
                                     that.inventories[i][key] = null;
                                 }
                             }
@@ -158,12 +179,14 @@
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
-                if (that.inventories[i].item_qty !== null && that.inventories[i].cases_qty !== null && that.inventories[i].packs_qty !== null) {
+                if (that.inventories[i].item_qty !== null && that.inventories[i].cases_qty !== null && that.inventories[i].packs_qty !== null && that.inventories[i].nof_bottles !== null) {
                     m.inventory_items.push({
                         id: that.inventories[i].id,
                         item_qty: that.inventories[i].item_qty,
                         cases_qty: that.inventories[i].cases_qty,
-                        packs_qty: that.inventories[i].packs_qty
+                        nof_bottles: that.inventories[i].nof_bottles,
+                        packs_qty: that.inventories[i].packs_qty,
+                        total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
                     })
                 }
             }
