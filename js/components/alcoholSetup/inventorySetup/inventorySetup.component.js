@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant, $uibModal) {
+    function inventorySetupController(api, $state, auth, localStorageService, SweetAlert, $rootScope, restaurant, $uibModal, core) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -266,12 +266,15 @@
         };
 
         that.$onInit = function () {
-            getChosenVendors()
+            core.getRefbooks().then(function (res) {
+                that.refbooks = res;
+                getChosenVendors();
+            });
         };
 
     }
 
-    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant', '$uibModal'];
+    inventorySetupController.$inject = ['api', '$state', 'auth', 'localStorageService', 'SweetAlert', '$rootScope', 'restaurant', '$uibModal', 'core'];
 
     angular.module('inspinia').component('alcoholInventorySetupComponent', {
         templateUrl: 'js/components/alcoholSetup/inventorySetup/inventorySetup.html',

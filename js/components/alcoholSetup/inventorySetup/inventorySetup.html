@@ -160,9 +160,9 @@
                                         <td>{{i.vendor_sku}}</td>
                                         <td>{{i.case_qty}}</td>
                                         <td>{{i.pack}}</td>
-                                        <td>{{i.total_unit_size}}</td>
+                                        <td>{{$ctr.refbooks.tare_types | tareTypeFilter : i.tare_type_id}}</td>
                                         <td>{{i.unit_of_delivery}}</td>
-                                        <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
+                                        <td>{{i[i.price_field] || i.case_cost | currency: ''}}</td>
                                         <td class="text-right">
                                             <label class="switch">
                                                 <input ng-disabled="i.is_used_by_receipts || !$ctr.permissions['13'].w" type="checkbox" ng-model="i.is_used" ng-true-value="1" ng-false-value="0" ng-change="$ctr.addInventory(i)"><i></i>
@@ -240,7 +240,7 @@
                                                 <tr ng-repeat="i in $ctr.inventoryListSelected">
                                                     <td>{{i.vendor_sku}}</td>
                                                     <td>{{i.item_name}}</td>
-                                                    <td>{{i[price_field] || i.case_cost | currency: ''}}</td>
+                                                    <td>{{i[i.price_field] || i.case_cost | currency: ''}}</td>
                                                     <td>
                                                         <a href="" class="btn btn-danger pull-right btn-circle" ng-if="$ctr.permissions['13'].d"  ng-click="$ctr.deleteInventory(i)" ><i class="fa fa-times"></i></a>
                                                     </td>
