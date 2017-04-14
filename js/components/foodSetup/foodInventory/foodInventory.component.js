@@ -74,6 +74,19 @@
             }
         };
 
+        that.calculateUnitWeight = function (item, $index) {
+            that.total_in_uom_of_delivery = 0;
+            var totalUnits = item.total_unit_size || 0;
+            var size = item.size;
+
+            if (item.inventory_type_id == 2) {
+                var tareWeight = that.inventories[$index].nof_bottles * item.tare_weight;
+            } else {
+                tareWeight = 0;
+            }
+            that.inventories[$index].total_in_uom_of_delivery = that.inventories[$index].cases_qty * totalUnits + that.inventories[$index].packs_qty * size + (that.inventories[$index].item_qty - tareWeight);
+        };
+
         api.get_vendors_categories({is_restaurant_used_only: 1}).then(function (res) {
             try {
                 that.get_vendors_categories = res.data.data.categories;
@@ -162,7 +175,8 @@
                         id: that.inventories[i].id,
                         item_qty: that.inventories[i].item_qty,
                         cases_qty: that.inventories[i].cases_qty,
-                        packs_qty: that.inventories[i].packs_qty
+                        packs_qty: that.inventories[i].packs_qty,
+                        total_in_uom_of_delivery: that.inventories[$index].total_in_uom_of_delivery
                     })
                 }
              }

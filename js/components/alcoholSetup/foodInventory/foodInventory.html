@@ -75,12 +75,16 @@
                                     <table class="table table-bordered">
                                         <thead class="th-text-center th-vertical-align-middle">
                                         <tr>
-                                            <th class="width-120">SKU</th>
-                                            <th class="min-width-150">Inventory Item</th>
-                                            <th class="width-100">Total Case(s)</th>
-                                            <th class="width-100">Full Bottles</th>
+                                            <th rowspan="2" class="width-120">SKU</th>
+                                            <th rowspan="2" class="min-width-150">Inventory Item</th>
+                                            <th rowspan="2" class="width-100">Total Case(s)</th>
+                                            <th rowspan="2" class="width-100">Full Bottles</th>
+                                            <th colspan="2" class="width-100">Partial Item Qty</th>
+                                            <th rowspan="2" class="width-120">Unit of Delivery</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="width-100">#of Bottles</th>
                                             <th class="width-100">Unit Weight</th>
-                                            <th class="width-120">Unit of Delivery</th>
                                         </tr>
                                         </thead>
                                         <tbody ng-repeat="i in $ctr.inventories track by $index">
@@ -93,15 +97,18 @@
                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.cases_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                    <input ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.cases_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.packs_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                    <input ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.packs_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
-                                                </td>
 
+                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.nof_bottles" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                </td>
+                                                <td>
+                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index)" type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                </td>
                                                 <td>
                                                     {{$ctr.model.measurement_units_of_delivery(i.uom_id_of_delivery_unit)}}
                                                  <!--   <select class="form-control" ng-model="i.uom_id_of_delivery_unit"  disabled
