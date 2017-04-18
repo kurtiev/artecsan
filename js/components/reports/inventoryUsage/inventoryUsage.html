@@ -92,7 +92,7 @@
                                         <th class="width-100">Description</th>
                                         <th class="width-80">Individual Cost</th>
                                         <th class="width-80">Pkg Unit Type</th>
-                                        <th class="width-80">Last Counted</th>
+                                        <th class="width-80">Beginning Amount</th>
                                         <th class="width-80">Purchased this Period</th>
                                         <th class="width-100">Counted this Period</th>
                                         <th class="width-100">Qty Used this Period</th>
@@ -106,15 +106,15 @@
                                         <td class="performance-table-color"><strong>{{i.vendor_name}}</strong></td>
                                         <td>{{$ctr.refbooks['inventory_types'] | recipeTypeFilter : i.inventory_type_id }}</td>
                                         <td>{{i.description}}</td>
-                                        <td class="text-center">{{i.unit_cost | currency: '$'}}</td>
+                                        <td class="text-center">{{i.unit_cost || 0 | currency: '$'}}</td>
                                         <td>{{i.package_order_type}}</td>
-                                        <td class="text-center">{{i.last_counted}}</td>
-                                        <td class="text-center">{{i.purchased_this_period}}</td>
-                                        <td class="text-center">{{i.counted_this_period}}</td>
-                                        <td class="text-center">{{i.qty_used_this_period}}</td>
-                                        <td class="text-center">{{i.pos_sales_this_period}}</td>
-                                        <td class="text-danger text-center">{{i.over_this_period}}</td>
-                                        <td class="performance-table-color text-center">{{i.cost_of_over_this_period | currency: '$'}}</td>
+                                        <td class="text-center">{{i.last_counted || 0}}</td>
+                                        <td class="text-center">{{i.purchased_this_period || 0}}</td>
+                                        <td class="text-center">{{i.counted_this_period || 0}}</td>
+                                        <td class="text-center">{{i.qty_used_this_period || 0}}</td>
+                                        <td class="text-center">{{i.pos_sales_this_period || 0}}</td>
+                                        <td class="text-danger text-center">{{i.over_this_period || 0}}</td>
+                                        <td class="performance-table-color text-center">{{i.cost_of_over_this_period || 0 | currency: '$'}}</td>
                                     </tr>
                                     <tr class="text-bold-total">
                                         <td class="text-right" colspan="3"><strong>TOTAL</strong></td>

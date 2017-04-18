@@ -81,7 +81,7 @@
                 m.sku_items.push({
                     item_name: that.uniqueItem[i].item_name,
                     tare_type_id: that.uniqueItem[i].tare_type_id,  //tare_type_id, refbooks
-                    size: that.uniqueItem[i].content_weight,
+                    size: that.uniqueItem[i].size || that.uniqueItem[i].content_weight || 1,
                     full_weight: that.uniqueItem[i].full_weight,
                     tare_weight: that.uniqueItem[i].tare_weight,
                     manufacturer: that.uniqueItem[i].manufacturer,
@@ -136,9 +136,11 @@
         };
 
         that.calculate = function ($index) {
-            var t = that.uniqueItem[$index].pack || 0;
-            var u = that.uniqueItem[$index].unit_cost || 0;
-            that.uniqueItem[$index].case_cost = (t * u);
+            var t = that.uniqueItem[$index].pack || 1;
+            var u = that.uniqueItem[$index].unit_cost || 1;
+            var s = 1; // todo clarify that.uniqueItem[$index].size
+            var c = that.uniqueItem[$index].case_qty || 1;
+            that.uniqueItem[$index].case_cost = parseFloat((t * u * s * c).toFixed(2));
         };
 
         that.setWeights = function ($index, cat_id, sub_cat_id, tare_type_id) {
@@ -153,7 +155,6 @@
                     var f = that.uniqueItem[$index].vendor_cat_id === 71 ? that.refbooks.default_weights[i].full_weight : that.uniqueItem[$index].full_weight;
                     var c = that.refbooks.default_weights[i].content_weight;
 
-                    //TODO need to clarify that full_weight can't be more than content_weight
                     that.uniqueItem[$index].tare_weight = (f - c) || 0;
                     that.uniqueItem[$index].content_weight = c;
 

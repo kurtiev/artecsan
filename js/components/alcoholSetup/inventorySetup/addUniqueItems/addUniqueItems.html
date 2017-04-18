@@ -161,7 +161,7 @@
                                                 <input ng-disabled="item.parent_id" type="text" class="form-control min-width-115" ng-model="item.vendor_sku">
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" required min="0" ng-model="item.case_qty">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" required min="0" ng-model="item.case_qty" ng-change="$ctr.calculate($index)">
                                             </td>
                                             <td>
                                                 <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" ng-change="$ctr.calculate($index)" required min="0" ng-model="item.pack">

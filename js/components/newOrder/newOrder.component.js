@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope) {
+    function controller($state, auth, api, core, restaurant, localStorageService, $rootScope, alertService) {
 
         if (!auth.authentication.isLogged) {
             $state.go('login');
@@ -187,6 +187,7 @@
             if (!that.isEdit) {
                 that.api.create_order(m).then(function (res) {
                     if (res.data.data.code === 1000) {
+                        alertService.showAlertSave();
                         if (that.isFood) {
                             that.$state.go('foodSubCategories');
                         } else {
@@ -237,7 +238,7 @@
 
     }
 
-    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope'];
+    controller.$inject = ['$state', 'auth', 'api', 'core', 'restaurant', 'localStorageService', '$rootScope', 'alertService'];
 
     angular.module('inspinia').component('newOrderComponent', {
         templateUrl: 'js/components/newOrder/newOrder.html',

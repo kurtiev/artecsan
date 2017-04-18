@@ -61,7 +61,6 @@
             var cost_of_over_this_period = 0;
 
             angular.forEach(that.data, function (v, k) {
-                console.log(v);
                 last_counted += parseFloat(v.last_counted) || 0;
                 purchased_this_period += parseFloat(v.purchased_this_period) || 0;
                 counted_this_period += parseFloat(v.counted_this_period) || 0;
