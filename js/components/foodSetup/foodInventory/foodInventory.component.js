@@ -176,7 +176,7 @@
                         item_qty: that.inventories[i].item_qty,
                         cases_qty: that.inventories[i].cases_qty,
                         packs_qty: that.inventories[i].packs_qty,
-                        total_in_uom_of_delivery: that.inventories[$index].total_in_uom_of_delivery
+                        total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
                     })
                 }
              }
@@ -184,9 +184,13 @@
             that.api.update_inventory_audit(m).then(function (res) {
                 try {
                     if (res.data.data.code === 1000) {
-                        that.getInventories(that.model.vendor_category_id);
+                        INVENTORIES = angular.copy(that.inventories);
+                        if (is_final_save) {
+                            $state.go('admin.homeMenu');
+                        } else {
+                            that.getInventories(that.model.vendor_category_id);
+                        }
                         alertService.showAlertSave();
-                        $state.go('admin.homeMenu');
                         deferred.resolve()
                     }
                 } catch (e) {
