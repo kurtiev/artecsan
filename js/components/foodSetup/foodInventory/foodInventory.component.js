@@ -176,7 +176,7 @@
                         item_qty: that.inventories[i].item_qty,
                         cases_qty: that.inventories[i].cases_qty,
                         packs_qty: that.inventories[i].packs_qty,
-                        total_in_uom_of_delivery: that.inventories[$index].total_in_uom_of_delivery
+                        total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
                     })
                 }
              }
