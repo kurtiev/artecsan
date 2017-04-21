@@ -120,7 +120,7 @@
 
             angular.forEach(that.model.ingredients, function (v, k) {
                 var content_weight = v.content_weight || (v.full_weight - v.tare_weight);
-                v.cost = _p(v.usage_in_units / content_weight * v.unit_cost);
+                v.cost = _p(v.usage_in_units * v.unit_cost);
                 total_cost += v.cost;
             });
 

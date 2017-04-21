@@ -137,7 +137,8 @@
                                             <td>
                                                  <span ng-if="!item.parent_id">
                                                      <span ng-if="(item.vendor_cat_id === 71)">-</span>
-                                                     <input ng-disabled="item.parent_id" ng-if="(item.vendor_cat_id !== 71)" type="number" class="form-control min-width-115" ng-model="item.full_weight" required min="0">
+                                                     <input ng-disabled="item.parent_id" ng-if="(item.vendor_cat_id !== 71)" type="number" class="form-control min-width-115" ng-model="item.full_weight" required min="0"
+                                                      ng-change="$ctr.setWeights($index, item.vendor_cat_id, item.vendor_sub_cat_id, item.tare_type_id)">
                                                 </span>
                                                 <span ng-if="item.parent_id">-</span>
                                             </td>
@@ -170,7 +171,7 @@
                                                 <input type="number" class="form-control min-width-90" ng-model="item.case_cost" readonly required min="0">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control min-width-90" ng-model="item.unit_cost"  required min="0" ng-change="$ctr.calculate($index)">
+                                                <input type="number" class="form-control min-width-90" ng-model="item.pack_cost"  required min="0" ng-change="$ctr.calculate($index)">
                                             </td>
                                             <td style="padding-right: 0;">
                                                 <a href="" ng-click="$ctr.removeUniqueItem($index, item)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>

@@ -82,17 +82,19 @@
                     item_name: that.uniqueItem[i].item_name,
                     tare_type_id: that.uniqueItem[i].tare_type_id,  //tare_type_id, refbooks
                     size: that.uniqueItem[i].size || that.uniqueItem[i].content_weight || 1,
+                    content_weight: that.uniqueItem[i].size || that.uniqueItem[i].content_weight || 1,
                     full_weight: that.uniqueItem[i].full_weight,
                     tare_weight: that.uniqueItem[i].tare_weight,
                     manufacturer: that.uniqueItem[i].manufacturer,
                     vendor_sku: that.uniqueItem[i].vendor_sku,
                     case_qty: that.uniqueItem[i].case_qty,
                     pack: that.uniqueItem[i].pack,
-                    price: that.uniqueItem[i].unit_cost,
+                    price: that.uniqueItem[i].pack_cost,
                     vendor_cat_id: that.uniqueItem[i].vendor_cat_id,
+                    uom_id_of_delivery_unit: 5,
                     vendor_sub_cat_id: that.uniqueItem[i].vendor_sub_cat_id,
                     is_active: that.uniqueItem[i].is_active,
-                    minimum_order_type: 'Each',
+                    minimum_order_type: 'Pack',
                     id: that.uniqueItem[i].id
                 });
 
@@ -137,7 +139,7 @@
 
         that.calculate = function ($index) {
             var t = that.uniqueItem[$index].pack || 1;
-            var u = that.uniqueItem[$index].unit_cost || 1;
+            var u = that.uniqueItem[$index].pack_cost || 1;
             var s = 1; // todo clarify that.uniqueItem[$index].size
             var c = that.uniqueItem[$index].case_qty || 1;
             that.uniqueItem[$index].case_cost = parseFloat((t * u * s * c).toFixed(2));
@@ -176,11 +178,12 @@
                 case_qty: 1,
                 total_unit_size: null,
                 price: null,
-                unit_cost: null,
+                pack_cost: null,
                 vendor_cat_id: that.categories.length ? that.categories[0].id : null,
+                uom_id_of_delivery_unit: 5,
                 vendor_sub_cat_id: that.sub_categories.length ? that.sub_categories[0].id : null,
                 is_active: 1,
-                minimum_order_type: 'Each',
+                minimum_order_type: 'Pack',
                 id: null
             })
         };

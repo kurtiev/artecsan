@@ -107,6 +107,20 @@
         });
 
         that.getInventories = function (categoryId, categoryOldId) {
+
+            var _setToZero = function (data) {
+                if (!data.length) return;
+
+                for (var i = 0; data.length > i; i++) {
+                    data[i].cases_qty = 0;
+                    data[i].packs_qty = 0;
+                    data[i].nof_bottles = 0;
+                    data[i].item_qty = 0;
+                }
+
+                return data;
+            };
+
             var m = {
                 inventory_type_id: 2,
                 vendor_cat_id: categoryId == 'all' ? null : categoryId
@@ -126,7 +140,10 @@
                             that.saveAll(that.form).then(function () {
                                 that.api.get_inventory_audit(m).then(function (res) {
                                     that.inventories = res.data.data.inventory;
-                                    INVENTORIES = angular.copy(res.data.data.inventory);
+                                    if (that.typeInventory == 'adjustment') {
+                                        that.inventories = _setToZero(that.inventories)
+                                    }
+                                    INVENTORIES = angular.copy(that.inventories);
                                 })
                             });
                         } else {
@@ -136,15 +153,8 @@
             } else {
                 that.api.get_inventory_audit(m).then(function (res) {
                     if (that.typeInventory == 'adjustment') {
-                        that.inventories = res.data.data.inventory;
-                        for (var i = 0; that.inventories.length > i; i++) {
-                            for (var key in that.inventories[i]) {
-                                if (that.inventories[i][key] == 0) {
-                                    that.inventories[i][key] = null;
-                                }
-                            }
-                        }
-                        INVENTORIES = angular.copy(res.data.data.inventory);
+                        that.inventories = _setToZero(res.data.data.inventory);
+                        INVENTORIES = angular.copy(that.inventories);
                     } else {
                         that.inventories = res.data.data.inventory;
                         INVENTORIES = angular.copy(res.data.data.inventory);
@@ -179,7 +189,7 @@
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
-                if (that.inventories[i].item_qty !== null && that.inventories[i].cases_qty !== null && that.inventories[i].packs_qty !== null && that.inventories[i].nof_bottles !== null) {
+                if (that.inventories[i].item_qty && that.inventories[i].cases_qty && that.inventories[i].packs_qty && that.inventories[i].nof_bottles) {
                     m.inventory_items.push({
                         id: that.inventories[i].id,
                         item_qty: that.inventories[i].item_qty,
@@ -190,6 +200,8 @@
                     })
                 }
             }
+
+            if (!m.inventory_items.length) return;
 
             that.api.update_inventory_audit(m).then(function (res) {
                 try {
