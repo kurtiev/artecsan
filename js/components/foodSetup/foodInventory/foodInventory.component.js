@@ -131,9 +131,11 @@
                         that.inventories = res.data.data.inventory;
                         for (var i = 0; that.inventories.length > i; i++) {
                             for (var key in that.inventories[i]) {
-                                if (that.inventories[i][key] == 0){
-                                    that.inventories[i][key] = null;
-                                }
+                                // if (that.inventories[i][key] == 0){
+                                    that.inventories[i]['cases_qty'] = null;
+                                    that.inventories[i]['item_qty'] = null;
+                                    that.inventories[i]['packs_qty'] = null;
+                                // }
                             }
                         }
                         INVENTORIES = angular.copy(res.data.data.inventory);
@@ -170,12 +172,12 @@
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
-                if (that.inventories[i].item_qty !== null && that.inventories[i].cases_qty !== null && that.inventories[i].packs_qty !== null) {
+                if (that.inventories[i].item_qty !== null || that.inventories[i].cases_qty !== null || that.inventories[i].packs_qty !== null) {
                     m.inventory_items.push({
                         id: that.inventories[i].id,
-                        item_qty: that.inventories[i].item_qty,
-                        cases_qty: that.inventories[i].cases_qty,
-                        packs_qty: that.inventories[i].packs_qty,
+                        item_qty: that.inventories[i].item_qty ? that.inventories[i].item_qty : 0,
+                        cases_qty: that.inventories[i].cases_qty ? that.inventories[i].cases_qty : 0,
+                        packs_qty: that.inventories[i].packs_qty ? that.inventories[i].packs_qty : 0,
                         total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
                     })
                 }

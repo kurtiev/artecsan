@@ -112,10 +112,10 @@
                 if (!data.length) return;
 
                 for (var i = 0; data.length > i; i++) {
-                    data[i].cases_qty = 0;
-                    data[i].packs_qty = 0;
-                    data[i].nof_bottles = 0;
-                    data[i].item_qty = 0;
+                    data[i].cases_qty = null;
+                    data[i].packs_qty = null;
+                    data[i].nof_bottles = null;
+                    data[i].item_qty = null;
                 }
 
                 return data;
@@ -189,13 +189,13 @@
             };
 
             for (var i = 0; that.inventories.length > i; i++) {
-                if (that.inventories[i].item_qty && that.inventories[i].cases_qty && that.inventories[i].packs_qty && that.inventories[i].nof_bottles) {
+                if (that.inventories[i].item_qty !== null || that.inventories[i].cases_qty !== null || that.inventories[i].packs_qty !== null || that.inventories[i].nof_bottles !== null) {
                     m.inventory_items.push({
                         id: that.inventories[i].id,
-                        item_qty: that.inventories[i].item_qty,
-                        cases_qty: that.inventories[i].cases_qty,
-                        nof_bottles: that.inventories[i].nof_bottles,
-                        packs_qty: that.inventories[i].packs_qty,
+                        item_qty: that.inventories[i].item_qty ? that.inventories[i].item_qty : 0,
+                        cases_qty: that.inventories[i].cases_qty ? that.inventories[i].cases_qty : 0,
+                        nof_bottles: that.inventories[i].nof_bottles ? that.inventories[i].nof_bottles : 0,
+                        packs_qty: that.inventories[i].packs_qty ? that.inventories[i].packs_qty : 0,
                         total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
                     })
                 }
