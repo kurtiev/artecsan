@@ -63,7 +63,7 @@
                 vendor_sku: that.searchModel.vendor_sku,
                 filter: that.searchModel.filter,
                 category: that.searchModel.category,
-                inventory_type_id: 2
+                inventory_type_id: that.inventory_type_id
             };
 
             for (var i in m) {
@@ -115,7 +115,9 @@
 
         };
 
-        that.getDateObj = function (date) {
+        that.getDateObj = function (date, isFocus) {
+            if (!date && isFocus) return new Date();
+            if (!date && !isFocus) return;
             var d = new Date(date);
             if (isNaN(d) || !d) return new Date();
             return new Date(d)

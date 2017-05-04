@@ -58,37 +58,36 @@
                                             </td>
                                             <td class="text-center">
                                                 <label class="switch">
-                                                    <input type="checkbox" ng-disabled="i.invoice_total != i.total" ng-model="i.is_delivery_confirmed" ng-true-value="1" ng-false-value="0"><i></i>
+                                                    <input type="checkbox" ng-disabled="i.invoice_total != i.total || !i.is_approved" ng-model="i.is_delivery_confirmed" ng-true-value="1" ng-false-value="0"><i></i>
                                                 </label>
-                                                <!--<span ng-show="i.is_delivery_confirmed">Yes</span>-->
-                                                <!--<span ng-show="!i.is_delivery_confirmed">No</span>-->
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" class="form-control" ng-model="i.invoice_number">
+                                                <input type="text" class="form-control" ng-model="i.invoice_number" ng-required="i.is_approved" ng-disabled="i.is_approved">
                                             </td>
                                             <td class="text-center" ng-init="i.delivery_date = $ctr.getDateObj(i.delivery_date)">
                                                 <input type="text" class="form-control" style="min-width: 101px"
                                                        datetime-picker="MM/dd/yyyy HH:mm"
                                                        format="MM/dd/yyyy"
                                                        ng-model="i.delivery_date"
-                                                       ng-focus="orderDate = true; i.delivery_date = $ctr.getDateObj(i.delivery_date)"
+                                                       ng-focus="orderDate = true; i.delivery_date = $ctr.getDateObj(i.delivery_date, 1)"
                                                        is-open="orderDate"
+                                                       ng-disabled="i.is_approved"
                                                        datepicker-append-to-body="true" ng-required="i.is_approved">
                                             </td>
                                             <td class="text-center" ng-init="i.delivery_time = $ctr.getDateObj(i.delivery_time)">
                                                 {{i.delivery_date | date : 'HH:mm'}}
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" class="form-control" ng-change="$ctr.calculate()" ng-model="i.invoice_total" ng-required="i.is_approved">
+                                                <input type="text" class="form-control" ng-change="$ctr.calculate()" ng-model="i.invoice_total" ng-required="i.is_approved" ng-disabled="i.is_approved">
                                             </td>
                                             <td class="text-center">
                                                 <label class="switch">
-                                                    <input type="checkbox" ng-model="i.is_approved" ng-true-value="1" ng-false-value="0"><i></i>
+                                                    <input type="checkbox" ng-model="i.is_approved" ng-true-value="1" ng-false-value="0" ng-disabled="(i.is_delivery_confirmed || i.invoice_total != i.total) || (!i.invoice_total || !i.delivery_date || !i.invoice_number)"><i></i>
                                                 </label>
                                             </td>
                                             <td class="text-right">
-                                                <a href="" class="btn btn-warning" ng-show="!$ctr.isFood" ui-sref="alcohol.editAlcoholOrder({id: i.id})"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                <a href="" class="btn btn-warning" ng-show="$ctr.isFood" ui-sref="food.editFoodOrder({id: i.id})"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="" class="btn btn-warning" ng-if="!i.is_approved" ng-show="!$ctr.isFood" ui-sref="alcohol.editAlcoholOrder({id: i.id})"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="" class="btn btn-warning" ng-if="!i.is_approved" ng-show="$ctr.isFood" ui-sref="food.editFoodOrder({id: i.id})"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                                             </td>
                                         </tr>
                                     </ng-form>
