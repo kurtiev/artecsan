@@ -122,6 +122,7 @@
             };
 
             var m = {
+                is_adjustment: that.typeInventory == 'adjustment' ? 1 : 0,
                 inventory_type_id: 2,
                 vendor_cat_id: categoryId == 'all' ? null : categoryId
             };
