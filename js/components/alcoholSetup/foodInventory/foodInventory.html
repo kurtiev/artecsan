@@ -104,10 +104,10 @@
                                                 </td>
                                                 <td>
 
-                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.nof_bottles" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.nof_bottles" ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)" min="0">
                                                 </td>
                                                 <td>
-                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index)" type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full'" min="0">
+                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index)" type="number" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)" min="0">
                                                 </td>
                                                 <td>
                                                     {{$ctr.model.measurement_units_of_delivery(i.uom_id_of_delivery_unit)}}
