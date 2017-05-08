@@ -110,12 +110,12 @@
                                         <td>{{i.package_order_type}}</td>
                                         <td class="text-center">{{i.last_counted || 0}}</td>
                                         <td class="text-center">{{i.purchased_this_period || 0}}</td>
-                                        <td class="text-center">{{i.counted_this_period || 0}}</td>
+                                        <td class="text-center">{{i.is_there_audit_inside_report_period || i.counted_this_period}}</td>
                                         <td class="text-center">{{i.total_in_uom_of_delivery_final_in_units || 0}}</td>
                                         <!--<td class="text-center">{{i.qty_used_this_period || 0}}</td>-->
                                         <td class="text-center">{{i.pos_sales_this_period || 0}}</td>
-                                        <td class="text-danger text-center">{{i.over_this_period || 0}}</td>
-                                        <td class="performance-table-color text-center">{{i.cost_of_over_this_period || 0 | currency: '$'}}</td>
+                                        <td class="text-danger text-center">{{i.is_there_audit_inside_report_period || i.over_this_period}}</td>
+                                        <td class="performance-table-color text-center">{{i.is_there_audit_inside_report_period || i.cost_of_over_this_period || 0 | currency: '$'}}</td>
                                     </tr>
                                     <tr class="text-bold-total">
                                         <td class="text-right" colspan="3"><strong>TOTAL</strong></td>

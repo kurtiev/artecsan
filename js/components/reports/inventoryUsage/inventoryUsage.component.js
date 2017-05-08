@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function controller(api, $state, auth, localStorageService, restaurant, $rootScope, core) {
+    function controller(api, $state, auth, localStorageService, restaurant, $rootScope, core, $filter) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -84,8 +84,10 @@
 
             var m = {
                 inventory_type_id: that.inventory_type_id,
-                date_from: parseInt(new Date(that.searchModel.date_from).getTime() / 1000),
-                date_to: parseInt(new Date(that.searchModel.date_to).getTime() / 1000)
+                date_from: $filter('date')(new Date(that.searchModel.date_from), 'yyyy-MM-dd'),
+                // date_from: parseInt(new Date(that.searchModel.date_from).getTime() / 1000),
+                date_to: $filter('date')(new Date(that.searchModel.date_to), 'yyyy-MM-dd')
+                // date_to: parseInt(new Date(that.searchModel.date_to).getTime() / 1000)
             };
 
             that.api.inventory_usage_report(m).then(function (res) {
@@ -106,7 +108,7 @@
 
     }
 
-    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'restaurant', '$rootScope', 'core'];
+    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'restaurant', '$rootScope', 'core', '$filter'];
 
     angular.module('inspinia').component('inventoryUsage', {
         templateUrl: 'js/components/reports/inventoryUsage/inventoryUsage.html',
