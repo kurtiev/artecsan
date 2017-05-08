@@ -149,7 +149,7 @@
 
                 if (!item) return;
 
-                v.item_cost = v.amount ? (v.order_type == 'Case' ? (item.case_cost || 0) : v.order_type == 'Pack' ? (item.pack_cost || 0) : (item.pack_cost || 0)) : 0;
+                v.item_cost = v.amount ? (v.order_type == 'Case' ? (item.case_cost || 0) : v.order_type == 'Pack' ? (item.pack_cost || 0) : (that.isFood ? item.unit_cost : item.pack_cost || 0)) : 0;
                 v.total_cost = (v.item_cost * v.amount) || 0;
 
                 totalItemsCost += v.item_cost;
