@@ -141,6 +141,11 @@
 
             for (var i = 0; that.inventories.length > i; i++) {
 
+                if (!that.inventories[i].is_approved && !that.inventories[i].is_delivery_confirmed) {
+                    alertService.showError('Some of Vendor(s) need to be approved');
+                    return
+                }
+
                 m.orders.push({
                     id: that.inventories[i].id,
                     is_approved: that.inventories[i].is_approved,
