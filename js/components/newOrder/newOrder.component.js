@@ -149,7 +149,7 @@
 
                 if (!item) return;
 
-                v.item_cost = v.amount ? (v.order_type == 'Case' ? (item.case_cost || 0) : v.order_type == 'Pack' ? (item.pack_cost || 0) : (item.unit_cost || 0)) : 0;
+                v.item_cost = v.amount ? (v.order_type == 'Case' ? (item.case_cost || 0) : v.order_type == 'Pack' ? (item.pack_cost || 0) : (item.pack_cost || 0)) : 0;
                 v.total_cost = (v.item_cost * v.amount) || 0;
 
                 totalItemsCost += v.item_cost;
@@ -177,7 +177,7 @@
                     vendor_id: that.orderModel.items[i].vendor_id,
                     vendor_sku_id: that.orderModel.items[i].vendor_sku_id,
                     amount: that.orderModel.items[i].amount,
-                    order_type: that.orderModel.items[i].order_type,
+                    order_type: !that.isFood && that.orderModel.items[i].order_type == 'Each' ? 'Pack' : that.orderModel.items[i].order_type,
                     item_cost: that.orderModel.items[i].item_cost,
                     total_cost: that.orderModel.items[i].total_cost,
                     is_approved: that.orderModel.items[i].is_approved
