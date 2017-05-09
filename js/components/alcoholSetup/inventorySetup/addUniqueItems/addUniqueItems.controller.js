@@ -138,9 +138,9 @@
         };
 
         that.calculate = function ($index) {
-            var t = that.uniqueItem[$index].pack || 1;
-            var u = that.uniqueItem[$index].pack_cost || 1;
-            var s = 1; // todo clarify that.uniqueItem[$index].size
+            var t = that.uniqueItem[$index].pack || 0;
+            var u = that.uniqueItem[$index].pack_cost || 0;
+            var s = 1;
             var c = that.uniqueItem[$index].case_qty || 1;
             that.uniqueItem[$index].case_cost = parseFloat((t * u * s * c).toFixed(2));
         };
