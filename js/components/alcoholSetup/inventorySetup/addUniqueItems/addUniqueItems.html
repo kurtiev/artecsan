@@ -165,13 +165,13 @@
                                                 <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" min="0" ng-model="item.case_qty" ng-change="$ctr.calculate($index)" readonly>
                                             </td>
                                             <td>
-                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" ng-change="$ctr.calculate($index)" required min="0.01" ng-model="item.pack">
+                                                <input ng-disabled="item.parent_id" type="number" class="form-control min-width-90" ng-change="$ctr.calculate($index)" required min="0" ng-model="item.pack">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control min-width-90" ng-model="item.case_cost" readonly required min="0.01">
+                                                <input type="number" class="form-control min-width-90" ng-model="item.case_cost" readonly required min="0">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control min-width-90" ng-model="item.pack_cost"  required min="0.01" ng-change="$ctr.calculate($index)">
+                                                <input type="number" class="form-control min-width-90" ng-model="item.pack_cost"  required min="0" ng-change="$ctr.calculate($index)">
                                             </td>
                                             <td style="padding-right: 0;">
                                                 <a href="" ng-click="$ctr.removeUniqueItem($index, item)" class="btn btn-danger btn-circle pull-right" ><i class="fa fa-times"></i></a>

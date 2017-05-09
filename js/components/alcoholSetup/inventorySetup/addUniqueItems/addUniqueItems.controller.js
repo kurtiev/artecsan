@@ -89,7 +89,7 @@
                     vendor_sku: that.uniqueItem[i].vendor_sku,
                     case_qty: that.uniqueItem[i].case_qty,
                     pack: that.uniqueItem[i].pack,
-                    price: that.uniqueItem[i].pack_cost,
+                    price: that.uniqueItem[i].pack_cost || 1,
                     vendor_cat_id: that.uniqueItem[i].vendor_cat_id,
                     uom_id_of_delivery_unit: 5,
                     vendor_sub_cat_id: that.uniqueItem[i].vendor_sub_cat_id,
@@ -138,8 +138,8 @@
         };
 
         that.calculate = function ($index) {
-            var t = that.uniqueItem[$index].pack || 0;
-            var u = that.uniqueItem[$index].pack_cost || 0;
+            var t = that.uniqueItem[$index].pack || 1;
+            var u = that.uniqueItem[$index].pack_cost || 1;
             var s = 1;
             var c = that.uniqueItem[$index].case_qty || 1;
             that.uniqueItem[$index].case_cost = parseFloat((t * u * s * c).toFixed(2));
