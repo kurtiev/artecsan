@@ -89,7 +89,7 @@
                     vendor_sku: that.uniqueItem[i].vendor_sku,
                     case_qty: that.uniqueItem[i].case_qty,
                     pack: that.uniqueItem[i].pack,
-                    price: that.uniqueItem[i].pack_cost || 1,
+                    price: that.uniqueItem[i].pack_cost,
                     vendor_cat_id: that.uniqueItem[i].vendor_cat_id,
                     uom_id_of_delivery_unit: 5,
                     vendor_sub_cat_id: that.uniqueItem[i].vendor_sub_cat_id,
