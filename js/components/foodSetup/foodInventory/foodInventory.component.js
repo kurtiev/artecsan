@@ -60,7 +60,8 @@
                         return that.refbooks.measurement_units_of_delivery[i].name;
                     }
                 }
-            }
+            },
+            inventory_item: null
         };
 
         that.calculateCount = function (item, $index) {
@@ -101,7 +102,8 @@
         that.getInventories = function (categoryId, categoryOldId) {
             var m = {
                 inventory_type_id: 1,
-                vendor_cat_id: categoryId == 'all' ? null : categoryId
+                vendor_cat_id: categoryId == 'all' ? null : categoryId,
+                inventory_item: that.model.inventory_item
             };
 
             if (!_.isEqual(INVENTORIES, that.inventories)) {

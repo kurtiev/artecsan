@@ -20,57 +20,69 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-content overflow-x-auto">
-                            <form novalidate autocomplete="off" name="$ctr.form" ng-submit="$ctr.saveAll($ctr.form)">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-3">
-                                        <div class="form-group float-left select-category">
+                        <div class="ibox-title">
+                            <div class="row">
+                                <form ng-submit="$ctr.getInventories($ctr.model.vendor_category_id, $ctr.model.vendor_category_id);">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group m-b-none float-left select-category">
                                             <label class="font-noraml">Select Category:</label>
                                         </div>
-                                        <div class="form-group float-left">
+                                        <div class="form-group m-b-none float-left">
                                             <select class="form-control"
                                                     ng-model="$ctr.model.vendor_category_id"
-                                                    ng-change="$ctr.getInventories($ctr.model.vendor_category_id, {{$ctr.model.vendor_category_id}});"
+
                                                     ng-options="vendor.id as vendor.category for vendor in  $ctr.get_vendors_categories"></select>
+                                            <!--ng-change="$ctr.getInventories($ctr.model.vendor_category_id, {{$ctr.model.vendor_category_id}});"-->
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input  type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" id="filter" ng-model="$ctr.model.inventory_item" placeholder="Search">
+                                        </div>
+                                        <div class="col-md-2 ">
+                                            <button type="submit"  class="btn btn-primary">Search</button>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-9">
-                                        <div class="form-inline pull-right">
-                                            <label for="begin_date">Begin Date</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="begin_date"
-                                                       datetime-picker="MM/dd/yyyy HH:mm"
-                                                       ng-model="$ctr.pickers.beginDate.date"
-                                                       ng-disabled="$ctr.typeInventory == 'adjustment'"
-                                                       is-open="$ctr.pickers.beginDate.open"
-                                                       datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
-                                                <span class="input-group-btn">
+                                </form>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-inline pull-right">
+                                        <label for="begin_date">Begin Date</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="begin_date"
+                                                   datetime-picker="MM/dd/yyyy HH:mm"
+                                                   ng-model="$ctr.pickers.beginDate.date"
+                                                   ng-disabled="$ctr.typeInventory == 'adjustment'"
+                                                   is-open="$ctr.pickers.beginDate.open"
+                                                   datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
+                                            <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-disabled="$ctr.typeInventory == 'adjustment'"
                                                             ng-click="$ctr.openCalendar($event, 'beginDate')">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </button>
                                                 </span>
-                                            </div>
-                                            <label for="end_date">End Date</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="end_date"
-                                                       datetime-picker="MM/dd/yyyy HH:mm"
-                                                       ng-model="$ctr.pickers.endDate.date"
-                                                       ng-disabled="$ctr.typeInventory == 'adjustment'"
-                                                       is-open="$ctr.pickers.endDate.open"
-                                                       datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
-                                                <span class="input-group-btn">
+                                        </div>
+                                        <label for="end_date">End Date</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="end_date"
+                                                   datetime-picker="MM/dd/yyyy HH:mm"
+                                                   ng-model="$ctr.pickers.endDate.date"
+                                                   ng-disabled="$ctr.typeInventory == 'adjustment'"
+                                                   is-open="$ctr.pickers.endDate.open"
+                                                   datepicker-append-to-body="true" ng-required="$ctr.is_final_save">
+                                            <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"
                                                             ng-disabled="$ctr.typeInventory == 'adjustment'"
                                                             ng-click="$ctr.openCalendar($event, 'endDate')">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </button>
                                                 </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="ibox-content overflow-x-auto">
+
+                            <form novalidate autocomplete="off" name="$ctr.form" ng-submit="$ctr.saveAll($ctr.form)">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead class="th-text-center th-vertical-align-middle">
@@ -86,7 +98,7 @@
                                         <tbody ng-repeat="i in $ctr.inventories track by $index">
                                         <ng-form name="inventory">
                                             <tr>
-                                                <td>{{i.vendor_sku_id}}</td>
+                                                <td>{{i.vendor_sku}}</td>
                                                 <td>
                                                    <span class="no-wrap">
                                                         {{i.inventory_item}}

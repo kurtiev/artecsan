@@ -60,7 +60,8 @@
                         return that.refbooks.measurement_units_of_delivery[i].name;
                     }
                 }
-            }
+            },
+            inventory_item: null
         };
 
         that.calculateCount = function (item, $index) {
@@ -86,6 +87,32 @@
             }
 
             that.inventories[$index].total_in_uom_of_delivery = that.inventories[$index].cases_qty * totalUnits + that.inventories[$index].packs_qty * size + (that.inventories[$index].item_qty - tareWeight);
+        };
+
+        that.calculateUW = function (item, $index) {
+            var item_qty = item.item_qty ? item.item_qty : 0;
+
+            that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+");
+
+            // var itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g);
+            that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
+                return (previousValue * 1) + (currentValue * 1);
+            });
+
+            console.log(that.itemQtyStr)
+        };
+
+        that.calculateUWSum = function (item, $index) {
+            var item_qty = item.item_qty ? item.item_qty : 0;
+            that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
+                return (previousValue * 1) + (currentValue * 1);
+            });
+            console.log(that.itemQtyStr);
+            that.inventories[$index].item_qty = that.itemQtyStr
+        };
+
+        that.calculateUWFormula = function (item, $index) {
+            that.inventories[$index].item_qty = that.inventories[$index].item_qty_formula
         };
 
         that.initOfBottle = function (item, $index) {
@@ -124,7 +151,8 @@
             var m = {
                 is_adjustment: that.typeInventory == 'adjustment' ? 1 : 0,
                 inventory_type_id: 2,
-                vendor_cat_id: categoryId == 'all' ? null : categoryId
+                vendor_cat_id: categoryId == 'all' ? null : categoryId,
+                inventory_item: that.model.inventory_item
             };
 
             if (!_.isEqual(INVENTORIES, that.inventories)) {
@@ -197,7 +225,8 @@
                         cases_qty: that.inventories[i].cases_qty ? that.inventories[i].cases_qty : 0,
                         nof_bottles: that.inventories[i].nof_bottles ? that.inventories[i].nof_bottles : 0,
                         packs_qty: that.inventories[i].packs_qty ? that.inventories[i].packs_qty : 0,
-                        total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery
+                        total_in_uom_of_delivery: that.inventories[i].total_in_uom_of_delivery,
+                        item_qty_formula: that.inventories[i].item_qty_formula
                     })
                 }
             }

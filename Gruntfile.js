@@ -7,7 +7,8 @@ module.exports = function (grunt) {
         'js/plugins/metisMenu/jquery.metisMenu.js', 'js/plugins/slimscroll/jquery.slimscroll.min.js', 'js/plugins/pace/pace.min.js',
         'js/inspinia.js', 'js/angular/angular-sanitize.min.js', 'js/plugins/oclazyload/dist/ocLazyLoad.min.js',
         'js/ui-router/angular-ui-router.min.js', 'js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js', 'js/plugins/angular-idle/angular-idle.js', 'js/plugins/datetime-picker.js',
-        'js/plugins/angular-local-storage.min.js', 'js/plugins/sweetalert/sweetalert.min.js', 'js/plugins/sweetalert/angular-sweetalert.min.js', 'js/controllers/homeMenuController.js'
+        'js/plugins/angular-local-storage.min.js', 'js/plugins/sweetalert/sweetalert.min.js', 'js/plugins/sweetalert/angular-sweetalert.min.js', 'js/controllers/homeMenuController.js',
+        'js/plugins/stickyHeder.js'
     ];
 
     var uglify_all = ['js/jquery/jquery-2.1.1.min.js', 'js/angular/angular.min.js', 'dist/app.js', 'dist/plugins.js', 'dist/services.js', 'dist/directives.js', 'dist/components.js', 'dist/filters.js'];
