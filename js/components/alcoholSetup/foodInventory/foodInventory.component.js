@@ -92,27 +92,35 @@
         that.calculateUW = function (item, $index) {
             var item_qty = item.item_qty ? item.item_qty : 0;
 
-            that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+");
+            that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+").replace(/^\D*|\D*$/g,"");
+            // that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+");
 
             // var itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g);
             that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
                 return (previousValue * 1) + (currentValue * 1);
             });
 
+            item.itemQtyStrlabel = that.itemQtyStr ? that.itemQtyStr : item.item_qty;
             console.log(that.itemQtyStr)
         };
 
         that.calculateUWSum = function (item, $index) {
             var item_qty = item.item_qty ? item.item_qty : 0;
-            that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
-                return (previousValue * 1) + (currentValue * 1);
-            });
+
+            if (item_qty) {
+                that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
+                    return (previousValue * 1) + (currentValue * 1);
+                });
+            } else {
+                that.itemQtyStr = 0
+            }
+
             console.log(that.itemQtyStr);
             that.inventories[$index].item_qty = that.itemQtyStr
         };
 
         that.calculateUWFormula = function (item, $index) {
-            that.inventories[$index].item_qty = that.inventories[$index].item_qty_formula
+            that.inventories[$index].item_qty = that.inventories[$index].item_qty_formula ? that.inventories[$index].item_qty_formula : 0
         };
 
         that.initOfBottle = function (item, $index) {

@@ -661,3 +661,11 @@ fieldset[disabled] .btn-primary.active {
         margin-left: 0;
     }
 }
+
+.calculatetextareaFocus {
+    height: 50px !important;
+    resize: none;
+}
+.calculatetextarea {
+    resize: none;
+}

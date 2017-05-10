@@ -121,7 +121,17 @@
                                                     <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index);" type="number" class="form-control" ng-model="i.nof_bottles" ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)" min="0">
                                                 </td>
                                                 <td>
-                                                    <input ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id" ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index); $ctr.calculateUW(i, $index)" ng-blur="$ctr.calculateUWSum(i, $index)" ng-focus="$ctr.calculateUWFormula(i, $index)"  type="text" class="form-control" ng-model="i.item_qty" ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)" min="0">
+                                                    <textarea ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id"
+                                                           ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index); $ctr.calculateUW(i, $index)"
+                                                           ng-blur="$ctr.calculateUWSum(i, $index); calculateUWlabel = false"
+                                                           ng-focus="$ctr.calculateUWFormula(i, $index); ; calculateUWlabel = true"
+                                                           type="text" class="form-control calculatetextarea"
+                                                           ng-model="i.item_qty"
+                                                              style="height: 34px"
+                                                              ng-class="{'calculatetextareaFocus' : calculateUWlabel}"
+                                                           ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)"
+                                                              min="0"></textarea>
+                                                    <div ng-if="calculateUWlabel" class="text-center"><b>{{i.itemQtyStrlabel}}</b></div>
                                                 </td>
                                                 <td>
                                                     {{$ctr.model.measurement_units_of_delivery(i.uom_id_of_delivery_unit)}}
