@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function controller(api, $state, auth, localStorageService, alertService, $rootScope, restaurant, core, $scope, SweetAlert, $q) {
+    function controller(api, $state, auth, localStorageService, alertService, $rootScope, restaurant, core, $scope, SweetAlert, $q, $interval) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -90,6 +90,12 @@
         };
 
         that.calculateUW = function (item, $index) {
+
+            var updateItemQty = function() {
+                item.item_qty = item.item_qty ? item.item_qty.replace(/[^\+^\d((,|\.)\d)?]+/g, "") : 0
+            };
+            $interval(updateItemQty, 1500);
+
             var item_qty = item.item_qty ? item.item_qty : 0;
 
             that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+").replace(/^\D*|\D*$/g,"");
@@ -101,7 +107,7 @@
             });
 
             item.itemQtyStrlabel = that.itemQtyStr ? that.itemQtyStr : item.item_qty;
-            console.log(that.itemQtyStr)
+            // console.log(that.itemQtyStr)
         };
 
         that.calculateUWSum = function (item, $index) {
@@ -115,7 +121,7 @@
                 that.itemQtyStr = 0
             }
 
-            console.log(that.itemQtyStr);
+            // console.log(that.itemQtyStr);
             that.inventories[$index].item_qty = that.itemQtyStr
         };
 
@@ -309,7 +315,7 @@
         // }
     }
 
-    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q'];
+    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q', '$interval'];
 
     angular.module('inspinia').component('alcoholInventoryComponent', {
         templateUrl: 'js/components/alcoholSetup/foodInventory/foodInventory.html',

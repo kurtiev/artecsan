@@ -92,24 +92,30 @@
                         <div class="ibox-content overflow-x-auto">
                             <form novalidate autocomplete="off" name="$ctr.form" ng-submit="$ctr.saveAll($ctr.form)">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
+
+
+                                    <table table-height="700px" class="table table-bordered" fixed-header>
+
+
                                         <thead class="th-text-center th-vertical-align-middle">
                                         <tr>
-                                            <th rowspan="2" class="width-120">SKU</th>
-                                            <th rowspan="2" class="min-width-150">Inventory Item</th>
-                                            <th rowspan="2" class="width-100">Total Case(s)</th>
-                                            <th rowspan="2" class="width-100">Full Bottles</th>
-                                            <th colspan="2" class="width-100">Partial Item Qty</th>
-                                            <th rowspan="2" class="width-120">Unit of Delivery</th>
+                                            <th  r rowspan="2" class="width-120">SKU</th>
+                                            <th  rowspan="2" class="min-width-300">Inventory Item</th>
+                                            <th   rowspan="2" class="width-100">Total Case(s)</th>
+                                            <th   rowspan="2" class="width-100">Full Bottles</th>
+                                            <th   colspan="2" class="width-200">Partial Item Qty</th>
+                                            <th   rowspan="2"  class=" respons-col-table">Unit of Delivery</th>
                                         </tr>
                                         <tr>
-                                            <th class="width-100">#of Bottles</th>
-                                            <th class="width-100">Unit Weight</th>
+                                            <th  class="width-100">#of Bottles</th>
+                                            <th   class="width-100">Unit Weight</th>
                                         </tr>
                                         </thead>
-                                        <tbody ng-repeat="i in $ctr.inventories track by $index">
+
+
+                                        <tbody>
                                         <ng-form name="inventory">
-                                            <tr>
+                                            <tr ng-repeat="i in $ctr.inventories track by $index">
                                                 <td>{{i.vendor_sku}}</td>
                                                 <td>
                                                    <span class="no-wrap">
@@ -151,6 +157,8 @@
                                         </ng-form>
                                         </tbody>
                                     </table>
+
+
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">

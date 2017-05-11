@@ -91,20 +91,20 @@
 
                             <form novalidate autocomplete="off" name="$ctr.form" ng-submit="$ctr.saveAll($ctr.form)">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                    <table table-height="700px" class="table table-bordered" fixed-header>
                                         <thead class="th-text-center th-vertical-align-middle">
                                         <tr>
                                             <th class="width-120">SKU</th>
-                                            <th class="min-width-150">Inventory Item</th>
+                                            <th class="min-width-300">Inventory Item</th>
                                             <th class="width-100">Total Case(s)</th>
                                             <th class="width-100">Total Pack(s)</th>
                                             <th class="width-100">Partial Item Qty</th>
-                                            <th class="width-120">Unit of Delivery</th>
+                                            <th class="width-100">Unit of Delivery</th>
                                         </tr>
                                         </thead>
-                                        <tbody ng-repeat="i in $ctr.inventories track by $index">
+                                        <tbody class="foodBody">
                                         <ng-form name="inventory">
-                                            <tr>
+                                            <tr ng-repeat="i in $ctr.inventories track by $index">
                                                 <td>{{i.vendor_sku}}</td>
                                                 <td>
                                                    <span class="no-wrap">

@@ -10,7 +10,8 @@
         'ngSanitize',                   // ngSanitize
         'oitozero.ngSweetAlert',
         'LocalStorageModule',
-        'ui.bootstrap.datetimepicker'
+        'ui.bootstrap.datetimepicker',
+        'anguFixedHeaderTable'
     ])
 })();
 
