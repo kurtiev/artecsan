@@ -28,6 +28,19 @@
                 }
             });
 
+
+            // $(window).resize(function(ololo){
+            //     console.log(ololo)
+            //     $scope.$apply(function(){
+            //         window.location.reload();
+            //     });
+            // });
+            // if ($window.innerHeight > $window.innerWidth) {
+            //     console.log('sdfsdf')
+            // }
+
+
+
             function tableDataLoaded() {
                 // first cell in the tbody exists when data is loaded but doesn't have a width
                 // until after the table is transformed
@@ -49,13 +62,13 @@
 
                         var columnWidth = tdElems ? tdElems.offsetWidth : thElem.offsetWidth;
                         if (tdElems) {
-                            tdElems.style.width = columnWidth + 'px';
+                            tdElems.style.width = columnWidth   + 'px';
                         }
                         if (thElem) {
-                            thElem.style.width = columnWidth + 'px';
+                            thElem.style.width = columnWidth   + 'px';
                         }
                         if (tfElems) {
-                            tfElems.style.width = columnWidth + 'px';
+                            tfElems.style.width = columnWidth  + 'px';
                         }
                     });
 

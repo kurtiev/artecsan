@@ -795,8 +795,72 @@ fieldset[disabled] .btn-primary.active {
     }
 
 }
+.table-bordered-fixed {
+    border-bottom: none !important;
+    border-right: none !important;
+    border-left: none !important;
+}
 
+.width-120-food {
+    width: 120px;
+}
+.min-width-300-food {
+   min-width: 300px;
+}
+.width-100-food {
+    width: 100px;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .width-120-food {
+        width: auto;
+    }
+    .min-width-300-food {
+        width: auto;
+    }
+    .width-100-food {
+        width: auto;
+    }
+}
+
+.width-120-alcohol {
+    width: 120px;
+}
+
+.min-width-300-alcohol {
+    min-width: 300px;
+}
+
+.width-100-alcohol {
+    width: 100px;
+}
+
+.width-200-alcohol {
+    width: 200px;
+}
 
 .respons-col-table {
     width: 7.8% !important;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .width-120-alcohol {
+        width: auto;
+    }
+
+    .min-width-300-alcohol {
+        min-width: auto;
+    }
+
+    .width-100-alcohol {
+        width: auto;
+    }
+
+    .width-200-alcohol {
+        width: auto;
+    }
+
+    .respons-col-table {
+        width: auto !important;
+    }
 }
