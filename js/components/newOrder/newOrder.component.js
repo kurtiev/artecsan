@@ -37,8 +37,8 @@
         };
 
         that.order_types = {
-            '1': ['Case', 'Pack', 'Each'],
-            '2': ['Case', 'Each']
+            '1': [{name: 'Case', value: 'Case'}, {name: 'Pack', value: 'Pack'}, {name: 'Each', value: 'Each'}],
+            '2': [{name: 'Case', value: 'Case'}, {name: 'Each', value: 'Pack'}]
         };
 
         that.restaurant_id = localStorageService.get('restaurant_id');  // {restaurant_id : 323}

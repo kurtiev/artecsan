@@ -63,7 +63,7 @@
                                             <td>Case</td>
                                             <td><input type="text" ng-change="$ctr.calculate($index, i.vendor_sku_id)" only-digits class="form-control" ng-model="i.amount" required></td>
                                             <td>
-                                                <select class="form-control" ng-model="i.order_type" ng-change="$ctr.calculate($index, i.vendor_sku_id)" ng-options="item for item in $ctr.order_types[$ctr.inventory_type_id]" required></select>
+                                                <select class="form-control" ng-model="i.order_type" ng-change="$ctr.calculate($index, i.vendor_sku_id)" ng-options="item.value as item.name for item in $ctr.order_types[$ctr.inventory_type_id]" required></select>
                                             </td>
                                             <td class="text-center">
                                                 <span ng-if="!i.id">
