@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function controller(api, $state, auth, localStorageService, alertService, $rootScope, restaurant, core, $scope, SweetAlert, $q, $interval) {
+    function controller(api, $state, auth, localStorageService, alertService, $rootScope, restaurant, core, $scope, SweetAlert, $q, $interval, $timeout) {
 
         if (!auth.authentication.isLogged) {
             $state.go('home');
@@ -85,48 +85,70 @@
             } else {
                 tareWeight = 0;
             }
-
             that.inventories[$index].total_in_uom_of_delivery = that.inventories[$index].cases_qty * totalUnits + that.inventories[$index].packs_qty * size + (that.inventories[$index].item_qty - tareWeight);
+            // console.log(that.inventories[$index].item_qty)
         };
 
-        that.calculateUW = function (item, $index) {
+        that.calculateUW = function (item, $index,form) {
 
-            var updateItemQty = function() {
-                item.item_qty = item.item_qty ? item.item_qty.replace(/[^\+^\d((,|\.)\d)?]+/g, "") : 0
-            };
-            $interval(updateItemQty, 1500);
+
+
+            $timeout(function(){
+               return item.item_qty = item.item_qty ? item.item_qty.replace(/[^\+^\d((,|\.)\d)?]+/g, "") : null;
+            }, 500);
 
             var item_qty = item.item_qty ? item.item_qty : 0;
 
-            that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+").replace(/^\D*|\D*$/g,"");
-            // that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+");
+            // if (item_qty) {
+            //     var unitWeightFormula = item_qty.match(/\d+((,|\.)\d+)?/g);
+            //     var tareWeight = item.tare_weight;
+            //     // var formUnitW = form
+            //
+            //     angular.forEach(unitWeightFormula, function (unitWeight) {
+            //
+            //         if (unitWeight < tareWeight) {
+            //             console.log('invalid')
+            //             console.log(form.unitweight)
+            //             form.unitweight.$setValidity(form.unitweight, false);
+            //         } else {
+            //             form.unitweight.$setValidity(form.unitweight, true);
+            //         }
+            //
+            //         // console.log('unitWeight - '+ unitWeight);
+            //         // console.log('tareWeight - '+ tareWeight);
+            //
+            //
+            //     });
+            //     // console.log(tareWeight);
+            // }
 
-            // var itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g);
-            that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
-                return (previousValue * 1) + (currentValue * 1);
-            });
 
+            if (item_qty) {
+                that.inventories[$index].item_qty_formula = item.item_qty.replace(/[^\d((,|\.)\d)?]+/g, "+").replace(/^\D*|\D*$/g, "");
+                that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
+                    return (previousValue * 1) + (currentValue * 1);
+                });
+            }
             item.itemQtyStrlabel = that.itemQtyStr ? that.itemQtyStr : item.item_qty;
-            // console.log(that.itemQtyStr)
         };
 
         that.calculateUWSum = function (item, $index) {
-            var item_qty = item.item_qty ? item.item_qty : 0;
+            var item_qty = item.item_qty ? item.item_qty : null;
 
             if (item_qty) {
                 that.itemQtyStr = item_qty.match(/\d+((,|\.)\d+)?/g).reduce(function (previousValue, currentValue, index, array) {
                     return (previousValue * 1) + (currentValue * 1);
                 });
             } else {
-                that.itemQtyStr = 0
+                that.itemQtyStr = null;
+                return
             }
 
-            // console.log(that.itemQtyStr);
             that.inventories[$index].item_qty = that.itemQtyStr
         };
 
         that.calculateUWFormula = function (item, $index) {
-            that.inventories[$index].item_qty = that.inventories[$index].item_qty_formula ? that.inventories[$index].item_qty_formula : 0
+            that.inventories[$index].item_qty = that.inventories[$index].item_qty_formula ? that.inventories[$index].item_qty_formula : null
         };
 
         that.initOfBottle = function (item, $index) {
@@ -315,7 +337,7 @@
         // }
     }
 
-    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q', '$interval'];
+    controller.$inject = ['api', '$state', 'auth', 'localStorageService', 'alertService', '$rootScope', 'restaurant', 'core', '$scope', 'SweetAlert', '$q', '$interval', '$timeout'];
 
     angular.module('inspinia').component('alcoholInventoryComponent', {
         templateUrl: 'js/components/alcoholSetup/foodInventory/foodInventory.html',

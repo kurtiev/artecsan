@@ -134,13 +134,15 @@
                                                 </td>
                                                 <td>
                                                     <textarea ng-disabled="$ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id"
-                                                           ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index); $ctr.calculateUW(i, $index)"
-                                                           ng-blur="$ctr.calculateUWSum(i, $index); calculateUWlabel = false"
-                                                           ng-focus="$ctr.calculateUWFormula(i, $index); ; calculateUWlabel = true"
+                                                           ng-change="$ctr.calculateUnitWeight(i, $index); $ctr.initOfBottle(i, $index); $ctr.calculateUW(i, $index, $ctr.form)"
+                                                           ng-blur="$ctr.calculateUWSum(i, $index);  $ctr.calculateUnitWeight(i, $index); calculateUWlabel = false"
+                                                           ng-focus="$ctr.calculateUWFormula(i, $index); ; calculateUWlabel = true; $ctr.calculateUnitWeight(i, $index);"
                                                            type="text" class="form-control calculatetextarea"
                                                            ng-model="i.item_qty"
-                                                              style="height: 34px"
-                                                              ng-class="{'calculatetextareaFocus' : calculateUWlabel}"
+                                                           style="height: 34px"
+                                                           unit-weight-valid
+                                                           ng-class="{'calculatetextareaFocus' : calculateUWlabel}"
+                                                           name="unitweight"
                                                            ng-required="$ctr.typeInventory == 'full' && !($ctr.refbooks.vendor_sub_cat | vendorSubCatIdTypeFilter : i.vendor_sub_cat_id)"
                                                               min="0"></textarea>
                                                     <div ng-if="calculateUWlabel" class="text-center"><b><span ng-show="i.itemQtyStrlabel">=</span> {{i.itemQtyStrlabel}}</b></div>
