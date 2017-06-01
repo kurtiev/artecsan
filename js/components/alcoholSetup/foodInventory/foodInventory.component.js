@@ -89,12 +89,11 @@
             // console.log(that.inventories[$index].item_qty)
         };
 
-        that.calculateUW = function (item, $index,form) {
+        that.calculateUW = function (item, $index, form) {
 
 
-
-            $timeout(function(){
-               return item.item_qty = item.item_qty ? item.item_qty.replace(/[^\+^\d((,|\.)\d)?]+/g, "") : null;
+            $timeout(function () {
+                return item.item_qty = item.item_qty ? item.item_qty.replace(/[^\+^\d((,|\.)\d)?]+/g, "") : null;
             }, 500);
 
             var item_qty = item.item_qty ? item.item_qty : 0;
@@ -144,7 +143,10 @@
                 return
             }
 
-            that.inventories[$index].item_qty = that.itemQtyStr
+            that.inventories[$index].item_qty = that.itemQtyStr;
+            if (that.itemQtyStr > 0 && (item.nof_bottles == 0 || item.nof_bottles == null)) {
+                that.inventories[$index].nof_bottles = 1;
+            }
         };
 
         that.calculateUWFormula = function (item, $index) {
@@ -152,8 +154,12 @@
         };
 
         that.initOfBottle = function (item, $index) {
-            if (item.nof_bottles == 0 || item.nof_bottles == null) {
+            if (item.item_qty > 0 && (item.nof_bottles == 0 || item.nof_bottles == null)) {
                 that.inventories[$index].nof_bottles = 1;
+            }
+
+            if (item.item_qty == 0) {
+                that.inventories[$index].nof_bottles = 0;
             }
         };
 
