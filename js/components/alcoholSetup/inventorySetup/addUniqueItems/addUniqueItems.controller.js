@@ -59,6 +59,7 @@
             var deferred = $q.defer();
 
             if (!form.$valid) {
+                alertService.showError('Please validate all inputs');
                 deferred.reject();
                 return deferred.promise;
             }

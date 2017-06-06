@@ -864,3 +864,7 @@ fieldset[disabled] .btn-primary.active {
         width: auto !important;
     }
 }
+
+input.ng-not-empty.ng-invalid {
+    background-color: #f78f9a !important;
+}
